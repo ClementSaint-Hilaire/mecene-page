@@ -7,7 +7,7 @@
    Couleur : .nav--on-light sur chaque bloc (logo, pastilles, langue, burger) qui passe sur un fond clair
    (encre foncée). Le fond est lu sur les zones [data-nav-bg="dark|light"] sous le centre de chaque bloc ;
    si plusieurs se superposent, la dernière dans le DOM l'emporte. Aucune zone = fond clair.
-   Le bouton WORK WITH US reste blanc sur tous les fonds (maquette).
+   Le bouton WORK WITH US reste blanc sur tous les fonds (maquette), survol compris.
    API : window.Nav.setOverlay(bool) → force l'encre claire (menu mobile ouvert par-dessus)
    ========================================================= */
 (() => {
@@ -16,6 +16,7 @@
   if (!nav) return;
 
   const COLLAPSE_AT = 80;   // px scrollés avant de replier le menu
+  const EXPAND_AT = 40;     // px sous lesquels il se redéplie (l'écart évite le va-et-vient autour du seuil)
   const PROBE_Y = 43;       // ligne de lecture du fond : milieu de la barre (24 + 38 / 2)
   const CLOSE_DELAY = 250;  // ms de tolérance quand la souris sort du menu
 
@@ -77,7 +78,7 @@
   /* ---------- Replié / déplié ---------- */
   let collapsed = null;
   function onScroll() {
-    const c = window.scrollY > COLLAPSE_AT;
+    const c = window.scrollY > (collapsed ? EXPAND_AT : COLLAPSE_AT);
     if (c === collapsed) return;
     collapsed = c;
     nav.classList.toggle('is-collapsed', c);

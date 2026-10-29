@@ -128,10 +128,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   border-radius: 0;
   transition: background-color .35s var(--ease-figma), color .35s var(--ease-figma), border-color .35s var(--ease-figma), border-radius .35s var(--ease-figma);
 }
-/* Survol : coins arrondis à 16px (+ inversion des couleurs pour le primaire uniquement) */
+/* Survol : coins arrondis à 16px ; les couleurs (fond du primaire compris) restent celles du repos */
 .btn:hover { border-radius: 16px; }
 .btn--solid { background: var(--light); color: var(--ink); border-color: var(--light); }
-.btn--solid:hover { background: transparent; color: var(--light); }
 .btn--outline { color: var(--ink); border-color: var(--ink); }
 .btn--outline-light { color: var(--light); border-color: var(--light); }
 .btn--w120 { width: 120px; }
@@ -149,8 +148,6 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .vline--136 { height: 136px; } .vline--136 img { width: 136px; height: 1px; }
 .vline--32 { height: 32px; } .vline--32 img { width: 32px; height: 1px; }
 .vline--188 { height: 188px; } .vline--188 img { width: 188px; height: 1.5px; }
-
-.star { width: 72px; height: 72px; flex-shrink: 0; }
 
 /* =========================================================
    HERO
@@ -210,7 +207,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: inline-flex;
   align-items: center;
   gap: 4px;
-  font-size: var(--fs-s);
+  font-size: var(--fs-xs);
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: inherit;
@@ -226,19 +223,21 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav__item:hover .nav__dot, .nav__item:focus-visible .nav__dot, .nav__item.is-active .nav__dot { opacity: 1; transform: scale(1); }
 .nav__item:hover .nav__label { transform: translateX(2px); }
 
-/* Repli (scroll) : les libellés s'effacent de bas en haut, puis les pastilles se dessinent */
+/* Repli (scroll) : les libellés s'effacent de bas en haut, puis les pastilles se dessinent.
+   Le 1er libellé occupe la ligne des pastilles : il remonte de 8 px (hors de la ligne) et a presque disparu
+   quand elles commencent (.3s) ; au dépliage, les libellés attendent que les pastilles soient rentrées (.18s). */
 .nav__menu .nav__label {
   transition: transform .45s var(--ease-expo),
-              opacity .45s var(--ease-figma) calc(.1s + var(--i) * 30ms),
-              translate .7s var(--ease-expo) calc(.1s + var(--i) * 30ms);
+              opacity .45s var(--ease-figma) calc(.18s + var(--i) * 30ms),
+              translate .7s var(--ease-expo) calc(.18s + var(--i) * 30ms);
 }
 .nav.is-collapsed .nav__menu { visibility: hidden; transition: visibility 0s linear .5s; }
 .nav.is-collapsed .nav__menu .nav__label {
   opacity: 0;
-  translate: 0 -6px;
+  translate: 0 -8px;
   transition: transform .45s var(--ease-expo),
-              opacity .25s var(--ease-figma) calc((7 - var(--i)) * 25ms),
-              translate .4s var(--ease-expo) calc((7 - var(--i)) * 25ms);
+              opacity .2s var(--ease-figma) calc((7 - var(--i)) * 20ms),
+              translate .35s var(--ease-expo) calc((7 - var(--i)) * 20ms);
 }
 .nav.is-collapsed .nav__menu .nav__dot { opacity: 0; }
 
@@ -259,10 +258,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   transition: clip-path .4s var(--ease-expo), opacity .3s var(--ease-figma);
 }
 .nav.is-collapsed .nav__toggle { visibility: visible; transition: none; }
-.nav.is-collapsed .nav__dots { clip-path: inset(0); transition: clip-path .9s var(--ease-expo) .2s, opacity .3s var(--ease-figma); }
+/* opacité retardée : à la fermeture du panneau, les pastilles reviennent pendant qu'il s'efface au-dessus */
+.nav.is-collapsed .nav__dots { clip-path: inset(0); transition: clip-path .9s var(--ease-expo) .3s, opacity .35s var(--ease-figma) .15s; }
 .nav.is-open .nav__dots { opacity: 0; }
 
-/* Panneau : se déplie depuis les pastilles (toujours sombre, encre claire) */
+/* Panneau : se déplie depuis les pastilles (toujours sombre, encre claire).
+   Fermé = réduit au cadre des pastilles ET transparent : sans le fondu, ce cadre sombre restait affiché
+   sur les pastilles jusqu'au masquage (visibility), très visible sur fond clair. */
 .nav__panel {
   position: absolute; top: 0; left: 0; z-index: 1;
   display: flex; flex-direction: column; gap: 12px; align-items: flex-start;
@@ -271,10 +273,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   background-image: linear-gradient(209.63deg, #000 0%, #302f2d 100%);
   color: var(--light);
   visibility: hidden;
+  opacity: 0;
   clip-path: inset(0 calc(100% - 56px) calc(100% - 30px) 0);
-  transition: clip-path .45s var(--ease-expo), visibility 0s linear .45s;
+  transition: clip-path .5s var(--ease-expo), opacity .3s var(--ease-figma) .12s, visibility 0s linear .5s;
 }
-.nav.is-open .nav__panel { visibility: visible; clip-path: inset(0); transition: clip-path .8s var(--ease-expo); }
+.nav.is-open .nav__panel { visibility: visible; opacity: 1; clip-path: inset(0); transition: clip-path .8s var(--ease-expo), opacity .2s var(--ease-figma); }
 .nav__close { font-size: var(--fs-s); line-height: 1.2; letter-spacing: -0.01em; color: var(--light-3); }
 .nav__close:hover { color: var(--light); }
 .nav__rule { width: 145px; height: 1px; transform-origin: left center; }
@@ -309,8 +312,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav__chev { position: relative; width: 20px; height: 20px; transition: transform .35s var(--ease-expo); }
 .nav__chev img { width: 20px; height: 20px; }
 .nav__lang:hover .nav__chev { transform: translateY(2px); }
-.nav__cta { width: 130px; height: 38px; border: 0; justify-content: flex-start; padding: 11px 12px 10px; }
-.nav__cta:hover { background: var(--light); color: var(--ink); }
+/* Bordure transparente (38 px de haut comme la maquette) ; au survol, seuls les coins s'arrondissent comme les autres primaires */
+.nav__cta { width: 130px; height: 38px; border-color: transparent; justify-content: flex-start; padding: 10px 11px 9px; }
 .nav__burger { display: none; }
 
 /* Corps du hero */
@@ -340,6 +343,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   height: 100%;
   object-fit: cover;
   background: #000;
+  /* assombrit la vidéo (le noir reste noir, donc le fondu en screen est conservé) */
+  filter: brightness(.6);
 }
 .hero__spacer { width: 347px; height: 100px; flex-shrink: 0; }
 .hero__content { position: relative; z-index: 1; width: 529px; flex-shrink: 0; display: flex; flex-direction: column; gap: 64px; }
@@ -424,32 +429,46 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 /* =========================================================
    OUR SERVICES — horizontal
    ========================================================= */
-.services { position: relative; z-index: 2; background: var(--bg-primary); }
-.services__pin { position: relative; overflow: hidden; padding-top: 192px; background: var(--bg-primary); }
+.services { position: relative; z-index: 2; padding-top: 128px; background: var(--bg-primary); }
+/* Le bloc épinglé fait la hauteur de l'écran ; son contenu visible (haut des lettres de OUR SERVICES → bas des cartes)
+   y est centré verticalement, la bande sombre descend jusqu'en bas de l'écran. */
+.services__pin {
+  --big: clamp(200px, 38vh, 380px);     /* mot géant (380 px maquette), réduit sur les écrans peu hauts */
+  --band-pt: clamp(64px, 13vh, 128px);  /* marge haute de la bande sombre */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: max(100vh, 600px);
+  overflow: hidden;
+  /* 1.128 = 1.1 (line-height) − 0.171 (chevauchement de la bande) + 0.2 (haut des lettres sous la boîte) ; 272 = hauteur utile des cartes */
+  padding-top: max(0px, calc((100vh - 1.128 * var(--big) - var(--band-pt) - 272px) / 2));
+  background: var(--bg-primary);
+}
 .services__bigword-wrap {
   position: relative;
   display: flex;
+  flex-shrink: 0;
   justify-content: flex-start;
   padding: 0 512px;
-  margin-bottom: -65px;
+  margin-bottom: calc(-0.171 * var(--big));
   background: var(--bg-primary);
   white-space: nowrap;
 }
 .services__bigword {
-  font-size: 380px;
+  font-size: var(--big);
   font-weight: 700;
   line-height: 1.1;
   letter-spacing: -0.03em;
   color: var(--bg-secondary);
 }
-.services__band { position: relative; height: 700px; background: var(--bg-dark); }
+.services__band { position: relative; flex: 1 1 auto; background: var(--bg-dark); }
 .services__track {
   display: flex;
   gap: 128px;
   align-items: flex-start;
   height: 100%;
   width: max-content;
-  padding: 128px var(--gutter) 0 700px;
+  padding: var(--band-pt) var(--gutter) 0 700px;
 }
 .services__intro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; flex-shrink: 0; }
 .services__intro .h2 { white-space: nowrap; }
@@ -477,11 +496,12 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .gcard:hover::after { opacity: 1; }
 .gcard__line { position: relative; width: 0; height: 272px; flex-shrink: 0; }
 .gcard__line img { position: absolute; left: 0; top: 0; width: 1px; height: 435.72px; transform-origin: top center; }
-.gcard__body { flex: 1 0 0; min-width: 1px; display: flex; flex-direction: column; gap: 128px; align-items: flex-start; }
+.gcard__body { flex: 1 0 0; min-width: 1px; display: flex; flex-direction: column; gap: 88px; align-items: flex-start; }
 .gcard__text { display: flex; flex-direction: column; gap: 19px; width: 100%; }
 
-.gcard .star { transition: transform .8s var(--ease-expo); }
-.gcard:hover .star { transform: rotate(72deg) scale(1.06); }
+/* pictogramme en points (js/components/service-dots.js) : grille 24 × 16 au pas de 7 px */
+.gdots { position: relative; width: 168px; height: 112px; flex-shrink: 0; }
+.gdots canvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 
 /* =========================================================
    EXPERTISES
@@ -530,8 +550,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .xcard__body { flex: 1 0 0; min-width: 1px; display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
 .xcard__text { display: flex; flex-direction: column; gap: 19px; width: 100%; }
 
-.xcard .star { transition: transform .8s var(--ease-expo); }
-.xcard:hover .star { transform: rotate(72deg); }
+/* pictogramme en points : pas de 6 px ici, la carte a une hauteur fixe */
+.xcard .gdots { width: 144px; height: 96px; }
 
 /* =========================================================
    FACTORY BUILT
@@ -647,15 +667,35 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
    ========================================================= */
 .partners { padding: 128px var(--gutter) 384px; background: var(--bg-primary); }  /* bas : place pour l'arc dégradé des actus */
 .partners__grid {
+  --logo-scale: 1;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  grid-template-rows: repeat(3, minmax(0, 1fr));
-  height: 707px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  height: 472px;
   border: .5px solid var(--stroke);
   overflow: clip;
 }
-.partners__cell { position: relative; }
-.partners__cell img { position: absolute; inset: 0; width: 100%; height: 100%; transition: opacity .4s var(--ease-figma), transform .6s var(--ease-expo); }
+.partners__cell { position: relative; display: grid; place-items: center; border: .5px solid var(--stroke); background: var(--bg-primary); }
+/* largeur optique par logo (--w, inline) ; multiply efface le fond blanc des logos non détourés */
+.partners__cell img {
+  width: calc(var(--w) * var(--logo-scale));
+  max-width: 80%;
+  height: auto;
+  filter: grayscale(1);
+  mix-blend-mode: multiply;
+  transition: opacity .4s var(--ease-figma), filter .4s var(--ease-figma);
+}
+/* points d'angle */
+.partners__cell::before {
+  content: "";
+  --dot: radial-gradient(circle closest-side, var(--ink) 80%, transparent);
+  position: absolute;
+  inset: 6px;
+  background: var(--dot) 0 0, var(--dot) 100% 0, var(--dot) 0 100%, var(--dot) 100% 100%;
+  background-size: 3px 3px;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
 .partners__cell::after {
   content: "";
   position: absolute;
@@ -668,7 +708,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .partners__cell { isolation: isolate; }
 .partners__cell:hover::after { opacity: 1; }
 .partners__grid:hover .partners__cell img { opacity: .45; }
-.partners__grid .partners__cell:hover img { opacity: 1; }
+.partners__grid .partners__cell:hover img { opacity: 1; filter: none; }
 
 /* =========================================================
    ACTUALITÉS
@@ -856,14 +896,16 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .finfo__col { flex: 1 0 0; min-width: 1px; display: flex; flex-direction: column; justify-content: space-between; align-self: stretch; }
 .finfo__block { display: flex; flex-direction: column; gap: 4px; }
 .finfo__val { font-size: var(--fs-s); font-weight: 500; line-height: 1.2; }
-.finfo__map { flex: 1 0 0; min-width: 1px; height: 135px; background: var(--light); }
+.finfo__map { flex: 1 0 0; min-width: 1px; height: 135px; background: var(--bg-primary); }
 
 /* --- Carte Europe (dot matrix isométrique en rotation, js/components/europe-map.js) --- */
 .emap { position: relative; overflow: hidden; }
 .emap__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .fbottom { display: flex; flex-direction: column; width: 100%; }
-.fbottom__mark { width: 100%; aspect-ratio: 931.84 / 120.64; position: relative; }
-.fbottom__mark img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.fbottom__mark { width: 100%; aspect-ratio: 936 / 126.19; position: relative; }
+
+/* --- Signature « verdon groupe » (dot matrix colorée au survol, js/components/wordmark-dots.js) --- */
+.wmark__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
 .fbottom__legal {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding-top: 16px;
@@ -908,19 +950,15 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
 /* cartes services */
 .js [data-reveal="card"] { opacity: 0; transform: translate3d(0, 120px, 0) rotate(3deg); transition: opacity 1s var(--ease-expo), transform 1s var(--ease-expo); }
-.js [data-reveal="card"] .star { transform: rotate(-144deg) scale(.4); transition: transform 1.4s var(--ease-expo) .15s; }
 .js [data-reveal="card"] .gcard__line img { transform: scaleY(0); transition: transform 1.2s cubic-bezier(.87,0,.13,1) .15s; }
 .js [data-reveal="card"].is-in { opacity: 1; transform: none; }
-.js [data-reveal="card"].is-in .star, .js [data-reveal="card"].is-in .gcard__line img { transform: none; }
+.js [data-reveal="card"].is-in .gcard__line img { transform: none; }
 .js .gcard.is-in:hover { transform: translate3d(0, -12px, 0); transition-duration: .6s; transition-delay: 0s; }
-.js .gcard.is-in:hover .star { transform: rotate(72deg) scale(1.06); transition-delay: 0s; }
 
 /* cartes expertises */
 .js [data-reveal="xcard"] .xcard__rot img { transform: scaleX(0); transition: transform 1.3s cubic-bezier(.87,0,.13,1); }
-.js [data-reveal="xcard"] .star { opacity: 0; transform: rotate(-144deg) scale(.4); transition: opacity 1s var(--ease-expo) .2s, transform 1.4s var(--ease-expo) .2s; }
 .js [data-reveal="xcard"] .xcard__text { opacity: 0; transform: translate3d(0, 30px, 0); transition: opacity 1.1s var(--ease-expo) .3s, transform 1.1s var(--ease-expo) .3s; }
-.js [data-reveal="xcard"].is-in .xcard__rot img, .js [data-reveal="xcard"].is-in .star, .js [data-reveal="xcard"].is-in .xcard__text { opacity: 1; transform: none; }
-.js .xcard.is-in:hover .star { transform: rotate(72deg); transition-delay: 0s; }
+.js [data-reveal="xcard"].is-in .xcard__rot img, .js [data-reveal="xcard"].is-in .xcard__text { opacity: 1; transform: none; }
 
 /* témoignages */
 .js [data-reveal="quote"] .quote__meta, .js [data-reveal="quote"] .quote__text { opacity: 0; transform: translate3d(0, 40px, 0); transition: opacity 1.2s var(--ease-expo), transform 1.2s var(--ease-expo); }
@@ -988,7 +1026,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .expertise__blobs { top: 600px; }
 
   /* services : scroll horizontal natif */
-  .services__pin { padding-top: 144px; }
+  .services { padding-top: 0; }
+  .services__pin { display: block; height: auto; padding-top: 144px; }
   .services__bigword { font-size: 200px; }
   .services__bigword-wrap { padding: 0 var(--gutter); margin-bottom: -36px; }
   .services__band { height: auto; overflow-x: auto; overflow-y: visible; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; scrollbar-width: none; padding-top: 0; }
@@ -997,7 +1036,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .services__cards { height: auto; padding-bottom: 0; align-items: stretch; gap: 24px; }
   .gcard { scroll-snap-align: start; width: 320px; }
   .services__intro .h2 { white-space: normal; width: 420px; }
-  .gcard__body { gap: 64px; }
+  .gcard__body { gap: 32px; }
 
   .factory { padding: 96px var(--gutter); }
   .factory__head .h2, .factory__rowintro .h2, .cta__content .h2 { white-space: normal; }
@@ -1011,7 +1050,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .quote { gap: 32px; }
 
   .partners { padding: 96px var(--gutter) 224px; }
-  .partners__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: 180px; height: auto; }
+  .partners__grid { --logo-scale: .8; grid-template-columns: repeat(3, minmax(0, 1fr)); grid-template-rows: none; grid-auto-rows: 180px; height: auto; }
 
   .news { padding-top: 256px; }
   .news__gradient { top: -160px; height: 1060px; }
@@ -1068,7 +1107,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .quote__meta { padding-top: 0; }
   .quote__role { width: auto; }
 
-  .partners__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 140px; }
+  .partners__grid { --logo-scale: .62; grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: 140px; }
 
   .news__item { flex-direction: column; gap: 6px; }
   .news__item.is-active .news__headline { transform: none; }

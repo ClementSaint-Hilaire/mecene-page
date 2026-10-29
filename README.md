@@ -15,8 +15,11 @@ des SVG ne fonctionnent pas en `file://`.
   - `reveal.js` : apparitions à l'entrée dans l'écran (`data-reveal="up|fade|clip|scale|line|vline|wipe|card|xcard|quote"`)
   - `campus-3d.js` : maquette 3D interactive du campus (section Factory built)
   - `europe-map.js` : carte Europe en points, en rotation (footer)
+  - `wordmark-dots.js` : signature « verdon groupe » en points, colorée au survol (footer)
+  - `service-dots.js` : pictogrammes en points des cartes « Our services » et « Expertises », parcourus par un flux au survol
 - `js/vendor/` : GSAP 3.12.5, ScrollTrigger, Lenis 1.1.13, three.js 0.160 (aucun CDN requis)
 - `assets/campus-3d.json` : géométrie de la maquette 3D
+- `assets/wordmark-dots.json` : points de la signature du footer (Figma 273:216)
 - `assets/` : images et SVG exportés de Figma
 
 ## Police
@@ -31,6 +34,12 @@ Le texte apparaît de gauche à droite à l'entrée dans l'écran, le bord d'att
 - `data-gt` : un seul balayage sur tout l'élément (libellés de CTA). Sur les boutons (`[data-btn]`), il est rejoué au survol.
 
 Réglages par variables CSS, sur l'élément ou un parent : `--gt-duration`, `--gt-delay`, `--gt-stagger`, `--gt-feather`, `--gt-c1` à `--gt-c4`. `data-gt-hover="false"` désactive la relecture au survol.
+
+## Signature du footer (Figma 273:216)
+La signature « verdon groupe » est une matrice de 894 points dessinée en canvas (`js/components/wordmark-dots.js`, données `assets/wordmark-dots.json`). Au survol, les points proches du curseur chauffent et passent de la couleur du texte (`--ink`) au dégradé habituel (lilas → pêche → ambre → vert, `--gt-c1` à `--gt-c4`) en doublant de taille, puis refroidissent lentement derrière lui (traînée). Au toucher, un tap colore la zone touchée. Réglages en tête du fichier : `RADIUS` (rayon d'influence), `HEAT_IN` / `HEAT_OUT` (vitesse de montée et de retour à la couleur du texte), `GROW` (grossissement des points chauds : sans lui, les points de ~1,7 px sont délavés par l'anticrénelage et les couleurs paraissent ternes). Le rendu ne tourne que pendant le survol et le refroidissement.
+
+## Pictogrammes des services et expertises
+Chaque carte « Our services » et « Expertises » porte un pictogramme en matrice de 24 × 16 points dessiné en canvas (`js/components/service-dots.js`, `<div class="gdots" data-service-dots="…">`). Services : skid (cuve, pompe, échangeur sur châssis), portique support de tuyauterie, tableau basse tension, conduites avec coudes et vanne, allée froide confinée, schéma unifilaire de distribution, goutte et plaque froide de puce. Expertises : double hélice d'ADN, pylône électrique, baies de data center, wafer de semi-conducteurs. Pas de 7 px (168 × 112) sur les cartes services, de 6 px (144 × 96) sur les cartes expertises, dont la hauteur est fixe. Les grilles sont écrites en caractères dans `ARTS`, en tête du fichier (`#` trait, `+` remplissage gris, `o` / `~` trait / fluide parcourus par le flux, `src` points de départ du flux) : on modifie un dessin en éditant ses lignes. Les points montent du bas quand la carte entre à l'écran, puis un premier passage du flux montre ce que le pictogramme illustre. Au survol de la carte, des impulsions partent des sources et suivent le tracé (eau, air, courant, charges) en passant au dégradé habituel (`--gt-c1` à `--gt-c4`). Réglages en tête du fichier : `SPEED`, `WAVE`, `TAIL` (impulsions), `GROW`, `RISE` / `POP` (apparition). Sans animation si `prefers-reduced-motion`.
 
 ## Navigation (Figma « Navbar » : héro / scroll / menu hover)
 Fixe en haut de page, trois états :
@@ -53,10 +62,11 @@ Désactivé par défaut (le scroll natif reste fluide même quand la page calcul
 - Compteurs 0 → 180 000+, lignes qui se dessinent, photos révélées par un masque.
 - Our services : scroll horizontal épinglé (desktop), le grand « OUR SERVICES » en parallaxe,
   cartes qui entrent une à une (sans flou d'arrière-plan, trop coûteux au scroll) ; scroll horizontal natif sur tablette et mobile.
-- Expertises : étoiles qui pivotent, traits verticaux dessinés, blobs de couleur qui dérivent.
+  Chaque carte porte un pictogramme en matrice de points (voir « Pictogrammes des services et expertises »).
+- Expertises : pictogrammes en points (voir « Pictogrammes des services et expertises »), traits verticaux dessinés, blobs de couleur qui dérivent.
 - Factory built : maquette 3D interactive du campus (survol ou toucher pour voir chaque bâtiment, glisser pour tourner, visite automatique au repos). three.js n'est chargé qu'au besoin, le rendu s'arrête hors écran.
 - Actus : le même arc dégradé que sous le hero, retourné, assure le passage partenaires (clair) → actus (sombre) ; trait vert et image qui suivent l'article survolé (fondu + léger zoom arrière). FAQ : accordéon animé.
-- CTA : parallaxe de la photo, footer qui remonte, signature « verdon groupe » révélée.
+- CTA : parallaxe de la photo, footer qui remonte, signature « verdon groupe » révélée puis colorée au survol.
 - `prefers-reduced-motion` respecté (tout s'affiche sans animation).
 
 ## Points à valider
