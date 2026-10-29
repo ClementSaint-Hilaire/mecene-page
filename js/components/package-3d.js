@@ -187,7 +187,7 @@ async function init(root) {
 
   /* ---------- tailles (lues seulement au resize, jamais dans la boucle) ---------- */
   // clientWidth et non getBoundingClientRect : la vue peut être en cours de reveal (scale)
-  let W = 1, H = 1, wide = true, capBox = { w: 0, y: 0 };
+  let W = 1, H = 1, wide = true, centered = false, capBox = { w: 0, y: 0, bottom: 0 };
   let active = null, pinned = null, lastUser = -1e9, pointer = null, pickDirty = false;
   function resize() {
     W = Math.max(1, view.clientWidth); H = Math.max(1, view.clientHeight);
@@ -201,14 +201,15 @@ async function init(root) {
     cam.left = -half; cam.right = half; cam.top = (half * H) / W; cam.bottom = (-half * H) / W;
     cam.updateProjectionMatrix();
     wide = matchMedia('(min-width: 701px)').matches;
+    centered = matchMedia('(max-width: 991px)').matches; // tablette : légende centrée (voir .p3d-cap)
     measureCap();
     wake();
   }
-  // largeur de la légende et milieu de son titre, pour la ligne de rappel
+  // largeur de la légende, milieu de son titre et bas, pour la ligne de rappel
   function measureCap() {
     if (!active) return;
     const t = items[active].querySelector('.p3d-cap__title');
-    capBox = { w: cap.offsetWidth, y: cap.offsetTop + t.offsetTop + t.offsetHeight / 2 };
+    capBox = { w: cap.offsetWidth, y: cap.offsetTop + t.offsetTop + t.offsetHeight / 2, bottom: cap.offsetTop + cap.offsetHeight };
   }
 
   /* ---------- interaction ---------- */
@@ -297,12 +298,20 @@ async function init(root) {
     }
     if (!active || !wide) { lp.setAttribute('opacity', 0); lc.setAttribute('opacity', 0); return; }
     const [ax, ay] = project(active);
-    // la légende se place du côté du système survolé
-    if ((ax > W * 0.5) !== right) { right = !right; cap.classList.toggle('is-r', right); }
-    const m = W * 0.02;
-    const sx = right ? W - m - capBox.w - 12 : m + capBox.w + 12;
-    const kx = sx + (right ? -1 : 1) * Math.min(70, Math.abs(ax - sx) * 0.3);
-    lp.setAttribute('d', `M${sx},${capBox.y} H${kx} L${ax},${ay}`); lp.setAttribute('opacity', 1);
+    if (centered) {
+      // tablette : légende centrée, la ligne descend de son bas
+      const sx = W / 2, sy = capBox.bottom + 12;
+      const ky = sy + Math.min(70, Math.abs(ay - sy) * 0.3);
+      lp.setAttribute('d', `M${sx},${sy} V${ky} L${ax},${ay}`);
+    } else {
+      // la légende se place du côté du système survolé
+      if ((ax > W * 0.5) !== right) { right = !right; cap.classList.toggle('is-r', right); }
+      const m = W * 0.02;
+      const sx = right ? W - m - capBox.w - 12 : m + capBox.w + 12;
+      const kx = sx + (right ? -1 : 1) * Math.min(70, Math.abs(ax - sx) * 0.3);
+      lp.setAttribute('d', `M${sx},${capBox.y} H${kx} L${ax},${ay}`);
+    }
+    lp.setAttribute('opacity', 1);
     lc.setAttribute('cx', ax); lc.setAttribute('cy', ay); lc.setAttribute('opacity', 1);
   }
 

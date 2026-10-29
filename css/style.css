@@ -202,6 +202,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav__slot { position: relative; flex-shrink: 0; }
 
 .nav__menu, .nav__plist { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.nav__menu { gap: 6px; }  /* menu déplié : interligne serré (le panneau garde 12 px) */
 .nav__item {
   position: relative;
   display: inline-flex;
@@ -324,7 +325,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex;
   align-items: flex-end;
   gap: 16px;
-  padding: 0 var(--gutter) 128px;
+  padding: 0 var(--gutter) 96px;
 }
 .hero__visual {
   position: absolute;
@@ -344,10 +345,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   object-fit: cover;
   background: #000;
   /* assombrit la vidéo (le noir reste noir, donc le fondu en screen est conservé) */
-  filter: brightness(.6);
+  filter: brightness(.4);
 }
 .hero__spacer { width: 347px; height: 100px; flex-shrink: 0; }
-.hero__content { position: relative; z-index: 1; width: 529px; flex-shrink: 0; display: flex; flex-direction: column; gap: 64px; }
+.hero__content { position: relative; z-index: 1; width: 529px; flex-shrink: 0; display: flex; flex-direction: column; gap: 32px; }
 .hero__text { display: flex; flex-direction: column; gap: 24px; }
 .hero__titles { display: flex; flex-direction: column; gap: 8px; width: 700px; }
 .hero__eyebrow { font-size: var(--fs-s); letter-spacing: -0.01em; line-height: 1.2; color: var(--light); }
@@ -609,6 +610,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .p3d-cap__title { font-size: 20px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; text-transform: uppercase; color: var(--light); }
 .p3d-cap__text { font-size: var(--fs-s); line-height: 1.35; letter-spacing: -0.01em; color: var(--light-2); }
 
+/* tablette : légende centrée en haut de la vue, la ligne de rappel part de son bas */
+@media (min-width: 701px) and (max-width: 991px) {
+  .p3d-cap, .p3d-cap.is-r { left: 50%; right: auto; translate: -50% 0; text-align: center; }
+}
 @media (max-width: 700px) {
   .p3d-cap, .p3d-cap.is-r { top: 0; left: 0; right: 0; width: auto; padding: 12px 14px 14px; text-align: left; transform: none; }
   .pack3d__leader { display: none; }
@@ -1063,7 +1068,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .hero { min-height: 600px; }
   .hero__body { padding-bottom: 240px; }
   .nav__cta { display: none; }
-  .hero__content { gap: 40px; }
+  .hero__content { gap: 24px; }
   .hero__visual { width: 640px; height: 640px; top: -160px; right: -260px; opacity: .65; }
   .hero__ctas { flex-wrap: wrap; gap: 12px; }
 

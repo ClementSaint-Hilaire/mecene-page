@@ -19,6 +19,7 @@
   const EXPAND_AT = 40;     // px sous lesquels il se redéplie (l'écart évite le va-et-vient autour du seuil)
   const PROBE_Y = 43;       // ligne de lecture du fond : milieu de la barre (24 + 38 / 2)
   const CLOSE_DELAY = 250;  // ms de tolérance quand la souris sort du menu
+  const AVOID_GAP = 24;     // px d'écart minimal entre le menu déplié et [data-nav-avoid], sinon nav repliée
 
   const DOT_COLORS = ['green', 'amber', 'peach', 'lilac'];  // tokens de style.css
 
@@ -75,17 +76,35 @@
     document.addEventListener('click', (e) => { if (!slot.contains(e.target)) setOpen(false); });
   }
 
-  /* ---------- Replié / déplié ---------- */
+  /* ---------- Replié / déplié ----------
+     Écran peu haut : si, en haut de page, le menu déplié recouvrirait [data-nav-avoid] (texte du hero),
+     la nav reste repliée même en haut de page. */
+  const menu = nav.querySelector('.nav__menu');
+  const avoid = document.querySelector('[data-nav-avoid]');
+  let cramped = false;
+  function measure() {
+    // menu masqué (burger) : rien à éviter
+    if (!menu || !avoid || !menu.offsetHeight) { cramped = false; return; }
+    // position en haut de page, par offsetTop : insensible aux transformations (intro, sortie du hero).
+    // On s'arrête au conteneur collé (le hero, en haut de page) : son offsetTop suit le scroll.
+    let top = 0;
+    for (let el = avoid; el && getComputedStyle(el).position !== 'sticky'; el = el.offsetParent) top += el.offsetTop;
+    cramped = top < slot.offsetTop + menu.offsetHeight + AVOID_GAP;
+  }
+
   let collapsed = null;
   function onScroll() {
-    const c = window.scrollY > (collapsed ? EXPAND_AT : COLLAPSE_AT);
+    const c = cramped || window.scrollY > (collapsed ? EXPAND_AT : COLLAPSE_AT);
     if (c === collapsed) return;
     collapsed = c;
     nav.classList.toggle('is-collapsed', c);
     if (!c && panel) setOpen(false);
   }
+  const update = () => { measure(); onScroll(); };
   window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
+  window.addEventListener('resize', update);
+  if (document.fonts) document.fonts.ready.then(update);  // la hauteur du texte change avec la police
+  update();
 
   /* ---------- Fond clair / sombre sous la nav ----------
      Chaque bloc (logo, pastilles, langue, burger) lit le fond sous son propre centre :
