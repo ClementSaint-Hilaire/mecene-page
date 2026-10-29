@@ -5,10 +5,15 @@
    - géométrie chargée à la demande : assets/package-3d.json (index des systèmes)
      + assets/package-3d.bin (positions quantifiées et triangles en uint16, compressés en gzip)
    - initialisation seulement quand la section approche de l'écran
-   - boucle de rendu coupée hors écran et onglet masqué, DPR plafonné à 1.5
+   - boucle de rendu coupée hors écran et onglet masqué, DPR plafonné à 2
    - l'image fixe reste affichée tant que la 3D n'est pas prête (ou sans WebGL)
+   - au survol, les points du système actif passent au dégradé habituel
+     (lilas → pêche → ambre → vert, --gt-c1…--gt-c4), de gauche à droite sur son étendue à l'écran
    Balisage attendu : voir .pack3d dans index.html
    ========================================================= */
+
+const CELL = 3;     // pas de la grille de points, en px CSS (densité : plus petit = plus de points)
+const CELL_S = 2.5; // idem quand la vue fait moins de 560 px de large
 
 // Contenus : brochure VERDON, juillet 2026. tone : teinte de repos (les équipements tiers plus sombres)
 const SYSTEMS = [
@@ -23,6 +28,15 @@ const SYSTEMS = [
 ];
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+// couleurs du dégradé (sRGB 0 → 1, écrites telles quelles par la passe « points »)
+const css = getComputedStyle(document.documentElement);
+const color = (name, fallback) => {
+  const hex = (css.getPropertyValue(name).trim() || fallback).replace('#', '');
+  const n = parseInt(hex.length === 3 ? hex.replace(/./g, '$&$&') : hex, 16);
+  return [((n >> 16) & 255) / 255, ((n >> 8) & 255) / 255, (n & 255) / 255];
+};
+const GRADIENT = [color('--gt-c1', '#d6b3ff'), color('--gt-c2', '#ffb592'), color('--gt-c3', '#fabb15'), color('--gt-c4', '#5fe219')];
 
 function buildDom(root) {
   const cap = root.querySelector('[data-p3d-cap]');
@@ -126,12 +140,15 @@ async function init(root) {
     g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     g.setIndex(new THREE.BufferAttribute(new Uint16Array(BUF, c.idx, c.nf * 3), 1));
     g.computeVertexNormals();
+    g.computeBoundingBox();
     const rest = IDLE.clone().multiplyScalar(s.tone);
-    const mesh = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: rest.clone(), flatShading: true, side: THREE.DoubleSide }));
+    // NoBlending : sans quoi three force l'alpha à 1 sur un matériau opaque (voir hot)
+    const mesh = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: rest.clone(), flatShading: true, side: THREE.DoubleSide, blending: THREE.NoBlending }));
     scene.add(mesh);
     // même géométrie, couleur unie = numéro du système (picking GPU)
     pickScene.add(new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: new THREE.Color().setRGB(((i + 1) * 24) / 255, 0, 0), side: THREE.DoubleSide })));
-    parts[s.id] = { mesh, s, anchor: new THREE.Vector3(...c.a), target: rest };
+    // hot : 0 → 1, passage au dégradé (transmis à la passe « points » par l'alpha, voir postMat)
+    parts[s.id] = { mesh, s, anchor: new THREE.Vector3(...c.a), target: rest, hot: 0, hotTarget: 0 };
   });
 
   // Passe « matrice de points » (même rendu que les visuels du site)
@@ -139,10 +156,19 @@ async function init(root) {
   // (≈ 16× moins de pixels qu'en pleine résolution, sans MSAA).
   const rt = new THREE.WebGLRenderTarget(2, 2, { samples: 0, minFilter: THREE.NearestFilter, magFilter: THREE.NearestFilter });
   const postScene = new THREE.Scene(), postCam = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  // Le système actif est rendu avec un alpha < 1 (opacity, matériau opaque : l'alpha est écrit tel quel) :
+  // la passe en déduit quels points colorer, et suit la transition (hot).
+  const vec3 = (c) => new THREE.Vector3(...c);
   const postMat = new THREE.ShaderMaterial({
-    uniforms: { t: { value: rt.texture }, res: { value: new THREE.Vector2() }, cell: { value: 4 } },
+    uniforms: {
+      t: { value: rt.texture }, res: { value: new THREE.Vector2() }, cell: { value: 4 },
+      span: { value: new THREE.Vector2(-1, 1) }, // étendue x du système actif à l'écran (NDC)
+      g1: { value: vec3(GRADIENT[0]) }, g2: { value: vec3(GRADIENT[1]) }, g3: { value: vec3(GRADIENT[2]) }, g4: { value: vec3(GRADIENT[3]) },
+    },
     vertexShader: 'void main(){gl_Position=vec4(position.xy,0.,1.);}',
-    fragmentShader: `uniform sampler2D t;uniform vec2 res;uniform float cell;
+    fragmentShader: `uniform sampler2D t;uniform vec2 res;uniform float cell;uniform vec2 span;uniform vec3 g1,g2,g3,g4;
+      vec3 ramp(float u){u=clamp(u,0.,1.); // lilas dominant, comme Gradient text
+       return u<.62?mix(g1,g2,u/.62):u<.82?mix(g2,g3,(u-.62)/.2):mix(g3,g4,(u-.82)/.18);}
       void main(){vec2 px=gl_FragCoord.xy;vec2 c=(floor(px/cell)+.5)*cell;
        vec4 s=texture2D(t,c/res);
        vec3 col=pow(max(s.rgb,0.),vec3(1./2.2));
@@ -151,7 +177,9 @@ async function init(root) {
        float r=.5*cell*.95*sqrt(k);
        float d=length(px-c);
        float m=(1.-smoothstep(r-.7,r+.7,d))*step(.05,s.a)*step(.03,k);
-       vec3 o=col/max(l,.001)*mix(.45,1.,k);
+       float hot=clamp((1.-s.a)*2.,0.,1.);
+       vec3 hue=mix(col/max(l,.001),ramp(((c.x/res.x*2.-1.)-span.x)/(span.y-span.x)),hot);
+       vec3 o=hue*mix(.45,1.,k);
        gl_FragColor=vec4(o*m,m);}`,
     transparent: true,
   });
@@ -163,9 +191,9 @@ async function init(root) {
   let active = null, pinned = null, lastUser = -1e9, pointer = null, pickDirty = false;
   function resize() {
     W = Math.max(1, view.clientWidth); H = Math.max(1, view.clientHeight);
-    const dpr = Math.min(devicePixelRatio || 1, 1.5);
+    const dpr = Math.min(devicePixelRatio || 1, 2);
     renderer.setPixelRatio(dpr); renderer.setSize(W, H, false);
-    const cell = Math.max(3, Math.round((W < 560 ? 3.5 : 4) * dpr));
+    const cell = Math.max(3, Math.round((W < 560 ? CELL_S : CELL) * dpr));
     postMat.uniforms.res.value.set(W * dpr, H * dpr);
     postMat.uniforms.cell.value = cell;
     rt.setSize(Math.ceil((W * dpr) / cell), Math.ceil((H * dpr) / cell));
@@ -194,6 +222,7 @@ async function init(root) {
       if (id) items[s.id].classList.toggle('is-on', on);
       parts[s.id].target.copy(on ? ON : id ? OFF : IDLE);
       if (!on) parts[s.id].target.multiplyScalar(s.tone);
+      parts[s.id].hotTarget = on ? 1 : 0;
     }
     root.classList.toggle('has-active', !!id);
     if (id) {
@@ -250,6 +279,16 @@ async function init(root) {
   /* ---------- pastilles + légende et sa ligne de rappel ---------- */
   const v3 = new THREE.Vector3();
   function project(id) { v3.copy(parts[id].anchor).project(cam); return [((v3.x + 1) / 2) * W, ((1 - v3.y) / 2) * H]; }
+  // étendue horizontale du système à l'écran (coins de sa boîte englobante) : le dégradé la parcourt
+  function measureSpan(id) {
+    const { min, max } = parts[id].mesh.geometry.boundingBox;
+    let x0 = Infinity, x1 = -Infinity;
+    for (let i = 0; i < 8; i++) {
+      v3.set(i & 1 ? max.x : min.x, i & 2 ? max.y : min.y, i & 4 ? max.z : min.z).project(cam);
+      x0 = Math.min(x0, v3.x); x1 = Math.max(x1, v3.x);
+    }
+    postMat.uniforms.span.value.set(x0, Math.max(x1, x0 + 1e-3));
+  }
   let right = false;
   function updateOverlay() {
     for (const s of SYSTEMS) {
@@ -286,10 +325,17 @@ async function init(root) {
     let moving = controls.autoRotate;
     controls.update(dt);
     if (pointer && pickDirty && !pinned) { pickDirty = false; setActive(pick(pointer[0], pointer[1])); }
+    const ease = 1 - Math.pow(0.0008, dt);
     for (const p of Object.values(parts)) {
       const c = p.mesh.material.color;
-      if (!c.equals(p.target)) { c.lerp(p.target, 1 - Math.pow(0.0008, dt)); moving = true; if (Math.abs(c.r - p.target.r) < 0.002) c.copy(p.target); }
+      if (!c.equals(p.target)) { c.lerp(p.target, ease); moving = true; if (Math.abs(c.r - p.target.r) < 0.002) c.copy(p.target); }
+      if (p.hot !== p.hotTarget) {
+        p.hot += (p.hotTarget - p.hot) * ease; moving = true;
+        if (Math.abs(p.hot - p.hotTarget) < 0.002) p.hot = p.hotTarget;
+        p.mesh.material.opacity = 1 - 0.5 * p.hot;
+      }
     }
+    if (active) measureSpan(active);
     // le système actif passe devant les autres (rendu après un effacement de la profondeur)
     renderer.setRenderTarget(rt); renderer.clear();
     for (const s of SYSTEMS) parts[s.id].mesh.visible = s.id !== active;

@@ -18,7 +18,7 @@ des SVG ne fonctionnent pas en `file://`.
   - `wordmark-dots.js` : signature « verdon groupe » en points, colorée au survol (footer)
   - `service-dots.js` : pictogrammes en points des cartes « Our services » et « Expertises », parcourus par un flux au survol
 - `js/vendor/` : GSAP 3.12.5, ScrollTrigger, Lenis 1.1.13, three.js 0.160 (aucun CDN requis)
-- `assets/package-3d.json` + `assets/package-3d.bin` : géométrie de la maquette 3D (index des 8 systèmes ; positions et triangles en uint16, gzip), `assets/package-3d-poster.webp` : image fixe affichée avant le chargement ou sans WebGL
+- `assets/package-3d.json` + `assets/package-3d.bin` : géométrie de la maquette 3D (index des 8 systèmes ; positions et triangles en uint16, gzip), `assets/package-3d-poster.webp` : image fixe (rendue en 2×) affichée avant le chargement ou sans WebGL
 - `assets/wordmark-dots.json` : points de la signature du footer (Figma 273:216)
 - `assets/` : images et SVG exportés de Figma
 
@@ -64,7 +64,7 @@ Désactivé par défaut (le scroll natif reste fluide même quand la page calcul
   cartes qui entrent une à une (sans flou d'arrière-plan, trop coûteux au scroll) ; scroll horizontal natif sur tablette et mobile.
   Chaque carte porte un pictogramme en matrice de points (voir « Pictogrammes des services et expertises »).
 - Expertises : pictogrammes en points (voir « Pictogrammes des services et expertises »), traits verticaux dessinés, blobs de couleur qui dérivent.
-- Factory built : maquette 3D interactive du package (data hall) en matrice de points, d'après « Verdon Factory-Built.html ». Survol ou toucher d'un système (ou de sa pastille) : il passe devant les autres en blanc, sa légende s'affiche dans le coin de la vue, de son côté, reliée par une ligne de rappel (légende pleine largeur en haut de la vue ≤ 700 px) ; un clic la fige. Glisser pour tourner, rotation automatique après 5 s sans interaction. Textes des 8 systèmes dans `SYSTEMS`, en tête de `js/components/package-3d.js`. three.js et la maquette (~790 Ko) ne sont chargés qu'au besoin, le rendu s'arrête hors écran. Frise des 8 étapes (Design → Commissioning support) en dessous.
+- Factory built : maquette 3D interactive du package (data hall) en matrice de points, d'après « Verdon Factory-Built.html ». Survol ou toucher d'un système (ou de sa pastille) : il passe devant les autres et ses points prennent le dégradé habituel (lilas → pêche → ambre → vert, `--gt-c1` à `--gt-c4`, de gauche à droite sur son étendue à l'écran) ; sa légende s'affiche dans le coin de la vue, de son côté, reliée par une ligne de rappel (légende pleine largeur en haut de la vue ≤ 700 px) ; un clic la fige. Glisser pour tourner, rotation automatique après 5 s sans interaction. Textes des 8 systèmes dans `SYSTEMS`, en tête de `js/components/package-3d.js` ; densité des points réglée par `CELL` (pas de la grille en px CSS, 3) et `CELL_S` (vue de moins de 560 px, 2,5). Après un changement de densité, refaire l'image fixe. three.js et la maquette (~790 Ko) ne sont chargés qu'au besoin, le rendu s'arrête hors écran. Frise des 8 étapes (Design → Commissioning support) en dessous.
 - Actus : le même arc dégradé que sous le hero, retourné, assure le passage partenaires (clair) → actus (sombre) ; trait vert et image qui suivent l'article survolé (fondu + léger zoom arrière). FAQ : accordéon animé.
 - CTA : parallaxe de la photo, footer qui remonte, signature « verdon groupe » révélée puis colorée au survol.
 - `prefers-reduced-motion` respecté (tout s'affiche sans animation).
