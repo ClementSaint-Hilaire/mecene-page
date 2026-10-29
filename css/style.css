@@ -571,71 +571,57 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .factory__head .h2 { white-space: nowrap; }
 .factory__headcontent { display: flex; flex-direction: column; gap: 32px; align-items: center; width: 100%; }
 .factory__lead { max-width: 600px; }
-/* --- Composant Campus 3D --- */
-.campus3d {
-  position: relative;
-  width: 100%;
-  margin-top: 64px;
-  display: grid;
-  grid-template-columns: minmax(210px, 270px) minmax(0, 1fr) minmax(210px, 270px);
-  gap: clamp(12px, 2vw, 28px);
-  align-items: stretch;
-  --c3d-hi: #f4f1ea;
-  --c3d-muted: #7d7c78;
-  --c3d-line: #2a2a2c;
-}
-.campus3d__col { position: relative; z-index: 2; display: flex; flex-direction: column; justify-content: space-between; gap: 28px; padding-block: 24px; }
-.campus3d__col--right { text-align: right; }
-.campus3d__view { position: relative; min-width: 0; height: min(900px, max(520px, 58vw)); max-height: 86vh; }
-.campus3d__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .8s var(--ease-figma); }
-.campus3d__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: grab; opacity: 0; transition: opacity .8s var(--ease-figma); }
-.campus3d__canvas:active { cursor: grabbing; }
-.campus3d.is-ready .campus3d__canvas { opacity: 1; }
-.campus3d.is-ready .campus3d__poster { opacity: 0; }
-.campus3d.is-fallback .campus3d__canvas, .campus3d.is-fallback .campus3d__markers, .campus3d.is-fallback .campus3d__hint { display: none; }
-.campus3d__hint { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); white-space: nowrap; color: var(--c3d-muted); letter-spacing: .06em; opacity: 0; transition: opacity .6s; pointer-events: none; }
-.campus3d.is-ready .campus3d__hint { opacity: 1; }
-.campus3d__leaders { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: visible; }
-.campus3d__leaders path { fill: none; stroke: var(--c3d-hi); stroke-width: 1; vector-effect: non-scaling-stroke; transition: opacity .25s; }
-.campus3d__leaders circle { fill: var(--c3d-hi); transition: opacity .25s; }
+/* --- Composant Package 3D --- */
+.pack3d { position: relative; width: 100%; display: flex; justify-content: center; }
+.pack3d__view { position: relative; width: min(100%, 1080px); aspect-ratio: 1 / 1; }
+.pack3d__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .8s var(--ease-figma); }
+.pack3d__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: grab; opacity: 0; transition: opacity .8s var(--ease-figma); }
+.pack3d__canvas:active { cursor: grabbing; }
+.pack3d.is-ready .pack3d__canvas { opacity: 1; }
+.pack3d.is-ready .pack3d__poster { opacity: 0; }
+.pack3d.is-fallback .pack3d__canvas, .pack3d.is-fallback .pack3d__markers, .pack3d.is-fallback .pack3d__hint { display: none; }
+.pack3d__hint { position: absolute; left: 0; right: 0; bottom: 4%; text-align: center; font-size: 12px; line-height: 1.2; letter-spacing: .04em; text-transform: uppercase; color: var(--light-2); opacity: 0; transition: opacity .3s; pointer-events: none; }
+.pack3d.is-ready .pack3d__hint { opacity: 1; }
+.pack3d.has-active .pack3d__hint { opacity: 0; }
+.pack3d__leader { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: visible; }
+.pack3d__leader path { fill: none; stroke: var(--light); stroke-width: 1; transition: opacity .25s; }
+.pack3d__leader circle { fill: var(--light); transition: opacity .25s; }
 
-.c3d-card {
-  all: unset; box-sizing: border-box; display: grid; gap: 10px; cursor: pointer; min-width: 0;
-  opacity: 0; transform: translateY(6px); pointer-events: none;
-  transition: opacity .3s var(--ease-figma), transform .3s var(--ease-figma);
+.pack3d__markers { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
+.p3d-pin {
+  appearance: none; padding: 0; border: 0; margin: -3.5px 0 0 -3.5px; position: absolute; left: 0; top: 0; width: 7px; height: 7px; border-radius: 50%;
+  background: rgba(255, 255, 255, .45); box-shadow: 0 0 0 3px rgba(28, 27, 25, .7); pointer-events: auto; cursor: pointer; will-change: transform;
+  transition: background .2s;
 }
-.c3d-card.is-on, .c3d-card:focus-visible { opacity: 1; transform: none; pointer-events: auto; }
-.c3d-card:focus-visible { outline: 1px solid var(--c3d-hi); outline-offset: 6px; }
-.c3d-card__title { font-size: var(--fs-xl); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; text-transform: uppercase; color: var(--light); }
-.c3d-card__text { font-size: var(--fs-s); line-height: 1.3; letter-spacing: -0.01em; color: var(--light-2); max-width: 34ch; }
-.campus3d__col--right .c3d-card__text { margin-left: auto; }
+.p3d-pin.is-on { background: var(--light); }
+.p3d-pin:focus-visible { outline: 1px solid var(--light); outline-offset: 3px; }
 
-.campus3d__markers { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
-.c3d-pin { position: absolute; left: 0; top: 0; width: 0; height: 0; pointer-events: none; will-change: transform; }
-.c3d-pin__dot {
-  appearance: none; padding: 0; border: 0; margin: 0; position: absolute; left: -4px; top: -4px; width: 8px; height: 8px; border-radius: 50%;
-  background: var(--c3d-muted); box-shadow: 0 0 0 3px rgba(28, 27, 25, .6); pointer-events: auto; cursor: pointer;
-  transition: background .25s, transform .25s;
+/* légende : dans un coin de la vue, du côté du système actif */
+.p3d-cap {
+  position: absolute; top: 2%; left: 2%; z-index: 2; width: min(320px, 44%); padding: 16px 18px 18px;
+  background: rgba(28, 27, 25, .9); pointer-events: none;
+  opacity: 0; transform: translateY(6px); transition: opacity .25s var(--ease-figma), transform .3s var(--ease-figma);
 }
-.c3d-pin.is-on .c3d-pin__dot { background: var(--c3d-hi); transform: scale(1.15); }
+.p3d-cap.is-r { left: auto; right: 2%; text-align: right; }
+.pack3d.has-active .p3d-cap { opacity: 1; transform: none; }
+.p3d-cap__item { display: none; gap: 12px; }
+.p3d-cap__item.is-on { display: grid; }
+.p3d-cap__title { font-size: 20px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; text-transform: uppercase; color: var(--light); }
+.p3d-cap__text { font-size: var(--fs-s); line-height: 1.35; letter-spacing: -0.01em; color: var(--light-2); }
 
-@media (max-width: 900px) {
-  .campus3d { grid-template-columns: 1fr 1fr; gap: 28px 20px; margin-top: 32px; }
-  .campus3d__view { grid-column: 1 / -1; order: -1; height: auto; aspect-ratio: 1 / 1; max-height: 78vh; }
-  .campus3d__col { padding-block: 0; justify-content: flex-start; }
-  .campus3d__col--right { text-align: left; }
-  .campus3d__col--right .c3d-card__text { margin-left: 0; }
-  .campus3d__leaders { display: none; }
-  .c3d-card:not(.is-on) { display: none; }
+@media (max-width: 700px) {
+  .p3d-cap, .p3d-cap.is-r { top: 0; left: 0; right: 0; width: auto; padding: 12px 14px 14px; text-align: left; transform: none; }
+  .pack3d__leader { display: none; }
 }
-@media (max-width: 520px) { .campus3d { grid-template-columns: 1fr; } }
 .factory__row { width: 100%; display: flex; gap: 128px; align-items: flex-start; padding-top: 128px; overflow: hidden; }
 .factory__rowintro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; flex-shrink: 0; }
 .factory__rowintro .h2 { white-space: nowrap; }
 .factory__cols-viewport { flex: 1 0 0; min-width: 0; overflow: visible; }
-.factory__cols { display: flex; gap: 32px; align-items: flex-start; width: max-content; border-bottom: 1px solid var(--stroke); }
-.fcol { display: flex; flex-direction: column; gap: 24px; justify-content: center; align-items: flex-start; }
+.factory__cols { display: flex; gap: 32px; align-items: stretch; width: max-content; border-bottom: 1px solid var(--stroke); }
+.fcol { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
+.fcol .vline { margin-top: auto; } /* textes de longueurs différentes : le trait reste posé sur la ligne */
 .fcol__text { display: flex; flex-direction: column; gap: 19px; width: 294px; }
+.fcol__text .h4 { min-height: 2.4em; } /* titres sur 1 ou 2 lignes : les textes restent alignés */
 
 /* =========================================================
    TÉMOIGNAGES

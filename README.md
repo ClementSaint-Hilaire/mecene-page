@@ -13,12 +13,12 @@ des SVG ne fonctionnent pas en `file://`.
   - `nav.js` : navigation fixe (3 états, encre selon le fond, voir plus bas)
   - `gradient-text.js` + `css/components/gradient-text.css` : apparition du texte par le dégradé
   - `reveal.js` : apparitions à l'entrée dans l'écran (`data-reveal="up|fade|clip|scale|line|vline|wipe|card|xcard|quote"`)
-  - `campus-3d.js` : maquette 3D interactive du campus (section Factory built)
+  - `package-3d.js` : maquette 3D interactive du package factory-built (section Factory built)
   - `europe-map.js` : carte Europe en points, en rotation (footer)
   - `wordmark-dots.js` : signature « verdon groupe » en points, colorée au survol (footer)
   - `service-dots.js` : pictogrammes en points des cartes « Our services » et « Expertises », parcourus par un flux au survol
 - `js/vendor/` : GSAP 3.12.5, ScrollTrigger, Lenis 1.1.13, three.js 0.160 (aucun CDN requis)
-- `assets/campus-3d.json` : géométrie de la maquette 3D
+- `assets/package-3d.json` + `assets/package-3d.bin` : géométrie de la maquette 3D (index des 8 systèmes ; positions et triangles en uint16, gzip), `assets/package-3d-poster.webp` : image fixe affichée avant le chargement ou sans WebGL
 - `assets/wordmark-dots.json` : points de la signature du footer (Figma 273:216)
 - `assets/` : images et SVG exportés de Figma
 
@@ -64,7 +64,7 @@ Désactivé par défaut (le scroll natif reste fluide même quand la page calcul
   cartes qui entrent une à une (sans flou d'arrière-plan, trop coûteux au scroll) ; scroll horizontal natif sur tablette et mobile.
   Chaque carte porte un pictogramme en matrice de points (voir « Pictogrammes des services et expertises »).
 - Expertises : pictogrammes en points (voir « Pictogrammes des services et expertises »), traits verticaux dessinés, blobs de couleur qui dérivent.
-- Factory built : maquette 3D interactive du campus (survol ou toucher pour voir chaque bâtiment, glisser pour tourner, visite automatique au repos). three.js n'est chargé qu'au besoin, le rendu s'arrête hors écran.
+- Factory built : maquette 3D interactive du package (data hall) en matrice de points, d'après « Verdon Factory-Built.html ». Survol ou toucher d'un système (ou de sa pastille) : il passe devant les autres en blanc, sa légende s'affiche dans le coin de la vue, de son côté, reliée par une ligne de rappel (légende pleine largeur en haut de la vue ≤ 700 px) ; un clic la fige. Glisser pour tourner, rotation automatique après 5 s sans interaction. Textes des 8 systèmes dans `SYSTEMS`, en tête de `js/components/package-3d.js`. three.js et la maquette (~790 Ko) ne sont chargés qu'au besoin, le rendu s'arrête hors écran. Frise des 8 étapes (Design → Commissioning support) en dessous.
 - Actus : le même arc dégradé que sous le hero, retourné, assure le passage partenaires (clair) → actus (sombre) ; trait vert et image qui suivent l'article survolé (fondu + léger zoom arrière). FAQ : accordéon animé.
 - CTA : parallaxe de la photo, footer qui remonte, signature « verdon groupe » révélée puis colorée au survol.
 - `prefers-reduced-motion` respecté (tout s'affiche sans animation).

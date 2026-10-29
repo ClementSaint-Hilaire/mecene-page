@@ -373,10 +373,10 @@
 <section class="factory" data-section="factory" data-nav-bg="dark">
   <div class="factory__head">
     <h2 class="h2 h2--light t-center" data-gt-lines>
-      <span class="t-muted-light">Lorem </span><span>FACTORY BUILT </span><br><span class="t-muted-light">consectetur</span><span> adipiscing</span>
+      <span class="t-muted-light">One integrated </span><span>package.</span><br><span class="t-muted-light">Multiple </span><span>critical systems.</span>
     </h2>
     <div class="factory__headcontent">
-      <p class="lead-m t-muted-light t-center factory__lead" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+      <p class="lead-m t-muted-light t-center factory__lead" data-reveal="up">VERDON combines mechanical, electrical, containment, and fire-protection scope into coordinated factory-built assemblies. Each package is engineered around transport, lifting, access, maintenance and site interface constraints, so integration happens before the module reaches the jobsite.</p>
       <div class="btn-row" data-reveal="up">
         <a href="#" class="btn btn--solid btn--w120" data-btn><span class="btn__label" data-gt>TALK TO US</span></a>
         <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
@@ -384,23 +384,22 @@
     </div>
   </div>
 
-  <!-- Composant Campus 3D (js/components/campus-3d.js) -->
-  <div class="factory__campus campus3d" data-campus3d data-src="assets/campus-3d.json" data-reveal="scale">
-    <div class="campus3d__col campus3d__col--left" data-c3d-left></div>
-    <div class="campus3d__view" data-c3d-view>
-      <img class="campus3d__poster" decoding="async" src="assets/campus-a.webp" alt="Maquette isométrique du campus Verdon" width="1080" height="1080" loading="lazy">
-      <canvas class="campus3d__canvas" aria-label="Maquette 3D interactive du campus : survoler ou toucher un bâtiment, glisser pour tourner"></canvas>
-      <div class="campus3d__markers" data-c3d-markers></div>
-      <p class="campus3d__hint caption" aria-hidden="true">Survoler ou toucher un bâtiment · Glisser pour tourner</p>
+  <!-- Composant Package 3D (js/components/package-3d.js) -->
+  <div class="factory__package pack3d" data-pack3d data-src="assets/package-3d.json" data-bin="assets/package-3d.bin" data-reveal="scale">
+    <div class="pack3d__view" data-p3d-view>
+      <img class="pack3d__poster" decoding="async" src="assets/package-3d-poster.webp" alt="VERDON factory-built data hall package and its integrated systems" width="1080" height="1080" loading="lazy">
+      <canvas class="pack3d__canvas" aria-label="Interactive 3D view of a VERDON factory-built data hall package: hover or tap a system, drag to rotate"></canvas>
+      <svg class="pack3d__leader" aria-hidden="true"><path data-p3d-path d="" opacity="0"></path><circle data-p3d-dot r="3" opacity="0"></circle></svg>
+      <div class="pack3d__markers" data-p3d-markers></div>
+      <div class="p3d-cap" data-p3d-cap aria-live="polite"></div>
+      <p class="pack3d__hint" data-p3d-hint aria-hidden="true">Hover a system · Drag to rotate</p>
     </div>
-    <div class="campus3d__col campus3d__col--right" data-c3d-right></div>
-    <svg class="campus3d__leaders" aria-hidden="true"><path data-c3d-path d="" opacity="0"></path><circle data-c3d-dot r="2.5" opacity="0"></circle></svg>
   </div>
 
   <div class="factory__row">
     <div class="factory__rowintro">
       <h2 class="h2 h2--light" data-gt-lines>
-        <span class="t-muted-light">Lorem ipsum </span><br><span>dolor sit amet, </span><br><span class="t-muted-light">consectetur elit </span><br><span>adipiscing</span>
+        <span class="t-muted-light">A controlled path </span><br><span>from concept </span><br><span class="t-muted-light">to </span><br><span>commissioning</span>
       </h2>
       <a href="#" class="btn btn--outline-light" data-btn data-reveal="up"><span class="btn__label" data-gt>DISCOVER OUR SERVICES</span></a>
     </div>
@@ -409,36 +408,57 @@
       <div class="factory__cols" data-drag-track>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
-            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+            <h3 class="h4 h4--light" data-gt-lines>DESIGN</h3>
+            <p class="p p--light">Requirements, 3D coordination, modular breakdown and approved interfaces.</p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
         </div>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
-            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+            <h3 class="h4 h4--light" data-gt-lines>PROCUREMENT</h3>
+            <p class="p p--light">Qualified supply chain, material traceability and production-aligned call-offs.</p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
         </div>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
-            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+            <h3 class="h4 h4--light" data-gt-lines>FABRICATION</h3>
+            <p class="p p--light">Controlled manufacturing of structures, pipework, supports and system components.</p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
         </div>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
-            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+            <h3 class="h4 h4--light" data-gt-lines>INTEGRATION</h3>
+            <p class="p p--light">Assembly of mechanical, electrical and ancillary systems in a stable environment.</p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
         </div>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
-            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+            <h3 class="h4 h4--light" data-gt-lines>FAT AND RELEASE</h3>
+            <p class="p p--light">Inspection, testing, documentation review and shipment authorisation.</p>
+          </div>
+          <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
+        </div>
+        <div class="fcol" data-fcol data-reveal="up">
+          <div class="fcol__text">
+            <h3 class="h4 h4--light" data-gt-lines>STORAGE AND LOGISTICS</h3>
+            <p class="p p--light">Protected storage, phased call-off, transport planning and installation sequencing.</p>
+          </div>
+          <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
+        </div>
+        <div class="fcol" data-fcol data-reveal="up">
+          <div class="fcol__text">
+            <h3 class="h4 h4--light" data-gt-lines>SITE INSTALLATION</h3>
+            <p class="p p--light">Lifting, positioning, bolted connections, hook-up and completion with reduced co-activity.</p>
+          </div>
+          <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
+        </div>
+        <div class="fcol" data-fcol data-reveal="up">
+          <div class="fcol__text">
+            <h3 class="h4 h4--light" data-gt-lines>COMMISSIONING SUPPORT</h3>
+            <p class="p p--light">System verification, punch closure, handover and support through operational readiness.</p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
         </div>
@@ -782,7 +802,7 @@
 <script src="js/components/reveal.js"></script>
 <script src="js/components/nav.js"></script>
 <script src="js/main.js"></script>
-<script type="module" src="js/components/campus-3d.js"></script>
+<script type="module" src="js/components/package-3d.js"></script>
 <script src="js/components/europe-map.js" defer></script>
 <script src="js/components/wordmark-dots.js" defer></script>
 <script src="js/components/service-dots.js" defer></script>
