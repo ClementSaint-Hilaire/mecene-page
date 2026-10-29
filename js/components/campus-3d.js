@@ -182,7 +182,7 @@ async function init(root) {
     // réutilise le composant dégradé sur le titre de la carte active
     if (id && window.GradientText) {
       const t = cards[id].querySelector('.c3d-card__title');
-      if (!t.dataset.gt) { t.dataset.gt = ''; window.GradientText.init(cards[id]); }
+      if (!t.hasAttribute('data-gt-lines')) { t.setAttribute('data-gt-lines', ''); window.GradientText.init(cards[id]); }
       window.GradientText.play(t);
     }
     wake();

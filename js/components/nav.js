@@ -4,9 +4,10 @@
    - .is-collapsed : menu replié en pastilles dès qu'on a scrollé
    - .is-open      : panneau ouvert au survol des pastilles, refermé quand la souris quitte le menu
                      (ou CLOSE, Échap). Clavier / tactile : le bouton pastilles ouvre, focus ou toucher ailleurs ferme.
-   Couleur : .nav--on-light sur chaque bloc (logo, pastilles, langue, bouton, burger) qui passe sur un fond clair
+   Couleur : .nav--on-light sur chaque bloc (logo, pastilles, langue, burger) qui passe sur un fond clair
    (encre foncée). Le fond est lu sur les zones [data-nav-bg="dark|light"] sous le centre de chaque bloc ;
    si plusieurs se superposent, la dernière dans le DOM l'emporte. Aucune zone = fond clair.
+   Le bouton WORK WITH US reste blanc sur tous les fonds (maquette).
    API : window.Nav.setOverlay(bool) → force l'encre claire (menu mobile ouvert par-dessus)
    ========================================================= */
 (() => {
@@ -62,7 +63,10 @@
       closeTimer = setTimeout(() => setOpen(false), CLOSE_DELAY);
     });
 
-    toggle.addEventListener('click', () => setOpen(true));
+    toggle.addEventListener('click', (e) => {
+      setOpen(true);
+      if (e.detail === 0) panel.querySelector('a, button').focus({ preventScroll: true });  // ouvert au clavier
+    });
     slot.addEventListener('focusout', (e) => { if (!slot.contains(e.relatedTarget)) setOpen(false); });
     nav.querySelector('[data-nav-close]').addEventListener('click', () => { hoverLocked = true; setOpen(false); });
     panel.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => setOpen(false)));
@@ -83,14 +87,13 @@
   onScroll();
 
   /* ---------- Fond clair / sombre sous la nav ----------
-     Chaque bloc (logo, pastilles, langue, bouton, burger) lit le fond sous son propre centre :
+     Chaque bloc (logo, pastilles, langue, burger) lit le fond sous son propre centre :
      un logo sur une carte claire passe en foncé même si le reste de la barre est sur fond sombre. */
   const zones = Array.from(document.querySelectorAll('[data-nav-bg]'));
   const regions = [
     { el: nav.querySelector('.nav__logo'), at: 0.15 },  // le mot « Verdon » n'occupe que la gauche du SVG (347 px)
     { el: slot, probe: toggle },                        // sonde sur les pastilles
     { el: nav.querySelector('.nav__lang') },
-    { el: nav.querySelector('.nav__cta') },
     { el: nav.querySelector('.nav__burger') },
   ].filter((r) => r.el).map((r) => ({ ...r, probe: r.probe || r.el, at: r.at ?? 0.5, hits: new Set() }));
   let overlay = false;

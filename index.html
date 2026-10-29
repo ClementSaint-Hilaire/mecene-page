@@ -13,41 +13,76 @@
 <body>
 
 <!-- =========================================================
+     NAV — fixe, 3 états (js/components/nav.js) : menu déplié sur le hero,
+     pastilles dès qu'on scrolle, panneau au survol des pastilles.
+     Encre claire ou foncée selon le fond ([data-nav-bg] sur les sections).
+     ========================================================= -->
+<header class="nav" data-nav>
+  <a href="#" class="nav__logo" aria-label="Verdon — accueil">
+    <img decoding="async" class="nav__ink nav__ink--light" src="assets/logo.svg" alt="" width="347" height="24">
+    <img decoding="async" class="nav__ink nav__ink--dark" src="assets/logo-dark.svg" alt="" width="347" height="24">
+  </a>
+
+  <div class="nav__slot" data-nav-slot>
+    <nav class="nav__menu" aria-label="Navigation principale">
+      <a href="#" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
+      <a href="#" class="nav__item" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
+      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
+      <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
+      <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
+      <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
+      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+    </nav>
+
+    <button class="nav__toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+      <span class="nav__dots" aria-hidden="true"></span>
+    </button>
+
+    <div class="nav__panel" id="nav-panel" data-nav-panel>
+      <button class="nav__close" type="button" data-nav-close>CLOSE</button>
+      <img decoding="async" class="nav__rule" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <nav class="nav__plist" aria-label="Navigation principale">
+        <a href="#" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
+        <a href="#" class="nav__item" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
+        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
+        <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
+        <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
+        <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
+        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+      </nav>
+      <img decoding="async" class="nav__rule nav__rule--end" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <div class="nav__contact">
+        <p>connect with us:</p>
+        <a href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav__spacer"></div>
+
+  <div class="nav__right">
+    <button class="nav__lang" type="button" aria-label="Changer de langue">
+      <span>EN</span>
+      <span class="nav__chev" aria-hidden="true">
+        <img decoding="async" class="nav__ink nav__ink--light" src="assets/frame.svg" alt="" width="20" height="20">
+        <img decoding="async" class="nav__ink nav__ink--dark" src="assets/frame-dark.svg" alt="" width="20" height="20">
+      </span>
+    </button>
+    <a href="#" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+    <button class="nav__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- =========================================================
      HERO + POSITIONNEMENT (le hero reste collé derrière, la section suivante le recouvre)
      ========================================================= -->
 <div class="hero-stack">
 
-  <section class="hero" data-section="hero">
-    <header class="nav" data-nav>
-      <a href="#" class="nav__logo" aria-label="Verdon — accueil">
-        <img decoding="async" src="assets/logo.svg" alt="Verdon" width="347" height="24">
-      </a>
-
-      <nav class="nav__menu" aria-label="Navigation principale">
-        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>FACTORY BUILT</span></a>
-        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>SYSTÈMES</span></a>
-        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>SECTEURS</span></a>
-        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>RÉALISATIONS</span></a>
-        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>À PROPOS</span></a>
-        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>ACTUALITÉS</span></a>
-        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>RESSOURCES</span></a>
-        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>CARRIÈRES</span></a>
-      </nav>
-
-      <div class="nav__spacer"></div>
-
-      <div class="nav__right">
-        <button class="nav__lang" type="button" aria-label="Changer de langue">
-          <span>EN</span>
-          <img decoding="async" src="assets/frame.svg" alt="" width="20" height="20">
-        </button>
-        <a href="#" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
-        <button class="nav__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
-          <span></span><span></span>
-        </button>
-      </div>
-    </header>
-
+  <section class="hero" data-section="hero" data-nav-bg="dark">
     <div class="hero__body">
       <div class="hero__visual" aria-hidden="true">
         <!-- Vidéo matrice de points (24 s en boucle). Source choisie en JS selon l'écran ; sans JS : l'image poster. -->
@@ -61,19 +96,16 @@
       <div class="hero__content">
         <div class="hero__text">
           <div class="hero__titles">
-            <p class="hero__eyebrow">LOREM IPSUM</p>
-            <h1 class="h1 hero__title" data-hero-title>
-              <span class="line" data-gt style="--gt-delay:0.45s">Lorem ipsum</span>
-              <span class="line" data-gt style="--gt-delay:0.57s">dolor sit amet,</span>
-              <span class="line" data-gt style="--gt-delay:0.69s">consectetur elit</span>
-              <span class="line" data-gt style="--gt-delay:0.81s">adipiscing elit</span>
+            <p class="hero__eyebrow">ENGINEERING · MANUFACTURING · DELIVERY</p>
+            <h1 class="h1 hero__title" data-hero-title data-gt-lines style="--gt-delay:0.45s">
+              Industrialising technical systems for Data&nbsp;Centers and beyond.
             </h1>
           </div>
-          <p class="p hero__lead" data-hero-fade>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+          <p class="p hero__lead" data-hero-fade>VERDON combines engineering and industrial manufacturing to support the development and integration of technical systems for complex infrastructure projects. With a strong focus on Data Centers, its approach brings together technical design, system integration and controlled off-site manufacturing to address demanding MEP requirements and the constraints of large-scale infrastructure.</p>
         </div>
         <div class="hero__ctas" data-hero-fade>
           <a href="#" class="btn btn--solid" data-btn><span class="btn__label" data-gt>TALK WITH US</span></a>
-          <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>OUR SERVICES</span></a>
+          <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>EXPLORE OUR CAPABILITIES</span></a>
         </div>
       </div>
     </div>
@@ -82,56 +114,58 @@
   <section class="positioning" data-section="positioning">
     <div class="positioning__gradient" aria-hidden="true">
       <img decoding="async" class="positioning__arc" src="assets/arc.webp" alt="" width="3132" height="1749" data-arc>
+      <!-- zone de lecture du fond pour la nav : la bande colorée de l'arc compte comme fond clair -->
+      <span class="positioning__navbg" data-nav-bg="light"></span>
     </div>
 
-    <div class="positioning__inner">
+    <div class="positioning__inner" data-nav-bg="light">
       <div class="positioning__left">
         <div class="positioning__spacer"></div>
         <div class="positioning__photo" data-reveal="clip">
           <img decoding="async" src="assets/frame-64.webp" alt="Soudeur en atelier" width="1500" height="1000" loading="lazy">
         </div>
-        <h2 class="h2 positioning__title" data-gt>
-          <span class="t-muted">Lorem ipsum </span><span>dolor sit amet, </span><br><span class="t-muted">consectetur elit</span><span> adipiscing</span>
+        <h2 class="h2 positioning__title" data-gt-lines>
+          <span>Industrial capacity,</span><br><span class="t-muted">built around </span><span>Data</span><br><span>Center</span><span class="t-muted"> delivery.</span>
         </h2>
       </div>
 
       <div class="positioning__right">
         <div class="positioning__rspacer"></div>
         <div class="positioning__intro">
-          <p class="lead-l" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
-          <a href="#" class="btn btn--outline" data-btn data-reveal="up"><span class="btn__label" data-gt>LEARN MORE ABOUT US</span></a>
+          <p class="lead-l" data-reveal="up">Verdon develops and manufactures MEP systems for Data Center infrastructure. By combining engineering, early planning and controlled manufacturing, our group prepares complex systems for assembly and deployment.</p>
+          <a href="#" class="btn btn--outline" data-btn data-reveal="up"><span class="btn__label" data-gt>EXPLORE OUR CAPABILITIES</span></a>
         </div>
 
         <div class="stats">
           <div class="stat stat--first">
             <div class="stat__head">
-              <p class="p stat__label" data-reveal="fade">Lorem ipsum di odolores</p>
+              <p class="p stat__label" data-reveal="fade">Key figures</p>
               <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
             </div>
             <div class="stat__body" data-reveal="up">
               <p class="stat__num" data-count="180000">180 000+</p>
-              <p class="stat__caption">Lorem ipsum</p>
+              <p class="stat__caption" data-gt-lines>m² of industrial space supporting VERDON’s large-scale industrial operations</p>
             </div>
           </div>
           <div class="stat">
             <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
             <div class="stat__body" data-reveal="up">
-              <p class="stat__num" data-count="180000">180 000+</p>
-              <p class="stat__caption">Lorem ipsum</p>
+              <p class="stat__num" data-count="0">0</p>
+              <p class="stat__caption" data-gt-lines>Welding repairs reflecting VERDON’s focus on manufacturing precision and quality control</p>
             </div>
           </div>
           <div class="stat">
             <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
             <div class="stat__body" data-reveal="up">
-              <p class="stat__num" data-count="180000">180 000+</p>
-              <p class="stat__caption">Lorem ipsum</p>
+              <p class="stat__num" data-count="48">48+</p>
+              <p class="stat__caption" data-gt-lines>Years of manufacturing experience built through decades of expertise in industrial environments</p>
             </div>
           </div>
           <div class="stat">
             <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
             <div class="stat__body" data-reveal="up">
-              <p class="stat__num" data-count="180000">180 000+</p>
-              <p class="stat__caption">Lorem ipsum</p>
+              <p class="stat__num" data-count="650">650+</p>
+              <p class="stat__caption" data-gt-lines>Experts bringing together technical expertise and industrial know-how to support complex projects.</p>
             </div>
           </div>
         </div>
@@ -143,16 +177,16 @@
 <!-- =========================================================
      OUR SERVICES — scroll horizontal épinglé
      ========================================================= -->
-<section class="services" data-section="services" data-hscroll>
+<section class="services" data-section="services" data-hscroll data-nav-bg="light">
   <div class="services__pin" data-hscroll-pin>
     <div class="services__bigword-wrap">
       <p class="services__bigword" data-hscroll-bigword>OUR SERVICES</p>
     </div>
-    <div class="services__band">
+    <div class="services__band" data-nav-bg="dark">
       <div class="services__track" data-hscroll-track>
         <div class="services__intro">
-          <h2 class="h2 h2--light" data-gt>
-            <span class="t-muted-light">Lorem ipsum </span><span>dolor sit amet, </span><br><span class="t-muted-light">consectetur elit</span><span> adipiscing</span>
+          <h2 class="h2 h2--light" data-gt-lines>
+            <span>Technical systems. </span><br><span>Engineered for integration.</span>
           </h2>
           <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>DISCOVER OUR SERVICES</span></a>
         </div>
@@ -160,79 +194,95 @@
         <div class="vline vline--136" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-9.svg" alt=""></div></div>
 
         <div class="p p--light services__text">
-          <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-          <p>&#8203;</p>
-          <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+          <p>VERDON’s systems and solutions cover key technical infrastructures, from electrical distribution and cooling networks to airflow containment and liquid cooling assemblies. Each system addresses specific functional requirements, equipment interfaces and integration constraints within complex industrial environments.</p>
         </div>
 
         <div class="services__cards">
-          <!-- 5 cartes -->
-          <article class="gcard" data-gcard data-reveal="card">
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
             <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
             <div class="gcard__body">
               <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
               <div class="gcard__text">
-                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <h3 class="h4" data-gt-lines>INTEGRATED SKIDS</h3>
                 <div class="p p--muted">
-                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-                  <p>&#8203;</p>
-                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                  <p>Integrated skid assemblies bring selected liquid cooling components together on a common supporting frame. Each assembly can be configured around equipment layouts, pipework connections and project requirements, providing a consolidated unit for installation within the wider cooling system.</p>
                 </div>
               </div>
             </div>
           </article>
-          <article class="gcard" data-gcard data-reveal="card">
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
             <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
             <div class="gcard__body">
               <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
               <div class="gcard__text">
-                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <h3 class="h4" data-gt-lines>SUPPORT STRUCTURES</h3>
                 <div class="p p--muted">
-                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-                  <p>&#8203;</p>
-                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                  <p>Structural frameworks designed to support liquid cooling equipment, pipework and associated components. Their configuration takes into account equipment interfaces, spatial constraints and installation layouts, helping accommodate the technical requirements of each cooling system.</p>
                 </div>
               </div>
             </div>
           </article>
-          <article class="gcard" data-gcard data-reveal="card">
+        </div>
+
+        <div class="vline vline--136" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-9.svg" alt=""></div></div>
+
+        <div class="services__cards">
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
             <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
             <div class="gcard__body">
               <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
               <div class="gcard__text">
-                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <h3 class="h4" data-gt-lines>LOW-VOLTAGE<br>SYSTEMS</h3>
                 <div class="p p--muted">
-                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-                  <p>&#8203;</p>
-                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                  <p>Low-voltage electrical systems designed to meet the technical requirements of complex industrial environments. VERDON supports the preparation and integration of electrical equipment, with configurations adapted to project specifications and installation constraints.</p>
                 </div>
               </div>
             </div>
           </article>
-          <article class="gcard" data-gcard data-reveal="card">
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
             <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
             <div class="gcard__body">
               <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
               <div class="gcard__text">
-                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <h3 class="h4" data-gt-lines>COOLING<br>PIPEWORK</h3>
                 <div class="p p--muted">
-                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-                  <p>&#8203;</p>
-                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                  <p>Cooling pipework designed to support the thermal management requirements of demanding industrial facilities. Each system is configured around project-specific layouts, piping connections and equipment interfaces to facilitate integration within the wider cooling infrastructure.</p>
                 </div>
               </div>
             </div>
           </article>
-          <article class="gcard" data-gcard data-reveal="card">
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
             <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
             <div class="gcard__body">
               <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
               <div class="gcard__text">
-                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <h3 class="h4" data-gt-lines>AISLE CONTAINMENT<br>&amp; CROSS-AISLES</h3>
                 <div class="p p--muted">
-                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-                  <p>&#8203;</p>
-                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                  <p>Containment systems designed to separate hot and cold airflow within Data Center environments. Aisle containment and cross-aisle configurations help organise airflow paths around server racks, taking account of room layouts and the facility’s cooling requirements.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
+            <div class="gcard__body">
+              <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>ELECTRICAL<br>DISTRIBUTION &amp; LOW<br>VOLTAGE</h3>
+                <div class="p p--muted">
+                  <p>Electrical distribution systems designed to organise and route power across technical installations. Solutions are configured around equipment specifications, distribution requirements and connection interfaces to support integration into the wider electrical infrastructure.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
+            <div class="gcard__body">
+              <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>LIQUID<br>COOLING</h3>
+                <div class="p p--muted">
+                  <p>Liquid cooling solutions designed to meet the thermal demands of high-density computing environments. The offering includes integrated skids and dedicated support structures, bringing together key elements of the cooling infrastructure according to project-specific technical and installation requirements.</p>
                 </div>
               </div>
             </div>
@@ -246,7 +296,7 @@
 <!-- =========================================================
      EXPERTISES
      ========================================================= -->
-<section class="expertise" data-section="expertise">
+<section class="expertise" data-section="expertise" data-nav-bg="light">
   <div class="expertise__inner">
     <div class="expertise__blobs" aria-hidden="true">
       <img decoding="async" src="assets/blobs.webp" alt="" width="2571" height="2474" data-blobs>
@@ -254,11 +304,11 @@
 
     <div class="expertise__left">
       <div class="expertise__spacer"></div>
-      <h2 class="h2" data-gt>
-        <span class="t-muted">Lorem </span><span>dolor sit amet, </span><br><span class="t-muted">consectetur</span><span> adipiscing</span>
+      <h2 class="h2" data-gt-lines>
+        <span class="t-muted">A </span><span>MANUFACTURING PARTNER</br></span><span class="t-muted"> FOR COMPLEX INDUSTRIAL </br> ENVIRONMENTS</span>
       </h2>
       <div class="expertise__intro">
-        <p class="lead-m t-muted" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+        <p class="lead-m t-muted expertise__lead" data-reveal="up">VERDON develops and manufactures technical systems for demanding industrial applications, adapting its expertise to the specific needs of each project. Across four key sectors, the company works in environments where technical precision, manufacturing quality and a clear understanding of operational constraints are essential. This cross-sector experience enables VERDON to address a wide range of industrial challenges and project requirements.</p>
         <a href="#" class="btn btn--outline" data-btn data-reveal="up"><span class="btn__label" data-gt>LEARN MORE ABOUT OUR FIELDS OF EXPERTISES</span></a>
       </div>
     </div>
@@ -270,11 +320,9 @@
         <div class="xcard__body">
           <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
           <div class="xcard__text">
-            <h3 class="h4" data-gt>LOREM IPSUM DIS</h3>
+            <h3 class="h4" data-gt-lines>LIFE SCIENCE &amp;<br>PHARMACEUTICALS</h3>
             <div class="p p--muted">
-              <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-              <p>&#8203;</p>
-              <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+              <p>Engineering and manufacturing capabilities for demanding life sciences and pharmaceutical environments, where precision and quality are essential. VERDON supports projects requiring a high level of technical rigor and carefully controlled processes.</p>
             </div>
           </div>
         </div>
@@ -284,11 +332,9 @@
         <div class="xcard__body">
           <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
           <div class="xcard__text">
-            <h3 class="h4" data-gt>LOREM IPSUM DIS</h3>
+            <h3 class="h4" data-gt-lines>ENERGY</h3>
             <div class="p p--muted">
-              <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-              <p>&#8203;</p>
-              <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+              <p>Industrial capabilities supporting complex energy infrastructure and technical systems, adapted to demanding operational requirements. VERDON contributes to projects where reliable manufacturing and the integration of technical systems play a key role.</p>
             </div>
           </div>
         </div>
@@ -298,11 +344,9 @@
         <div class="xcard__body">
           <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
           <div class="xcard__text">
-            <h3 class="h4" data-gt>LOREM IPSUM DIS</h3>
+            <h3 class="h4" data-gt-lines>DATA CENTERS</h3>
             <div class="p p--muted">
-              <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-              <p>&#8203;</p>
-              <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+              <p>Engineering and off-site manufacturing for complex MEP systems supporting Data Center infrastructure, from technical planning to system integration. This approach helps prepare technical systems for the requirements of complex, large-scale projects.</p>
             </div>
           </div>
         </div>
@@ -312,11 +356,9 @@
         <div class="xcard__body">
           <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
           <div class="xcard__text">
-            <h3 class="h4" data-gt>LOREM IPSUM DIS</h3>
+            <h3 class="h4" data-gt-lines>SEMICONDUCTORS</h3>
             <div class="p p--muted">
-              <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
-              <p>&#8203;</p>
-              <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+              <p>Industrial capabilities for demanding semiconductor manufacturing environments, where technical precision and controlled processes are critical. VERDON supports projects shaped by stringent technical specifications and complex infrastructure requirements.</p>
             </div>
           </div>
         </div>
@@ -328,9 +370,9 @@
 <!-- =========================================================
      FACTORY BUILT (sombre)
      ========================================================= -->
-<section class="factory" data-section="factory">
+<section class="factory" data-section="factory" data-nav-bg="dark">
   <div class="factory__head">
-    <h2 class="h2 h2--light t-center" data-gt>
+    <h2 class="h2 h2--light t-center" data-gt-lines>
       <span class="t-muted-light">Lorem </span><span>FACTORY BUILT </span><br><span class="t-muted-light">consectetur</span><span> adipiscing</span>
     </h2>
     <div class="factory__headcontent">
@@ -357,7 +399,7 @@
 
   <div class="factory__row">
     <div class="factory__rowintro">
-      <h2 class="h2 h2--light" data-gt>
+      <h2 class="h2 h2--light" data-gt-lines>
         <span class="t-muted-light">Lorem ipsum </span><br><span>dolor sit amet, </span><br><span class="t-muted-light">consectetur elit </span><br><span>adipiscing</span>
       </h2>
       <a href="#" class="btn btn--outline-light" data-btn data-reveal="up"><span class="btn__label" data-gt>DISCOVER OUR SERVICES</span></a>
@@ -367,35 +409,35 @@
       <div class="factory__cols" data-drag-track>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
             <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
         </div>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
             <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
         </div>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
             <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
         </div>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
             <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
         </div>
         <div class="fcol" data-fcol data-reveal="up">
           <div class="fcol__text">
-            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <h3 class="h4 h4--light" data-gt-lines>LOREM<br>IPSUM DIS</h3>
             <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
           </div>
           <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
@@ -409,12 +451,12 @@
   <!-- =========================================================
        TÉMOIGNAGES
        ========================================================= -->
-  <section class="testimonials" data-section="testimonials" data-reveal-stagger="0">
+  <section class="testimonials" data-section="testimonials" data-reveal-stagger="0" data-nav-bg="light">
     <div class="testimonials__head">
-      <h2 class="h2 testimonials__title" data-gt>
-        <span class="t-muted">Lorem ipsum </span><span>dolor sit amet, </span><span class="t-muted">consectetur elit</span><span> adipiscing</span>
+      <h2 class="h2 testimonials__title" data-gt-lines>
+        <span class="t-muted">Trusted by </span><span>Industry Experts</span>
       </h2>
-      <p class="p t-muted testimonials__intro" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+      <p class="p t-muted testimonials__intro" data-reveal="up">Hear from the industry professionals who work with VERDON on complex technical projects. Their perspectives reflect the expertise, collaboration and industrial requirements that shape our approach to engineering and manufacturing.</p>
     </div>
 
     <article class="quote" data-quote data-reveal="quote">
@@ -466,7 +508,7 @@
   <!-- =========================================================
        PARTENAIRES
        ========================================================= -->
-  <section class="partners" data-section="partners">
+  <section class="partners" data-section="partners" data-nav-bg="light">
     <div class="partners__grid" data-partners>
       <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-114.svg" alt="Logo partenaire" loading="lazy"></div>
       <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-115.svg" alt="Logo partenaire" loading="lazy"></div>
@@ -486,13 +528,20 @@
   <!-- =========================================================
        ACTUALITÉS (sombre)
        ========================================================= -->
-  <section class="news" data-section="news">
+  <section class="news" data-section="news" data-nav-bg="dark">
+    <!-- même arc dégradé que sous le hero, retourné : passage fond clair → fond sombre -->
+    <div class="news__gradient" aria-hidden="true">
+      <img decoding="async" loading="lazy" class="news__arc" src="assets/arc.webp" alt="" width="3132" height="1749">
+      <!-- zone de lecture du fond pour la nav : la bande colorée de l'arc compte comme fond clair -->
+      <span class="news__navbg" data-nav-bg="light"></span>
+    </div>
+
     <div class="news__head">
-      <h2 class="h2 h2--light news__title" data-gt>
+      <h2 class="h2 h2--light news__title" data-gt-lines>
         <span class="t-muted-light">What’s moving </span><br><span>IN YOUR INDUSTRY</span>
       </h2>
       <div class="news__aside" data-reveal="up">
-        <p class="p p--light">Stay ahead of the current abx across all europe from x to y and z trends.</p>
+        <p class="p p--light">Discover the latest news, insights and developments from VERDON, exploring our expertise across Data Centers and complex industrial environments.</p>
         <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
       </div>
     </div>
@@ -535,75 +584,93 @@
           <span class="news__loc">France, belgium</span>
         </a>
       </div>
-      <div class="news__img" data-news-img data-reveal="wipe" aria-hidden="true"></div>
+      <!-- Une image par article, dans le même ordre que la liste (visuels provisoires) -->
+      <div class="news__img" data-news-img data-reveal="wipe" aria-hidden="true">
+        <img decoding="async" class="news__pic is-active" src="assets/frame-64.webp" alt="" width="900" height="600" loading="lazy">
+        <img decoding="async" class="news__pic" src="assets/seciton-temoignages.webp" alt="" width="1500" height="1123" loading="lazy">
+        <img decoding="async" class="news__pic" src="assets/campus-a.webp" alt="" width="1080" height="1080" loading="lazy">
+        <img decoding="async" class="news__pic" src="assets/frame-64.webp" alt="" width="900" height="600" loading="lazy">
+        <img decoding="async" class="news__pic" src="assets/seciton-temoignages.webp" alt="" width="1500" height="1123" loading="lazy">
+      </div>
     </div>
   </section>
 
   <!-- =========================================================
        FAQ
        ========================================================= -->
-  <section class="faq" data-section="faq">
+  <section class="faq" data-section="faq" data-nav-bg="light">
     <div class="faq__grid">
       <div class="faq__intro">
-        <h2 class="h2" data-gt><span>F.A.Q</span></h2>
-        <p class="p t-muted" data-reveal="up">Still have questions? <br>Our team is here to help.</p>
+        <h2 class="h2" data-gt-lines><span>F.A.Q</span></h2>
+        <p class="p t-muted" data-reveal="up">Discover VERDON’s expertise in engineering, manufacturing and Data Center infrastructure.</p>
       </div>
 
       <div class="faq__list" data-faq>
         <div class="faq__item" data-faq-item data-reveal="up">
           <button class="faq__q" type="button" aria-expanded="false">
             <span class="faq__num">01</span>
-            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__question">What does VERDON specialise in&nbsp;?</span>
             <span class="faq__icon" aria-hidden="true">
               <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
               <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
             </span>
           </button>
-          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>VERDON combines engineering expertise and industrial manufacturing to develop and produce technical systems for complex industrial environments. With a strong focus on Data Centers, the company brings together technical design, manufacturing processes and system integration to address the requirements of demanding infrastructure projects.</p></div></div>
         </div>
         <div class="faq__item is-open" data-faq-item data-reveal="up">
           <button class="faq__q" type="button" aria-expanded="true">
             <span class="faq__num">02</span>
-            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__question">What is VERDON’s expertise in Data Centers&nbsp;?</span>
             <span class="faq__icon" aria-hidden="true">
               <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
               <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
             </span>
           </button>
-          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>VERDON supports Data Center projects through the engineering and off-site manufacturing of technical systems designed for complex MEP infrastructure. Its approach takes into account equipment interfaces, installation constraints and the coordination required to integrate systems into large-scale facilities.</p></div></div>
         </div>
         <div class="faq__item" data-faq-item data-reveal="up">
           <button class="faq__q" type="button" aria-expanded="false">
             <span class="faq__num">03</span>
-            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__question">Which industries does VERDON serve&nbsp;?</span>
             <span class="faq__icon" aria-hidden="true">
               <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
               <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
             </span>
           </button>
-          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>VERDON operates across four key sectors: Data Centers, Energy, Life Sciences &amp; Pharmaceuticals, and Semiconductors. Each sector presents specific technical requirements, operating conditions and infrastructure constraints. VERDON applies its engineering and manufacturing capabilities to address the needs of these different industrial environments.</p></div></div>
         </div>
         <div class="faq__item" data-faq-item data-reveal="up">
           <button class="faq__q" type="button" aria-expanded="false">
             <span class="faq__num">04</span>
-            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__question">What types of systems does VERDON manufacture&nbsp;?</span>
             <span class="faq__icon" aria-hidden="true">
               <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
               <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
             </span>
           </button>
-          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>VERDON’s capabilities cover a range of technical systems, including electrical infrastructure, cooling pipework, aisle containment, liquid cooling assemblies and associated support structures. Each system addresses specific functional requirements and equipment interfaces, with its configuration defined according to project specifications.</p></div></div>
         </div>
         <div class="faq__item" data-faq-item data-reveal="up">
           <button class="faq__q" type="button" aria-expanded="false">
             <span class="faq__num">05</span>
-            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__question">How does VERDON approach complex industrial projects&nbsp;?</span>
             <span class="faq__icon" aria-hidden="true">
               <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
               <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
             </span>
           </button>
-          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>VERDON brings engineering and manufacturing capabilities together to prepare technical systems for integration into complex facilities. By considering technical specifications, equipment interfaces and manufacturing constraints, the company works to align system design with practical installation requirements from the outset.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">06</span>
+            <span class="faq__question">Can VERDON adapt its solutions to specific project requirements&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>VERDON develops technical systems around the specifications and constraints of each project. Equipment configurations, spatial limitations, connection interfaces and installation requirements inform the approach taken. This allows the scope and configuration of each solution to be defined in line with the project’s technical needs.</p></div></div>
         </div>
       </div>
 
@@ -617,7 +684,7 @@
   <!-- =========================================================
        CTA + FOOTER
        ========================================================= -->
-  <section class="cta" data-section="cta">
+  <section class="cta" data-section="cta" data-nav-bg="dark">
     <div class="cta__bg" aria-hidden="true">
       <img decoding="async" src="assets/seciton-temoignages.webp" alt="" width="1500" height="1123" loading="lazy" data-cta-bg>
       <div class="cta__overlay"></div>
@@ -626,13 +693,13 @@
     <div class="cta__head">
       <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
       <div class="cta__content">
-        <h2 class="h2 h2--light t-center" data-gt>
-          <span class="t-muted-light">Lorem </span><span>FACTORY BUILT </span><br><span class="t-muted-light">consectetur</span><span> adipiscing ?</span>
+        <h2 class="h2 h2--light t-center" data-gt-lines>
+          <span class="t-muted-light">Let’s define your </span><br><span>project requirements.</span>
         </h2>
         <div class="cta__sub">
-          <p class="lead-m t-center cta__lead" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+          <p class="lead-m t-center cta__lead" data-reveal="up">VERDON works alongside project stakeholders to address the technical, engineering and manufacturing requirements of complex infrastructure projects. Contact our team to discuss your needs and explore the scope of our capabilities.</p>
           <div class="btn-row" data-reveal="up">
-            <a href="#" class="btn btn--solid btn--w240" data-btn><span class="btn__label" data-gt>TALK TO US</span></a>
+            <a href="#" class="btn btn--solid btn--w240" data-btn><span class="btn__label" data-gt>CONTACT</span></a>
             <a href="#" class="btn btn--outline-light btn--w240" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
           </div>
         </div>
@@ -640,10 +707,10 @@
       <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
     </div>
 
-    <footer class="footer" data-footer>
+    <footer class="footer" data-footer data-nav-bg="light">
       <div class="frow">
         <div class="fcell fcell--line fcell--top">
-          <p class="p t-muted">Lorem ipsum<br>ipsum dolor sit amet.</p>
+          <p class="p t-muted">We don’t just build systems.<br>We set the standard.</p>
         </div>
         <div class="fcell fcell--line fcell--stretch"></div>
       </div>
@@ -727,6 +794,7 @@
 <script src="js/vendor/lenis.min.js"></script>
 <script src="js/components/gradient-text.js"></script>
 <script src="js/components/reveal.js"></script>
+<script src="js/components/nav.js"></script>
 <script src="js/main.js"></script>
 <script type="module" src="js/components/campus-3d.js"></script>
 <script src="js/components/europe-map.js" defer></script>

@@ -3,7 +3,7 @@
    GSAP 3 + ScrollTrigger + Lenis (vendorisés dans js/vendor)
 
    Les animations « d'entrée » sont des composants CSS + IntersectionObserver :
-   - js/components/gradient-text.js  → titres h2 / h3 et libellés de CTA ([data-gt])
+   - js/components/gradient-text.js  → titres h1 / h2 / h3, légendes des chiffres ([data-gt-lines]) et libellés de CTA ([data-gt])
    - js/components/reveal.js         → apparitions ([data-reveal])
    Ce fichier ne garde que ce qui dépend vraiment du scroll (scrub, pin) + intro du hero.
    ========================================================= */
@@ -26,6 +26,7 @@
       burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
       mnav.classList.toggle('is-open', open);
       mnav.setAttribute('aria-hidden', String(!open));
+      if (window.Nav) Nav.setOverlay(open);  // menu sombre par-dessus : encre claire
       if (open) $$('[data-gt]', mnav).forEach((el) => window.GradientText && GradientText.play(el));
       if (lenis) open ? lenis.stop() : lenis.start();
     });
@@ -63,10 +64,14 @@
     });
   });
 
-  /* ---------- Actualités : trait vert sur l'article survolé ---------- */
+  /* ---------- Actualités : trait vert + image de l'article survolé ---------- */
   const newsItems = $$('[data-news-item]');
-  newsItems.forEach((item) => {
-    const activate = () => newsItems.forEach((n) => n.classList.toggle('is-active', n === item));
+  const newsPics = $$('[data-news-img] .news__pic');
+  newsItems.forEach((item, i) => {
+    const activate = () => {
+      newsItems.forEach((n) => n.classList.toggle('is-active', n === item));
+      newsPics.forEach((p, j) => p.classList.toggle('is-active', j === i));
+    };
     item.addEventListener('mouseenter', activate);
     item.addEventListener('focus', activate);
   });
@@ -140,10 +145,10 @@
   gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.1 })
     .fromTo(heroDots, { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 2.4, ease: 'power3.out' }, 0)
     .fromTo('.nav__logo', { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 1.2 }, 0.2)
-    .fromTo('.nav__item', { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 1, stagger: 0.05 }, 0.3)
+    .fromTo('.nav__menu .nav__item', { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 1, stagger: 0.05 }, 0.3)
     .fromTo(['.nav__lang', '.nav__cta', '.nav__burger'], { opacity: 0 }, { opacity: 1, duration: 1, ease: 'sine.inOut' }, 0.5)
     .fromTo('.hero__eyebrow', { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'sine.inOut' }, 0.45)
-    // titre h1 : composant Gradient text, une ligne après l'autre (délais dans le HTML)
+    // titre h1 : composant Gradient text ligne par ligne ([data-gt-lines], délai dans le HTML)
     .fromTo('[data-hero-fade]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.12 }, 0.95);
 
   // Vidéo mise en pause quand le hero est entièrement recouvert (économie GPU / batterie)

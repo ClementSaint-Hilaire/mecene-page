@@ -5,21 +5,30 @@
    le texte apparaît de gauche à droite et son bord d'attaque passe par le dégradé
    lilas → pêche → ambre → vert avant de reprendre sa couleur.
 
-   Utilisation : ajouter l'attribut data-gt sur n'importe quel élément texte
-   (h2, h3, libellé de bouton…). Le JS (js/components/gradient-text.js) ajoute
-   la classe .gt, un calque .gt__fx et déclenche l'animation à l'entrée dans l'écran.
+   Deux modes (le JS js/components/gradient-text.js ajoute les classes et le calque .gt__fx,
+   puis déclenche l'animation à l'entrée dans l'écran) :
 
-     <h2 class="h2" data-gt>Lorem <span class="t-muted">ipsum</span></h2>
-     <a class="btn" data-btn><span class="btn__label" data-gt>TALK TO US</span></a>
+   1. data-gt-lines — animation du titre h1, à mettre sur les h1, h2, h3 et légendes :
+      le texte est découpé en lignes (telles qu'elles tombent à l'écran, redécoupé au
+      redimensionnement) et chaque ligne a son propre balayage, décalé de --gt-stagger.
+      Les <span> de couleur (.t-muted…) et les <br> sont conservés.
 
-   Réglages par élément (variables CSS, en inline ou dans une classe) :
-     --gt-duration   durée du balayage            (défaut 1.4s, boutons 0.9s)
-     --gt-delay      délai avant le balayage      (défaut 0s)
-     --gt-feather    largeur du fondu d'apparition (défaut 18%)
+        <h2 class="h2" data-gt-lines><span class="t-muted">Lorem ipsum </span><br><span>dolor sit</span></h2>
+        <h1 class="h1" data-gt-lines style="--gt-delay:.45s">Lorem ipsum<br>dolor sit amet</h1>
+
+   2. data-gt — un seul balayage sur tout l'élément (libellés de CTA, rejoué au survol) :
+
+        <a class="btn" data-btn><span class="btn__label" data-gt>TALK TO US</span></a>
+
+   Réglages (variables CSS, sur l'élément ou un parent : inline, classe…) :
+     --gt-duration   durée du balayage d'une ligne  (défaut 1.9s, lignes 2.2s, boutons 1.2s)
+     --gt-delay      délai avant le premier balayage (défaut 0s)
+     --gt-stagger    décalage entre deux lignes      (défaut 0.12s)
+     --gt-feather    largeur du fondu d'apparition   (défaut 18%, lignes 22%)
      --gt-c1…--gt-c4 couleurs du dégradé
    Option : data-gt-hover="false" pour désactiver la relecture au survol des boutons.
 
-   Performance : pas de découpage en lettres (aucun nœud ajouté sauf 1 calque),
+   Performance : aucun découpage en lettres (1 nœud par ligne + 1 calque),
    l'animation ne fait varier qu'une propriété enregistrée (@property) sur l'élément.
    ========================================================= */
 
@@ -29,15 +38,20 @@
   initial-value: 200%;
 }
 
-.gt {
+/* Valeurs par défaut sur :root pour qu'un réglage posé sur un parent descende jusqu'aux lignes */
+:root {
   --gt-c1: #d6b3ff;
   --gt-c2: #ffb592;
   --gt-c3: #fabb15;
   --gt-c4: #5fe219;
   --gt-duration: 1.9s;
   --gt-delay: 0s;
+  --gt-stagger: 0.12s;
   --gt-ease: cubic-bezier(0.42, 0, 0.58, 1);
   --gt-feather: 18%;
+}
+
+.gt {
   position: relative;
   -webkit-mask-image: linear-gradient(90deg, #000 calc(var(--gt-p) - var(--gt-feather)), transparent var(--gt-p));
           mask-image: linear-gradient(90deg, #000 calc(var(--gt-p) - var(--gt-feather)), transparent var(--gt-p));
@@ -62,12 +76,38 @@
 .gt-ready .gt:not(.is-in),
 .gt-ready .gt:not(.is-in) > .gt__fx { --gt-p: -5%; }
 .gt.is-in,
-.gt.is-in > .gt__fx { animation: gt-sweep var(--gt-duration) var(--gt-ease) var(--gt-delay) both; }
+.gt.is-in > .gt__fx {
+  animation: gt-sweep var(--gt-duration) var(--gt-ease) calc(var(--gt-delay) + var(--gt-i, 0) * var(--gt-stagger)) both;
+}
+/* Lignes redécoupées après l'animation : affichées directement */
+.gt.is-done,
+.gt.is-done > .gt__fx { animation: none; }
 
 @keyframes gt-sweep {
   from { --gt-p: -5%; }
   to   { --gt-p: 200%; }
 }
+
+/* ---------- Mode lignes ([data-gt-lines]) : réglages du titre h1 ---------- */
+[data-gt-lines] {
+  --gt-duration: 2.2s;
+  --gt-feather: 22%;
+}
+.gt-line {
+  display: inline-block;   /* suit le text-align du titre ; un <br> sépare les lignes */
+  vertical-align: top;
+  white-space: nowrap;
+  /* le masque coupe ce qui dépasse de la boîte (accents, dernier glyphe) : on l'agrandit sans bouger la mise en page */
+  padding: 0.2em 0.1em;
+  margin: -0.2em -0.1em;
+}
+.gt-line > .gt__fx { padding: inherit; }
+
+/* Titre masqué jusqu'au découpage en lignes ; réaffiché au bout de 3 s si le JS ne tourne pas */
+@media (prefers-reduced-motion: no-preference) {
+  .gt-ready [data-gt-lines]:not(.gt-lines) { visibility: hidden; animation: gt-failsafe 0s 3s both; }
+}
+@keyframes gt-failsafe { to { visibility: visible; } }
 
 /* Libellés de boutons : le texte reste toujours affiché à 100 %, seul le dégradé
    passe dessus (à l'entrée dans l'écran puis au survol), balayage plus court */
