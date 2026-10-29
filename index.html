@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Verdon — Factory built</title>
+  <meta name="description" content="Verdon — construction industrialisée, systèmes et réalisations.">
+  <script>document.documentElement.classList.add("js","gt-ready");</script>
+  <link rel="preload" href="assets/hero-dots-poster.webp" as="image" type="image/webp">
+  <link rel="stylesheet" href="css/components/gradient-text.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- =========================================================
+     HERO + POSITIONNEMENT (le hero reste collé derrière, la section suivante le recouvre)
+     ========================================================= -->
+<div class="hero-stack">
+
+  <section class="hero" data-section="hero">
+    <header class="nav" data-nav>
+      <a href="#" class="nav__logo" aria-label="Verdon — accueil">
+        <img decoding="async" src="assets/logo.svg" alt="Verdon" width="347" height="24">
+      </a>
+
+      <nav class="nav__menu" aria-label="Navigation principale">
+        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>FACTORY BUILT</span></a>
+        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>SYSTÈMES</span></a>
+        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>SECTEURS</span></a>
+        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>RÉALISATIONS</span></a>
+        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>À PROPOS</span></a>
+        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>ACTUALITÉS</span></a>
+        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>RESSOURCES</span></a>
+        <a href="#" class="nav__item"><span class="nav__dot" aria-hidden="true"></span><span>CARRIÈRES</span></a>
+      </nav>
+
+      <div class="nav__spacer"></div>
+
+      <div class="nav__right">
+        <button class="nav__lang" type="button" aria-label="Changer de langue">
+          <span>EN</span>
+          <img decoding="async" src="assets/frame.svg" alt="" width="20" height="20">
+        </button>
+        <a href="#" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+        <button class="nav__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+          <span></span><span></span>
+        </button>
+      </div>
+    </header>
+
+    <div class="hero__body">
+      <div class="hero__visual" aria-hidden="true">
+        <!-- Vidéo matrice de points (24 s en boucle). Source choisie en JS selon l'écran ; sans JS : l'image poster. -->
+        <video class="hero__dots" data-hero-video muted loop playsinline preload="none"
+               poster="assets/hero-dots-poster.webp" width="1080" height="1080"
+               data-src="assets/hero-dots-1080.mp4" data-src-mobile="assets/hero-dots-720.mp4"></video>
+      </div>
+
+      <div class="hero__spacer"></div>
+
+      <div class="hero__content">
+        <div class="hero__text">
+          <div class="hero__titles">
+            <p class="hero__eyebrow">LOREM IPSUM</p>
+            <h1 class="h1 hero__title" data-hero-title>
+              <span class="line" data-gt style="--gt-delay:0.45s">Lorem ipsum</span>
+              <span class="line" data-gt style="--gt-delay:0.57s">dolor sit amet,</span>
+              <span class="line" data-gt style="--gt-delay:0.69s">consectetur elit</span>
+              <span class="line" data-gt style="--gt-delay:0.81s">adipiscing elit</span>
+            </h1>
+          </div>
+          <p class="p hero__lead" data-hero-fade>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,</p>
+        </div>
+        <div class="hero__ctas" data-hero-fade>
+          <a href="#" class="btn btn--solid" data-btn><span class="btn__label" data-gt>TALK WITH US</span></a>
+          <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>OUR SERVICES</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="positioning" data-section="positioning">
+    <div class="positioning__gradient" aria-hidden="true">
+      <img decoding="async" class="positioning__arc" src="assets/arc.webp" alt="" width="3132" height="1749" data-arc>
+    </div>
+
+    <div class="positioning__inner">
+      <div class="positioning__left">
+        <div class="positioning__spacer"></div>
+        <div class="positioning__photo" data-reveal="clip">
+          <img decoding="async" src="assets/frame-64.webp" alt="Soudeur en atelier" width="1500" height="1000" loading="lazy">
+        </div>
+        <h2 class="h2 positioning__title" data-gt>
+          <span class="t-muted">Lorem ipsum </span><span>dolor sit amet, </span><br><span class="t-muted">consectetur elit</span><span> adipiscing</span>
+        </h2>
+      </div>
+
+      <div class="positioning__right">
+        <div class="positioning__rspacer"></div>
+        <div class="positioning__intro">
+          <p class="lead-l" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+          <a href="#" class="btn btn--outline" data-btn data-reveal="up"><span class="btn__label" data-gt>LEARN MORE ABOUT US</span></a>
+        </div>
+
+        <div class="stats">
+          <div class="stat stat--first">
+            <div class="stat__head">
+              <p class="p stat__label" data-reveal="fade">Lorem ipsum di odolores</p>
+              <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
+            </div>
+            <div class="stat__body" data-reveal="up">
+              <p class="stat__num" data-count="180000">180 000+</p>
+              <p class="stat__caption">Lorem ipsum</p>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
+            <div class="stat__body" data-reveal="up">
+              <p class="stat__num" data-count="180000">180 000+</p>
+              <p class="stat__caption">Lorem ipsum</p>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
+            <div class="stat__body" data-reveal="up">
+              <p class="stat__num" data-count="180000">180 000+</p>
+              <p class="stat__caption">Lorem ipsum</p>
+            </div>
+          </div>
+          <div class="stat">
+            <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
+            <div class="stat__body" data-reveal="up">
+              <p class="stat__num" data-count="180000">180 000+</p>
+              <p class="stat__caption">Lorem ipsum</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- =========================================================
+     OUR SERVICES — scroll horizontal épinglé
+     ========================================================= -->
+<section class="services" data-section="services" data-hscroll>
+  <div class="services__pin" data-hscroll-pin>
+    <div class="services__bigword-wrap">
+      <p class="services__bigword" data-hscroll-bigword>OUR SERVICES</p>
+    </div>
+    <div class="services__band">
+      <div class="services__track" data-hscroll-track>
+        <div class="services__intro">
+          <h2 class="h2 h2--light" data-gt>
+            <span class="t-muted-light">Lorem ipsum </span><span>dolor sit amet, </span><br><span class="t-muted-light">consectetur elit</span><span> adipiscing</span>
+          </h2>
+          <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>DISCOVER OUR SERVICES</span></a>
+        </div>
+
+        <div class="vline vline--136" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-9.svg" alt=""></div></div>
+
+        <div class="p p--light services__text">
+          <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+          <p>&#8203;</p>
+          <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+        </div>
+
+        <div class="services__cards">
+          <!-- 5 cartes -->
+          <article class="gcard" data-gcard data-reveal="card">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
+            <div class="gcard__body">
+              <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+              <div class="gcard__text">
+                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <div class="p p--muted">
+                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                  <p>&#8203;</p>
+                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
+            <div class="gcard__body">
+              <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+              <div class="gcard__text">
+                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <div class="p p--muted">
+                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                  <p>&#8203;</p>
+                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
+            <div class="gcard__body">
+              <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+              <div class="gcard__text">
+                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <div class="p p--muted">
+                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                  <p>&#8203;</p>
+                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
+            <div class="gcard__body">
+              <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+              <div class="gcard__text">
+                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <div class="p p--muted">
+                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                  <p>&#8203;</p>
+                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104.svg" alt=""></div>
+            <div class="gcard__body">
+              <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+              <div class="gcard__text">
+                <h3 class="h4" data-gt>LOREM<br>IPSUM DIS</h3>
+                <div class="p p--muted">
+                  <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+                  <p>&#8203;</p>
+                  <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     EXPERTISES
+     ========================================================= -->
+<section class="expertise" data-section="expertise">
+  <div class="expertise__inner">
+    <div class="expertise__blobs" aria-hidden="true">
+      <img decoding="async" src="assets/blobs.webp" alt="" width="2571" height="2474" data-blobs>
+    </div>
+
+    <div class="expertise__left">
+      <div class="expertise__spacer"></div>
+      <h2 class="h2" data-gt>
+        <span class="t-muted">Lorem </span><span>dolor sit amet, </span><br><span class="t-muted">consectetur</span><span> adipiscing</span>
+      </h2>
+      <div class="expertise__intro">
+        <p class="lead-m t-muted" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+        <a href="#" class="btn btn--outline" data-btn data-reveal="up"><span class="btn__label" data-gt>LEARN MORE ABOUT OUR FIELDS OF EXPERTISES</span></a>
+      </div>
+    </div>
+
+    <div class="expertise__right">
+      <div class="expertise__rspacer"></div>
+      <article class="xcard" data-xcard data-reveal="xcard">
+        <div class="xcard__line" aria-hidden="true"><div class="xcard__rot"><img decoding="async" src="assets/line-7.svg" alt=""></div></div>
+        <div class="xcard__body">
+          <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+          <div class="xcard__text">
+            <h3 class="h4" data-gt>LOREM IPSUM DIS</h3>
+            <div class="p p--muted">
+              <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+              <p>&#8203;</p>
+              <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="xcard" data-xcard data-reveal="xcard">
+        <div class="xcard__line" aria-hidden="true"><div class="xcard__rot"><img decoding="async" src="assets/line-7.svg" alt=""></div></div>
+        <div class="xcard__body">
+          <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+          <div class="xcard__text">
+            <h3 class="h4" data-gt>LOREM IPSUM DIS</h3>
+            <div class="p p--muted">
+              <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+              <p>&#8203;</p>
+              <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="xcard" data-xcard data-reveal="xcard">
+        <div class="xcard__line" aria-hidden="true"><div class="xcard__rot"><img decoding="async" src="assets/line-7.svg" alt=""></div></div>
+        <div class="xcard__body">
+          <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+          <div class="xcard__text">
+            <h3 class="h4" data-gt>LOREM IPSUM DIS</h3>
+            <div class="p p--muted">
+              <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+              <p>&#8203;</p>
+              <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="xcard" data-xcard data-reveal="xcard">
+        <div class="xcard__line" aria-hidden="true"><div class="xcard__rot"><img decoding="async" src="assets/line-7.svg" alt=""></div></div>
+        <div class="xcard__body">
+          <img decoding="async" class="star" src="assets/star.svg" alt="" width="72" height="72">
+          <div class="xcard__text">
+            <h3 class="h4" data-gt>LOREM IPSUM DIS</h3>
+            <div class="p p--muted">
+              <p>Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+              <p>&#8203;</p>
+              <p>quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     FACTORY BUILT (sombre)
+     ========================================================= -->
+<section class="factory" data-section="factory">
+  <div class="factory__head">
+    <h2 class="h2 h2--light t-center" data-gt>
+      <span class="t-muted-light">Lorem </span><span>FACTORY BUILT </span><br><span class="t-muted-light">consectetur</span><span> adipiscing</span>
+    </h2>
+    <div class="factory__headcontent">
+      <p class="lead-m t-muted-light t-center factory__lead" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+      <div class="btn-row" data-reveal="up">
+        <a href="#" class="btn btn--solid btn--w120" data-btn><span class="btn__label" data-gt>TALK TO US</span></a>
+        <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Composant Campus 3D (js/components/campus-3d.js) -->
+  <div class="factory__campus campus3d" data-campus3d data-src="assets/campus-3d.json" data-reveal="scale">
+    <div class="campus3d__col campus3d__col--left" data-c3d-left></div>
+    <div class="campus3d__view" data-c3d-view>
+      <img class="campus3d__poster" decoding="async" src="assets/campus-a.webp" alt="Maquette isométrique du campus Verdon" width="1080" height="1080" loading="lazy">
+      <canvas class="campus3d__canvas" aria-label="Maquette 3D interactive du campus : survoler ou toucher un bâtiment, glisser pour tourner"></canvas>
+      <div class="campus3d__markers" data-c3d-markers></div>
+      <p class="campus3d__hint caption" aria-hidden="true">Survoler ou toucher un bâtiment · Glisser pour tourner</p>
+    </div>
+    <div class="campus3d__col campus3d__col--right" data-c3d-right></div>
+    <svg class="campus3d__leaders" aria-hidden="true"><path data-c3d-path d="" opacity="0"></path><circle data-c3d-dot r="2.5" opacity="0"></circle></svg>
+  </div>
+
+  <div class="factory__row">
+    <div class="factory__rowintro">
+      <h2 class="h2 h2--light" data-gt>
+        <span class="t-muted-light">Lorem ipsum </span><br><span>dolor sit amet, </span><br><span class="t-muted-light">consectetur elit </span><br><span>adipiscing</span>
+      </h2>
+      <a href="#" class="btn btn--outline-light" data-btn data-reveal="up"><span class="btn__label" data-gt>DISCOVER OUR SERVICES</span></a>
+    </div>
+
+    <div class="factory__cols-viewport" data-drag>
+      <div class="factory__cols" data-drag-track>
+        <div class="fcol" data-fcol data-reveal="up">
+          <div class="fcol__text">
+            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+          </div>
+          <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
+        </div>
+        <div class="fcol" data-fcol data-reveal="up">
+          <div class="fcol__text">
+            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+          </div>
+          <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
+        </div>
+        <div class="fcol" data-fcol data-reveal="up">
+          <div class="fcol__text">
+            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+          </div>
+          <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
+        </div>
+        <div class="fcol" data-fcol data-reveal="up">
+          <div class="fcol__text">
+            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+          </div>
+          <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
+        </div>
+        <div class="fcol" data-fcol data-reveal="up">
+          <div class="fcol__text">
+            <h3 class="h4 h4--light" data-gt>LOREM<br>IPSUM DIS</h3>
+            <p class="p p--light">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+          </div>
+          <div class="vline vline--32" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-10.svg" alt=""></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="lower">
+  <!-- =========================================================
+       TÉMOIGNAGES
+       ========================================================= -->
+  <section class="testimonials" data-section="testimonials" data-reveal-stagger="0">
+    <div class="testimonials__head">
+      <h2 class="h2 testimonials__title" data-gt>
+        <span class="t-muted">Lorem ipsum </span><span>dolor sit amet, </span><span class="t-muted">consectetur elit</span><span> adipiscing</span>
+      </h2>
+      <p class="p t-muted testimonials__intro" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, </p>
+    </div>
+
+    <article class="quote" data-quote data-reveal="quote">
+      <div class="quote__person">
+        <div class="quote__img" data-reveal="clip"><img decoding="async" src="assets/img.webp" alt="Francis Fung" width="384" height="384" loading="lazy"></div>
+        <div class="quote__meta">
+          <p class="quote__name">Francis Fung</p>
+          <p class="p t-muted quote__role">APAC Supply Chain Operations Director, US Fortune 500 Telecom and Communications Supplier</p>
+          <p class="quote__company">at Commscope</p>
+        </div>
+      </div>
+      <p class="lead-l quote__text">As a first time supplier shipping equipment to support one of the major Australian infrastructure project I came up against uncharted territories. It was a three months discovery and mobilization period until the first shipment left its origin airborne for Melbourne. Looking back I really appreciate Chris effort in helping a potential customer to understand what are required and how to go about the execution. Our first time right delivery to my Customer's 3PL was no coincident. It was Chris' relentless attention to details and pro-active monitoring of the process that ensured a smooth dock to dock delivery. I would like to offer Chris my most sincere congratulation in his new venture with United Carriers.</p>
+    </article>
+    <article class="quote" data-quote data-reveal="quote">
+      <div class="quote__person">
+        <div class="quote__img" data-reveal="clip"><img decoding="async" src="assets/img.webp" alt="Francis Fung" width="384" height="384" loading="lazy"></div>
+        <div class="quote__meta">
+          <p class="quote__name">Francis Fung</p>
+          <p class="p t-muted quote__role">APAC Supply Chain Operations Director, US Fortune 500 Telecom and Communications Supplier</p>
+          <p class="quote__company">at Commscope</p>
+        </div>
+      </div>
+      <p class="lead-l quote__text">As a first time supplier shipping equipment to support one of the major Australian infrastructure project I came up against uncharted territories. It was a three months discovery and mobilization period until the first shipment left its origin airborne for Melbourne. Looking back I really appreciate Chris effort in helping a potential customer to understand what are required and how to go about the execution. Our first time right delivery to my Customer's 3PL was no coincident. It was Chris' relentless attention to details and pro-active monitoring of the process that ensured a smooth dock to dock delivery. I would like to offer Chris my most sincere congratulation in his new venture with United Carriers.</p>
+    </article>
+    <article class="quote" data-quote data-reveal="quote">
+      <div class="quote__person">
+        <div class="quote__img" data-reveal="clip"><img decoding="async" src="assets/img.webp" alt="Francis Fung" width="384" height="384" loading="lazy"></div>
+        <div class="quote__meta">
+          <p class="quote__name">Francis Fung</p>
+          <p class="p t-muted quote__role">APAC Supply Chain Operations Director, US Fortune 500 Telecom and Communications Supplier</p>
+          <p class="quote__company">at Commscope</p>
+        </div>
+      </div>
+      <p class="lead-l quote__text">As a first time supplier shipping equipment to support one of the major Australian infrastructure project I came up against uncharted territories. It was a three months discovery and mobilization period until the first shipment left its origin airborne for Melbourne. Looking back I really appreciate Chris effort in helping a potential customer to understand what are required and how to go about the execution. Our first time right delivery to my Customer's 3PL was no coincident. It was Chris' relentless attention to details and pro-active monitoring of the process that ensured a smooth dock to dock delivery. I would like to offer Chris my most sincere congratulation in his new venture with United Carriers.</p>
+    </article>
+    <article class="quote" data-quote data-reveal="quote">
+      <div class="quote__person">
+        <div class="quote__img" data-reveal="clip"><img decoding="async" src="assets/img.webp" alt="Francis Fung" width="384" height="384" loading="lazy"></div>
+        <div class="quote__meta">
+          <p class="quote__name">Francis Fung</p>
+          <p class="p t-muted quote__role">APAC Supply Chain Operations Director, US Fortune 500 Telecom and Communications Supplier</p>
+          <p class="quote__company">at Commscope</p>
+        </div>
+      </div>
+      <p class="lead-l quote__text">As a first time supplier shipping equipment to support one of the major Australian infrastructure project I came up against uncharted territories. It was a three months discovery and mobilization period until the first shipment left its origin airborne for Melbourne. Looking back I really appreciate Chris effort in helping a potential customer to understand what are required and how to go about the execution. Our first time right delivery to my Customer's 3PL was no coincident. It was Chris' relentless attention to details and pro-active monitoring of the process that ensured a smooth dock to dock delivery. I would like to offer Chris my most sincere congratulation in his new venture with United Carriers.</p>
+    </article>
+  </section>
+
+  <!-- =========================================================
+       PARTENAIRES
+       ========================================================= -->
+  <section class="partners" data-section="partners">
+    <div class="partners__grid" data-partners>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-114.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-115.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-116.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-117.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-118.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-119.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-120.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-121.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-122.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-123.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-124.svg" alt="Logo partenaire" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/frame-125.svg" alt="Logo partenaire" loading="lazy"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ACTUALITÉS (sombre)
+       ========================================================= -->
+  <section class="news" data-section="news">
+    <div class="news__head">
+      <h2 class="h2 h2--light news__title" data-gt>
+        <span class="t-muted-light">What’s moving </span><br><span>IN YOUR INDUSTRY</span>
+      </h2>
+      <div class="news__aside" data-reveal="up">
+        <p class="p p--light">Stay ahead of the current abx across all europe from x to y and z trends.</p>
+        <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
+      </div>
+    </div>
+
+    <div class="news__body">
+      <div class="news__list" data-news-list>
+        <a href="#" class="news__item is-active" data-news-item data-reveal="up">
+          <span class="news__main">
+            <span class="news__date">october 20, 2026</span>
+            <span class="news__headline">Title of the long awaited big ass article </span>
+          </span>
+          <span class="news__loc">France, belgium</span>
+        </a>
+        <a href="#" class="news__item" data-news-item data-reveal="up">
+          <span class="news__main">
+            <span class="news__date">october 20, 2026</span>
+            <span class="news__headline">Title of the long awaited big ass article </span>
+          </span>
+          <span class="news__loc">France, belgium</span>
+        </a>
+        <a href="#" class="news__item" data-news-item data-reveal="up">
+          <span class="news__main">
+            <span class="news__date">october 20, 2026</span>
+            <span class="news__headline">Title of the long awaited big ass article </span>
+          </span>
+          <span class="news__loc">France, belgium</span>
+        </a>
+        <a href="#" class="news__item" data-news-item data-reveal="up">
+          <span class="news__main">
+            <span class="news__date">october 20, 2026</span>
+            <span class="news__headline">Title of the long awaited big ass article </span>
+          </span>
+          <span class="news__loc">France, belgium</span>
+        </a>
+        <a href="#" class="news__item" data-news-item data-reveal="up">
+          <span class="news__main">
+            <span class="news__date">october 20, 2026</span>
+            <span class="news__headline">Title of the long awaited big ass article </span>
+          </span>
+          <span class="news__loc">France, belgium</span>
+        </a>
+      </div>
+      <div class="news__img" data-news-img data-reveal="wipe" aria-hidden="true"></div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FAQ
+       ========================================================= -->
+  <section class="faq" data-section="faq">
+    <div class="faq__grid">
+      <div class="faq__intro">
+        <h2 class="h2" data-gt><span>F.A.Q</span></h2>
+        <p class="p t-muted" data-reveal="up">Still have questions? <br>Our team is here to help.</p>
+      </div>
+
+      <div class="faq__list" data-faq>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">01</span>
+            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+        </div>
+        <div class="faq__item is-open" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="true">
+            <span class="faq__num">02</span>
+            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">03</span>
+            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">04</span>
+            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">05</span>
+            <span class="faq__question">Super duper question you beg to know the awnser</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p></div></div>
+        </div>
+      </div>
+
+      <div class="faq__aside" data-reveal="up">
+        <p class="p t-muted">Still have questions? <br>Our team is here to help.</p>
+        <a href="#" class="btn btn--outline" data-btn><span class="btn__label" data-gt>EMAIL US</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA + FOOTER
+       ========================================================= -->
+  <section class="cta" data-section="cta">
+    <div class="cta__bg" aria-hidden="true">
+      <img decoding="async" src="assets/seciton-temoignages.webp" alt="" width="1500" height="1123" loading="lazy" data-cta-bg>
+      <div class="cta__overlay"></div>
+    </div>
+
+    <div class="cta__head">
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+      <div class="cta__content">
+        <h2 class="h2 h2--light t-center" data-gt>
+          <span class="t-muted-light">Lorem </span><span>FACTORY BUILT </span><br><span class="t-muted-light">consectetur</span><span> adipiscing ?</span>
+        </h2>
+        <div class="cta__sub">
+          <p class="lead-m t-center cta__lead" data-reveal="up">Lorem ipsLorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </p>
+          <div class="btn-row" data-reveal="up">
+            <a href="#" class="btn btn--solid btn--w240" data-btn><span class="btn__label" data-gt>TALK TO US</span></a>
+            <a href="#" class="btn btn--outline-light btn--w240" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+    </div>
+
+    <footer class="footer" data-footer>
+      <div class="frow">
+        <div class="fcell fcell--line fcell--top">
+          <p class="p t-muted">Lorem ipsum<br>ipsum dolor sit amet.</p>
+        </div>
+        <div class="fcell fcell--line fcell--stretch"></div>
+      </div>
+
+      <div class="frow">
+        <div class="fcell fcell--top fcell--socials">
+          <p class="caption">SOCIALS</p>
+          <div class="socials">
+            <a href="#" class="socials__link" aria-label="LinkedIn"><img decoding="async" src="assets/icon.svg" alt="" width="16" height="16"></a>
+            <a href="#" class="socials__link" aria-label="Instagram">
+              <span class="socials__ig"><img decoding="async" src="assets/group-1.svg" alt=""></span>
+            </a>
+            <a href="#" class="socials__link" aria-label="Facebook"><img decoding="async" src="assets/icon-1.svg" alt="" width="16" height="16"></a>
+          </div>
+        </div>
+        <div class="fcell fcell--line fcell--links">
+          <p class="caption">SOCIALS</p>
+          <div class="flinks">
+            <div class="flinks__col"><a href="#">Home</a><a href="#">About us</a><a href="#">Newsroom</a></div>
+            <div class="flinks__col"><a href="#">Ressources</a><a href="#">Factory built</a><a href="#">Sectors</a></div>
+            <div class="flinks__col"><a href="#">Systems</a><a href="#">Careers</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="frow frow--grow">
+        <div class="fcell"></div>
+        <div class="fcell fcell--line fcell--info">
+          <div class="finfo">
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">HEAD OFFICE</p>
+                <p class="finfo__val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">PHONE NUMBER</p>
+                <a class="finfo__val" href="tel:+3271468380">+32 71 46 83 80</a>
+              </div>
+            </div>
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">EMAIL</p>
+                <a class="finfo__val" href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">OPERATING ACROSS</p>
+                <p class="finfo__val">France • Belgium • England </p>
+              </div>
+            </div>
+            <!-- Carte Europe en matrice de points, vue isométrique en rotation lente (js/components/europe-map.js) -->
+            <div class="finfo__map emap" data-europe-map data-src="assets/europe-dots.json" role="img" aria-label="Carte de l'Europe avec 5 sites Verdon : Courcelles (siège), Liège, Lille, Paris, Lyon">
+              <canvas class="emap__canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fbottom">
+        <div class="fbottom__mark" data-wordmark data-reveal="wipe" style="--dur:2s"><img decoding="async" src="assets/vector.svg" alt="Verdon groupe"></div>
+        <div class="fbottom__legal">
+          <a href="#">Legal</a>
+          <p>Copyright © Verdon SA • All rights reserved</p>
+          <a href="https://agence-orem.fr" target="_blank" rel="noopener">Réalisé par Orem</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<!-- Menu mobile -->
+<div class="mnav" data-mnav aria-hidden="true">
+  <nav class="mnav__links">
+    <a href="#">FACTORY BUILT</a><a href="#">SYSTÈMES</a><a href="#">SECTEURS</a><a href="#">RÉALISATIONS</a>
+    <a href="#">À PROPOS</a><a href="#">ACTUALITÉS</a><a href="#">RESSOURCES</a><a href="#">CARRIÈRES</a>
+  </nav>
+  <a href="#" class="btn btn--solid" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+</div>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/components/gradient-text.js"></script>
+<script src="js/components/reveal.js"></script>
+<script src="js/main.js"></script>
+<script type="module" src="js/components/campus-3d.js"></script>
+<script src="js/components/europe-map.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+/* =========================================================
+   Composant « Gradient text » — apparition du texte par un dégradé
+   ---------------------------------------------------------
+   Reprend le motion Figma du titre « positionnement » (nodes 258:4373 / 258:4374) :
+   le texte apparaît de gauche à droite et son bord d'attaque passe par le dégradé
+   lilas → pêche → ambre → vert avant de reprendre sa couleur.
+
+   Utilisation : ajouter l'attribut data-gt sur n'importe quel élément texte
+   (h2, h3, libellé de bouton…). Le JS (js/components/gradient-text.js) ajoute
+   la classe .gt, un calque .gt__fx et déclenche l'animation à l'entrée dans l'écran.
+
+     <h2 class="h2" data-gt>Lorem <span class="t-muted">ipsum</span></h2>
+     <a class="btn" data-btn><span class="btn__label" data-gt>TALK TO US</span></a>
+
+   Réglages par élément (variables CSS, en inline ou dans une classe) :
+     --gt-duration   durée du balayage            (défaut 1.4s, boutons 0.9s)
+     --gt-delay      délai avant le balayage      (défaut 0s)
+     --gt-feather    largeur du fondu d'apparition (défaut 18%)
+     --gt-c1…--gt-c4 couleurs du dégradé
+   Option : data-gt-hover="false" pour désactiver la relecture au survol des boutons.
+
+   Performance : pas de découpage en lettres (aucun nœud ajouté sauf 1 calque),
+   l'animation ne fait varier qu'une propriété enregistrée (@property) sur l'élément.
+   ========================================================= */
+
+@property --gt-p {
+  syntax: "<percentage>";
+  inherits: false;   /* pas d'héritage : seul l'élément et son calque recalculent leur style */
+  initial-value: 200%;
+}
+
+.gt {
+  --gt-c1: #d6b3ff;
+  --gt-c2: #ffb592;
+  --gt-c3: #fabb15;
+  --gt-c4: #5fe219;
+  --gt-duration: 1.9s;
+  --gt-delay: 0s;
+  --gt-ease: cubic-bezier(0.42, 0, 0.58, 1);
+  --gt-feather: 18%;
+  position: relative;
+  -webkit-mask-image: linear-gradient(90deg, #000 calc(var(--gt-p) - var(--gt-feather)), transparent var(--gt-p));
+          mask-image: linear-gradient(90deg, #000 calc(var(--gt-p) - var(--gt-feather)), transparent var(--gt-p));
+}
+
+/* Calque coloré : visible seulement dans la bande qui suit le bord d'attaque */
+.gt__fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  color: transparent;
+  background-image: linear-gradient(90deg, var(--gt-c1) 0%, var(--gt-c2) 80%, var(--gt-c3) 90%, var(--gt-c4) 100%);
+  -webkit-background-clip: text;
+          background-clip: text;
+  -webkit-mask-image: linear-gradient(90deg, transparent calc(var(--gt-p) - 55%), #000 calc(var(--gt-p) - 14%), #000 var(--gt-p));
+          mask-image: linear-gradient(90deg, transparent calc(var(--gt-p) - 55%), #000 calc(var(--gt-p) - 14%), #000 var(--gt-p));
+}
+.gt__fx * { color: transparent !important; }
+
+/* Masqué tant qu'il n'est pas entré dans l'écran (seulement si le JS tourne) */
+.gt-ready .gt:not(.is-in),
+.gt-ready .gt:not(.is-in) > .gt__fx { --gt-p: -5%; }
+.gt.is-in,
+.gt.is-in > .gt__fx { animation: gt-sweep var(--gt-duration) var(--gt-ease) var(--gt-delay) both; }
+
+@keyframes gt-sweep {
+  from { --gt-p: -5%; }
+  to   { --gt-p: 200%; }
+}
+
+/* Libellés de boutons : le texte reste toujours affiché à 100 %, seul le dégradé
+   passe dessus (à l'entrée dans l'écran puis au survol), balayage plus court */
+.btn .gt {
+  --gt-duration: 1.2s;
+  -webkit-mask-image: none;
+          mask-image: none;
+}
+.btn .gt > .gt__fx {
+  -webkit-mask-image: linear-gradient(90deg, transparent calc(var(--gt-p) - 55%), #000 calc(var(--gt-p) - 18%), #000 calc(var(--gt-p) - 8%), transparent var(--gt-p));
+          mask-image: linear-gradient(90deg, transparent calc(var(--gt-p) - 55%), #000 calc(var(--gt-p) - 18%), #000 calc(var(--gt-p) - 8%), transparent var(--gt-p));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gt-ready .gt:not(.is-in), .gt.is-in,
+  .gt-ready .gt:not(.is-in) > .gt__fx, .gt.is-in > .gt__fx { --gt-p: 200%; animation: none; }
+}

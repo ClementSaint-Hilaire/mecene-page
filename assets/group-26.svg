@@ -1,0 +1,20 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="3131.58" height="1749.34" viewBox="0 0 3131.58 1749.34" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Group 26" filter="url(#filter0_f_0_213)">
+<path id="Subtract" d="M218.623 845.366C446.303 1073.18 977.222 1232.93 1595.85 1232.93C2188 1232.93 2699.79 1086.57 2942.2 874.241C3000.01 936.174 3031.58 1003.09 3031.58 1072.91C3031.58 1391.26 2375.32 1649.34 1565.79 1649.34C756.257 1649.34 100.001 1391.26 100 1072.91C100 992.098 142.283 915.173 218.623 845.366Z" fill="url(#paint0_radial_0_213)"/>
+<g id="Ellipse 2">
+</g>
+</g>
+<defs>
+<filter id="filter0_f_0_213" x="0" y="745.366" width="3131.58" height="1003.98" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feBlend mode="normal" in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
+<feGaussianBlur stdDeviation="50" result="effect1_foregroundBlur_0_213"/>
+</filter>
+<radialGradient id="paint0_radial_0_213" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(1565.79 1218.43) rotate(90) scale(384.361 1145.9)">
+<stop offset="0.6" stop-color="#D6B3FF"/>
+<stop offset="0.8" stop-color="#FFB592"/>
+<stop offset="0.9" stop-color="#FABB15"/>
+<stop offset="1" stop-color="#5FE219"/>
+</radialGradient>
+</defs>
+</svg>
