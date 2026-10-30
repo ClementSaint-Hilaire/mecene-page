@@ -210,18 +210,30 @@
   gsap.fromTo('.expertise__blobs', { y: 200 }, { y: -200, ease: 'none', scrollTrigger: { trigger: '.expertise', start: 'top bottom', end: 'bottom top', scrub: true } });
 
   /* =========================================================
-     FACTORY BUILT — colonnes (la maquette 3D est dans js/components/campus-3d.js)
+     FACTORY BUILT — frise des étapes (la maquette 3D est dans js/components/package-3d.js)
      ========================================================= */
+  const FRISE_SLOW = 1.5;   // px de scroll par px de défilement horizontal de la frise (plus grand = plus lent)
+  const FRISE_HOLD = 0.25;  // pause à l'arrêt avant le défilement, en part de celui-ci (le temps de lire le h2)
   mm.add(DESKTOP, () => {
+    const row = $('.factory__row');
     const vp = $('[data-drag]');
     const tr = $('[data-drag-track]');
-    if (!vp || !tr) return;
+    if (!row || !vp || !tr) return;
     const over = () => Math.max(0, tr.scrollWidth - vp.clientWidth);
-    // le h2 de la frise défile avec elle
-    gsap.to([tr, $('.factory__rowintro .h2')].filter(Boolean), {
-      x: () => -over(), ease: 'none',
-      scrollTrigger: { trigger: '.factory__row', start: 'top 85%', end: 'bottom 20%', scrub: 0.8, invalidateOnRefresh: true },
-    });
+    // la frise reste épinglée au milieu de l'écran pendant qu'elle défile ; le h2 de la frise défile avec elle
+    gsap.timeline({
+      scrollTrigger: {
+        trigger: '.factory__rowintro',  // centré sur le contenu (la ligne a 128 px de marge haute)
+        pin: row,
+        pinSpacing: true,  // .factory est en flex : GSAP ne réserve pas la place du pin par défaut
+        start: 'center center',
+        end: () => '+=' + over() * FRISE_SLOW * (1 + FRISE_HOLD),
+        scrub: 0.8,
+        invalidateOnRefresh: true,
+        anticipatePin: 1,
+      },
+    })
+      .to([tr, $('.factory__rowintro .h2')].filter(Boolean), { x: () => -over(), ease: 'none', duration: 1 }, FRISE_HOLD);
   });
 
   /* =========================================================
