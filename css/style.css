@@ -621,7 +621,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .factory__row { width: 100%; display: flex; gap: 128px; align-items: flex-start; padding-top: 128px; overflow: hidden; }
 .factory__rowintro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; flex-shrink: 0; }
 .factory__rowintro .h2 { white-space: nowrap; }
-.factory__cols-viewport { flex: 1 0 0; min-width: 0; overflow: visible; }
+/* frise : scroll horizontal libre (trackpad, glisser à la souris, clavier), voir main.js */
+.factory__cols-viewport { flex: 1 0 0; min-width: 0; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; cursor: grab; }
+.factory__cols-viewport::-webkit-scrollbar { display: none; }
+.factory__cols-viewport.is-dragging { cursor: grabbing; }
+.factory__cols-viewport:focus-visible { outline: 1px solid var(--light); outline-offset: 8px; }
 .factory__cols { display: flex; gap: 32px; align-items: stretch; width: max-content; border-bottom: 1px solid var(--stroke); }
 .fcol { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
 .fcol .vline { margin-top: auto; } /* textes de longueurs différentes : le trait reste posé sur la ligne */
@@ -1032,8 +1036,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .factory { padding: 96px var(--gutter); }
   .factory__head .h2, .factory__rowintro .h2, .cta__content .h2 { white-space: normal; }
   .factory__row { flex-direction: column; gap: 48px; padding-top: 64px; overflow: visible; }
-  .factory__cols-viewport { width: 100%; overflow-x: auto; scrollbar-width: none; }
-  .factory__cols-viewport::-webkit-scrollbar { display: none; }
+  .factory__cols-viewport { width: 100%; }
 
   .testimonials, .news { padding: 96px var(--gutter); }
   .testimonials__head { flex-direction: column; align-items: flex-start; }

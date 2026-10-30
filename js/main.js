@@ -76,6 +76,27 @@
     item.addEventListener('focus', activate);
   });
 
+  /* ---------- Factory built : frise des étapes ----------
+     Scroll horizontal libre (trackpad, molette horizontale, glisser à la souris, flèches du clavier),
+     jamais imposé par le scroll vertical. (La maquette 3D est dans js/components/package-3d.js.) */
+  const rail = $('[data-drag]');
+  if (rail) {
+    // geste horizontal : laissé au navigateur (sinon Lenis le transforme en scroll vertical de la page)
+    rail.addEventListener('wheel', (e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) e.stopPropagation(); }, { passive: true });
+    let x0 = null, s0 = 0;
+    rail.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      e.preventDefault();  // pas de sélection de texte ni de glisser-déposer d'image
+      x0 = e.clientX; s0 = rail.scrollLeft;
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (x0 === null) return;
+      if (Math.abs(e.clientX - x0) > 3) rail.classList.add('is-dragging');
+      rail.scrollLeft = s0 - (e.clientX - x0);
+    });
+    window.addEventListener('pointerup', () => { x0 = null; rail.classList.remove('is-dragging'); });
+  }
+
   /* ---------- Compteurs (IntersectionObserver, pas de ScrollTrigger) ---------- */
   const fmt = (n) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   const counters = $$('[data-count]');
@@ -208,33 +229,6 @@
      EXPERTISES — blobs en parallaxe
      ========================================================= */
   gsap.fromTo('.expertise__blobs', { y: 200 }, { y: -200, ease: 'none', scrollTrigger: { trigger: '.expertise', start: 'top bottom', end: 'bottom top', scrub: true } });
-
-  /* =========================================================
-     FACTORY BUILT — frise des étapes (la maquette 3D est dans js/components/package-3d.js)
-     ========================================================= */
-  const FRISE_SLOW = 1.5;   // px de scroll par px de défilement horizontal de la frise (plus grand = plus lent)
-  const FRISE_HOLD = 0.25;  // pause à l'arrêt avant le défilement, en part de celui-ci (le temps de lire le h2)
-  mm.add(DESKTOP, () => {
-    const row = $('.factory__row');
-    const vp = $('[data-drag]');
-    const tr = $('[data-drag-track]');
-    if (!row || !vp || !tr) return;
-    const over = () => Math.max(0, tr.scrollWidth - vp.clientWidth);
-    // la frise reste épinglée au milieu de l'écran pendant qu'elle défile ; le h2 de la frise défile avec elle
-    gsap.timeline({
-      scrollTrigger: {
-        trigger: '.factory__rowintro',  // centré sur le contenu (la ligne a 128 px de marge haute)
-        pin: row,
-        pinSpacing: true,  // .factory est en flex : GSAP ne réserve pas la place du pin par défaut
-        start: 'center center',
-        end: () => '+=' + over() * FRISE_SLOW * (1 + FRISE_HOLD),
-        scrub: 0.8,
-        invalidateOnRefresh: true,
-        anticipatePin: 1,
-      },
-    })
-      .to([tr, $('.factory__rowintro .h2')].filter(Boolean), { x: () => -over(), ease: 'none', duration: 1 }, FRISE_HOLD);
-  });
 
   /* =========================================================
      CTA + FOOTER
