@@ -23,7 +23,7 @@
   --bg-secondary: #ececec;
   --bg-dark: #1c1b19;
   --ink: #1c1b19;
-  --ink-2: #7b7a7a;
+  --ink-2: #5f5e5e;         /* Figma : #7b7a7a, assombri pour le contraste AA (4.5:1 sur le fond clair et sur les cartes services) */
   --ink-3: rgba(0, 0, 0, 0.35);
   --light: #ffffff;
   --light-2: rgba(255, 255, 255, 0.6);
@@ -37,7 +37,7 @@
 
   --font: "ABC Areal", "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-  --fs-4xl: 64px;
+  --fs-4xl: 54px;
   --fs-3xl: 43px;
   --fs-xl: 27px;
   --fs-l: 22px;
@@ -278,7 +278,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   transition: clip-path .5s var(--ease-expo), opacity .3s var(--ease-figma) .12s, visibility 0s linear .5s;
 }
 .nav.is-open .nav__panel { visibility: visible; opacity: 1; clip-path: inset(0); transition: clip-path .8s var(--ease-expo), opacity .2s var(--ease-figma); }
-.nav__close { font-size: var(--fs-s); line-height: 1.2; letter-spacing: -0.01em; color: var(--light-3); }
+.nav__close { font-size: var(--fs-s); line-height: 1.2; letter-spacing: -0.01em; color: var(--light-2); } /* --light-3 : contraste insuffisant (3:1) */
 .nav__close:hover { color: var(--light); }
 .nav__rule { width: 145px; height: 1px; transform-origin: left center; }
 .nav__contact { display: flex; flex-direction: column; gap: 4px; font-size: var(--fs-xs); line-height: 1.2; }
@@ -367,13 +367,17 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   overflow: clip;
 }
 @supports not (overflow: clip) { .positioning { overflow: hidden; } }
+/* --arc-drop : descend l'arc sous le bas du hero. On allonge le bloc plutôt que de décaler l'arc,
+   sinon la jonction sombre / clair (couverte de justesse au centre de l'arc) apparaîtrait. */
 .positioning__gradient {
+  --arc-drop: 120px;
   position: relative;
   z-index: 2;
-  height: max(100vh, 680px);
+  height: calc(max(100vh, 680px) + var(--arc-drop));
   pointer-events: none;
 }
-.positioning__arc {
+.positioning__arc,
+.positioning__gradient::before {
   position: absolute;
   /* box Figma : 2931.578 × 1649.343 @ (-739.78, -246.65) dans un bloc de 1078 px, SVG débordant de 3.41 % / 6.06 % */
   left: calc(50% - 750px - 739.78px - 99.97px);
@@ -381,6 +385,16 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   width: 3131.58px;
   height: 1749.34px;
 }
+/* Arc discret : la silhouette de l'arc couleur fond clair masque la jonction sombre / clair,
+   l'arc coloré par-dessus n'en garde qu'une teinte (--arc-tint) */
+.positioning__gradient::before,
+.news__gradient::before {
+  content: "";
+  background: var(--bg-primary);
+  -webkit-mask: url("../assets/arc.webp") 0 0 / 100% 100% no-repeat;
+          mask: url("../assets/arc.webp") 0 0 / 100% 100% no-repeat;
+}
+.positioning__arc, .news__arc { opacity: var(--arc-tint, .3); }
 /* Zone [data-nav-bg="light"] : bande colorée de l'arc, au-dessus de la section claire */
 .positioning__navbg { position: absolute; left: 0; right: 0; bottom: 0; height: 110px; }
 .positioning__inner {
@@ -515,12 +529,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 @supports not (overflow: clip) { .expertise { overflow: hidden; } }
 .expertise__inner { position: relative; display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 128px; }
+/* dégradé réduit à 60 % de la box Figma (2571 × 2474 @ -1153, 1052), centre conservé */
 .expertise__blobs {
   position: absolute;
-  left: -1153.1px;
-  top: 1052px;
-  width: 2571.02px;
-  height: 2474.11px;
+  left: -638.9px;
+  top: 1546.8px;
+  width: 1542.61px;
+  height: 1484.47px;
   pointer-events: none;
   z-index: 0;
 }
@@ -540,6 +555,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .expertise__spacer { width: 100px; height: max(160px, calc(100vh - 516px)); }
 .expertise__intro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
 .expertise__lead { max-width: 600px; }
+/* Texte courant que les blobs de couleur traversent (parallaxe) : gris plus soutenu, 4.5:1 sur le vert le plus saturé */
+.expertise__lead, .expertise .p--muted { color: #4a4949; }
 .expertise__right { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 64px; width: 527.967px; max-width: 350px; flex-shrink: 0; }
 .expertise__rspacer { height: 459px; }
 
@@ -583,6 +600,17 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .pack3d__hint { position: absolute; left: 0; right: 0; bottom: 4%; text-align: center; font-size: 12px; line-height: 1.2; letter-spacing: .04em; text-transform: uppercase; color: var(--light-2); opacity: 0; transition: opacity .3s; pointer-events: none; }
 .pack3d.is-ready .pack3d__hint { opacity: 1; }
 .pack3d.has-active .pack3d__hint { opacity: 0; }
+/* bascule matrice de points / rendu lisse : point plein = points, cerclé = lisse */
+.pack3d__mode {
+  appearance: none; position: absolute; right: 2%; bottom: 4%; z-index: 2; display: inline-flex; align-items: center; gap: 8px;
+  padding: 0; border: 0; background: none; font: inherit; font-size: 12px; line-height: 1.2; letter-spacing: .04em; text-transform: uppercase;
+  color: var(--light-2); cursor: pointer; opacity: 0; visibility: hidden; transition: opacity .3s, visibility .3s, color .2s;
+}
+.pack3d.is-ready .pack3d__mode { opacity: 1; visibility: visible; }
+.pack3d__mode:hover { color: var(--light); }
+.pack3d__mode:focus-visible { outline: 1px solid var(--light); outline-offset: 3px; }
+.pack3d__modedot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; background: currentColor; box-shadow: inset 0 0 0 1px currentColor; transition: background .2s; }
+.pack3d.is-smooth .pack3d__modedot { background: transparent; }
 .pack3d__leader { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 1; overflow: visible; }
 .pack3d__leader path { fill: none; stroke: var(--light); stroke-width: 1; transition: opacity .25s; }
 .pack3d__leader circle { fill: var(--light); transition: opacity .25s; }
@@ -612,6 +640,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 @media (max-width: 700px) {
   .p3d-cap, .p3d-cap.is-r { top: 0; left: 0; right: 0; width: auto; padding: 12px 14px 14px; text-align: left; transform: none; }
   .pack3d__leader { display: none; }
+  /* bascule centrée sous l'indication */
+  .pack3d__hint { bottom: calc(4% + 26px); }
+  .pack3d__mode { left: 0; right: 0; width: max-content; margin: 0 auto; }
 }
 .factory__row { width: 100%; display: flex; gap: 128px; align-items: flex-start; padding-top: 128px; overflow: hidden; }
 .factory__rowintro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; flex-shrink: 0; }
@@ -722,7 +753,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   pointer-events: none;
 }
 @supports not (overflow: clip) { .news__gradient { overflow: hidden; } }
-.news__arc {
+.news__arc,
+.news__gradient::before {
   position: absolute;
   left: calc(50% - 750px - 739.78px - 99.97px);
   top: 0;
@@ -825,7 +857,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .cta__bg { position: absolute; inset: 0; pointer-events: none; }
 .cta__bg img { position: absolute; left: 0; top: -10%; width: 100%; height: 120%; object-fit: cover; }
-.cta__overlay { position: absolute; inset: 0; background: rgba(0, 0, 0, 0.3); }
+/* plus sombre en haut (ciel clair) : titre, texte, boutons et nav restent lisibles (AA) */
+.cta__overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.42) 45%, rgba(0, 0, 0, 0.3) 100%); }
 .cta__head { position: relative; width: 100%; display: flex; gap: 128px; align-items: center; justify-content: center; }
 .cta__content { display: flex; flex-direction: column; gap: 16px; align-items: center; }
 .cta__content .h2 { white-space: nowrap; }
@@ -895,7 +928,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .fbottom__legal {
   display: flex; align-items: center; justify-content: space-between; gap: 16px;
   padding-top: 16px;
-  font-size: var(--fs-xs); line-height: 1.2; color: var(--ink-3); white-space: nowrap;
+  font-size: var(--fs-xs); line-height: 1.2; color: var(--ink-2); white-space: nowrap; /* --ink-3 : contraste insuffisant (2.4:1) */
 }
 .fbottom__legal a { position: relative; }
 
@@ -1003,13 +1036,13 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .expertise__left { flex: none; padding-right: 0; }
   .positioning__spacer, .expertise__spacer, .positioning__rspacer, .expertise__rspacer { display: none; }
   .positioning__inner { padding-top: 140px; }
-  .positioning__arc { width: 1900px; height: 1060px; left: calc(50% - 950px); top: calc(100% - 900px); }
+  .positioning__arc, .positioning__gradient::before { width: 1900px; height: 1060px; left: calc(50% - 950px); top: calc(100% - 900px); }
   .positioning__navbg { height: 170px; }
   .hero__body { padding-bottom: 260px; }
   .positioning__title, .expertise__left .h2 { white-space: normal; }
   .positioning__right, .expertise__right { width: 100%; gap: 64px; }
   .expertise__inner { padding-top: 96px; }
-  .expertise__blobs { top: 600px; }
+  .expertise__blobs { top: 1095px; }
 
   /* services : scroll horizontal natif */
   .services { padding-top: 0; }
@@ -1040,7 +1073,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 
   .news { padding-top: 256px; }
   .news__gradient { top: -160px; height: 1060px; }
-  .news__arc { width: 1900px; left: calc(50% - 950px); }
+  .news__arc, .news__gradient::before { width: 1900px; left: calc(50% - 950px); }
   .news__navbg { top: 160px; height: 170px; }
   .news__head, .news__body { grid-template-columns: minmax(0, 1fr); row-gap: 32px; }
   .news__title { width: auto; }

@@ -13,7 +13,7 @@
 
   const TILT = 0.56;            // écrasement vertical (vue isométrique)
   const TURN_SECONDS = 90;      // durée d'un tour complet
-  const INK = getComputedStyle(document.documentElement).getPropertyValue('--ink-2').trim() || '#7b7a7a'; // texte muted
+  const INK = getComputedStyle(document.documentElement).getPropertyValue('--ink-2').trim() || '#5f5e5e'; // texte muted
 
   async function init(root) {
     const canvas = root.querySelector('canvas');

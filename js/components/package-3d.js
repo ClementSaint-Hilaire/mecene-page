@@ -9,6 +9,7 @@
    - l'image fixe reste affichée tant que la 3D n'est pas prête (ou sans WebGL)
    - au survol, les points du système actif passent au dégradé habituel
      (lilas → pêche → ambre → vert, --gt-c1…--gt-c4), de gauche à droite sur son étendue à l'écran
+   - bouton « Disable dot matrix » : même passe sans les points (rendu lisse, suréchantillonné 2×)
    Balisage attendu : voir .pack3d dans index.html
    ========================================================= */
 
@@ -161,26 +162,38 @@ async function init(root) {
   const vec3 = (c) => new THREE.Vector3(...c);
   const postMat = new THREE.ShaderMaterial({
     uniforms: {
-      t: { value: rt.texture }, res: { value: new THREE.Vector2() }, cell: { value: 4 },
+      t: { value: rt.texture }, res: { value: new THREE.Vector2() }, cell: { value: 4 }, dots: { value: 1 },
       span: { value: new THREE.Vector2(-1, 1) }, // étendue x du système actif à l'écran (NDC)
       g1: { value: vec3(GRADIENT[0]) }, g2: { value: vec3(GRADIENT[1]) }, g3: { value: vec3(GRADIENT[2]) }, g4: { value: vec3(GRADIENT[3]) },
     },
     vertexShader: 'void main(){gl_Position=vec4(position.xy,0.,1.);}',
-    fragmentShader: `uniform sampler2D t;uniform vec2 res;uniform float cell;uniform vec2 span;uniform vec3 g1,g2,g3,g4;
+    fragmentShader: `uniform sampler2D t;uniform vec2 res;uniform float cell;uniform float dots;uniform vec2 span;uniform vec3 g1,g2,g3,g4;
       vec3 ramp(float u){u=clamp(u,0.,1.); // lilas dominant, comme Gradient text
        return u<.62?mix(g1,g2,u/.62):u<.82?mix(g2,g3,(u-.62)/.2):mix(g3,g4,(u-.82)/.18);}
-      void main(){vec2 px=gl_FragCoord.xy;vec2 c=(floor(px/cell)+.5)*cell;
-       vec4 s=texture2D(t,c/res);
+      // texel de la scène vu au pixel p : teinte (dégradé si son système est actif) et luminosité l
+      vec3 hue(vec4 s,vec2 p,out float l){
        vec3 col=pow(max(s.rgb,0.),vec3(1./2.2));
-       float l=max(col.r,max(col.g,col.b));
+       l=max(col.r,max(col.g,col.b));
+       float hot=clamp((1.-s.a)*2.,0.,1.);
+       return mix(col/max(l,.001),ramp(((p.x/res.x*2.-1.)-span.x)/(span.y-span.x)),hot);}
+      void main(){vec2 px=gl_FragCoord.xy;float l;
+       if(dots<.5){ // rendu lisse : 4 échantillons par pixel (la scène est rendue en plus haute définition)
+        vec4 o=vec4(0.);
+        for(int i=0;i<4;i++){
+         vec2 p=px+(vec2(mod(float(i),2.),floor(float(i)/2.))-.5)*.5;
+         vec4 s=texture2D(t,p/res);
+         vec3 h=hue(s,p,l);
+         float a=step(.05,s.a);
+         o+=vec4(h*l*a,a);}
+        gl_FragColor=vec4(o.rgb/max(o.a,1.),o.a*.25);return;}
+       vec2 c=(floor(px/cell)+.5)*cell;
+       vec4 s=texture2D(t,c/res);
+       vec3 h=hue(s,c,l);
        float k=smoothstep(.1,1.,l);
        float r=.5*cell*.95*sqrt(k);
        float d=length(px-c);
        float m=(1.-smoothstep(r-.7,r+.7,d))*step(.05,s.a)*step(.03,k);
-       float hot=clamp((1.-s.a)*2.,0.,1.);
-       vec3 hue=mix(col/max(l,.001),ramp(((c.x/res.x*2.-1.)-span.x)/(span.y-span.x)),hot);
-       vec3 o=hue*mix(.45,1.,k);
-       gl_FragColor=vec4(o*m,m);}`,
+       gl_FragColor=vec4(h*mix(.45,1.,k)*m,m);}`,
     transparent: true,
   });
   postScene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), postMat));
@@ -188,7 +201,7 @@ async function init(root) {
   /* ---------- tailles (lues seulement au resize, jamais dans la boucle) ---------- */
   // clientWidth et non getBoundingClientRect : la vue peut être en cours de reveal (scale)
   let W = 1, H = 1, wide = true, capBox = { w: 0, y: 0 };
-  let active = null, pinned = null, lastUser = -1e9, pointer = null, pickDirty = false;
+  let active = null, pinned = null, lastUser = -1e9, pointer = null, pickDirty = false, dots = true;
   function resize() {
     W = Math.max(1, view.clientWidth); H = Math.max(1, view.clientHeight);
     const dpr = Math.min(devicePixelRatio || 1, 2);
@@ -196,7 +209,9 @@ async function init(root) {
     const cell = Math.max(3, Math.round((W < 560 ? CELL_S : CELL) * dpr));
     postMat.uniforms.res.value.set(W * dpr, H * dpr);
     postMat.uniforms.cell.value = cell;
-    rt.setSize(Math.ceil((W * dpr) / cell), Math.ceil((H * dpr) / cell));
+    // points : un texel par cellule ; lisse : au moins 2 texels par px CSS (4 échantillons par pixel en DPR 1)
+    if (dots) rt.setSize(Math.ceil((W * dpr) / cell), Math.ceil((H * dpr) / cell));
+    else rt.setSize(Math.ceil(W * Math.max(dpr, 2)), Math.ceil(H * Math.max(dpr, 2)));
     const half = radius * 0.92;
     cam.left = -half; cam.right = half; cam.top = (half * H) / W; cam.bottom = (-half * H) / W;
     cam.updateProjectionMatrix();
@@ -265,6 +280,16 @@ async function init(root) {
     if (moved < 6) { const id = pick(...local(e)); pinned = (id && id !== pinned) ? id : null; setActive(pinned); }
   });
   controls.addEventListener('start', user);
+
+  // matrice de points ↔ rendu lisse
+  const modeLabel = root.querySelector('[data-p3d-mode-label]');
+  root.querySelector('[data-p3d-mode]').addEventListener('click', () => {
+    dots = !dots;
+    postMat.uniforms.dots.value = dots ? 1 : 0;
+    modeLabel.textContent = dots ? 'Disable dot matrix' : 'Enable dot matrix';
+    root.classList.toggle('is-smooth', !dots);
+    resize();
+  });
   controls.addEventListener('change', () => { pickDirty = true; wake(); });
 
   for (const s of SYSTEMS) {

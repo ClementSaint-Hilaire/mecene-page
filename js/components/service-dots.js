@@ -270,7 +270,7 @@
     });
   };
   const PAL_INK = palette(INK);
-  const PAL_MUTED = palette(color('--ink-2', '#7b7a7a'));
+  const PAL_MUTED = palette(color('--ink-2', '#5f5e5e'));
 
   const outBack = (p) => 1 + 2.70158 * (p - 1) ** 3 + 1.70158 * (p - 1) ** 2;
   const hash = (i) => { const s = Math.sin(i * 12.9898) * 43758.5453; return s - Math.floor(s); };
