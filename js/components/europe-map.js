@@ -4,7 +4,10 @@
    Données : assets/europe-dots.json (générées depuis Natural Earth 1:50m)
      pts   : [x0, y0, x1, y1, …] en unités carte autour du centre
      sites : [{ name, color, i }] → i = index du point de la grille coloré
-   Les sites sont des points de la grille comme les autres, seulement colorés.
+     dotScale, siteScale (optionnels) : rayon des points et des sites, en facteur du rayon par défaut (1)
+   Couleur des points : --emap-ink sur le conteneur, sinon --ink-2.
+   Les sites sont des points de la grille comme les autres, seulement colorés (et agrandis sur la grille fine
+   de la page Contact, assets/europe-dots-fine.json, où ils seraient sinon noyés dans la masse).
    Canvas 2D, ~900 points : rendu seulement quand la carte est à l'écran.
    ========================================================= */
 (() => {
@@ -18,13 +21,14 @@
   async function init(root) {
     const canvas = root.querySelector('canvas');
     const ctx = canvas.getContext('2d');
+    const ink = getComputedStyle(root).getPropertyValue('--emap-ink').trim() || INK;
     const data = await fetch(root.dataset.src || 'assets/europe-dots.json').then((r) => r.json());
     const N = data.pts.length / 2;
     const P = Float32Array.from(data.pts);
     const siteOf = new Map(data.sites.map((s) => [s.i, s]));
     const hitR = new Float32Array(data.sites.length * 2);
 
-    let W = 0, H = 0, dpr = 1, scale = 1, dotR = 1;
+    let W = 0, H = 0, dpr = 1, scale = 1, dotR = 1, siteR = 1;
     function resize() {
       const r = root.getBoundingClientRect();
       W = r.width; H = r.height;
@@ -33,7 +37,8 @@
       // le disque de points doit couvrir le cadre quelle que soit la rotation
       const needX = W / 2, needY = (H / 2) / TILT;
       scale = Math.hypot(needX, needY) / (data.radius * 0.92);
-      dotR = Math.max(0.9, data.step * scale * 0.24);
+      dotR = Math.max(0.9, data.step * scale * 0.24 * (data.dotScale || 1));
+      siteR = Math.max(0.9, data.step * scale * 0.24 * (data.siteScale || 1));
       draw();
     }
 
@@ -44,7 +49,7 @@
       const cx = W / 2, cy = H / 2, ca = Math.cos(angle), sa = Math.sin(angle);
       const revealR = reveal * data.radius * 1.05;
       // points gris en un seul tracé
-      ctx.fillStyle = INK;
+      ctx.fillStyle = ink;
       ctx.beginPath();
       for (let k = 0; k < N; k++) {
         if (siteOf.has(k)) continue;
@@ -65,7 +70,7 @@
         const sy = cy + (x * sa + y * ca) * scale * TILT;
         hitR[2 * j] = sx; hitR[2 * j + 1] = sy;
         ctx.fillStyle = s.color;
-        ctx.beginPath(); ctx.arc(sx, sy, dotR, 0, Math.PI * 2); ctx.fill();
+        ctx.beginPath(); ctx.arc(sx, sy, siteR, 0, Math.PI * 2); ctx.fill();
       });
     }
 
@@ -74,7 +79,7 @@
       const r = canvas.getBoundingClientRect();
       const mx = e.clientX - r.left, my = e.clientY - r.top;
       let hit = '';
-      data.sites.forEach((s, j) => { if (Math.hypot(hitR[2 * j] - mx, hitR[2 * j + 1] - my) < Math.max(6, dotR * 3)) hit = s.name; });
+      data.sites.forEach((s, j) => { if (Math.hypot(hitR[2 * j] - mx, hitR[2 * j + 1] - my) < Math.max(6, siteR * 3)) hit = s.name; });
       canvas.title = hit;
       canvas.style.cursor = hit ? 'help' : '';
     });

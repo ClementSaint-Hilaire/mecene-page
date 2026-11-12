@@ -133,6 +133,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .btn--solid { background: var(--light); color: var(--ink); border-color: var(--light); }
 .btn--outline { color: var(--ink); border-color: var(--ink); }
 .btn--outline-light { color: var(--light); border-color: var(--light); }
+.btn--ink { background: var(--ink); color: var(--light); border-color: var(--ink); }
 .btn--w120 { width: 120px; }
 .btn--w240 { width: 240px; }
 .btn-row { display: flex; gap: 32px; align-items: flex-start; }

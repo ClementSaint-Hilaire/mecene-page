@@ -9,20 +9,22 @@ des SVG ne fonctionnent pas en `file://`.
   factory built, témoignages, partenaires, actus, FAQ, CTA + footer)
 - `factory-built.html` : page Factory built (Figma 318:3931, voir « Page Factory built » plus bas),
   avec `css/factory-built.css` et `js/factory-built.js` (styles et animations propres à la page)
+- `contact.html` : page Contact (Figma 328:4976, voir « Page Contact » plus bas), avec `css/contact.css` et `js/contact.js` (envoi du formulaire)
 - `css/style.css` : tokens Figma en variables CSS, layout desktop 1500 px, responsive (≤1280, ≤991, ≤767)
-- `js/main.js` : animations liées au scroll (pin, parallaxes, intro du hero, FAQ, compteurs), communes aux deux pages
+- `js/main.js` : animations liées au scroll (pin, parallaxes, intro du hero, FAQ, compteurs), communes à toutes les pages
   (chaque bloc ne tourne que si sa section est dans la page)
 - `js/components/` : composants réutilisables
   - `nav.js` : navigation fixe (3 états, encre selon le fond, voir plus bas)
   - `gradient-text.js` + `css/components/gradient-text.css` : apparition du texte par le dégradé
   - `reveal.js` : apparitions à l'entrée dans l'écran (`data-reveal="up|fade|clip|scale|line|vline|wipe|card|xcard|quote"`)
   - `package-3d.js` : maquette 3D interactive du package factory-built (section Factory built)
-  - `europe-map.js` : carte Europe en points, en rotation (footer)
+  - `europe-map.js` : carte Europe en points, en rotation (footer, et carte des sites de la page Contact)
   - `wordmark-dots.js` : signature « verdon groupe » en points, colorée au survol (footer)
   - `service-dots.js` : pictogrammes en points des cartes « Our services » et « Expertises » (accueil), « The Factory-Built advantage » et « Our process » (Factory built), parcourus par un flux au survol ; illustrations en points des vignettes « One integrated chain » et du visuel des Steps
 - `js/vendor/` : GSAP 3.12.5, ScrollTrigger, Lenis 1.1.13, three.js 0.160 (aucun CDN requis)
 - `assets/package-3d.json` + `assets/package-3d.bin` : géométrie de la maquette 3D (index des 8 systèmes ; positions et triangles en uint16, gzip), `assets/package-3d-poster.webp` : image fixe (rendue en 2×) affichée avant le chargement ou sans WebGL
 - `assets/wordmark-dots.json` : points de la signature du footer (Figma 273:216)
+- `assets/europe-dots-fine.json` : points de la carte des sites de la page Contact (grille 3 fois plus fine que `europe-dots.json`, même projection)
 - `assets/` : images et SVG exportés de Figma
 
 ## Police
@@ -64,6 +66,16 @@ Même nav, mêmes boutons, FAQ, CTA et footer que l'accueil ; titres « Heading 
 - Steps : sommaire collant (étape active marquée d'une pastille, clic = étape centrée à l'écran), règle graduée (`assets/frame-427321029.svg`) dont les graduations se remplissent au dégradé lilas → vert jusqu'à l'étape en cours, visuel 200 × 250 collé au milieu de l'écran avec un calque par étape (`[data-steps-slide]`, dans l'ordre des étapes, même illustration en points que la vignette de la même étape), empilés comme les vignettes (le 1er dessus) : à l'étape suivante, le calque du dessus se relève et découvre le suivant, dont l'illustration est parcourue une fois par le flux ; il redescend en remontant.
 - Industrial scale : section sombre ; à droite du texte, trois pages sombres en vue isométrique, posées sur le fond de la section (`.fbpages`, une par ligne de la maquette : titre, complément, illustration en points en clair), empilées de la plus éloignée (01, en haut à droite) à la plus proche (03, en bas à gauche), qui se posent l'une après l'autre (`data-reveal="page"`). Illustration à gauche, texte à droite dans chaque page. Projection orthogonale par rotations 3D sans perspective ; réglages en variables CSS sur `.fbpages` : taille d'une page (`--pw`, `--ph`), décalage entre pages (`--sx`, `--sy`), angles de vue (`--rx`, `--ry`), survol (`--lift`, `--drop`, `--lift-front`). Au repos, le texte de chaque page est lisible ; au survol, la page monte et celles de devant descendent pour découvrir son illustration, parcourue par le flux. Pages réduites quand la colonne rétrécit (`@container`), à plat l'une sous l'autre sur mobile.
 
+## Page Contact (Figma 328:4976)
+Même nav (pastilles dès le haut de page, `data-nav-compact`), mêmes FAQ, CTA et footer que les autres pages ; titre « Heading 1 » à 64 px.
+- En-tête : téléphone, titre et présentation sur une ligne ; le trait du dessous se dessine à l'entrée.
+- Formulaire : onglets « type de demande » (boutons radio, non sélectionnés à 50 % d'opacité), champs dont le libellé remonte au focus ou une fois rempli, trait foncé dessiné au focus. Champs marqués * requis : validation native du navigateur. Onglets puis colonnes se replient selon la largeur de la carte du formulaire (`@container`).
+- Groupe propre à chaque onglet (`[data-request-group]` = `data-request` de l'onglet, `js/contact.js`) : ASK A QUESTION → « Reason of enquiry » (2 colonnes de 6, remplies colonne par colonne : c'est aussi l'ordre du clavier) ; SPEAK ABOUT YOUR PROJECT → aucun ; ASK FOR A VISIT → « Desired location » (les 5 sites de la carte). Un groupe masqué est désactivé : il sort du clavier et de l'envoi.
+- Envoi (`js/contact.js`) : tant qu'aucun service n'est branché, ouvre la messagerie du visiteur avec un e-mail prérempli (type, raison ou lieu, coordonnées, message) adressé à `data-mailto` (info@groupe-verdon.com). Pour brancher un service d'envoi, renseigner `action` (et `method="post"`) sur le `<form>` : l'envoi classique prend alors le relais.
+- E-mails de Luc Gerodez et Mikus Strele (`[data-copy]`) : copiés dans le presse-papiers au clic, confirmés par un petit toast en bas de l'écran (fond du panneau de la nav, pastille verte, texte qui apparaît par le dégradé) et annoncés aux lecteurs d'écran ; si le navigateur refuse la copie, la messagerie s'ouvre.
+- Carte des sites : colonne de droite collante (686 px de haut sur la maquette, centrée dans l'écran sous la nav, raccourcie sur les écrans bas). Même composant que le footer (`europe-map.js`), sur une grille 3 fois plus fine (`assets/europe-dots-fine.json`, ~7 950 points, régénérée depuis Natural Earth 1:50m avec la projection de `europe-dots.json`) pour garder à cette taille le pas de points du footer (~8 px). Points plus clairs (`--emap-ink` sur `.ctmap`) et un peu plus petits, sites agrandis pour ressortir (`dotScale` / `siteScale` dans le JSON). Tablette et mobile : carte dans le flux, sous les infos de contact.
+- Les boutons WORK WITH US, TALK WITH US / TALK TO US et CONTACT des autres pages mènent à `contact.html`, EMAIL US à info@groupe-verdon.com ; sur la page Contact, ils ramènent au formulaire.
+
 ## Scroll lissé
 Désactivé par défaut (le scroll natif reste fluide même quand la page calcule). Pour réactiver Lenis : `<html data-smooth-scroll>`.
 
@@ -89,6 +101,10 @@ Désactivé par défaut (le scroll natif reste fluide même quand la page calcul
 - Factory built : pages isométriques d'« Industrial scale » d'après un croquis (pas de maquette) ; chaque ligne de la liste a été coupée en titre + complément (« Standardised processes » / « Adaptable to project requirements. », etc.), sans changer le texte.
 - Factory built : les 6 vignettes de « One integrated chain » et le visuel des Steps sont des blocs pleins sur la maquette (visuels à venir) ; ils sont intégrés tels quels, prêts à recevoir une image (une `.fbtile` et un `.fbsteps__slide` par étape, dans l'ordre). La vignette n et le calque n doivent porter le même visuel : sur desktop, la pile de vignettes passe le relais au visuel des Steps sans coupure.
 - Factory built : coquille corrigée dans le texte des avantages (« environmetunts » → « environments ») ; FAQ numérotée 01 à 06 (toutes en « 02 » sur la maquette).
+- Contact : les 12 raisons de la demande de la maquette sont des intitulés de logistique (Air Freight, Brokerage, 3PL…) sans rapport avec l'activité de Verdon ; intégrées telles quelles, à remplacer.
+- Contact : lieux de visite (« Desired location ») absents de la maquette ; ce sont les 5 sites de la carte, à confirmer avec eux.
+- Contact : les 3 adresses d'« Our locations » sont identiques sur la maquette (siège de Courcelles), intégrées telles quelles ; lien LinkedIn à renseigner (`href="#"`) ; envoi du formulaire à brancher (voir « Page Contact »).
+- Contact : coquilles corrigées (« Your infomation » → « Your information », « LNKEDIN » → « LINKEDIN »), e-mails en minuscules comme dans le footer ; libellés des champs en ABC Areal (Helvetica Neue sur la maquette) ; texte du CTA et première ligne du footer repris des autres pages (lorem ipsum sur la maquette).
 - Images des actus : visuels provisoires (photos déjà dans `assets/`), une `<img class="news__pic">` par article dans `.news__img`, dans le même ordre que la liste.
 - Footer : carte de l'Europe en matrice de points, vue isométrique en rotation lente (un tour en 90 s), centrée sur la France / Belgique (`js/components/europe-map.js` + `assets/europe-dots.json`, générées depuis Natural Earth 1:50m, ~880 points en canvas, rendu seulement à l'écran). Les 5 sites sont des points de la grille colorés, nom au survol. Sites à confirmer : Courcelles (siège), Liège, Lille, Paris, Lyon.
 - Hero : vidéo « dotmatrix_24s » (24 s en boucle, sans son), recompressée en H.264 24 i/s : `hero-dots-1080.mp4` (8 Mo, desktop) et `hero-dots-720.mp4` (4 Mo, ≤ 991 px), noirs ramenés à 0 et fondus dans le dégradé du hero (`mix-blend-mode: screen`). Image poster tant que la vidéo charge ; vidéo en pause quand le hero est recouvert ou l'onglet masqué ; poster seul si « réduire les animations ».

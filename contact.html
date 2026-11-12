@@ -1,0 +1,442 @@
+<!doctype html>
+<html lang="fr" data-smooth-scroll>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact — Verdon</title>
+  <meta name="description" content="Contact Verdon: ask a question, speak about your project or ask for a visit. Head office: 124, Rue de Trazegnies, 6180 Courcelles, Belgium.">
+  <script>document.documentElement.classList.add("js","gt-ready");</script>
+  <link rel="stylesheet" href="css/components/gradient-text.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/contact.css">
+</head>
+<body>
+
+<!-- =========================================================
+     NAV — composant js/components/nav.js (même barre que les autres pages).
+     data-nav-compact : pastilles dès le haut de page, comme sur la maquette.
+     ========================================================= -->
+<header class="nav is-collapsed" data-nav data-nav-compact>
+  <a href="index.html" class="nav__logo" aria-label="Verdon — accueil">
+    <img decoding="async" class="nav__ink nav__ink--light" src="assets/logo.svg" alt="" width="347" height="24">
+    <img decoding="async" class="nav__ink nav__ink--dark" src="assets/logo-dark.svg" alt="" width="347" height="24">
+  </a>
+
+  <div class="nav__slot" data-nav-slot>
+    <nav class="nav__menu" aria-label="Navigation principale">
+      <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
+      <a href="#" class="nav__item" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
+      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
+      <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
+      <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
+      <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
+      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+    </nav>
+
+    <button class="nav__toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+      <span class="nav__dots" aria-hidden="true"></span>
+    </button>
+
+    <div class="nav__panel" id="nav-panel" data-nav-panel>
+      <button class="nav__close" type="button" data-nav-close>CLOSE</button>
+      <img decoding="async" class="nav__rule" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <nav class="nav__plist" aria-label="Navigation principale">
+        <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
+        <a href="#" class="nav__item" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
+        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
+        <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
+        <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
+        <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
+        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+      </nav>
+      <img decoding="async" class="nav__rule nav__rule--end" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <div class="nav__contact">
+        <p>connect with us:</p>
+        <a href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav__spacer"></div>
+
+  <div class="nav__right">
+    <button class="nav__lang" type="button" aria-label="Changer de langue">
+      <span>EN</span>
+      <span class="nav__chev" aria-hidden="true">
+        <img decoding="async" class="nav__ink nav__ink--light" src="assets/frame.svg" alt="" width="20" height="20">
+        <img decoding="async" class="nav__ink nav__ink--dark" src="assets/frame-dark.svg" alt="" width="20" height="20">
+      </span>
+    </button>
+    <a href="#contact-form" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+    <button class="nav__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- =========================================================
+       EN-TÊTE — téléphone, titre, présentation
+       ========================================================= -->
+  <section class="cthead" data-section="contact-head" data-nav-bg="light">
+    <div class="cthead__row" data-reveal="cthead">
+      <div class="cthead__phone" data-hero-fade>
+        <p class="caption">PHONE NUMBER</p>
+        <a class="ct-val ct-link" href="tel:+3271468380">+32 71 46 83 80</a>
+      </div>
+      <h1 class="h1 cthead__title" data-gt-lines style="--gt-delay:0.45s">Let’s get<br>in touch</h1>
+      <p class="p t-muted cthead__lead" data-hero-fade>Verdon combines engineering and industrial manufacturing to support the development and integration of technical systems for complex infrastructure projects.</p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       FORMULAIRE + INFOS (à gauche) · CARTE DES SITES (à droite, collante)
+       ========================================================= -->
+  <section class="ctbody" data-section="contact" data-nav-bg="light">
+    <div class="ctbody__main">
+      <!-- Envoi : js/contact.js (messagerie préremplie tant qu'aucun action n'est renseigné, voir README) -->
+      <form class="ctform" id="contact-form" data-contact-form data-mailto="info@groupe-verdon.com" data-reveal="up">
+        <fieldset class="ctform__tabs">
+          <legend class="ct-sr">Type of request</legend>
+          <label class="ctform__tab"><input type="radio" name="request" value="Ask a question" data-request="question" checked><span>ASK A QUESTION</span></label>
+          <label class="ctform__tab"><input type="radio" name="request" value="Speak about your project" data-request="project"><span>SPEAK ABOUT YOUR PROJECT</span></label>
+          <label class="ctform__tab"><input type="radio" name="request" value="Ask for a visit" data-request="visit"><span>ASK FOR A VISIT</span></label>
+        </fieldset>
+
+        <p class="lead-m t-muted ctform__intro">Use the form below to tell us about your enquiry and we’ll call you back to schedule an appointment. Our general response time is within one business day.</p>
+
+        <div class="ctform__body">
+          <!-- Groupes propres à un onglet ([data-request-group] = data-request de l'onglet) : affichés et envoyés seulement pour lui (js/contact.js) -->
+          <fieldset class="ctform__group ctform__group--choice" data-request-group="question">
+            <legend class="ctform__legend">Reason of enquiry</legend>
+            <div class="ctform__radios">
+              <label class="ctradio"><input type="radio" name="reason" value="Domestic & Interstate Transport"><span class="ctradio__box" aria-hidden="true"></span><span>Domestic &amp; Interstate Transport</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="APAC Emerging Markets"><span class="ctradio__box" aria-hidden="true"></span><span>APAC Emerging Markets</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="Tariff/Compliance Audits"><span class="ctradio__box" aria-hidden="true"></span><span>Tariff/Compliance Audits</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="Careers"><span class="ctradio__box" aria-hidden="true"></span><span>Careers</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="Partnership"><span class="ctradio__box" aria-hidden="true"></span><span>Partnership</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="Other"><span class="ctradio__box" aria-hidden="true"></span><span>Other</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="Air Freight"><span class="ctradio__box" aria-hidden="true"></span><span>Air Freight</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="Sea Freight"><span class="ctradio__box" aria-hidden="true"></span><span>Sea Freight</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="Brokerage"><span class="ctradio__box" aria-hidden="true"></span><span>Brokerage</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="Consolidation Programs"><span class="ctradio__box" aria-hidden="true"></span><span>Consolidation Programs</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="3PL"><span class="ctradio__box" aria-hidden="true"></span><span>3PL</span></label>
+              <label class="ctradio"><input type="radio" name="reason" value="Crossdock/By-pass Solutions"><span class="ctradio__box" aria-hidden="true"></span><span>Crossdock/By-pass Solutions</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="ctform__group ctform__group--choice" data-request-group="visit" hidden disabled>
+            <legend class="ctform__legend">Desired location</legend>
+            <div class="ctform__radios ctform__radios--sites">
+              <label class="ctradio"><input type="radio" name="location" value="Courcelles (head office)"><span class="ctradio__box" aria-hidden="true"></span><span>Courcelles (head office)</span></label>
+              <label class="ctradio"><input type="radio" name="location" value="Liège"><span class="ctradio__box" aria-hidden="true"></span><span>Liège</span></label>
+              <label class="ctradio"><input type="radio" name="location" value="Lille"><span class="ctradio__box" aria-hidden="true"></span><span>Lille</span></label>
+              <label class="ctradio"><input type="radio" name="location" value="Paris"><span class="ctradio__box" aria-hidden="true"></span><span>Paris</span></label>
+              <label class="ctradio"><input type="radio" name="location" value="Lyon"><span class="ctradio__box" aria-hidden="true"></span><span>Lyon</span></label>
+            </div>
+          </fieldset>
+
+          <fieldset class="ctform__group ctform__group--info">
+            <legend class="ctform__legend">Your information</legend>
+            <div class="ctform__fields">
+              <div class="ctfield">
+                <input class="ctfield__input" id="ct-company" name="company" type="text" autocomplete="organization" required placeholder=" ">
+                <label class="ctfield__label" for="ct-company">Company *</label>
+              </div>
+              <div class="ctfield">
+                <input class="ctfield__input" id="ct-name" name="name" type="text" autocomplete="name" required placeholder=" ">
+                <label class="ctfield__label" for="ct-name">Your full name *</label>
+              </div>
+              <div class="ctfield">
+                <input class="ctfield__input" id="ct-phone" name="phone" type="tel" autocomplete="tel" required placeholder=" ">
+                <label class="ctfield__label" for="ct-phone">Phone *</label>
+              </div>
+              <div class="ctfield">
+                <input class="ctfield__input" id="ct-email" name="email" type="email" autocomplete="email" required placeholder=" ">
+                <label class="ctfield__label" for="ct-email">Email address *</label>
+              </div>
+              <div class="ctfield ctfield--message">
+                <textarea class="ctfield__input" id="ct-message" name="message" rows="5" required placeholder=" "></textarea>
+                <label class="ctfield__label" for="ct-message">Your message *</label>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <button class="btn btn--ink ctform__send" type="submit" data-btn><span class="btn__label" data-gt>SEND</span></button>
+        <p class="caption ctform__status" role="status" data-contact-status></p>
+      </form>
+
+      <div class="ctcard ctinfo" data-reveal="up">
+        <h2 class="lead-m">CONTACTS INFOS</h2>
+        <div class="ctinfo__row">
+          <div class="ct-block ctinfo__office">
+            <p class="caption">HEAD OFFICE</p>
+            <p class="ct-val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+          </div>
+          <div class="ctinfo__list">
+            <div class="ct-block">
+              <p class="caption">LINKEDIN</p>
+              <a class="ct-val ct-link" href="#">@Verdon-groupe</a>
+            </div>
+            <div class="ct-block">
+              <p class="caption">Luc GERODEZ</p>
+              <button class="ct-val ct-link" type="button" data-copy="lgerodez@groupe-verdon.com" title="Copy the email address">lgerodez@groupe-verdon.com</button>
+            </div>
+            <div class="ct-block">
+              <p class="caption">Mikus STRELE</p>
+              <button class="ct-val ct-link" type="button" data-copy="mstrele@groupe-verdon.com" title="Copy the email address">mstrele@groupe-verdon.com</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="ctbody__aside" aria-labelledby="ct-locations">
+      <!-- Carte Europe en matrice de points, vue isométrique en rotation lente (js/components/europe-map.js), grille fine -->
+      <div class="ctmap emap" data-europe-map data-src="assets/europe-dots-fine.json" role="img" aria-label="Carte de l'Europe avec 5 sites Verdon : Courcelles (siège), Liège, Lille, Paris, Lyon">
+        <canvas class="emap__canvas"></canvas>
+      </div>
+      <div class="ctlocs">
+        <div class="ctlocs__head">
+          <h2 class="lead-m" id="ct-locations">OUR LOCATIONS</h2>
+          <div class="ctlocs__img" data-reveal="clip"><img decoding="async" src="assets/frame-64.webp" alt="Soudeur en atelier" width="900" height="600" loading="lazy"></div>
+        </div>
+        <div class="ctlocs__list" data-reveal-stagger="100">
+          <div class="ct-block" data-reveal="up">
+            <p class="caption">HEAD OFFICE</p>
+            <p class="ct-val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+          </div>
+          <div class="ct-block" data-reveal="up">
+            <p class="caption">HEAD OFFICE</p>
+            <p class="ct-val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+          </div>
+          <div class="ct-block" data-reveal="up">
+            <p class="caption">HEAD OFFICE</p>
+            <p class="ct-val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </section>
+</main>
+
+<div class="lower">
+  <!-- =========================================================
+       FAQ
+       ========================================================= -->
+  <section class="faq" data-section="faq" data-nav-bg="light">
+    <div class="faq__grid">
+      <div class="faq__intro">
+        <h2 class="h2" data-gt-lines><span>F.A.Q</span></h2>
+        <p class="p t-muted" data-reveal="up">Discover Verdon’s expertise in engineering, manufacturing and Data Center infrastructure.</p>
+      </div>
+
+      <div class="faq__list" data-faq>
+        <div class="faq__item is-open" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="true">
+            <span class="faq__num">01</span>
+            <span class="faq__question">What does Verdon specialise in&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon combines engineering expertise and industrial manufacturing to develop and produce technical systems for complex industrial environments. With a strong focus on Data Centers, the company brings together technical design, manufacturing processes and system integration to address the requirements of demanding infrastructure projects.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">02</span>
+            <span class="faq__question">What is Verdon’s expertise in Data Centers&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon supports Data Center projects through the engineering and off-site manufacturing of technical systems designed for complex MEP infrastructure. Its approach takes into account equipment interfaces, installation constraints and the coordination required to integrate systems into large-scale facilities.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">03</span>
+            <span class="faq__question">Which industries does Verdon serve&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon operates across four key sectors: Data Centers, Energy, Life Sciences &amp; Pharmaceuticals, and Semiconductors. Each sector presents specific technical requirements, operating conditions and infrastructure constraints. Verdon applies its engineering and manufacturing capabilities to address the needs of these different industrial environments.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">04</span>
+            <span class="faq__question">What types of systems does Verdon manufacture&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon’s capabilities cover a range of technical systems, including electrical infrastructure, cooling pipework, aisle containment, liquid cooling assemblies and associated support structures. Each system addresses specific functional requirements and equipment interfaces, with its configuration defined according to project specifications.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">05</span>
+            <span class="faq__question">How does Verdon approach complex industrial projects&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon brings engineering and manufacturing capabilities together to prepare technical systems for integration into complex facilities. By considering technical specifications, equipment interfaces and manufacturing constraints, the company works to align system design with practical installation requirements from the outset.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">06</span>
+            <span class="faq__question">Can Verdon adapt its solutions to specific project requirements&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon develops technical systems around the specifications and constraints of each project. Equipment configurations, spatial limitations, connection interfaces and installation requirements inform the approach taken. This allows the scope and configuration of each solution to be defined in line with the project’s technical needs.</p></div></div>
+        </div>
+      </div>
+
+      <div class="faq__aside" data-reveal="up">
+        <p class="p t-muted">Still have questions? <br>Our team is here to help.</p>
+        <a href="mailto:info@groupe-verdon.com" class="btn btn--outline" data-btn><span class="btn__label" data-gt>EMAIL US</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA + FOOTER
+       ========================================================= -->
+  <section class="cta" data-section="cta" data-nav-bg="dark">
+    <div class="cta__bg" aria-hidden="true">
+      <img decoding="async" src="assets/seciton-temoignages.webp" alt="" width="1500" height="1123" loading="lazy" data-cta-bg>
+      <div class="cta__overlay"></div>
+    </div>
+
+    <div class="cta__head">
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+      <div class="cta__content">
+        <h2 class="h2 h2--light t-center" data-gt-lines>
+          <span class="t-muted-light">Let’s define your </span><br><span>project requirements.</span>
+        </h2>
+        <div class="cta__sub">
+          <p class="lead-m t-center cta__lead" data-reveal="up">Verdon works alongside project stakeholders to address the technical, engineering and manufacturing requirements of complex infrastructure projects. Contact our team to discuss your needs and explore the scope of our capabilities.</p>
+          <div class="btn-row" data-reveal="up">
+            <a href="#contact-form" class="btn btn--solid btn--w240" data-btn><span class="btn__label" data-gt>TALK TO US</span></a>
+            <a href="#" class="btn btn--outline-light btn--w240" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+    </div>
+
+    <footer class="footer" data-footer data-nav-bg="light">
+      <div class="frow">
+        <div class="fcell fcell--line fcell--top">
+          <p class="p t-muted">We don’t just build systems.<br>We set the standard.</p>
+        </div>
+        <div class="fcell fcell--line fcell--stretch"></div>
+      </div>
+
+      <div class="frow">
+        <div class="fcell fcell--top fcell--socials">
+          <p class="caption">SOCIALS</p>
+          <div class="socials">
+            <a href="#" class="socials__link" aria-label="LinkedIn"><img decoding="async" src="assets/icon.svg" alt="" width="16" height="16"></a>
+            <a href="#" class="socials__link" aria-label="Instagram">
+              <span class="socials__ig"><img decoding="async" src="assets/group-1.svg" alt=""></span>
+            </a>
+            <a href="#" class="socials__link" aria-label="Facebook"><img decoding="async" src="assets/icon-1.svg" alt="" width="16" height="16"></a>
+          </div>
+        </div>
+        <div class="fcell fcell--line fcell--links">
+          <p class="caption">SOCIALS</p>
+          <div class="flinks">
+            <div class="flinks__col"><a href="index.html">Home</a><a href="#">About us</a><a href="#">Newsroom</a></div>
+            <div class="flinks__col"><a href="#">Ressources</a><a href="factory-built.html">Factory built</a><a href="#">Sectors</a></div>
+            <div class="flinks__col"><a href="#">Systems</a><a href="#">Careers</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="frow frow--grow">
+        <div class="fcell"></div>
+        <div class="fcell fcell--line fcell--info">
+          <div class="finfo">
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">HEAD OFFICE</p>
+                <p class="finfo__val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">PHONE NUMBER</p>
+                <a class="finfo__val" href="tel:+3271468380">+32 71 46 83 80</a>
+              </div>
+            </div>
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">EMAIL</p>
+                <a class="finfo__val" href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">OPERATING ACROSS</p>
+                <p class="finfo__val">France • Belgium • England </p>
+              </div>
+            </div>
+            <!-- Carte Europe en matrice de points, vue isométrique en rotation lente (js/components/europe-map.js) -->
+            <div class="finfo__map emap" data-europe-map data-src="assets/europe-dots.json" role="img" aria-label="Carte de l'Europe avec 5 sites Verdon : Courcelles (siège), Liège, Lille, Paris, Lyon">
+              <canvas class="emap__canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fbottom">
+        <!-- Signature en matrice de points, colorée au survol (js/components/wordmark-dots.js) -->
+        <div class="fbottom__mark wmark" data-wordmark data-src="assets/wordmark-dots.json" data-reveal="wipe" style="--dur:2s" role="img" aria-label="Verdon groupe">
+          <canvas class="wmark__canvas"></canvas>
+        </div>
+        <div class="fbottom__legal">
+          <a href="#">Legal</a>
+          <p>Copyright © Verdon SA • All rights reserved</p>
+          <a href="https://agence-orem.fr" target="_blank" rel="noopener">Réalisé par Orem</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<!-- Menu mobile -->
+<div class="mnav" data-mnav aria-hidden="true">
+  <nav class="mnav__links">
+    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTÈMES</a><a href="#">SECTEURS</a><a href="#">RÉALISATIONS</a>
+    <a href="#">À PROPOS</a><a href="#">ACTUALITÉS</a><a href="#">RESSOURCES</a><a href="#">CARRIÈRES</a>
+  </nav>
+  <a href="#contact-form" class="btn btn--solid" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+</div>
+
+<!-- Toast : adresse e-mail copiée (js/contact.js) ; annonce aux lecteurs d'écran par la zone ct-sr -->
+<div class="cttoast" data-toast aria-hidden="true">
+  <span class="cttoast__dot"></span>
+  <span data-gt>EMAIL ADDRESS COPIED</span>
+</div>
+<p class="ct-sr" role="status" data-toast-live></p>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/components/gradient-text.js"></script>
+<script src="js/components/reveal.js"></script>
+<script src="js/components/nav.js"></script>
+<script src="js/main.js"></script>
+<script src="js/contact.js"></script>
+<script src="js/components/europe-map.js" defer></script>
+<script src="js/components/wordmark-dots.js" defer></script>
+</body>
+</html>

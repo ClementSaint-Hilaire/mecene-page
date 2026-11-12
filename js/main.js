@@ -151,16 +151,17 @@
   /* =========================================================
      HERO — intro + sortie au scroll
      ========================================================= */
-  // visuel du hero : vidéo de points (accueil) ou photo [data-hero-media] (Factory built)
+  // visuel du hero : vidéo de points (accueil) ou photo [data-hero-media] (Factory built) ; ni visuel ni surtitre sur la page Contact
   const heroDots = $('.hero__dots, [data-hero-media]');
-  gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.1 })
-    .fromTo(heroDots, { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 2.4, ease: 'power3.out' }, 0)
+  const intro = gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.1 });
+  if (heroDots) intro.fromTo(heroDots, { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 2.4, ease: 'power3.out' }, 0);
+  intro
     .fromTo('.nav__logo', { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 1.2 }, 0.2)
     .fromTo('.nav__menu .nav__item', { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 1, stagger: 0.05 }, 0.3)
-    .fromTo(['.nav__toggle', '.nav__lang', '.nav__cta', '.nav__burger'], { opacity: 0 }, { opacity: 1, duration: 1, ease: 'sine.inOut' }, 0.5)
-    .fromTo('.hero__eyebrow', { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'sine.inOut' }, 0.45)
-    // titre h1 : composant Gradient text ligne par ligne ([data-gt-lines], délai dans le HTML)
-    .fromTo('[data-hero-fade]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.12 }, 0.95);
+    .fromTo(['.nav__toggle', '.nav__lang', '.nav__cta', '.nav__burger'], { opacity: 0 }, { opacity: 1, duration: 1, ease: 'sine.inOut' }, 0.5);
+  if ($('.hero__eyebrow')) intro.fromTo('.hero__eyebrow', { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'sine.inOut' }, 0.45);
+  // titre h1 : composant Gradient text ligne par ligne ([data-gt-lines], délai dans le HTML)
+  intro.fromTo('[data-hero-fade]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.12 }, 0.95);
 
   // Vidéo mise en pause quand le hero est entièrement recouvert (économie GPU / batterie)
   let heroVisible = true;

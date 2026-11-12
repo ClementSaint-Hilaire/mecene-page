@@ -1,0 +1,303 @@
+/* =========================================================
+   Verdon — page Contact
+   Intégration Figma (node 328:4976) — complète css/style.css
+   (nav, boutons, FAQ, CTA, footer et carte Europe viennent de style.css)
+   ========================================================= */
+
+.ct-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* Bloc libellé + valeur (téléphone, adresses, e-mails) */
+.ct-block { display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.ct-val { font-size: var(--fs-s); font-weight: 500; line-height: 1.2; }
+/* soulignement au survol, comme les liens du footer */
+.ct-link { position: relative; width: fit-content; }
+.ct-link::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: right center; transition: transform .45s var(--ease-expo);
+}
+.ct-link:hover::after { transform: scaleX(1); transform-origin: left center; }
+/* adresse copiée au clic (js/contact.js) */
+button.ct-link { text-align: left; }
+[data-copy] { cursor: copy; }
+
+/* ---------- Toast : adresse copiée ----------
+   Fond du panneau de la nav, pastille verte, texte qui apparaît par le dégradé (composant Gradient text, rejoué à chaque copie) */
+.cttoast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  z-index: 70;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 11px 12px 10px;
+  background-image: linear-gradient(209.63deg, #000 0%, #302f2d 100%);
+  color: var(--light);
+  font-size: var(--fs-s);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transform: translate3d(-50%, 12px, 0);
+  transition: opacity .3s var(--ease-figma), transform .5s var(--ease-expo), visibility 0s linear .5s;
+}
+.cttoast.is-on {
+  opacity: 1;
+  visibility: visible;
+  transform: translate3d(-50%, 0, 0);
+  transition: opacity .3s var(--ease-figma), transform .7s var(--ease-expo);
+}
+.cttoast__dot { width: 6px; height: 6px; flex-shrink: 0; border-radius: 50%; background: var(--green); transform: scale(0); transition: transform .5s var(--ease-expo) .1s; }
+.cttoast.is-on .cttoast__dot { transform: none; }
+
+/* =========================================================
+   EN-TÊTE — téléphone · titre · présentation, sur une ligne au-dessus d'un trait
+   ========================================================= */
+.cthead { padding: 190px var(--gutter) 0; } /* barre de nav (24 + 38) + 128 */
+.cthead__row {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  padding-bottom: 32px;
+}
+.cthead__row::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--stroke-2);
+  transform-origin: left center;
+}
+.cthead__phone { flex: 0 0 347px; display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.cthead__title { flex: 0 1 616px; color: var(--ink); font-size: 64px; } /* Heading 1 : 64 px sur cette page */
+.cthead__lead { flex: 1 0 0; min-width: 280px; }
+
+/* le trait se dessine à l'entrée */
+.js [data-reveal="cthead"]::after { transform: scaleX(0); transition: transform 1.3s cubic-bezier(.87,0,.13,1) .3s; }
+.js [data-reveal="cthead"].is-in::after { transform: none; }
+
+/* =========================================================
+   CORPS — formulaire et infos à gauche, carte des sites collante à droite
+   ========================================================= */
+.ctbody {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: 128px;
+  align-items: start;
+  padding: 64px var(--gutter) 0;
+}
+.ctbody__main { display: flex; flex-direction: column; gap: 24px; }
+
+.ctform, .ctcard { background: var(--bg-secondary); padding: 32px 24px; }
+
+/* ---------- Formulaire ---------- */
+.ctform {
+  container-type: inline-size;   /* onglets et colonnes se replient quand la carte rétrécit (@container plus bas) */
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: flex-end;         /* bouton SEND à droite */
+  scroll-margin-top: 96px;       /* sous la nav (liens #contact-form) */
+}
+.ctform > :not(.ctform__send) { align-self: stretch; }
+:where(.ctform) fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }   /* :where : les paddings des classes ci-dessous l'emportent */
+.ctform input[type="radio"] { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+
+/* Onglets : type de demande (boutons radio) */
+.ctform__tabs {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding-bottom: 32px;
+  font-size: var(--fs-m);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.ctform__tab { position: relative; flex: 1 0 0; min-width: 0; cursor: pointer; }
+.ctform__tab:nth-of-type(2) { flex: none; white-space: nowrap; }
+.ctform__tab:last-of-type { text-align: right; }
+/* onglets non sélectionnés : opacité 50 % ; pleine encre au survol et une fois sélectionnés */
+.ctform__tab span { color: var(--ink-2); opacity: .5; transition: color .35s var(--ease-figma), opacity .35s var(--ease-figma); }
+.ctform__tab:hover span, .ctform__tab input:checked + span { color: var(--ink); opacity: 1; }
+.ctform__tab input:focus-visible + span { outline: 1px solid currentColor; outline-offset: 4px; }
+
+.ctform__body { display: flex; flex-direction: column; gap: 24px; padding: 21.65px 0 15px; }
+/* légende flottante : sort du cadre spécial des <legend> et se place comme un bloc ordinaire */
+.ctform__legend { float: left; width: 100%; padding: 0; font-size: var(--fs-s); font-weight: 500; line-height: 1.2; }
+.ctform__legend + * { clear: both; }
+.ctform__group--choice { padding-bottom: 21.65px; }
+.ctform__group--choice .ctform__legend { margin-bottom: 15.87px; }
+/* groupe propre à l'onglet : apparaît quand on change d'onglet */
+.ctform__group[data-request-group] { animation: ct-group-in .7s var(--ease-expo) both; }
+@keyframes ct-group-in { from { opacity: 0; transform: translate3d(0, 12px, 0); } }
+.ctform__group--info { padding: 21.65px 0 14.43px; }
+
+/* Raisons : 2 colonnes de 6, remplies colonne par colonne (ordre de lecture = ordre du clavier) */
+.ctform__radios {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(6, 16px);
+  grid-auto-flow: column;
+  column-gap: 14.43px;
+  row-gap: 10.1px;
+}
+.ctform__radios--sites { grid-template-rows: repeat(3, 16px); }
+.ctradio {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8.66px;
+  font-size: var(--fs-s);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.ctradio__box {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 16px; height: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.45);   /* Figma : --ink-3 (.35), assombri pour le contraste 3:1 du contrôle */
+  border-radius: 50%;
+  transition: border-color .3s var(--ease-figma);
+}
+.ctradio__box::after {
+  content: "";
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  background: var(--ink);
+  transform: scale(0);
+  transition: transform .45s var(--ease-expo);
+}
+.ctradio:hover .ctradio__box, .ctradio input:checked + .ctradio__box { border-color: var(--ink); }
+.ctradio input:checked + .ctradio__box::after { transform: scale(1); }
+.ctradio input:focus-visible + .ctradio__box { outline: 1px solid var(--ink); outline-offset: 3px; }
+
+/* Champs : libellé dans le champ, qui remonte au focus ou une fois rempli ; trait foncé qui se dessine au focus */
+.ctform__fields { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 14.43px; }
+.ctfield { position: relative; border-bottom: 1px solid var(--stroke); }
+.ctfield::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .6s var(--ease-expo);
+}
+.ctfield:focus-within::after { transform: none; }
+.ctfield--message { grid-column: 1 / -1; }
+.ctfield__input {
+  display: block;
+  width: 100%;
+  height: 61.47px;
+  margin: 0;
+  padding: 22px 0 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font: 400 var(--fs-s) / 1.2 var(--font);
+  letter-spacing: -0.01em;
+  outline: none;
+  appearance: none;
+}
+textarea.ctfield__input { height: 163.49px; padding: 32px 0 16px; resize: none; }
+.ctfield__input:autofill { -webkit-box-shadow: 0 0 0 100px var(--bg-secondary) inset; -webkit-text-fill-color: var(--ink); }
+.ctfield__label {
+  position: absolute;
+  left: 0; top: 24px;
+  font-size: 11.5px;
+  font-weight: 500;
+  line-height: 1.2;
+  color: var(--ink-2);
+  pointer-events: none;
+  transition: transform .45s var(--ease-expo), color .3s var(--ease-figma);
+}
+.ctfield__input:focus + .ctfield__label,
+.ctfield__input:not(:placeholder-shown) + .ctfield__label,
+.ctfield__input:autofill + .ctfield__label { transform: translateY(-16px); }
+.ctfield__input:focus + .ctfield__label { color: var(--ink); }
+
+.ctform__send { padding: 11px 16px 10px; }
+.ctform__status { text-align: right; }
+.ctform__status:empty { display: none; }
+
+/* ---------- Infos de contact ---------- */
+.ctinfo { display: flex; flex-direction: column; gap: 16px; }
+.ctinfo__row { display: flex; gap: 16px; align-items: flex-start; }
+.ctinfo__office { flex: 0 0 295px; }
+.ctinfo__list { flex: 1 0 0; min-width: 1px; display: flex; flex-direction: column; gap: 24px; }
+
+/* ---------- Carte des sites + adresses (colonne collante) ----------
+   686 px de haut sur la maquette, centrée dans l'écran sous la nav ; réduite (la carte rétrécit) sur les écrans bas */
+.ctbody__aside {
+  position: sticky;
+  top: max(96px, calc(50vh - 343px));
+  height: clamp(520px, calc(100vh - 128px), 686px);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+/* points plus clairs que ceux du footer (--ink-2) : sur cette surface, la grille fine reste légère et les sites ressortent */
+.ctmap { --emap-ink: #a8a7a7; flex: 1 0 0; min-height: 1px; background: var(--bg-secondary); }
+.ctlocs { display: flex; gap: 19px; align-items: flex-start; }
+.ctlocs__head { flex: 1 0 0; min-width: 1px; display: flex; flex-direction: column; gap: 19px; }
+.ctlocs__img { width: 200px; height: 150px; overflow: hidden; }
+.ctlocs__img img { width: 100%; height: 100%; object-fit: cover; }
+.ctlocs__list { flex: 1 0 0; min-width: 1px; display: flex; flex-direction: column; gap: 16px; }
+
+/* Repli selon la largeur de la carte du formulaire : onglets en 16 px, puis sur plusieurs lignes */
+@container (max-width: 600px) {
+  .ctform__tabs { font-size: 16px; }
+}
+@container (max-width: 520px) {
+  .ctform__tabs { flex-wrap: wrap; column-gap: 24px; row-gap: 8px; }
+  .ctform__tab, .ctform__tab:nth-of-type(2) { flex: none; }
+  .ctform__tab:last-of-type { text-align: left; }
+}
+@container (max-width: 460px) {
+  .ctform__radios { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; grid-auto-flow: row; }
+  .ctradio { white-space: normal; }
+  .ctform__fields { grid-template-columns: minmax(0, 1fr); }
+}
+
+/* =========================================================
+   RESPONSIVE (déduit — pas de maquette tablette/mobile fournie)
+   ========================================================= */
+@media (max-width: 1280px) {
+  .ctbody { column-gap: 64px; }
+}
+
+@media (max-width: 1100px) {
+  .cthead__phone { flex-basis: 240px; }
+  .ctinfo__office { flex: 1 0 0; }
+}
+
+/* Tablette */
+@media (max-width: 991px) {
+  .cthead { padding-top: 160px; }
+  .cthead__row { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .cthead__title { order: -1; flex: none; font-size: var(--fs-4xl); }
+  .cthead__phone, .cthead__lead { flex: none; min-width: 0; max-width: 560px; }
+
+  .ctbody { grid-template-columns: minmax(0, 1fr); row-gap: 24px; padding-top: 48px; }
+  .ctbody__aside { position: relative; top: auto; height: auto; }
+  .ctmap { flex: none; aspect-ratio: 16 / 10; }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .cthead { padding-top: 128px; }
+  .ctinfo__row { flex-direction: column; gap: 24px; }
+  .ctinfo__office { flex: none; }
+  .ctmap { aspect-ratio: 1; }
+  .ctlocs { flex-direction: column; gap: 24px; }
+  .ctlocs__head { flex: none; width: 100%; }
+  .ctlocs__img { width: 100%; height: auto; aspect-ratio: 4 / 3; }
+  .ctlocs__list { flex: none; }
+}
