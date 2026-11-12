@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="fr" data-smooth-scroll>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Data Center — Verdon</title>
+  <meta name="description" content="Engineered, factory-built and integrated MEP systems for Data Centres. Verdon combines engineering, off-site manufacturing, quality control and site installation to support Data Centre deployment across Europe.">
+  <script>document.documentElement.classList.add("js","gt-ready");</script>
+  <link rel="preload" href="assets/dc-hero.webp" as="image" type="image/webp" imagesrcset="assets/dc-hero-1200.webp 1200w, assets/dc-hero.webp 2400w" imagesizes="100vw">
+  <link rel="stylesheet" href="css/components/gradient-text.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/data-center.css">
+</head>
+<body>
+
+<!-- =========================================================
+     NAV — composant js/components/nav.js (même barre que l'accueil).
+     data-nav-compact : pastilles dès le haut de page, comme sur la maquette.
+     ========================================================= -->
+<header class="nav is-collapsed" data-nav data-nav-compact>
+  <a href="index.html" class="nav__logo" aria-label="Verdon — accueil">
+    <img decoding="async" class="nav__ink nav__ink--light" src="assets/logo.svg" alt="" width="347" height="24">
+    <img decoding="async" class="nav__ink nav__ink--dark" src="assets/logo-dark.svg" alt="" width="347" height="24">
+  </a>
+
+  <div class="nav__slot" data-nav-slot>
+    <nav class="nav__menu" aria-label="Navigation principale">
+      <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
+      <a href="data-center.html" class="nav__item is-active" aria-current="page" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
+      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
+      <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
+      <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
+      <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
+      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+    </nav>
+
+    <button class="nav__toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+      <span class="nav__dots" aria-hidden="true"></span>
+    </button>
+
+    <div class="nav__panel" id="nav-panel" data-nav-panel>
+      <button class="nav__close" type="button" data-nav-close>CLOSE</button>
+      <img decoding="async" class="nav__rule" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <nav class="nav__plist" aria-label="Navigation principale">
+        <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
+        <a href="data-center.html" class="nav__item is-active" aria-current="page" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
+        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
+        <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
+        <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
+        <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
+        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+      </nav>
+      <img decoding="async" class="nav__rule nav__rule--end" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <div class="nav__contact">
+        <p>connect with us:</p>
+        <a href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav__spacer"></div>
+
+  <div class="nav__right">
+    <button class="nav__lang" type="button" aria-label="Changer de langue">
+      <span>EN</span>
+      <span class="nav__chev" aria-hidden="true">
+        <img decoding="async" class="nav__ink nav__ink--light" src="assets/frame.svg" alt="" width="20" height="20">
+        <img decoding="async" class="nav__ink nav__ink--dark" src="assets/frame-dark.svg" alt="" width="20" height="20">
+      </span>
+    </button>
+    <a href="contact.html" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+    <button class="nav__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- =========================================================
+     HERO + ENJEUX (le hero reste collé derrière, la section claire le recouvre)
+     ========================================================= -->
+<div class="hero-stack">
+
+  <section class="hero dchero" data-section="hero" data-nav-bg="dark">
+    <div class="dchero__bg" aria-hidden="true">
+      <img src="assets/dc-hero.webp" srcset="assets/dc-hero-1200.webp 1200w, assets/dc-hero.webp 2400w" sizes="100vw"
+           alt="" width="2400" height="1798" fetchpriority="high" data-hero-media>
+    </div>
+
+    <div class="dchero__body">
+      <div class="dchero__titles">
+        <p class="hero__eyebrow">DATA CENTER</p>
+        <h1 class="h2 h2--light" data-hero-title data-gt-lines style="--gt-delay:0.45s">Engineered, factory-built and integrated MEP systems for Data Centres.</h1>
+      </div>
+      <div class="dchero__aside">
+        <div class="p dchero__lead" data-hero-fade>
+          <p>Verdon supports the deployment of Data Centre infrastructure across Europe through an integrated approach combining engineering, off-site manufacturing, quality control and site installation.</p>
+          <p>An industrial delivery model designed to improve reliability, increase project predictability and support large-scale deployment programmes.</p>
+        </div>
+        <div class="hero__ctas" data-hero-fade>
+          <a href="contact.html" class="btn btn--solid" data-btn><span class="btn__label" data-gt>TALK WITH US</span></a>
+          <a href="#approach" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>EXPLORE OUR APPROACH</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="dcgrowth" data-section="challenges" data-nav-bg="light">
+    <div class="dcgrowth__head">
+      <h2 class="h2 t-center" data-gt-lines>
+        <span class="t-muted">The growth of Data Centres </span><br><span class="t-muted">demands </span><span>new industrial standards.</span>
+      </h2>
+      <p class="p t-muted t-center dcgrowth__lead" data-reveal="up">The expansion of AI, cloud computing and high-density workloads is accelerating demand for critical infrastructure. As projects become increasingly complex and schedules tighten, traditional construction methods face growing limitations.</p>
+    </div>
+
+    <!-- Visuels à venir (blocs pleins sur la maquette) : une image par .dcard__img -->
+    <div class="dcgrid">
+      <article class="dcard" data-reveal="up">
+        <div class="dcard__img" data-nav-bg="dark"></div>
+        <div class="dcard__text">
+          <h3 class="lead-l">Increasing Schedule Pressure</h3>
+          <p class="p t-muted">Project timelines are shrinking while critical equipment can require months of procurement. Anticipating requirements from the earliest design stages is essential to securing delivery milestones.</p>
+        </div>
+      </article>
+      <article class="dcard" data-reveal="up">
+        <div class="dcard__img" data-nav-bg="dark"></div>
+        <div class="dcard__text">
+          <h3 class="lead-l">Complex Technical Integration</h3>
+          <p class="p t-muted">Cooling, power distribution, structural systems and safety infrastructure must work together. Multiple contractors and interfaces increase the risk of incompatibilities, delays and on-site rework.</p>
+        </div>
+      </article>
+      <article class="dcard" data-reveal="up">
+        <div class="dcard__img" data-nav-bg="dark"></div>
+        <div class="dcard__text">
+          <h3 class="lead-l">Uncompromising Quality Requirements</h3>
+          <p class="p t-muted">In critical infrastructure, every detail matters. Manufacturing precision, component traceability and assembly validation directly influence installation quality and operational reliability.</p>
+        </div>
+      </article>
+      <article class="dcard" data-reveal="up">
+        <div class="dcard__img" data-nav-bg="dark"></div>
+        <div class="dcard__text">
+          <h3 class="lead-l">Deployment at Scale</h3>
+          <p class="p t-muted">Operators are developing multi-building and multi-site programmes. Their challenge is to replicate proven solutions, maintain consistent quality and secure predictable delivery across successive projects.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+
+<!-- =========================================================
+     ONE PARTNER — campus 3D et ses 4 points (composant Package 3D, maquette « campus »)
+     ========================================================= -->
+<section class="factory dcsys" data-section="systems" data-nav-bg="dark">
+  <div class="factory__head">
+    <h2 class="h2 h2--light t-center" data-gt-lines>
+      <span class="t-muted-light">One </span><span>partner</span><span class="t-muted-light">. </span><br><span class="t-muted-light">Multiple </span><span>critical systems</span><span class="t-muted-light">.</span>
+    </h2>
+    <div class="factory__headcontent">
+      <div class="lead-m t-muted-light t-center factory__lead dcsys__lead" data-reveal="up">
+        <p>From White Space to Grey Space and campus utilities, Verdon engineers, prefabricates and integrates mechanical, electrical and auxiliary systems.</p>
+        <p>Every package is developed around assembly, transportation, maintenance and site interface requirements, ensuring integration is considered before delivery.</p>
+      </div>
+      <div class="btn-row" data-reveal="up">
+        <a href="contact.html" class="btn btn--solid btn--w120" data-btn><span class="btn__label" data-gt>TALK TO US</span></a>
+        <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Composant Package 3D (js/components/package-3d.js), maquette du campus -->
+  <div class="factory__package pack3d" data-pack3d="campus" data-reveal="scale">
+    <div class="pack3d__view" data-p3d-view>
+      <img class="pack3d__poster" decoding="async" src="assets/campus-3d-poster.webp" alt="Data Centre campus: containment and structural systems, cooling and process pipework, power distribution, safety and technical interfaces" width="1080" height="1080" loading="lazy">
+      <canvas class="pack3d__canvas" aria-label="Interactive 3D view of a Data Centre campus and the systems Verdon integrates: hover or tap a system, drag to rotate"></canvas>
+      <svg class="pack3d__leader" aria-hidden="true"><path data-p3d-path d="" opacity="0"></path><circle data-p3d-dot r="3" opacity="0"></circle></svg>
+      <div class="pack3d__markers" data-p3d-markers></div>
+      <div class="p3d-cap" data-p3d-cap aria-live="polite"></div>
+      <p class="pack3d__hint" data-p3d-hint aria-hidden="true">Hover a system · Drag to rotate</p>
+      <button type="button" class="pack3d__mode" data-p3d-mode><span class="pack3d__modedot" aria-hidden="true"></span><span data-p3d-mode-label>Disable dot matrix</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     OUR APPROACH — scroll horizontal épinglé (composant « Our services » de l'accueil, couleurs inversées)
+     ========================================================= -->
+<section class="services dcapproach" id="approach" data-section="approach" data-hscroll data-nav-bg="dark">
+  <div class="services__pin" data-hscroll-pin>
+    <div class="services__bigword-wrap">
+      <p class="services__bigword" data-hscroll-bigword aria-hidden="true">OUR APPROACH</p>
+    </div>
+    <div class="services__band" data-nav-bg="light">
+      <div class="services__track" data-hscroll-track>
+        <div class="vline vline--136" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-9.svg" alt=""></div></div>
+
+        <div class="services__intro">
+          <h2 class="h2" data-gt-lines>
+            <span>Site certainty begins </span><br><span>long before construction.</span>
+          </h2>
+          <a href="factory-built.html" class="btn btn--outline" data-btn><span class="btn__label" data-gt>EXPLORE OUR FACTORY-BUILT MODEL</span></a>
+        </div>
+
+        <div class="p p--muted services__text">
+          <p>Through its Factory-Built Delivery Model, Verdon coordinates the entire MEP delivery chain: engineering, procurement forecasting, manufacturing, integration, testing, logistics and site installation.</p>
+          <p>The objective is to move complexity into a controlled industrial environment and reduce uncertainty throughout deployment.</p>
+        </div>
+
+        <div class="services__cards">
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104-short.svg" alt=""></div>
+            <div class="gcard__body">
+              <div class="gdots" data-service-dots="engineer" aria-hidden="true"><canvas></canvas></div>
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>EARLY<br>ENGINEERING</h3>
+                <div class="p p--muted">
+                  <p>By engaging from RIBA Stage 2, Verdon anticipates technical constraints, defines system interfaces and prepares designs for efficient manufacturing and integration.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104-short.svg" alt=""></div>
+            <div class="gcard__body">
+              <div class="gdots" data-service-dots="procure" aria-hidden="true"><canvas></canvas></div>
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>PROCUREMENT<br>FORECASTING</h3>
+                <div class="p p--muted">
+                  <p>Early identification and ordering of long-lead equipment help secure critical milestones, reduce supply chain uncertainty and improve overall project lead times.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104-short.svg" alt=""></div>
+            <div class="gcard__body">
+              <div class="gdots" data-service-dots="manufacture" aria-hidden="true"><canvas></canvas></div>
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>FACTORY-BUILT<br>QUALITY</h3>
+                <div class="p p--muted">
+                  <p>Systems are manufactured, assembled and tested in a controlled industrial environment, ensuring precision, traceability and consistent quality before delivery.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104-short.svg" alt=""></div>
+            <div class="gcard__body">
+              <div class="gdots" data-service-dots="onsite" aria-hidden="true"><canvas></canvas></div>
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>SITE-READY<br>INTEGRATION</h3>
+                <div class="p p--muted">
+                  <p>Factory-validated systems arrive prepared for installation, reducing on-site activities, limiting interface risks and supporting more predictable commissioning.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     INDUSTRIAL CAPACITY — colonne gauche collante, chiffres clés à droite
+     ========================================================= -->
+<section class="dccap" data-section="capacity" data-nav-bg="light">
+  <div class="dccap__left">
+    <div class="dccap__photo" data-reveal="clip">
+      <img decoding="async" src="assets/frame-64.webp" alt="Welder at work in a Verdon workshop" width="1500" height="1000" loading="lazy">
+    </div>
+    <h2 class="h2 dccap__title" data-gt-lines>
+      <span>Industrial capacity </span><span class="t-muted">built to support your </span><span>European ambitions.</span>
+    </h2>
+  </div>
+
+  <div class="dccap__right">
+    <div class="dccap__intro">
+      <div class="lead-m dccap__lead" data-reveal="up">
+        <p>With five strategic sites across Belgium and France, Verdon operates an industrial infrastructure dedicated to the manufacturing, assembly and storage of MEP systems for European Data Centres.</p>
+        <p>This organisation enables Verdon to support complex projects and successive deployment programmes. By building on proven engineering concepts, we aim to deliver repeatable production, consistent quality and greater delivery predictability.</p>
+      </div>
+      <a href="#" class="btn btn--outline" data-btn data-reveal="up"><span class="btn__label" data-gt>EXPLORE OUR CAPABILITIES</span></a>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="stat__head">
+          <p class="p stat__label" data-reveal="fade">Key figure</p>
+          <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
+        </div>
+        <div class="stat__body" data-reveal="up">
+          <p class="stat__num" data-count="180000">180 000+</p>
+          <p class="stat__caption" data-gt-lines>m² of manufacturing, assembly and storage capacity.</p>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-6.svg" alt=""></div>
+        <div class="stat__body" data-reveal="up">
+          <p class="stat__num" data-count="650" data-suffix=" MW">650 MW</p>
+          <p class="stat__caption" data-gt-lines>Data Centre infrastructure delivered.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Cas d'étude collés en haut de l'écran pendant que les partenaires les recouvrent -->
+<div class="dcstack">
+  <!-- =========================================================
+       CAS D'ÉTUDE — carrousel (js/data-center.js) : la carte active au centre, les voisines réduites à 80 %
+       ========================================================= -->
+  <section class="dccases" data-section="cases" data-nav-bg="light" aria-roledescription="carousel" aria-label="Case studies">
+    <div class="dccases__viewport" data-cases>
+      <div class="dccases__track" data-cases-track>
+        <article class="dccase" data-case aria-roledescription="slide" aria-label="1 / 3">
+          <div class="dccase__body">
+            <p class="dccase__text">Our Trade Program allows us to support and collaborate with design professionals. Once you’re enrolled, we’re here to help you with selecting and specifying products, consulting on finishes and customization, and more.</p>
+            <a href="#" class="dccase__link">Voir le cas d’étude →</a>
+          </div>
+          <div class="dccase__img"></div>
+        </article>
+        <article class="dccase" data-case aria-roledescription="slide" aria-label="2 / 3">
+          <div class="dccase__body">
+            <p class="dccase__text">Our Trade Program allows us to support and collaborate with design professionals. Once you’re enrolled, we’re here to help you with selecting and specifying products, consulting on finishes and customization, and more.</p>
+            <a href="#" class="dccase__link">Voir le cas d’étude →</a>
+          </div>
+          <div class="dccase__img"></div>
+        </article>
+        <article class="dccase" data-case aria-roledescription="slide" aria-label="3 / 3">
+          <div class="dccase__body">
+            <p class="dccase__text">Our Trade Program allows us to support and collaborate with design professionals. Once you’re enrolled, we’re here to help you with selecting and specifying products, consulting on finishes and customization, and more.</p>
+            <a href="#" class="dccase__link">Voir le cas d’étude →</a>
+          </div>
+          <div class="dccase__img"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PARTENAIRES (mêmes logos que l'accueil)
+       ========================================================= -->
+  <section class="partners dcpartners" data-section="partners" data-nav-bg="light">
+    <div class="partners__grid" data-partners>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-atlasedge.webp" alt="AtlasEdge" width="534" height="289" style="--w:170px" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-data4.webp" alt="Data4" width="298" height="169" style="--w:140px" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-equinix.svg" alt="Equinix" width="500" height="242" style="--w:168px" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-ibm.webp" alt="IBM" width="800" height="324" style="--w:166px" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-lcl.webp" alt="LCL" width="640" height="360" style="--w:150px" loading="lazy"></div>
+      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-google.webp" alt="Google" width="640" height="216" style="--w:184px" loading="lazy"></div>
+    </div>
+  </section>
+</div>
+
+<div class="lower">
+  <!-- =========================================================
+       FAQ
+       ========================================================= -->
+  <section class="faq" data-section="faq" data-nav-bg="light">
+    <div class="faq__grid">
+      <div class="faq__intro">
+        <h2 class="h2" data-gt-lines><span>F.A.Q</span></h2>
+        <p class="p t-muted" data-reveal="up">Discover Verdon’s expertise in engineering, manufacturing and Data Center infrastructure.</p>
+      </div>
+
+      <div class="faq__list" data-faq>
+        <div class="faq__item is-open" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="true">
+            <span class="faq__num">01</span>
+            <span class="faq__question">What does Verdon specialise in&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon combines engineering expertise and industrial manufacturing to develop and produce technical systems for complex industrial environments. With a strong focus on Data Centers, the company brings together technical design, manufacturing processes and system integration to address the requirements of demanding infrastructure projects.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">02</span>
+            <span class="faq__question">What is Verdon’s expertise in Data Centers&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon supports Data Center projects through the engineering and off-site manufacturing of technical systems designed for complex MEP infrastructure. Its approach takes into account equipment interfaces, installation constraints and the coordination required to integrate systems into large-scale facilities.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">03</span>
+            <span class="faq__question">Which industries does Verdon serve&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon operates across four key sectors: Data Centers, Energy, Life Sciences &amp; Pharmaceuticals, and Semiconductors. Each sector presents specific technical requirements, operating conditions and infrastructure constraints. Verdon applies its engineering and manufacturing capabilities to address the needs of these different industrial environments.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">04</span>
+            <span class="faq__question">What types of systems does Verdon manufacture&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon’s capabilities cover a range of technical systems, including electrical infrastructure, cooling pipework, aisle containment, liquid cooling assemblies and associated support structures. Each system addresses specific functional requirements and equipment interfaces, with its configuration defined according to project specifications.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">05</span>
+            <span class="faq__question">How does Verdon approach complex industrial projects&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon brings engineering and manufacturing capabilities together to prepare technical systems for integration into complex facilities. By considering technical specifications, equipment interfaces and manufacturing constraints, the company works to align system design with practical installation requirements from the outset.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">06</span>
+            <span class="faq__question">Can Verdon adapt its solutions to specific project requirements&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon develops technical systems around the specifications and constraints of each project. Equipment configurations, spatial limitations, connection interfaces and installation requirements inform the approach taken. This allows the scope and configuration of each solution to be defined in line with the project’s technical needs.</p></div></div>
+        </div>
+      </div>
+
+      <div class="faq__aside" data-reveal="up">
+        <p class="p t-muted">Still have questions? <br>Our team is here to help.</p>
+        <a href="contact.html" class="btn btn--outline" data-btn><span class="btn__label" data-gt>CONTACT</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA + FOOTER
+       ========================================================= -->
+  <section class="cta" data-section="cta" data-nav-bg="dark">
+    <div class="cta__bg" aria-hidden="true">
+      <img decoding="async" src="assets/seciton-temoignages.webp" alt="" width="1500" height="1123" loading="lazy" data-cta-bg>
+      <div class="cta__overlay"></div>
+    </div>
+
+    <div class="cta__head">
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+      <div class="cta__content">
+        <h2 class="h2 h2--light t-center" data-gt-lines>
+          <span class="t-muted-light">Let’s define your </span><br><span>project requirements.</span>
+        </h2>
+        <div class="cta__sub">
+          <p class="lead-m t-center cta__lead" data-reveal="up">Verdon works alongside project stakeholders to address the technical, engineering and manufacturing requirements of complex infrastructure projects. Contact our team to discuss your needs and explore the scope of our capabilities.</p>
+          <div class="btn-row" data-reveal="up">
+            <a href="contact.html" class="btn btn--solid btn--w240" data-btn><span class="btn__label" data-gt>CONTACT</span></a>
+            <a href="#" class="btn btn--outline-light btn--w240" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+    </div>
+
+    <footer class="footer" data-footer data-nav-bg="light">
+      <div class="frow">
+        <div class="fcell fcell--line fcell--top">
+          <p class="p t-muted">We don’t just build systems.<br>We set the standard.</p>
+        </div>
+        <div class="fcell fcell--line fcell--stretch"></div>
+      </div>
+
+      <div class="frow">
+        <div class="fcell fcell--top fcell--socials">
+          <p class="caption">SOCIALS</p>
+          <div class="socials">
+            <a href="#" class="socials__link" aria-label="LinkedIn"><img decoding="async" src="assets/icon.svg" alt="" width="16" height="16"></a>
+            <a href="#" class="socials__link" aria-label="Instagram">
+              <span class="socials__ig"><img decoding="async" src="assets/group-1.svg" alt=""></span>
+            </a>
+            <a href="#" class="socials__link" aria-label="Facebook"><img decoding="async" src="assets/icon-1.svg" alt="" width="16" height="16"></a>
+          </div>
+        </div>
+        <div class="fcell fcell--line fcell--links">
+          <p class="caption">SOCIALS</p>
+          <div class="flinks">
+            <div class="flinks__col"><a href="index.html">Home</a><a href="#">About us</a><a href="#">Newsroom</a></div>
+            <div class="flinks__col"><a href="#">Ressources</a><a href="factory-built.html">Factory built</a><a href="data-center.html" aria-current="page">Sectors</a></div>
+            <div class="flinks__col"><a href="#">Systems</a><a href="#">Careers</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="frow frow--grow">
+        <div class="fcell"></div>
+        <div class="fcell fcell--line fcell--info">
+          <div class="finfo">
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">HEAD OFFICE</p>
+                <p class="finfo__val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">PHONE NUMBER</p>
+                <a class="finfo__val" href="tel:+3271468380">+32 71 46 83 80</a>
+              </div>
+            </div>
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">EMAIL</p>
+                <a class="finfo__val" href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">OPERATING ACROSS</p>
+                <p class="finfo__val">France • Belgium • England </p>
+              </div>
+            </div>
+            <!-- Carte Europe en matrice de points, vue isométrique en rotation lente (js/components/europe-map.js) -->
+            <div class="finfo__map emap" data-europe-map data-src="assets/europe-dots.json" role="img" aria-label="Carte de l'Europe avec 5 sites Verdon : Courcelles (siège), Liège, Lille, Paris, Lyon">
+              <canvas class="emap__canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fbottom">
+        <!-- Signature en matrice de points, colorée au survol (js/components/wordmark-dots.js) -->
+        <div class="fbottom__mark wmark" data-wordmark data-src="assets/wordmark-dots.json" data-reveal="wipe" style="--dur:2s" role="img" aria-label="Verdon groupe">
+          <canvas class="wmark__canvas"></canvas>
+        </div>
+        <div class="fbottom__legal">
+          <a href="#">Legal</a>
+          <p>Copyright © Verdon SA • All rights reserved</p>
+          <a href="https://agence-orem.fr" target="_blank" rel="noopener">Réalisé par Orem</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<!-- Menu mobile -->
+<div class="mnav" data-mnav aria-hidden="true">
+  <nav class="mnav__links">
+    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTÈMES</a><a href="data-center.html" aria-current="page">SECTEURS</a><a href="#">RÉALISATIONS</a>
+    <a href="#">À PROPOS</a><a href="#">ACTUALITÉS</a><a href="#">RESSOURCES</a><a href="#">CARRIÈRES</a>
+  </nav>
+  <a href="contact.html" class="btn btn--solid" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+</div>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/components/gradient-text.js"></script>
+<script src="js/components/reveal.js"></script>
+<script src="js/components/nav.js"></script>
+<script src="js/main.js"></script>
+<script src="js/data-center.js"></script>
+<script type="module" src="js/components/package-3d.js"></script>
+<script src="js/components/europe-map.js" defer></script>
+<script src="js/components/wordmark-dots.js" defer></script>
+<script src="js/components/service-dots.js" defer></script>
+</body>
+</html>

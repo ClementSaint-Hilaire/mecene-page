@@ -5,7 +5,7 @@
      pts   : [x0, y0, x1, y1, …] en unités carte autour du centre
      sites : [{ name, color, i }] → i = index du point de la grille coloré
      dotScale, siteScale (optionnels) : rayon des points et des sites, en facteur du rayon par défaut (1)
-   Couleur des points : --emap-ink sur le conteneur, sinon --ink-2.
+   Couleur des points : --emap-ink sur le conteneur, sinon --ink-2. Délai avant l'apparition des points : --emap-delay (ex. 1.3s).
    Les sites sont des points de la grille comme les autres, seulement colorés (et agrandis sur la grille fine
    de la page Contact, assets/europe-dots-fine.json, où ils seraient sinon noyés dans la masse).
    Canvas 2D, ~900 points : rendu seulement quand la carte est à l'écran.
@@ -93,12 +93,17 @@
         const dt = last ? Math.min(t - last, 100) / 1000 : 0;
         last = t;
         angle += (dt * Math.PI * 2) / TURN_SECONDS;
-        if (reveal < 1) { reveal = Math.min(1, (t - revealStart) / 1600); reveal = 1 - Math.pow(1 - reveal, 3); }
+        if (reveal < 1) { reveal = Math.min(1, Math.max(0, (t - revealStart) / 1600)); reveal = 1 - Math.pow(1 - reveal, 3); }
         draw();
       }
       raf = requestAnimationFrame(loop);
     }
-    function start() { if (!raf && !reduce) { last = 0; if (!revealStart) revealStart = performance.now(); raf = requestAnimationFrame(loop); } }
+    function start() {
+      if (raf || reduce) return;
+      last = 0;
+      if (!revealStart) revealStart = performance.now() + (parseFloat(getComputedStyle(root).getPropertyValue('--emap-delay')) || 0) * 1000;
+      raf = requestAnimationFrame(loop);
+    }
 
     new ResizeObserver(resize).observe(root);
     new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) start(); }, { threshold: 0.1 }).observe(root);

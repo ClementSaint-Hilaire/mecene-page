@@ -74,8 +74,8 @@ button.ct-link { text-align: left; }
 .cthead__title { flex: 0 1 616px; color: var(--ink); font-size: 64px; } /* Heading 1 : 64 px sur cette page */
 .cthead__lead { flex: 1 0 0; min-width: 280px; }
 
-/* le trait se dessine à l'entrée */
-.js [data-reveal="cthead"]::after { transform: scaleX(0); transition: transform 1.3s cubic-bezier(.87,0,.13,1) .3s; }
+/* le trait se dessine à l'entrée, après le titre, le téléphone et la présentation (ordre de chargement : js/contact.js) */
+.js [data-reveal="cthead"]::after { transform: scaleX(0); transition: transform 1.3s cubic-bezier(.87,0,.13,1) .8s; }
 .js [data-reveal="cthead"].is-in::after { transform: none; }
 
 /* =========================================================

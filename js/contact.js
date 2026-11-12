@@ -9,9 +9,32 @@
      s'ouvre avec un e-mail prérempli adressé à data-mailto. Avec un action, envoi classique.
    - [data-copy] : l'adresse est copiée dans le presse-papiers au clic, confirmée par un toast
      (messagerie à défaut, si la copie est refusée).
+   - Chargement : apparitions du haut vers le bas (voir plus bas).
    ========================================================= */
 (() => {
   'use strict';
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- Chargement : du haut vers le bas ----------
+     nav (0.2 s) → titre (Gradient text, 0.45 s) → téléphone et présentation (intro de js/main.js, ~1 s)
+     → trait de l'en-tête (0.8 s, lent au départ, css/contact.css) → éléments du corps visibles à l'arrivée, à partir de INTRO,
+     décalés selon leur position verticale (la colonne de droite juste après la gauche à hauteur égale).
+     Le délai s'ajoute à --d (décalage entre frères, js/components/reveal.js) ; la carte attend aussi pour
+     dessiner ses points (--emap-delay). Les éléments sous la ligne de flottaison apparaissent au scroll, sans délai. */
+  const INTRO = 1.45;       // s
+  const PER_PX = 0.0008;    // s par px vers le bas (~0.4 s pour 500 px)
+  const RIGHT = 0.1;        // s pour la colonne de droite
+  if (!reduceMotion) {
+    const items = Array.from(document.querySelectorAll('.ctbody [data-reveal]'))
+      .map((el) => ({ el, r: el.getBoundingClientRect() }))
+      .filter(({ r }) => r.top < innerHeight);
+    const top = Math.min(...items.map(({ r }) => r.top));
+    items.forEach(({ el, r }) => {
+      const delay = (INTRO + (r.top - top) * PER_PX + (r.left > innerWidth / 2 ? RIGHT : 0)).toFixed(2);
+      el.style.setProperty('--d', `calc(${el.style.getPropertyValue('--d') || '0s'} + ${delay}s)`);
+      if (el.hasAttribute('data-europe-map')) el.style.setProperty('--emap-delay', `${delay}s`);
+    });
+  }
 
   /* ---------- Adresses copiées au clic ---------- */
   const toast = document.querySelector('[data-toast]');

@@ -105,7 +105,8 @@
       requestAnimationFrame(tick);
     }), { rootMargin: '0px 0px -12% 0px' });
     counters.forEach((el) => {
-      el.dataset.suffix = el.textContent.trim().endsWith('+') ? '+' : '';
+      // suffixe : data-suffix dans le HTML (« 650 MW »), sinon le « + » final
+      if (!('suffix' in el.dataset)) el.dataset.suffix = el.textContent.trim().endsWith('+') ? '+' : '';
       el.textContent = '0' + el.dataset.suffix;
       cio.observe(el);
     });
@@ -222,7 +223,7 @@
   if ($('.expertise__blobs')) gsap.fromTo('.expertise__blobs', { y: 200 }, { y: -200, ease: 'none', scrollTrigger: { trigger: '.expertise', start: 'top bottom', end: 'bottom top', scrub: true } });
 
   /* =========================================================
-     FACTORY BUILT — colonnes (la maquette 3D est dans js/components/campus-3d.js)
+     FACTORY BUILT — colonnes (la maquette 3D est dans js/components/package-3d.js)
      ========================================================= */
   mm.add(DESKTOP, () => {
     const vp = $('[data-drag]');

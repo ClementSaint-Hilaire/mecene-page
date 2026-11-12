@@ -1,32 +1,61 @@
 /* =========================================================
-   Composant « Package 3D » — maquette interactive du package factory-built (section Factory built)
-   Adapté de « Verdon Factory-Built.html » :
+   Composant « Package 3D » — maquette 3D interactive en matrice de points
+   Deux maquettes (MODELS, choisie par la valeur de data-pack3d) :
+   - package : package factory-built (accueil, section Factory built), d'après « Verdon Factory-Built.html »
+   - campus : campus (page Data center), d'après « Campus Verdon 3D.html » (_ref/campus-3d-source.html)
+   Commun :
    - three.js + OrbitControls vendorisés (js/vendor/three), pas de CDN
-   - géométrie chargée à la demande : assets/package-3d.json (index des systèmes)
-     + assets/package-3d.bin (positions quantifiées et triangles en uint16, compressés en gzip)
+   - géométrie chargée à la demande : assets/<maquette>-3d.json (index des systèmes)
+     + assets/<maquette>-3d.bin (positions quantifiées et triangles en uint16, teinte par sommet en uint8
+       si présente, compressés en gzip)
    - initialisation seulement quand la section approche de l'écran
    - boucle de rendu coupée hors écran et onglet masqué, DPR plafonné à 2
    - l'image fixe reste affichée tant que la 3D n'est pas prête (ou sans WebGL)
    - au survol, les points du système actif passent au dégradé habituel
      (lilas → pêche → ambre → vert, --gt-c1…--gt-c4), de gauche à droite sur son étendue à l'écran
    - bouton « Disable dot matrix » : même passe sans les points (rendu lisse, suréchantillonné 2×)
-   Balisage attendu : voir .pack3d dans index.html
+   Balisage attendu : voir .pack3d dans index.html et data-center.html
    ========================================================= */
 
-const CELL = 3;     // pas de la grille de points, en px CSS (densité : plus petit = plus de points)
-const CELL_S = 2.5; // idem quand la vue fait moins de 560 px de large
-
-// Contenus : brochure VERDON, juillet 2026. tone : teinte de repos (les équipements tiers plus sombres)
-const SYSTEMS = [
-  { id: 'hac', tone: 1, name: 'Hot aisle containment (HAC)', text: 'Engineered support structures and containment systems designed for load requirements, transport constraints, site assembly and, where required, seismic compliance.' },
-  { id: 'pipework', tone: 1, name: 'Cooling and process pipework', text: 'Prefabricated pipework systems including headers, branches, valves, supports and bolted interfaces, designed to minimise field welding and accelerate installation.' },
-  { id: 'power', tone: 0.95, name: 'Power distribution', text: 'Integrated busway levels, tap-off boxes, transfer equipment, cabling and associated supports, assembled and checked before shipment.' },
-  { id: 'filler', tone: 0.95, name: 'Filler panels with low-voltage safety and service components', text: 'Pre-positioned cable containment, fibre routes, lighting, emergency lighting and low-voltage systems, reducing field installation hours and cross-trade coordination.' },
-  { id: 'crossaisle', tone: 1, name: 'Cross-aisles with cameras and other survey tools', text: 'Cross-aisle structures integrating cameras, sensors, auxiliary services and other project-specific components to ensure continuity between rows and systems.' },
-  { id: 'fire', tone: 1, name: 'Fire protection', text: 'Integrated sprinkler systems, detection supports and associated fire protection services incorporated within the scope.' },
-  { id: 'liquid', tone: 1, name: 'Liquid cooling', text: 'Prefabricated liquid-cooling systems including OEM-compatible CDU/MCDU integration, piping, manifolds, supports and flushing arrangements, assembled and tested to reduce site works and improve commissioning readiness.' },
-  { id: 'cfe', tone: 0.62, name: 'Customer-furnished equipment interfaces', text: 'CDUs, RHINO units, AHUs, manifolds and other vendor equipment can be positioned, connected or interface-validated within the VERDON package.' },
-];
+/* Par maquette :
+   - cell / cellS : pas de la grille de points en px CSS (plus petit = plus de points), cellS quand la vue fait moins de 560 px
+   - view : angles de départ (az, el, en degrés), point visé, cadrage (fit × rayon de la maquette = demi-largeur de la vue),
+     limites de l'inclinaison (polar), vitesse de la rotation automatique (spin)
+   - systems : un par catégorie du .json, dans l'ordre ; tone = teinte de repos ;
+     context = décor (sans pastille ni légende, non survolable) */
+const MODELS = {
+  // Contenus : brochure VERDON, juillet 2026. Équipements tiers plus sombres
+  package: {
+    src: 'assets/package-3d.json', bin: 'assets/package-3d.bin',
+    cell: 3, cellS: 2.5,
+    view: { az: -38, el: 30, target: [0, 2.4, 0], fit: 0.92, polar: [35, 78], spin: -0.35 },
+    systems: [
+      { id: 'hac', tone: 1, name: 'Hot aisle containment (HAC)', text: 'Engineered support structures and containment systems designed for load requirements, transport constraints, site assembly and, where required, seismic compliance.' },
+      { id: 'pipework', tone: 1, name: 'Cooling and process pipework', text: 'Prefabricated pipework systems including headers, branches, valves, supports and bolted interfaces, designed to minimise field welding and accelerate installation.' },
+      { id: 'power', tone: 0.95, name: 'Power distribution', text: 'Integrated busway levels, tap-off boxes, transfer equipment, cabling and associated supports, assembled and checked before shipment.' },
+      { id: 'filler', tone: 0.95, name: 'Filler panels with low-voltage safety and service components', text: 'Pre-positioned cable containment, fibre routes, lighting, emergency lighting and low-voltage systems, reducing field installation hours and cross-trade coordination.' },
+      { id: 'crossaisle', tone: 1, name: 'Cross-aisles with cameras and other survey tools', text: 'Cross-aisle structures integrating cameras, sensors, auxiliary services and other project-specific components to ensure continuity between rows and systems.' },
+      { id: 'fire', tone: 1, name: 'Fire protection', text: 'Integrated sprinkler systems, detection supports and associated fire protection services incorporated within the scope.' },
+      { id: 'liquid', tone: 1, name: 'Liquid cooling', text: 'Prefabricated liquid-cooling systems including OEM-compatible CDU/MCDU integration, piping, manifolds, supports and flushing arrangements, assembled and tested to reduce site works and improve commissioning readiness.' },
+      { id: 'cfe', tone: 0.62, name: 'Customer-furnished equipment interfaces', text: 'CDUs, RHINO units, AHUs, manifolds and other vendor equipment can be positioned, connected or interface-validated within the VERDON package.' },
+    ],
+  },
+  // Contenus : annotations « Point 01 » à « Point 04 » de la maquette Figma (329:5414).
+  // Bâtiment de chaque point : CATS dans _ref/campus-3d-convert.py ; « site » = reste du campus
+  campus: {
+    src: 'assets/campus-3d.json', bin: 'assets/campus-3d.bin',
+    cell: 4, cellS: 3,
+    view: { az: 0, el: 30, target: [0, 8, 0], fit: 1.14, polar: [25, 80], spin: -0.35 },
+    systems: [
+      { id: 'containment', tone: 1, name: 'Containment & Structural Systems', text: 'Engineered support structures and Hot Aisle Containment (HAC) systems, designed to meet equipment loads, installation requirements and site integration constraints.' },
+      { id: 'cooling', tone: 1, name: 'Cooling & Process Pipework', text: 'Prefabricated pipework networks, headers, supports and cooling assemblies, including liquid cooling solutions and their associated equipment interfaces.' },
+      { id: 'power', tone: 1, name: 'Power Distribution', text: 'Integration of electrical distribution systems, including busways, tap-off boxes, cabling and associated supports, assembled and checked before shipment.' },
+      { id: 'safety', tone: 1, name: 'Safety & Technical Interfaces', text: 'Integration of fire protection systems, auxiliary services and interfaces with building infrastructure and campus utility networks.' },
+      { id: 'site', tone: 1, context: true },
+    ],
+  },
+};
+const modelOf = (root) => MODELS[root.dataset.pack3d] || MODELS.package;
 
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -39,11 +68,12 @@ const color = (name, fallback) => {
 };
 const GRADIENT = [color('--gt-c1', '#d6b3ff'), color('--gt-c2', '#ffb592'), color('--gt-c3', '#fabb15'), color('--gt-c4', '#5fe219')];
 
-function buildDom(root) {
+function buildDom(root, systems) {
   const cap = root.querySelector('[data-p3d-cap]');
   const markers = root.querySelector('[data-p3d-markers]');
   const items = {}, pins = {};
-  for (const s of SYSTEMS) {
+  for (const s of systems) {
+    if (s.context) continue;
     const it = document.createElement('div');
     it.className = 'p3d-cap__item';
     it.innerHTML = `<h3 class="p3d-cap__title">${s.name}</h3><p class="p3d-cap__text">${s.text}</p>`;
@@ -67,18 +97,19 @@ function gunzip(buf) {
   return new Response(new Blob([buf]).stream().pipeThrough(new DecompressionStream('gzip'))).arrayBuffer();
 }
 
-// Téléchargement + parsing anticipés pendant un temps mort (pas pendant le scroll)
-let loading = null;
+// Téléchargement + parsing anticipés pendant un temps mort (pas pendant le scroll), une fois par maquette
+const loading = new Map();
 function preload(root) {
-  if (!loading) {
-    loading = Promise.all([
+  const model = modelOf(root);
+  if (!loading.has(model)) {
+    loading.set(model, Promise.all([
       import('../vendor/three/three.module.min.js'),
       import('../vendor/three/OrbitControls.js'),
-      fetch(root.dataset.src || 'assets/package-3d.json').then((r) => r.json()),
-      fetch(root.dataset.bin || 'assets/package-3d.bin').then((r) => r.arrayBuffer()).then(gunzip),
-    ]);
+      fetch(root.dataset.src || model.src).then((r) => r.json()),
+      fetch(root.dataset.bin || model.bin).then((r) => r.arrayBuffer()).then(gunzip),
+    ]));
   }
-  return loading;
+  return loading.get(model);
 }
 
 async function init(root) {
@@ -93,8 +124,9 @@ async function init(root) {
   if (!(probe.getContext('webgl2') || probe.getContext('webgl')) || !('DecompressionStream' in window)) { root.classList.add('is-fallback'); return; }
 
   const [THREE, { OrbitControls }, META, BUF] = await preload(root);
+  const model = modelOf(root), systems = model.systems, V = model.view, deg = THREE.MathUtils.degToRad;
 
-  const { cap, items, pins } = buildDom(root);
+  const { cap, items, pins } = buildDom(root, systems);
   if (matchMedia('(hover: none)').matches) hint.textContent = 'Tap a system · Drag to rotate';
 
   let renderer;
@@ -104,30 +136,26 @@ async function init(root) {
   renderer.autoClear = false; // le système actif est rendu en deuxième passe, par-dessus les autres
 
   const scene = new THREE.Scene();
-  const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, -200, 200);
+  const cam = new THREE.OrthographicCamera(-1, 1, 1, -1, -1, 1); // profondeur réglée sur la taille de la maquette, plus bas
   const controls = new OrbitControls(cam, cv);
   cv.style.touchAction = 'pan-y'; // OrbitControls bloque le scroll tactile : on laisse passer le défilement vertical
   controls.enableDamping = true; controls.dampingFactor = 0.08; controls.enablePan = false;
   controls.enableZoom = false; // la molette sert au scroll de la page
-  controls.minPolarAngle = THREE.MathUtils.degToRad(35); controls.maxPolarAngle = THREE.MathUtils.degToRad(78);
+  controls.minPolarAngle = deg(V.polar[0]); controls.maxPolarAngle = deg(V.polar[1]);
   controls.rotateSpeed = 0.6;
-  controls.autoRotate = !reduce; controls.autoRotateSpeed = -0.35;
-  const el = THREE.MathUtils.degToRad(30), az = THREE.MathUtils.degToRad(-38), R = 60;
-  controls.target.set(0, 2.4, 0);
-  cam.position.set(R * Math.cos(el) * Math.sin(az), 2.4 + R * Math.sin(el), R * Math.cos(el) * Math.cos(az));
-  controls.update();
+  controls.autoRotate = !reduce; controls.autoRotateSpeed = V.spin;
 
   scene.add(new THREE.HemisphereLight(0xffffff, 0x303030, 1.1));
   const sun = new THREE.DirectionalLight(0xffffff, 1.7); sun.position.set(-8, 14, 10); scene.add(sun);
   const fill = new THREE.DirectionalLight(0xffffff, 0.5); fill.position.set(10, 4, -6); scene.add(fill);
 
-  // Géométrie : positions uint16 ramenées dans la boîte englobante, triangles indexés
+  // Géométrie : positions uint16 ramenées dans la boîte englobante, triangles indexés, teinte par sommet (facultative)
   const IDLE = new THREE.Color(0xd2d0ca), ON = new THREE.Color(0xffffff), OFF = new THREE.Color(0x7d7c78);
   const pickScene = new THREE.Scene();
   const [lx, ly, lz] = META.lo, [sx, sy, sz] = META.span;
   const parts = {};
   let radius = 0;
-  SYSTEMS.forEach((s, i) => {
+  systems.forEach((s, i) => {
     const c = META.cats[s.id];
     const q = new Uint16Array(BUF, c.pos, c.nv * 3);
     const pos = new Float32Array(c.nv * 3);
@@ -140,17 +168,31 @@ async function init(root) {
     const g = new THREE.BufferGeometry();
     g.setAttribute('position', new THREE.BufferAttribute(pos, 3));
     g.setIndex(new THREE.BufferAttribute(new Uint16Array(BUF, c.idx, c.nf * 3), 1));
+    const tinted = c.col !== undefined;
+    if (tinted) {
+      const t = new Uint8Array(BUF, c.col, c.nv), col = new Float32Array(c.nv * 3);
+      for (let k = 0; k < c.nv; k++) col[k * 3] = col[k * 3 + 1] = col[k * 3 + 2] = t[k] / 255;
+      g.setAttribute('color', new THREE.BufferAttribute(col, 3));
+    }
     g.computeVertexNormals();
     g.computeBoundingBox();
     const rest = IDLE.clone().multiplyScalar(s.tone);
     // NoBlending : sans quoi three force l'alpha à 1 sur un matériau opaque (voir hot)
-    const mesh = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: rest.clone(), flatShading: true, side: THREE.DoubleSide, blending: THREE.NoBlending }));
+    const mesh = new THREE.Mesh(g, new THREE.MeshLambertMaterial({ color: rest.clone(), vertexColors: tinted, flatShading: true, side: THREE.DoubleSide, blending: THREE.NoBlending }));
     scene.add(mesh);
-    // même géométrie, couleur unie = numéro du système (picking GPU)
-    pickScene.add(new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: new THREE.Color().setRGB(((i + 1) * 24) / 255, 0, 0), side: THREE.DoubleSide })));
+    // même géométrie, couleur unie = numéro du système (picking GPU) ; noir pour le décor : rien à survoler
+    pickScene.add(new THREE.Mesh(g, new THREE.MeshBasicMaterial({ color: new THREE.Color().setRGB(s.context ? 0 : ((i + 1) * 24) / 255, 0, 0), side: THREE.DoubleSide })));
     // hot : 0 → 1, passage au dégradé (transmis à la passe « points » par l'alpha, voir postMat)
     parts[s.id] = { mesh, s, anchor: new THREE.Vector3(...c.a), target: rest, hot: 0, hotTarget: 0 };
   });
+
+  // Caméra orthographique : la distance ne change que la profondeur visible, proportionnelle à la maquette
+  // (package : rayon ≈ 13, R = 60, profondeur ± 200)
+  const R = radius * 4.6, el = deg(V.el), az = deg(V.az), [tx, ty, tz] = V.target;
+  cam.near = -R * 3.3; cam.far = R * 3.3;
+  controls.target.set(tx, ty, tz);
+  cam.position.set(tx + R * Math.cos(el) * Math.sin(az), ty + R * Math.sin(el), tz + R * Math.cos(el) * Math.cos(az));
+  controls.update();
 
   // Passe « matrice de points » (même rendu que les visuels du site)
   // La passe ne lit qu'un texel par cellule : la scène est rendue directement à la taille de la grille
@@ -206,13 +248,13 @@ async function init(root) {
     W = Math.max(1, view.clientWidth); H = Math.max(1, view.clientHeight);
     const dpr = Math.min(devicePixelRatio || 1, 2);
     renderer.setPixelRatio(dpr); renderer.setSize(W, H, false);
-    const cell = Math.max(3, Math.round((W < 560 ? CELL_S : CELL) * dpr));
+    const cell = Math.max(3, Math.round((W < 560 ? model.cellS : model.cell) * dpr));
     postMat.uniforms.res.value.set(W * dpr, H * dpr);
     postMat.uniforms.cell.value = cell;
     // points : un texel par cellule ; lisse : au moins 2 texels par px CSS (4 échantillons par pixel en DPR 1)
     if (dots) rt.setSize(Math.ceil((W * dpr) / cell), Math.ceil((H * dpr) / cell));
     else rt.setSize(Math.ceil(W * Math.max(dpr, 2)), Math.ceil(H * Math.max(dpr, 2)));
-    const half = radius * 0.92;
+    const half = radius * V.fit;
     cam.left = -half; cam.right = half; cam.top = (half * H) / W; cam.bottom = (-half * H) / W;
     cam.updateProjectionMatrix();
     wide = matchMedia('(min-width: 701px)').matches;
@@ -230,11 +272,13 @@ async function init(root) {
   function setActive(id) {
     if (id === active) return;
     active = id;
-    for (const s of SYSTEMS) {
+    for (const s of systems) {
       const on = s.id === id;
-      pins[s.id].classList.toggle('is-on', on);
-      // en sortie, la légende garde son texte pendant le fondu
-      if (id) items[s.id].classList.toggle('is-on', on);
+      if (!s.context) {
+        pins[s.id].classList.toggle('is-on', on);
+        // en sortie, la légende garde son texte pendant le fondu
+        if (id) items[s.id].classList.toggle('is-on', on);
+      }
       parts[s.id].target.copy(on ? ON : id ? OFF : IDLE);
       if (!on) parts[s.id].target.multiplyScalar(s.tone);
       parts[s.id].hotTarget = on ? 1 : 0;
@@ -260,8 +304,8 @@ async function init(root) {
     renderer.setRenderTarget(pickRT); renderer.clear(); renderer.render(pickScene, cam);
     renderer.readRenderTargetPixels(pickRT, 0, 0, 1, 1, px);
     cam.clearViewOffset(); renderer.setRenderTarget(null);
-    const i = Math.round(px[0] / 24) - 1;
-    return px[3] > 0 && SYSTEMS[i] ? SYSTEMS[i].id : null;
+    const s = systems[Math.round(px[0] / 24) - 1];
+    return px[3] > 0 && s && !s.context ? s.id : null;
   }
   let cvRect = null;
   const local = (e) => { cvRect = cvRect || cv.getBoundingClientRect(); return [e.clientX - cvRect.left, e.clientY - cvRect.top]; };
@@ -292,7 +336,8 @@ async function init(root) {
   });
   controls.addEventListener('change', () => { pickDirty = true; wake(); });
 
-  for (const s of SYSTEMS) {
+  const shown = systems.filter((s) => !s.context);
+  for (const s of shown) {
     const b = pins[s.id], id = s.id;
     b.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') { user(); if (!pinned) setActive(id); } });
     b.addEventListener('pointerleave', (e) => { if (e.pointerType === 'mouse' && !pinned) setActive(null); });
@@ -316,7 +361,7 @@ async function init(root) {
   }
   let right = false;
   function updateOverlay() {
-    for (const s of SYSTEMS) {
+    for (const s of shown) {
       const [x, y] = project(s.id);
       pins[s.id].style.transform = `translate3d(${x}px,${y}px,0)`;
     }
@@ -363,11 +408,11 @@ async function init(root) {
     if (active) measureSpan(active);
     // le système actif passe devant les autres (rendu après un effacement de la profondeur)
     renderer.setRenderTarget(rt); renderer.clear();
-    for (const s of SYSTEMS) parts[s.id].mesh.visible = s.id !== active;
+    for (const s of systems) parts[s.id].mesh.visible = s.id !== active;
     renderer.render(scene, cam);
     if (active) {
       renderer.clearDepth();
-      for (const s of SYSTEMS) parts[s.id].mesh.visible = s.id === active;
+      for (const s of systems) parts[s.id].mesh.visible = s.id === active;
       renderer.render(scene, cam);
     }
     renderer.setRenderTarget(null); renderer.clear(); renderer.render(postScene, postCam);

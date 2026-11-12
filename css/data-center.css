@@ -1,0 +1,240 @@
+/* =========================================================
+   Verdon — page Data center (secteur)
+   Intégration Figma (node 329:5343) — complète css/style.css
+   (nav, boutons, campus 3D [.pack3d], « Our approach » [.services], chiffres clés [.stats],
+    partenaires, FAQ, CTA et footer viennent de style.css)
+   ========================================================= */
+
+/* =========================================================
+   HERO — photo plein cadre, assombrie en bas à gauche (dégradé Figma, même que Factory built)
+   ========================================================= */
+.dchero { background-image: none; }
+.dchero__bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+/* 8 % de marge en haut : la photo descend en parallaxe pendant que la section suivante recouvre le hero */
+.dchero__bg img { position: absolute; left: 0; top: -8%; width: 100%; height: 108%; object-fit: cover; }
+.dchero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1500 1080' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.7'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(105.75 19.695 -11.427 61.358 484.64 883.05)'><stop stop-color='rgba(0,0,0,1)' offset='0'/><stop stop-color='rgba(0,0,0,0)' offset='1'/></radialGradient></defs></svg>");
+  background-size: 100% 100%;
+}
+.dchero__body {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 0;
+  min-height: 1px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 var(--gutter) 128px;
+}
+.dchero__titles { display: flex; flex-direction: column; gap: 8px; width: 529px; flex-shrink: 0; }
+.dchero__aside { display: flex; flex-direction: column; gap: 64px; align-items: flex-end; width: 363px; flex-shrink: 0; }
+.dchero__lead { color: var(--light); }
+.dchero__lead p + p { margin-top: 1.2em; }
+
+/* =========================================================
+   ENJEUX — titre centré, 4 cartes en grille (traits de 1 px, points d'angle)
+   ========================================================= */
+.dcgrowth {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 128px 0;
+  background: var(--bg-primary);
+}
+.dcgrowth__head { display: flex; flex-direction: column; gap: 16px; align-items: center; padding: 0 var(--gutter); }
+.dcgrowth__head .h2 { white-space: nowrap; }
+.dcgrowth__lead { max-width: 600px; }
+
+.dcgrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  padding: 0 128px;
+  border-top: 1px solid var(--stroke);
+  border-bottom: 1px solid var(--stroke);
+}
+.dcard {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 32px;
+  border-right: 1px solid var(--stroke);
+  border-bottom: 1px solid var(--stroke);
+}
+.dcard:nth-child(odd) { border-left: 1px solid var(--stroke); }
+.dcard:nth-last-child(-n + 2) { border-bottom: 0; }
+/* points d'angle (Ellipse 10 de la maquette) */
+.dcard::before {
+  content: "";
+  position: absolute;
+  inset: 15px 16px 14px;
+  background:
+    url("../assets/ellipse-10.svg") left top / 3px 3px no-repeat,
+    url("../assets/ellipse-10.svg") right top / 3px 3px no-repeat,
+    url("../assets/ellipse-10.svg") left bottom / 3px 3px no-repeat,
+    url("../assets/ellipse-10.svg") right bottom / 3px 3px no-repeat;
+  pointer-events: none;
+}
+/* visuel à venir : bloc plein de la maquette */
+.dcard__img { width: 100%; aspect-ratio: 100 / 65; background: var(--bg-dark); }
+.dcard__text { display: flex; flex-direction: column; gap: 8px; }
+
+/* =========================================================
+   ONE PARTNER — section .factory de l'accueil, campus 3D (.pack3d) à la place du package
+   ========================================================= */
+.dcsys__lead p + p { margin-top: 1.2em; }
+
+/* =========================================================
+   OUR APPROACH — composant « Our services » de l'accueil (style.css), couleurs inversées :
+   fond sombre, mot géant noir, bande claire
+   ========================================================= */
+.dcapproach, .dcapproach .services__pin, .dcapproach .services__bigword-wrap { background: var(--bg-dark); }
+.dcapproach .services__bigword { color: #000; }  /* Figma : background/secondary du thème sombre */
+.dcapproach .services__band { background: var(--bg-primary); }
+.dcapproach .services__text p + p { margin-top: 1.2em; }
+.dcapproach .gcard { min-height: 440px; }
+.dcapproach .gcard__line img { height: 365px; }  /* frame-104-short.svg */
+
+/* =========================================================
+   INDUSTRIAL CAPACITY — colonne gauche collante (photo + titre), texte et chiffres clés à droite
+   ========================================================= */
+.dccap {
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 64px;
+  padding: 0 var(--gutter);
+  background: var(--bg-primary);
+}
+.dccap__left {
+  position: sticky;
+  top: 120px;                   /* sous la nav */
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+.dccap__photo { width: 300px; height: 200px; overflow: hidden; }
+.dccap__photo img { width: 100%; height: 100%; object-fit: cover; }
+.dccap__title { width: 467px; max-width: 100%; }
+.dccap__right { display: flex; flex-direction: column; gap: 128px; width: 527.967px; flex-shrink: 0; }
+.dccap__intro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
+.dccap__lead p + p { margin-top: 1.2em; }
+
+/* =========================================================
+   CAS D'ÉTUDE — carrousel (js/data-center.js), collé en haut de l'écran pendant que les partenaires le recouvrent
+   Carte active : 988 px au centre ; voisines réduites à 80 %, ancrées du côté de la carte active (écart de 32 px conservé)
+   ========================================================= */
+.dcstack { position: relative; }
+.dccases {
+  --peek: 256px;                /* part de l'écran laissée aux cartes voisines, de chaque côté */
+  position: sticky;
+  top: 0;
+  z-index: 0;
+  padding: 128px 0;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+.dccases__viewport { position: relative; touch-action: pan-y; }
+.dccases__track {
+  position: relative;           /* repère des offsetLeft des cartes (js/data-center.js) */
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  width: max-content;
+  transform: translate3d(var(--x, 0px), 0, 0);
+  transition: transform .9s var(--ease-expo);
+}
+.dccases__viewport.is-dragging .dccases__track { transition: none; }
+.dccase {
+  display: flex;
+  gap: 64px;
+  align-items: flex-start;
+  width: min(988px, calc(100vw - 2 * var(--peek)));
+  flex-shrink: 0;
+  padding: 64px 32px;
+  background: var(--bg-secondary);
+  transform: scale(.8);
+  transform-origin: var(--o, center);
+  transition: transform .9s var(--ease-expo);
+  cursor: pointer;
+  user-select: none;
+}
+.dccase.is-before { --o: right center; }
+.dccase.is-after { --o: left center; }
+.dccase.is-active { transform: none; cursor: auto; user-select: auto; }
+.dccase__body {
+  flex: 1 0 0;
+  min-width: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  justify-content: center;
+  padding-left: 24px;
+  border-left: 1px solid var(--stroke);
+}
+.dccase__text { font-size: var(--fs-l); font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
+.dccase__link { align-self: flex-start; font-size: 15px; font-weight: 500; line-height: 1.2; }
+.dccase__link::after { content: ""; display: block; height: 1px; background: currentColor; transform: scaleX(0); transform-origin: left center; transition: transform .5s var(--ease-expo); }
+.dccase.is-active .dccase__link:hover::after, .dccase__link:focus-visible::after { transform: none; }
+/* visuel à venir */
+.dccase__img { width: 180px; align-self: stretch; flex-shrink: 0; background: var(--bg-primary); }
+
+.dcpartners { position: relative; z-index: 1; padding-bottom: 128px; }
+
+/* =========================================================
+   RESPONSIVE (déduit — pas de maquette tablette/mobile fournie)
+   ========================================================= */
+@media (max-width: 1280px) {
+  .dcgrid { padding: 0 64px; }
+  .dccases { --peek: 160px; }
+}
+
+@media (max-width: 1100px) {
+  .dccap__right { width: 440px; }
+}
+
+/* Tablette */
+@media (max-width: 991px) {
+  .dchero__body { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 40px; padding-bottom: 96px; }
+  .dchero__titles, .dchero__aside { width: 100%; max-width: 560px; }
+  .dchero__aside { align-items: flex-start; gap: 32px; }
+
+  .dcgrowth { padding: 96px 0; gap: 48px; }
+  .dcgrowth__head .h2 { white-space: normal; }
+  .dcgrid { padding: 0 var(--gutter); }
+  .dcard { padding: 24px; }
+
+  .dccap { flex-direction: column; gap: 64px; padding-bottom: 96px; }
+  .dccap__left { position: relative; top: auto; width: 100%; }
+  .dccap__right { width: 100%; gap: 64px; }
+
+  .dccases { --peek: 64px; position: relative; padding: 96px 0; }
+  .dccase { gap: 32px; }
+
+  .dcpartners { padding-bottom: 96px; }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .dchero__body { padding-bottom: 72px; }
+
+  .dcgrid { grid-template-columns: minmax(0, 1fr); }
+  .dcard { border-left: 1px solid var(--stroke); padding: 24px 20px; }
+  .dcard:nth-last-child(-n + 2) { border-bottom: 1px solid var(--stroke); }
+  .dcard:last-child { border-bottom: 0; }
+
+  .dccap__photo { width: 100%; height: auto; aspect-ratio: 3 / 2; }
+
+  .dccases { --peek: 24px; }
+  .dccase { flex-direction: column; gap: 24px; padding: 32px 20px; }
+  .dccase__img { order: -1; width: 100%; height: 120px; }
+  .dccase__body { gap: 32px; padding-left: 16px; }
+}
