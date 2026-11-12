@@ -1,0 +1,638 @@
+<!doctype html>
+<html lang="fr" data-smooth-scroll>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Factory-Built — Verdon</title>
+  <meta name="description" content="Verdon transforms the way critical MEP infrastructure is delivered: early-stage engineering, factory manufacturing and on-site integration under one coordinated delivery model.">
+  <script>document.documentElement.classList.add("js","gt-ready");</script>
+  <link rel="preload" href="assets/factory-hero.webp" as="image" type="image/webp" imagesrcset="assets/factory-hero-1200.webp 1200w, assets/factory-hero.webp 2400w" imagesizes="100vw">
+  <link rel="stylesheet" href="css/components/gradient-text.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/factory-built.css">
+</head>
+<body>
+
+<!-- =========================================================
+     NAV — composant js/components/nav.js (même barre que l'accueil).
+     data-nav-compact : pastilles dès le haut de page, comme sur la maquette.
+     ========================================================= -->
+<header class="nav is-collapsed" data-nav data-nav-compact>
+  <a href="index.html" class="nav__logo" aria-label="Verdon — accueil">
+    <img decoding="async" class="nav__ink nav__ink--light" src="assets/logo.svg" alt="" width="347" height="24">
+    <img decoding="async" class="nav__ink nav__ink--dark" src="assets/logo-dark.svg" alt="" width="347" height="24">
+  </a>
+
+  <div class="nav__slot" data-nav-slot>
+    <nav class="nav__menu" aria-label="Navigation principale">
+      <a href="factory-built.html" class="nav__item is-active" aria-current="page" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
+      <a href="#" class="nav__item" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
+      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
+      <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
+      <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
+      <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
+      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+    </nav>
+
+    <button class="nav__toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+      <span class="nav__dots" aria-hidden="true"></span>
+    </button>
+
+    <div class="nav__panel" id="nav-panel" data-nav-panel>
+      <button class="nav__close" type="button" data-nav-close>CLOSE</button>
+      <img decoding="async" class="nav__rule" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <nav class="nav__plist" aria-label="Navigation principale">
+        <a href="factory-built.html" class="nav__item is-active" aria-current="page" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
+        <a href="#" class="nav__item" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
+        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
+        <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
+        <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
+        <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
+        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+      </nav>
+      <img decoding="async" class="nav__rule nav__rule--end" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <div class="nav__contact">
+        <p>connect with us:</p>
+        <a href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav__spacer"></div>
+
+  <div class="nav__right">
+    <button class="nav__lang" type="button" aria-label="Changer de langue">
+      <span>EN</span>
+      <span class="nav__chev" aria-hidden="true">
+        <img decoding="async" class="nav__ink nav__ink--light" src="assets/frame.svg" alt="" width="20" height="20">
+        <img decoding="async" class="nav__ink nav__ink--dark" src="assets/frame-dark.svg" alt="" width="20" height="20">
+      </span>
+    </button>
+    <a href="#" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+    <button class="nav__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- =========================================================
+     HERO + INTRO + AVANTAGES (le hero reste collé derrière, les sections claires le recouvrent)
+     ========================================================= -->
+<div class="hero-stack">
+
+  <section class="hero fbhero" data-section="hero" data-nav-bg="dark">
+    <div class="fbhero__bg" aria-hidden="true">
+      <img src="assets/factory-hero.webp" srcset="assets/factory-hero-1200.webp 1200w, assets/factory-hero.webp 2400w" sizes="100vw"
+           alt="" width="2400" height="1601" fetchpriority="high" data-hero-media>
+    </div>
+
+    <div class="fbhero__body">
+      <div class="fbhero__titles">
+        <p class="hero__eyebrow">OUR DELIVERY MODEL</p>
+        <h1 class="h1 fb-h1" data-hero-title data-gt-lines style="--gt-delay:0.45s">Factory-Built.<br>Engineered<br>for certainty.</h1>
+      </div>
+      <div class="fbhero__aside">
+        <p class="p fbhero__lead" data-hero-fade>Verdon transforms the way critical MEP infrastructure is delivered. From early-stage engineering to factory manufacturing and on-site integration, we bring every stage together under one coordinated delivery model.</p>
+        <div class="hero__ctas" data-hero-fade>
+          <a href="#" class="btn btn--solid" data-btn><span class="btn__label" data-gt>TALK WITH US</span></a>
+          <a href="#process" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>EXPLORE OUR APPROACH</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="fbintro" data-section="intro" data-nav-bg="light">
+    <div class="fbintro__inner" data-reveal="fbintro">
+      <p class="h4 fbintro__text" data-fb-chars>Factory-Built means manufacturing, assembling and testing systems off-site before installation, ensuring greater quality, efficiency and predictability.</p>
+    </div>
+  </section>
+
+  <section class="fbadv" data-section="advantages" data-nav-bg="light">
+    <div class="fbadv__left">
+      <p class="p" data-reveal="fade">THE FACTORY-BUILT ADVANTAGE</p>
+      <h2 class="h2" data-gt-lines>
+        <span class="t-muted">Built differently. </span><br><span>Delivered with confidence.</span>
+      </h2>
+      <div class="fbadv__intro">
+        <p class="lead-m t-muted fbadv__lead" data-reveal="up">By moving complexity upstream and integrating critical systems in controlled industrial environments, Verdon makes large-scale data centre deployment more predictable, reliable and repeatable.</p>
+        <a href="#" class="btn btn--outline" data-btn data-reveal="up"><span class="btn__label" data-gt>LEARN MORE ABOUT OUR FIELDS OF EXPERTISES</span></a>
+      </div>
+    </div>
+
+    <div class="fbadv__right">
+      <article class="xcard" data-reveal="xcard">
+        <div class="xcard__line" aria-hidden="true"><div class="xcard__rot"><img decoding="async" src="assets/line-7.svg" alt=""></div></div>
+        <div class="xcard__body">
+          <div class="gdots" data-service-dots="leadtime" aria-hidden="true"><canvas></canvas></div>
+          <div class="xcard__text">
+            <h3 class="h4" data-gt-lines>PREDICTABLE LEAD TIMES</h3>
+            <div class="p p--muted">
+              <p>Early engineering involvement and strategic procurement help secure critical components before they impact the project schedule.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="xcard" data-reveal="xcard">
+        <div class="xcard__line" aria-hidden="true"><div class="xcard__rot"><img decoding="async" src="assets/line-7.svg" alt=""></div></div>
+        <div class="xcard__body">
+          <div class="gdots" data-service-dots="quality" aria-hidden="true"><canvas></canvas></div>
+          <div class="xcard__text">
+            <h3 class="h4" data-gt-lines>FACTORY-CONTROLLED<br>QUALITY</h3>
+            <div class="p p--muted">
+              <p>Precision manufacturing, integrated testing and quality control help ensure systems arrive ready for installation.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="xcard" data-reveal="xcard">
+        <div class="xcard__line" aria-hidden="true"><div class="xcard__rot"><img decoding="async" src="assets/line-7.svg" alt=""></div></div>
+        <div class="xcard__body">
+          <div class="gdots" data-service-dots="onsite" aria-hidden="true"><canvas></canvas></div>
+          <div class="xcard__text">
+            <h3 class="h4" data-gt-lines>REDUCED ON-SITE<br>COMPLEXITY</h3>
+            <div class="p p--muted">
+              <p>Factory-built assemblies reduce site activities, trade interfaces and the need for adjustments during installation.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="xcard" data-reveal="xcard">
+        <div class="xcard__line" aria-hidden="true"><div class="xcard__rot"><img decoding="async" src="assets/line-7.svg" alt=""></div></div>
+        <div class="xcard__body">
+          <div class="gdots" data-service-dots="scale" aria-hidden="true"><canvas></canvas></div>
+          <div class="xcard__text">
+            <h3 class="h4" data-gt-lines>BUILT TO SCALE</h3>
+            <div class="p p--muted">
+              <p>A coordinated industrial approach enables proven designs and manufacturing processes to be repeated across multiple projects.</p>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</div>
+
+<!-- =========================================================
+     OUR PROCESS — scroll horizontal épinglé (même composant que « Our services » de l'accueil)
+     ========================================================= -->
+<section class="services fbprocess" id="process" data-section="process" data-hscroll data-nav-bg="light">
+  <div class="services__pin" data-hscroll-pin>
+    <div class="services__bigword-wrap">
+      <p class="services__bigword" data-hscroll-bigword aria-hidden="true">OUR PROCESS</p>
+    </div>
+    <div class="services__band" data-nav-bg="dark">
+      <div class="services__track" data-hscroll-track>
+        <div class="vline vline--136" aria-hidden="true" data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-9.svg" alt=""></div></div>
+
+        <div class="services__intro">
+          <h2 class="h2 h2--light" data-gt-lines>
+            <span>From concept to commissioning. </span><br><span>One integrated approach.</span>
+          </h2>
+          <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>DISCOVER OUR CAPABILITIES</span></a>
+        </div>
+
+        <div class="p p--light services__text">
+          <p>Verdon coordinate every stage of MEP delivery, connecting engineering, procurement, manufacturing and site execution into a continuous process.</p>
+          <p>Our Factory-Built methodology is designed to anticipate constraints, secure production and prepare installation long before systems reach the construction site.</p>
+        </div>
+
+        <div class="services__cards">
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104-short.svg" alt=""></div>
+            <div class="gcard__body">
+              <div class="gdots" data-service-dots="engineer" aria-hidden="true"><canvas></canvas></div>
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>ENGINEER<br>EARLY</h3>
+                <div class="p p--muted">
+                  <p>Engaging from RIBA Stage 2 enables us to integrate manufacturing, transport and installation requirements directly into the design process.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104-short.svg" alt=""></div>
+            <div class="gcard__body">
+              <div class="gdots" data-service-dots="procure" aria-hidden="true"><canvas></canvas></div>
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>ANTICIPATE<br>PROCUREMENT</h3>
+                <div class="p p--muted">
+                  <p>Early forecasting helps identify long-lead components, secure supply chains and protect the project schedule.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104-short.svg" alt=""></div>
+            <div class="gcard__body">
+              <div class="gdots" data-service-dots="manufacture" aria-hidden="true"><canvas></canvas></div>
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>MANUFACTURE<br>&amp; VALIDATE</h3>
+                <div class="p p--muted">
+                  <p>Systems are fabricated and integrated in controlled industrial facilities, with quality inspections and testing performed before shipment.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+          <article class="gcard" data-gcard data-reveal="card" data-nav-bg="light">
+            <div class="gcard__line" aria-hidden="true"><img decoding="async" src="assets/frame-104-short.svg" alt=""></div>
+            <div class="gcard__body">
+              <div class="gdots" data-service-dots="deliver" aria-hidden="true"><canvas></canvas></div>
+              <div class="gcard__text">
+                <h3 class="h4" data-gt-lines>DELIVER &amp;<br>INTEGRATE</h3>
+                <div class="p p--muted">
+                  <p>Factory-built packages are transported, installed and connected on site, supported by coordinated execution and commissioning activities.</p>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- One integrated chain + Steps : épinglées ensemble pendant que les vignettes s'empilent (desktop, js/factory-built.js) -->
+<div class="fbflow" data-chain-flow>
+
+<!-- =========================================================
+     ONE INTEGRATED CHAIN — au scroll, les vignettes s'empilent à gauche puis la pile devient
+     le visuel collant des Steps (desktop, js/factory-built.js)
+     ========================================================= -->
+<section class="fbchain" data-section="chain" data-nav-bg="light">
+  <p class="p t-muted fbchain__aside" data-reveal="up">Traditional construction relies on multiple contractors, sequential operations and extensive on-site coordination. Verdon takes a different approach. By coordinating engineering, procurement, fabrication, integration and installation, we address critical interfaces before they become site-level constraints.</p>
+  <div class="fbchain__main">
+    <h2 class="h1 h1--ink fb-h1" data-gt-lines>
+      <span class="t-muted">One integrated chain. </span><br><span>Fewer uncertainties.</span>
+    </h2>
+    <!-- Une vignette par étape, dans l'ordre des étapes : illustration en points (js/components/service-dots.js).
+         Même visuel que le calque correspondant des Steps ([data-steps-slide]) : sur desktop, la pile devient ce visuel. -->
+    <div class="fbchain__tiles" data-chain-viewport>
+      <div class="fbchain__track" data-chain-track>
+        <div class="fbtile" data-reveal="up" data-nav-bg="dark" aria-hidden="true"><div class="gdots" data-service-dots="step-engineering"><canvas></canvas></div></div>
+        <div class="fbtile" data-reveal="up" data-nav-bg="dark" aria-hidden="true"><div class="gdots" data-service-dots="step-procurement"><canvas></canvas></div></div>
+        <div class="fbtile" data-reveal="up" data-nav-bg="dark" aria-hidden="true"><div class="gdots" data-service-dots="step-manufacturing"><canvas></canvas></div></div>
+        <div class="fbtile" data-reveal="up" data-nav-bg="dark" aria-hidden="true"><div class="gdots" data-service-dots="step-testing"><canvas></canvas></div></div>
+        <div class="fbtile" data-reveal="up" data-nav-bg="dark" aria-hidden="true"><div class="gdots" data-service-dots="step-integration"><canvas></canvas></div></div>
+        <div class="fbtile" data-reveal="up" data-nav-bg="dark" aria-hidden="true"><div class="gdots" data-service-dots="step-commissioning"><canvas></canvas></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     STEPS — sommaire collant, règle graduée qui se remplit, visuel de l'étape en cours
+     (js/factory-built.js)
+     ========================================================= -->
+<section class="fbsteps" data-section="steps" data-nav-bg="light" data-steps>
+  <div class="fbsteps__nav">
+    <div class="fbsteps__sticky">
+      <h2 class="h4 fbsteps__title" data-gt-lines>STEPS</h2>
+      <nav class="fbsteps__list" aria-label="Steps">
+        <p class="fbsteps__head">Verdon Factory-Built delivery</p>
+        <a href="#step-engineering" class="fbsteps__link" data-steps-link><span class="fbsteps__dot" aria-hidden="true"></span><span class="fbsteps__label">Early engineering</span></a>
+        <a href="#step-procurement" class="fbsteps__link" data-steps-link><span class="fbsteps__dot" aria-hidden="true"></span><span class="fbsteps__label">Forecasting &amp; procurement</span></a>
+        <a href="#step-manufacturing" class="fbsteps__link" data-steps-link><span class="fbsteps__dot" aria-hidden="true"></span><span class="fbsteps__label">Off-site manufacturing</span></a>
+        <a href="#step-testing" class="fbsteps__link" data-steps-link><span class="fbsteps__dot" aria-hidden="true"></span><span class="fbsteps__label">Factory testing</span></a>
+        <a href="#step-integration" class="fbsteps__link" data-steps-link><span class="fbsteps__dot" aria-hidden="true"></span><span class="fbsteps__label">Site integration</span></a>
+        <a href="#step-commissioning" class="fbsteps__link" data-steps-link><span class="fbsteps__dot" aria-hidden="true"></span><span class="fbsteps__label">Commissioning support</span></a>
+      </nav>
+    </div>
+  </div>
+
+  <div class="fbsteps__body">
+    <div class="fbsteps__ruler" aria-hidden="true">
+      <img decoding="async" src="assets/frame-427321029.svg" alt="" width="24" height="2401" loading="lazy">
+      <span class="fbsteps__fill" data-steps-fill></span>
+    </div>
+
+    <!-- Visuel de l'étape en cours : un calque par étape, même illustration que la vignette de la même étape de
+         « One integrated chain ». Sur desktop, il part de la 1re vignette (js/factory-built.js). -->
+    <div class="fbsteps__visual" aria-hidden="true">
+      <div class="fbsteps__frame" data-reveal="up" data-nav-bg="dark">
+        <div class="fbsteps__slide" data-steps-slide><div class="gdots" data-service-dots="step-engineering"><canvas></canvas></div></div>
+        <div class="fbsteps__slide" data-steps-slide><div class="gdots" data-service-dots="step-procurement"><canvas></canvas></div></div>
+        <div class="fbsteps__slide" data-steps-slide><div class="gdots" data-service-dots="step-manufacturing"><canvas></canvas></div></div>
+        <div class="fbsteps__slide" data-steps-slide><div class="gdots" data-service-dots="step-testing"><canvas></canvas></div></div>
+        <div class="fbsteps__slide" data-steps-slide><div class="gdots" data-service-dots="step-integration"><canvas></canvas></div></div>
+        <div class="fbsteps__slide" data-steps-slide><div class="gdots" data-service-dots="step-commissioning"><canvas></canvas></div></div>
+      </div>
+    </div>
+
+    <ol class="fbsteps__items">
+      <li class="fbstep" id="step-engineering" data-step>
+        <h3 class="h4" data-gt-lines>EARLY ENGINEERING</h3>
+        <div class="fbstep__text" data-reveal="up">
+          <p class="p t-muted">We engage from RIBA Stage 2 to integrate manufacturing, transport and installation requirements into the initial design.</p>
+          <p class="p fbstep__value">Added value: Fewer design changes and better coordination from the start.</p>
+        </div>
+      </li>
+      <li class="fbstep" id="step-procurement" data-step>
+        <h3 class="h4" data-gt-lines>FORECASTING &amp; PROCUREMENT</h3>
+        <div class="fbstep__text" data-reveal="up">
+          <p class="p t-muted">We anticipate material requirements and secure long-lead equipment early in the project lifecycle.</p>
+          <p class="p fbstep__value">Added value: Reduced procurement delays and more predictable project timelines.</p>
+        </div>
+      </li>
+      <li class="fbstep" id="step-manufacturing" data-step>
+        <h3 class="h4" data-gt-lines>OFF-SITE MANUFACTURING</h3>
+        <div class="fbstep__text" data-reveal="up">
+          <p class="p t-muted">Critical MEP systems are manufactured and assembled in controlled industrial environments.</p>
+          <p class="p fbstep__value">Added value: Consistent manufacturing quality and fewer on-site operations.</p>
+        </div>
+      </li>
+      <li class="fbstep" id="step-testing" data-step>
+        <h3 class="h4" data-gt-lines>FACTORY TESTING</h3>
+        <div class="fbstep__text" data-reveal="up">
+          <p class="p t-muted">Systems undergo quality inspections and integration testing before leaving our facilities.</p>
+          <p class="p fbstep__value">Added value: Earlier issue detection and reduced installation risks.</p>
+        </div>
+      </li>
+      <li class="fbstep" id="step-integration" data-step>
+        <h3 class="h4" data-gt-lines>SITE INTEGRATION</h3>
+        <div class="fbstep__text" data-reveal="up">
+          <p class="p t-muted">Factory-built assemblies are delivered, positioned and connected on site through a coordinated installation process.</p>
+          <p class="p fbstep__value">Added value: Less on-site welding, fewer interfaces and simpler installation.</p>
+        </div>
+      </li>
+      <li class="fbstep" id="step-commissioning" data-step>
+        <h3 class="h4" data-gt-lines>COMMISSIONING SUPPORT</h3>
+        <div class="fbstep__text" data-reveal="up">
+          <p class="p t-muted">We support final system testing, technical documentation and handover to ensure operational readiness.</p>
+          <p class="p fbstep__value">Added value: Smoother commissioning and greater confidence at handover.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+</div><!-- /.fbflow -->
+
+<!-- =========================================================
+     INDUSTRIAL SCALE (sombre)
+     ========================================================= -->
+<section class="fbscale" data-section="scale" data-nav-bg="dark">
+  <div class="fbscale__intro">
+    <p class="p p--light" data-reveal="fade">INDUSTRIAL SCALE</p>
+    <h2 class="h2 h2--light" data-gt-lines>
+      <span>One proven approach.</span><br><span>Multiple deployments.</span>
+    </h2>
+    <div class="fbscale__text" data-reveal="up">
+      <div class="p p--light">
+        <p>The real value of Factory-Built delivery grows with repetition.</p>
+        <p>By reusing validated engineering principles, manufacturing processes and system interfaces, Verdon helps customers deploy critical MEP infrastructure across multiple sites while maintaining consistent quality and greater schedule predictability.</p>
+      </div>
+      <a href="#" class="btn btn--outline-light" data-btn><span class="btn__label" data-gt>EXPLORE OUR CAPABILITIES</span></a>
+    </div>
+  </div>
+  <!-- Trois pages sombres en vue isométrique, de la plus éloignée (en haut à droite) à la plus proche,
+       une par ligne : texte + illustration en points (js/components/service-dots.js).
+       Au survol, la page monte et celles de devant s'écartent vers le bas : son illustration se découvre (css/factory-built.css). -->
+  <div class="fbscale__panel">
+    <ul class="fbpages" data-reveal-stagger="140">
+      <li class="fbpage" style="--i:0" data-reveal="page">
+        <div class="fbpage__sheet">
+          <div class="fbpage__text">
+            <p class="caption fbpage__num">01</p>
+            <h3 class="fbpage__title">Standardised processes</h3>
+            <p class="fbpage__desc">Adaptable to project requirements.</p>
+          </div>
+          <div class="gdots fbpage__dots" data-service-dots="fb-standard" aria-hidden="true"><canvas></canvas></div>
+        </div>
+      </li>
+      <li class="fbpage" style="--i:1" data-reveal="page">
+        <div class="fbpage__sheet">
+          <div class="fbpage__text">
+            <p class="caption fbpage__num">02</p>
+            <h3 class="fbpage__title">Repeatable manufacturing</h3>
+            <p class="fbpage__desc">Across multiple locations.</p>
+          </div>
+          <div class="gdots fbpage__dots" data-service-dots="fb-repeat" aria-hidden="true"><canvas></canvas></div>
+        </div>
+      </li>
+      <li class="fbpage" style="--i:2" data-reveal="page">
+        <div class="fbpage__sheet">
+          <div class="fbpage__text">
+            <p class="caption fbpage__num">03</p>
+            <h3 class="fbpage__title">Coordinated delivery</h3>
+            <p class="fbpage__desc">For large-scale European programmes.</p>
+          </div>
+          <div class="gdots fbpage__dots" data-service-dots="fb-europe" aria-hidden="true"><canvas></canvas></div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="lower">
+  <!-- =========================================================
+       FAQ
+       ========================================================= -->
+  <section class="faq" data-section="faq" data-nav-bg="light">
+    <div class="faq__grid">
+      <div class="faq__intro">
+        <h2 class="h2" data-gt-lines><span>F.A.Q</span></h2>
+        <p class="p t-muted" data-reveal="up">Discover Verdon’s expertise in engineering, manufacturing and Data Center infrastructure.</p>
+      </div>
+
+      <div class="faq__list" data-faq>
+        <div class="faq__item is-open" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="true">
+            <span class="faq__num">01</span>
+            <span class="faq__question">What does Verdon specialise in&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon combines engineering expertise and industrial manufacturing to develop and produce technical systems for complex industrial environments. With a strong focus on Data Centers, the company brings together technical design, manufacturing processes and system integration to address the requirements of demanding infrastructure projects.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">02</span>
+            <span class="faq__question">What is Verdon’s expertise in Data Centers&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon supports Data Center projects through the engineering and off-site manufacturing of technical systems designed for complex MEP infrastructure. Its approach takes into account equipment interfaces, installation constraints and the coordination required to integrate systems into large-scale facilities.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">03</span>
+            <span class="faq__question">Which industries does Verdon serve&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon operates across four key sectors: Data Centers, Energy, Life Sciences &amp; Pharmaceuticals, and Semiconductors. Each sector presents specific technical requirements, operating conditions and infrastructure constraints. Verdon applies its engineering and manufacturing capabilities to address the needs of these different industrial environments.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">04</span>
+            <span class="faq__question">What types of systems does Verdon manufacture&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon’s capabilities cover a range of technical systems, including electrical infrastructure, cooling pipework, aisle containment, liquid cooling assemblies and associated support structures. Each system addresses specific functional requirements and equipment interfaces, with its configuration defined according to project specifications.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">05</span>
+            <span class="faq__question">How does Verdon approach complex industrial projects&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon brings engineering and manufacturing capabilities together to prepare technical systems for integration into complex facilities. By considering technical specifications, equipment interfaces and manufacturing constraints, the company works to align system design with practical installation requirements from the outset.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">06</span>
+            <span class="faq__question">Can Verdon adapt its solutions to specific project requirements&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon develops technical systems around the specifications and constraints of each project. Equipment configurations, spatial limitations, connection interfaces and installation requirements inform the approach taken. This allows the scope and configuration of each solution to be defined in line with the project’s technical needs.</p></div></div>
+        </div>
+      </div>
+
+      <div class="faq__aside" data-reveal="up">
+        <p class="p t-muted">Still have questions? <br>Our team is here to help.</p>
+        <a href="#" class="btn btn--outline" data-btn><span class="btn__label" data-gt>CONTACT</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA + FOOTER
+       ========================================================= -->
+  <section class="cta" data-section="cta" data-nav-bg="dark">
+    <div class="cta__bg" aria-hidden="true">
+      <img decoding="async" src="assets/seciton-temoignages.webp" alt="" width="1500" height="1123" loading="lazy" data-cta-bg>
+      <div class="cta__overlay"></div>
+    </div>
+
+    <div class="cta__head">
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+      <div class="cta__content">
+        <h2 class="h2 h2--light t-center" data-gt-lines>
+          <span class="t-muted-light">Let’s define your </span><br><span>project requirements.</span>
+        </h2>
+        <div class="cta__sub">
+          <p class="lead-m t-center cta__lead" data-reveal="up">Verdon works alongside project stakeholders to address the technical, engineering and manufacturing requirements of complex infrastructure projects. Contact our team to discuss your needs and explore the scope of our capabilities.</p>
+          <div class="btn-row" data-reveal="up">
+            <a href="#" class="btn btn--solid btn--w240" data-btn><span class="btn__label" data-gt>CONTACT</span></a>
+            <a href="#" class="btn btn--outline-light btn--w240" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+    </div>
+
+    <footer class="footer" data-footer data-nav-bg="light">
+      <div class="frow">
+        <div class="fcell fcell--line fcell--top">
+          <p class="p t-muted">We don’t just build systems.<br>We set the standard.</p>
+        </div>
+        <div class="fcell fcell--line fcell--stretch"></div>
+      </div>
+
+      <div class="frow">
+        <div class="fcell fcell--top fcell--socials">
+          <p class="caption">SOCIALS</p>
+          <div class="socials">
+            <a href="#" class="socials__link" aria-label="LinkedIn"><img decoding="async" src="assets/icon.svg" alt="" width="16" height="16"></a>
+            <a href="#" class="socials__link" aria-label="Instagram">
+              <span class="socials__ig"><img decoding="async" src="assets/group-1.svg" alt=""></span>
+            </a>
+            <a href="#" class="socials__link" aria-label="Facebook"><img decoding="async" src="assets/icon-1.svg" alt="" width="16" height="16"></a>
+          </div>
+        </div>
+        <div class="fcell fcell--line fcell--links">
+          <p class="caption">SOCIALS</p>
+          <div class="flinks">
+            <div class="flinks__col"><a href="index.html">Home</a><a href="#">About us</a><a href="#">Newsroom</a></div>
+            <div class="flinks__col"><a href="#">Ressources</a><a href="factory-built.html" aria-current="page">Factory built</a><a href="#">Sectors</a></div>
+            <div class="flinks__col"><a href="#">Systems</a><a href="#">Careers</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="frow frow--grow">
+        <div class="fcell"></div>
+        <div class="fcell fcell--line fcell--info">
+          <div class="finfo">
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">HEAD OFFICE</p>
+                <p class="finfo__val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">PHONE NUMBER</p>
+                <a class="finfo__val" href="tel:+3271468380">+32 71 46 83 80</a>
+              </div>
+            </div>
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">EMAIL</p>
+                <a class="finfo__val" href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">OPERATING ACROSS</p>
+                <p class="finfo__val">France • Belgium • England </p>
+              </div>
+            </div>
+            <!-- Carte Europe en matrice de points, vue isométrique en rotation lente (js/components/europe-map.js) -->
+            <div class="finfo__map emap" data-europe-map data-src="assets/europe-dots.json" role="img" aria-label="Carte de l'Europe avec 5 sites Verdon : Courcelles (siège), Liège, Lille, Paris, Lyon">
+              <canvas class="emap__canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fbottom">
+        <!-- Signature en matrice de points, colorée au survol (js/components/wordmark-dots.js) -->
+        <div class="fbottom__mark wmark" data-wordmark data-src="assets/wordmark-dots.json" data-reveal="wipe" style="--dur:2s" role="img" aria-label="Verdon groupe">
+          <canvas class="wmark__canvas"></canvas>
+        </div>
+        <div class="fbottom__legal">
+          <a href="#">Legal</a>
+          <p>Copyright © Verdon SA • All rights reserved</p>
+          <a href="https://agence-orem.fr" target="_blank" rel="noopener">Réalisé par Orem</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<!-- Menu mobile -->
+<div class="mnav" data-mnav aria-hidden="true">
+  <nav class="mnav__links">
+    <a href="factory-built.html" aria-current="page">FACTORY BUILT</a><a href="#">SYSTÈMES</a><a href="#">SECTEURS</a><a href="#">RÉALISATIONS</a>
+    <a href="#">À PROPOS</a><a href="#">ACTUALITÉS</a><a href="#">RESSOURCES</a><a href="#">CARRIÈRES</a>
+  </nav>
+  <a href="#" class="btn btn--solid" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+</div>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/components/gradient-text.js"></script>
+<script src="js/components/reveal.js"></script>
+<script src="js/components/nav.js"></script>
+<script src="js/main.js"></script>
+<script src="js/factory-built.js"></script>
+<script src="js/components/europe-map.js" defer></script>
+<script src="js/components/wordmark-dots.js" defer></script>
+<script src="js/components/service-dots.js" defer></script>
+</body>
+</html>

@@ -20,13 +20,21 @@
   const mnav = $('[data-mnav]');
   let lenis = null;
   if (burger && mnav) {
+    let inkTimer = 0;
     burger.addEventListener('click', () => {
       const open = burger.getAttribute('aria-expanded') !== 'true';
       burger.setAttribute('aria-expanded', String(open));
       burger.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
       mnav.classList.toggle('is-open', open);
       mnav.setAttribute('aria-hidden', String(!open));
-      if (window.Nav) Nav.setOverlay(open);  // menu sombre par-dessus : encre claire
+      // menu sombre par-dessus : encre claire pendant que le balayage du fond passe sous la nav
+      // (vers 30 % de --mnav-sweep : le burger est déjà couvert, le logo le sera pendant le fondu de couleur)
+      clearTimeout(inkTimer);
+      if (window.Nav && !open) Nav.setOverlay(false);
+      else if (window.Nav) {
+        const delay = reduceMotion ? 0 : parseFloat(getComputedStyle(mnav).getPropertyValue('--mnav-sweep')) * 300;
+        inkTimer = setTimeout(() => Nav.setOverlay(true), delay || 0);
+      }
       if (open) $$('[data-gt]', mnav).forEach((el) => window.GradientText && GradientText.play(el));
       if (lenis) open ? lenis.stop() : lenis.start();
     });
@@ -130,7 +138,9 @@
     gsap.ticker.lagSmoothing(0);
     $$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
       const id = a.getAttribute('href');
-      if (id.length > 1 && $(id)) { e.preventDefault(); lenis.scrollTo(id); }
+      const target = id.length > 1 && $(id);
+      // Lenis ignore scroll-margin-top : on le passe en décalage
+      if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -(parseFloat(getComputedStyle(target).scrollMarginTop) || 0) }); }
       else if (id === '#') e.preventDefault();
     }));
   }
@@ -141,26 +151,27 @@
   /* =========================================================
      HERO — intro + sortie au scroll
      ========================================================= */
-  const heroDots = $('.hero__dots');
+  // visuel du hero : vidéo de points (accueil) ou photo [data-hero-media] (Factory built)
+  const heroDots = $('.hero__dots, [data-hero-media]');
   gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.1 })
     .fromTo(heroDots, { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 2.4, ease: 'power3.out' }, 0)
     .fromTo('.nav__logo', { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 1.2 }, 0.2)
     .fromTo('.nav__menu .nav__item', { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 1, stagger: 0.05 }, 0.3)
-    .fromTo(['.nav__lang', '.nav__cta', '.nav__burger'], { opacity: 0 }, { opacity: 1, duration: 1, ease: 'sine.inOut' }, 0.5)
+    .fromTo(['.nav__toggle', '.nav__lang', '.nav__cta', '.nav__burger'], { opacity: 0 }, { opacity: 1, duration: 1, ease: 'sine.inOut' }, 0.5)
     .fromTo('.hero__eyebrow', { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'sine.inOut' }, 0.45)
     // titre h1 : composant Gradient text ligne par ligne ([data-gt-lines], délai dans le HTML)
     .fromTo('[data-hero-fade]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.12 }, 0.95);
 
   // Vidéo mise en pause quand le hero est entièrement recouvert (économie GPU / batterie)
   let heroVisible = true;
-  ScrollTrigger.create({
+  if ($('.positioning__inner')) ScrollTrigger.create({
     trigger: '.positioning__inner', start: 'top top',
     onEnter: () => { heroVisible = false; if (heroVideo) { heroVideo.dataset.offscreen = '1'; heroVideo.pause(); } },
     onLeaveBack: () => { heroVisible = true; if (heroVideo) { heroVideo.dataset.offscreen = ''; heroVideo.__play && heroVideo.__play(); } },
   });
 
   // Parallaxe souris (desktop) — sans lecture de layout dans le handler
-  mm.add('(hover: hover) and (min-width: 992px)', () => {
+  if ($('.hero__visual')) mm.add('(hover: hover) and (min-width: 992px)', () => {
     const xTo = gsap.quickTo('.hero__visual', 'x', { duration: 1.2, ease: 'power3.out' });
     const yTo = gsap.quickTo('.hero__visual', 'y', { duration: 1.2, ease: 'power3.out' });
     const onMove = (e) => {
@@ -172,8 +183,8 @@
     return () => window.removeEventListener('mousemove', onMove);
   });
 
-  // Le hero s'efface pendant que la section suivante le recouvre
-  gsap.timeline({ scrollTrigger: { trigger: '.positioning', start: 'top top', end: () => '+=' + innerHeight, scrub: true } })
+  // Le hero s'efface pendant que la section suivante le recouvre (Factory built : js/factory-built.js)
+  if ($('.positioning')) gsap.timeline({ scrollTrigger: { trigger: '.positioning', start: 'top top', end: () => '+=' + innerHeight, scrub: true } })
     .to('.hero__dots', { yPercent: -12, ease: 'none' }, 0)
     .to('.hero__content', { y: -120, opacity: 0.15, ease: 'none' }, 0);
 
@@ -207,7 +218,7 @@
   /* =========================================================
      EXPERTISES — blobs en parallaxe
      ========================================================= */
-  gsap.fromTo('.expertise__blobs', { y: 200 }, { y: -200, ease: 'none', scrollTrigger: { trigger: '.expertise', start: 'top bottom', end: 'bottom top', scrub: true } });
+  if ($('.expertise__blobs')) gsap.fromTo('.expertise__blobs', { y: 200 }, { y: -200, ease: 'none', scrollTrigger: { trigger: '.expertise', start: 'top bottom', end: 'bottom top', scrub: true } });
 
   /* =========================================================
      FACTORY BUILT — colonnes (la maquette 3D est dans js/components/campus-3d.js)

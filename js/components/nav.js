@@ -1,7 +1,8 @@
 /* =========================================================
    Composant « Nav » — navigation fixe, 3 états (Figma « Navbar ») :
    - défaut        : menu déplié (haut de page, sur le hero)
-   - .is-collapsed : menu replié en pastilles dès qu'on a scrollé
+   - .is-collapsed : menu replié en pastilles dès qu'on a scrollé (dès le chargement avec [data-nav-compact],
+                     classe à poser aussi dans le HTML pour éviter le menu déplié avant le JS)
    - .is-open      : panneau ouvert au survol des pastilles, refermé quand la souris quitte le menu
                      (ou CLOSE, Échap). Clavier / tactile : le bouton pastilles ouvre, focus ou toucher ailleurs ferme.
    Couleur : .nav--on-light sur chaque bloc (logo, pastilles, langue, burger) qui passe sur un fond clair
@@ -17,6 +18,7 @@
 
   const COLLAPSE_AT = 80;   // px scrollés avant de replier le menu
   const EXPAND_AT = 40;     // px sous lesquels il se redéplie (l'écart évite le va-et-vient autour du seuil)
+  const COMPACT = nav.hasAttribute('data-nav-compact');  // toujours replié (pastilles dès le haut de page)
   const PROBE_Y = 43;       // ligne de lecture du fond : milieu de la barre (24 + 38 / 2)
   const CLOSE_DELAY = 250;  // ms de tolérance quand la souris sort du menu
 
@@ -78,7 +80,7 @@
   /* ---------- Replié / déplié ---------- */
   let collapsed = null;
   function onScroll() {
-    const c = window.scrollY > (collapsed ? EXPAND_AT : COLLAPSE_AT);
+    const c = COMPACT || window.scrollY > (collapsed ? EXPAND_AT : COLLAPSE_AT);
     if (c === collapsed) return;
     collapsed = c;
     nav.classList.toggle('is-collapsed', c);

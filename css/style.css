@@ -932,18 +932,34 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .fbottom__legal a { position: relative; }
 
-/* ---------- Menu mobile ---------- */
+/* ---------- Menu mobile ----------
+   Le fond apparaît comme les textes (composant Gradient text, css/components/gradient-text.css) :
+   balayage dont le bord d'attaque passe par le dégradé lilas → pêche → ambre → vert, mais de droite
+   à gauche (côté burger) : mêmes masques à 270deg. .mnav = fond sombre + contenu, ::before = calque coloré.
+   Fermeture : fondu court, puis --gt-p revient au départ une fois le menu masqué. */
 .mnav {
+  --mnav-sweep: 1.2s;   /* durée du balayage (lue aussi par main.js pour l'encre de la nav) */
   position: fixed; inset: 0; z-index: 50;
   display: flex; flex-direction: column; justify-content: space-between; gap: 32px;
   padding: 96px 24px 32px;
   background: var(--bg-dark);
   color: var(--light);
-  clip-path: inset(0 0 100% 0);
+  -webkit-mask-image: linear-gradient(270deg, #000 calc(var(--gt-p) - var(--gt-feather)), transparent var(--gt-p));
+          mask-image: linear-gradient(270deg, #000 calc(var(--gt-p) - var(--gt-feather)), transparent var(--gt-p));
+  opacity: 0;
   visibility: hidden;
-  transition: clip-path .7s var(--ease-expo), visibility 0s linear .7s;
+  transition: opacity .4s var(--ease-figma), visibility 0s linear .4s, --gt-p 0s linear .4s;
 }
-.mnav.is-open { clip-path: inset(0 0 0 0); visibility: visible; transition: clip-path .7s var(--ease-expo); }
+.mnav::before {
+  content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background-image: linear-gradient(270deg, var(--gt-c1) 0%, var(--gt-c2) 80%, var(--gt-c3) 90%, var(--gt-c4) 100%);
+  -webkit-mask-image: linear-gradient(270deg, transparent calc(var(--gt-p) - 55%), #000 calc(var(--gt-p) - 14%), #000 var(--gt-p));
+          mask-image: linear-gradient(270deg, transparent calc(var(--gt-p) - 55%), #000 calc(var(--gt-p) - 14%), #000 var(--gt-p));
+  transition: --gt-p 0s linear .4s;
+}
+.mnav, .mnav::before { --gt-p: -5%; }
+.mnav.is-open, .mnav.is-open::before { --gt-p: 200%; transition: --gt-p var(--mnav-sweep) var(--gt-ease); }
+.mnav.is-open { opacity: 1; visibility: visible; }
 .mnav__links { display: flex; flex-direction: column; gap: 14px; font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
 .mnav .btn { align-self: flex-start; }
 
@@ -1020,6 +1036,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .nav__slot, .nav__lang { display: none; }
   .nav__burger {
     display: inline-flex; flex-direction: column; justify-content: center; gap: 6px;
+    align-items: stretch;   /* <button> : Chrome / Safari posent flex-start → traits de 0 px de large */
     width: 38px; height: 38px; padding: 0 9px;
     border: 1px solid currentColor;
   }
