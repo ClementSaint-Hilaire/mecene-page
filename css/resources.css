@@ -1,0 +1,509 @@
+/* =========================================================
+   Verdon — page Resources (bibliothèque de fichiers à télécharger)
+   Pas de maquette de page : composée à partir des pages Contact (en-tête, onglets),
+   Data center (grille à traits et points d'angle) et des pictogrammes en points ;
+   bloc de filtres d'après Figma (node 10:211, fichier « MCP ») — complète css/style.css
+   (nav, boutons, FAQ, CTA et footer viennent de style.css)
+   ========================================================= */
+
+.rs-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* les classes ci-dessous posent un display : [hidden] doit l'emporter (cartes filtrées, état vide) */
+.rsbody [hidden] { display: none !important; }
+:where(.rsbody) fieldset { margin: 0; padding: 0; border: 0; min-width: 0; }   /* :where : les paddings des classes ci-dessous l'emportent */
+.rsbody input[type="radio"], .rsbody input[type="checkbox"] { position: absolute; width: 1px; height: 1px; margin: 0; opacity: 0; }
+
+/* =========================================================
+   EN-TÊTE — nombre de fichiers · titre · présentation, sur une ligne au-dessus d'un trait (comme la page Contact)
+   ========================================================= */
+.rshead { padding: 190px var(--gutter) 0; } /* barre de nav (24 + 38) + 128 */
+.rshead__row {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  padding-bottom: 32px;
+}
+.rshead__row::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--stroke-2);
+  transform-origin: left center;
+}
+.rshead__info { flex: 0 0 347px; display: flex; flex-direction: column; gap: 4px; align-items: flex-start; }
+.rshead__val { font-size: var(--fs-s); font-weight: 500; line-height: 1.2; }
+.rshead__title { flex: 0 1 616px; color: var(--ink); font-size: 64px; } /* Heading 1 : 64 px, comme Contact */
+.rshead__lead { flex: 1 0 0; min-width: 280px; }
+
+/* le trait se dessine à l'entrée, après le titre */
+.js [data-reveal="rshead"]::after { transform: scaleX(0); transition: transform 1.3s cubic-bezier(.87,0,.13,1) .8s; }
+.js [data-reveal="rshead"].is-in::after { transform: none; }
+
+/* =========================================================
+   CORPS — filtres collants à gauche (colonne de 347 px, comme le logo et l'en-tête),
+   recherche, catégories, barre de tri et résultats à droite (alignés sur le menu de la nav)
+   ========================================================= */
+.rsbody {
+  display: grid;
+  grid-template-columns: 347px minmax(0, 1fr);
+  grid-template-rows: auto auto auto 1fr;
+  grid-template-areas:
+    "aside search"
+    "aside tabs"
+    "aside bar"
+    "aside results";
+  column-gap: 16px;
+  padding: 64px var(--gutter) 0;
+}
+
+/* ---------- Recherche : grand champ souligné, trait foncé dessiné au focus (comme les champs du formulaire de contact) ---------- */
+.rssearch {
+  grid-area: search;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid var(--stroke);
+}
+.rssearch::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: -1px;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .6s var(--ease-expo);
+}
+.rssearch:focus-within::after { transform: none; }
+.rssearch__icon {
+  width: 20px; height: 20px; flex-shrink: 0;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.4'%3E%3Ccircle cx='8.5' cy='8.5' r='6'/%3E%3Cpath d='m13 13 5 5'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none' stroke='black' stroke-width='1.4'%3E%3Ccircle cx='8.5' cy='8.5' r='6'/%3E%3Cpath d='m13 13 5 5'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.rssearch__input {
+  flex: 1 0 0;
+  min-width: 0;
+  height: 72px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font: 500 var(--fs-l) / 1.2 var(--font);
+  letter-spacing: -0.02em;
+  outline: none;
+  appearance: none;
+}
+.rssearch__input::placeholder { color: var(--ink-2); opacity: .5; }
+.rssearch__input::-webkit-search-cancel-button { -webkit-appearance: none; }
+/* touche « / » tant que le champ est vide, bouton CLEAR une fois rempli */
+.rssearch__key {
+  display: grid;
+  place-items: center;
+  min-width: 22px;
+  height: 22px;
+  padding: 0 6px;
+  border: 1px solid var(--stroke);
+  font: 400 var(--fs-xs) / 1 var(--font);
+  color: var(--ink-2);
+}
+.rssearch__clear { font-size: var(--fs-xs); line-height: 1.2; color: var(--ink-2); transition: color .3s var(--ease-figma); }
+.rssearch__clear:hover { color: var(--ink); }
+.rssearch__input:focus ~ .rssearch__key,
+.rssearch__input:not(:placeholder-shown) ~ .rssearch__key,
+.rssearch__input:placeholder-shown ~ .rssearch__clear { display: none; }
+
+/* ---------- Catégories : onglets (boutons radio), non sélectionnés à 50 %, pastille verte sur l'onglet actif ---------- */
+.rstabs {
+  grid-area: tabs;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 28px;
+  padding: 32px 0 0 10px;   /* 10 px : place de la pastille du 1er onglet */
+  font-size: var(--fs-m);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+.rstab { position: relative; flex: none; cursor: pointer; white-space: nowrap; }
+.rstab__label { display: inline-flex; color: var(--ink-2); opacity: .5; transition: color .35s var(--ease-figma), opacity .35s var(--ease-figma); }
+.rstab:hover .rstab__label, .rstab input:checked + .rstab__label { color: var(--ink); opacity: 1; }
+.rstab input:focus-visible + .rstab__label { outline: 1px solid currentColor; outline-offset: 4px; }
+.rstab__label::before {
+  content: "";
+  position: absolute; left: -10px; top: calc(50% - 3px);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+  transform: scale(0);
+  transition: transform .45s var(--ease-expo);
+}
+.rstab input:checked + .rstab__label::before { transform: scale(1); }
+.rstab__n { margin-left: 3px; font-size: var(--fs-xs); font-weight: 400; line-height: 1; letter-spacing: 0; font-variant-numeric: tabular-nums; }
+.rstab.is-empty .rstab__label { opacity: .25; }
+
+/* ---------- Barre : nombre de résultats, tri, vue ---------- */
+.rsbar {
+  grid-area: bar;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  padding: 48px 0 16px;
+}
+.rsbar__count { font-size: var(--fs-s); font-weight: 500; line-height: 1.2; letter-spacing: -0.01em; }
+.rsbar__tools { display: flex; align-items: center; gap: 24px; }
+.rssort { display: flex; align-items: center; gap: 8px; }
+.rssort__select {
+  margin: 0;
+  padding: 4px 22px 4px 0;
+  border: 0;
+  border-radius: 0;
+  background: url("../assets/frame-dark.svg") right center / 20px 20px no-repeat;
+  color: var(--ink);
+  font: 500 var(--fs-s) / 1.2 var(--font);
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  appearance: none;
+}
+.rssort__select:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
+.rsview { display: flex; gap: 2px; }
+.rsview__btn { display: grid; place-items: center; width: 30px; height: 30px; color: var(--ink-2); opacity: .5; transition: color .3s var(--ease-figma), opacity .3s var(--ease-figma); }
+.rsview__btn:hover, .rsview__btn[aria-pressed="true"] { color: var(--ink); opacity: 1; }
+.rsview__btn:focus-visible { outline: 1px solid var(--ink); outline-offset: -2px; }
+.rsview__icon { width: 15px; height: 15px; }
+/* grille : matrice de 3 × 3 points ; liste : 3 traits */
+.rsview__icon--grid { background: radial-gradient(circle, currentColor 1.4px, transparent 1.7px) 0 0 / 5px 5px; }
+.rsview__icon--list {
+  background:
+    linear-gradient(currentColor 0 0) 0 2px / 100% 1px no-repeat,
+    linear-gradient(currentColor 0 0) 0 7px / 100% 1px no-repeat,
+    linear-gradient(currentColor 0 0) 0 12px / 100% 1px no-repeat;
+}
+
+/* =========================================================
+   RÉSULTATS — grille de cartes à traits de 1 px (l'ombre de chaque carte dessine son cadre :
+   les traits restent justes quand des cartes sont masquées) ; vue liste en lignes
+   ========================================================= */
+.rsresults { grid-area: results; scroll-margin-top: 96px; }
+.rsgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+  gap: 1px;
+  padding: 1px;
+}
+.rscard {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 16px 16px 20px;
+  box-shadow: 0 0 0 1px var(--stroke);
+}
+/* points d'angle (comme les cartes de la page Data center) */
+.rscard::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  background:
+    url("../assets/ellipse-10.svg") left top / 3px 3px no-repeat,
+    url("../assets/ellipse-10.svg") right top / 3px 3px no-repeat,
+    url("../assets/ellipse-10.svg") left bottom / 3px 3px no-repeat,
+    url("../assets/ellipse-10.svg") right bottom / 3px 3px no-repeat;
+  pointer-events: none;
+}
+/* survol : fond secondaire (sur un calque : la transition de la carte est celle de son apparition, reveal.js) ;
+   la vignette passe au fond clair et son pictogramme est parcouru par le flux (service-dots.js) */
+.rscard::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--bg-secondary);
+  opacity: 0;
+  transition: opacity .4s var(--ease-figma);
+}
+.rscard:hover::after { opacity: 1; }
+/* ré-apparition après un changement de filtre, de tri ou de vue (js/resources.js) */
+.rscard.is-pop { animation: rs-pop .8s var(--ease-expo) var(--pop, 0s) both; }
+@keyframes rs-pop { from { opacity: 0; transform: translate3d(0, 16px, 0); } }
+
+.rscard__thumb {
+  position: relative;
+  display: grid;
+  place-items: center;
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  background: var(--bg-secondary);
+  transition: background-color .4s var(--ease-figma);
+}
+.rscard:hover .rscard__thumb { background: var(--bg-primary); }
+.rscard__thumb > img:not(.rscard__logo) {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 1s var(--ease-expo);
+}
+.rscard:hover .rscard__thumb > img:not(.rscard__logo) { transform: scale(1.05); }
+.rscard__thumb--dark, .rscard:hover .rscard__thumb--dark { background: var(--bg-dark); }
+.rscard__logo { width: 62%; height: auto; }
+/* étiquette NEW : pastille verte, comme le toast de la page Contact */
+.rscard__new {
+  position: absolute; left: 8px; top: 8px; z-index: 1;
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 5px 7px 4px;
+  background: var(--bg-primary);
+  font-size: var(--fs-xs); font-weight: 500; line-height: 1.2;
+}
+.rscard__new::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--green); }
+
+.rscard__body { flex: 1 0 auto; display: flex; flex-direction: column; gap: 8px; }
+.rscard__meta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 12px;
+  font-size: var(--fs-xs);
+  line-height: 1.2;
+  color: var(--ink-2);
+}
+.rscard__cat { color: var(--ink); font-weight: 500; }
+.rscard__title { font-size: var(--fs-m); font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; transition: transform .5s var(--ease-expo); }
+.rscard:hover .rscard__title { transform: translateX(4px); }
+/* termes recherchés (js/resources.js) : surlignés en lilas, 1re couleur du dégradé */
+.rscard__title mark { background: color-mix(in srgb, var(--lilac) 60%, transparent); color: inherit; }
+.rscard__desc { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; overflow: hidden; }
+
+.rscard__foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--stroke-2);
+}
+.rscard__file { display: flex; align-items: center; flex-wrap: wrap; gap: 4px 8px; font-size: var(--fs-xs); line-height: 1.2; color: var(--ink-2); }
+.rscard__fmt { padding: 3px 4px 2px; border: 1px solid var(--stroke); color: var(--ink); font-weight: 500; }
+
+/* lien de téléchargement : toute la carte est cliquable (::before), flèche en masque (::after) */
+.rscard__dl {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  font-size: var(--fs-s);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  outline: none;
+}
+.rscard__dl::before { content: ""; position: absolute; inset: 0; z-index: 1; }
+.rscard__dl:focus-visible::before { outline: 1px solid var(--ink); outline-offset: -1px; }
+.rscard__dl::after {
+  content: "";
+  width: 12px; height: 12px;
+  background: currentColor;
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='black' stroke-width='1.2'%3E%3Cpath d='M6 1v7.5M2.5 5.5 6 9l3.5-3.5M1.5 11.4h9'/%3E%3C/svg%3E") center / contain no-repeat;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='black' stroke-width='1.2'%3E%3Cpath d='M6 1v7.5M2.5 5.5 6 9l3.5-3.5M1.5 11.4h9'/%3E%3C/svg%3E") center / contain no-repeat;
+  transition: transform .45s var(--ease-expo);
+}
+.rscard:hover .rscard__dl::after { transform: translateY(2px); }
+/* fichiers sur demande (CAD, BIM) : flèche vers la droite, vers le formulaire de contact */
+.rscard__dl--request::after {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='black' stroke-width='1.2'%3E%3Cpath d='M1 6h9.5M6.5 2.5 10 6l-3.5 3.5'/%3E%3C/svg%3E");
+          mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='black' stroke-width='1.2'%3E%3Cpath d='M1 6h9.5M6.5 2.5 10 6l-3.5 3.5'/%3E%3C/svg%3E");
+}
+.rscard:hover .rscard__dl--request::after { transform: translateX(2px); }
+/* soulignement au survol, comme les liens du footer */
+.rscard__dl-label { position: relative; }
+.rscard__dl-label::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: right center; transition: transform .45s var(--ease-expo);
+}
+.rscard:hover .rscard__dl-label::after { transform: scaleX(1); transform-origin: left center; }
+
+/* ---------- Vue liste : une ligne par fichier, sans vignette ---------- */
+.rsgrid.is-list { grid-template-columns: minmax(0, 1fr); gap: 0; padding: 0; border-top: 1px solid var(--stroke); }
+.rsgrid.is-list .rscard { flex-direction: row; align-items: center; gap: 32px; padding: 20px 16px; box-shadow: none; border-bottom: 1px solid var(--stroke); }
+.rsgrid.is-list .rscard::before, .rsgrid.is-list .rscard__thumb { display: none; }
+.rsgrid.is-list .rscard__body { flex: 1 1 0; min-width: 0; }
+.rsgrid.is-list .rscard__meta { justify-content: flex-start; }
+.rsgrid.is-list .rscard__desc { -webkit-line-clamp: 1; }
+.rsgrid.is-list .rscard__foot { flex: 0 0 auto; gap: 32px; padding-top: 0; border-top: 0; }
+.rsgrid.is-list .rscard__file { flex-wrap: nowrap; white-space: nowrap; }
+.rsgrid.is-list .rscard__dl { min-width: 104px; justify-content: flex-end; }   /* DOWNLOAD et REQUEST : colonne des fichiers alignée */
+
+/* ---------- Aucun résultat ---------- */
+.rsempty { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 64px 0; border-top: 1px solid var(--stroke); }
+.rsempty .p { max-width: 460px; }
+.rsempty__ctas { display: flex; flex-wrap: wrap; gap: 16px; padding-top: 20px; }
+
+/* =========================================================
+   FILTRES — colonne collante sous la nav (secteurs, formats), puis la demande de document
+   ========================================================= */
+.rsaside {
+  grid-area: aside;
+  align-self: start;
+  position: sticky;
+  top: 96px;
+  max-height: calc(100vh - 128px);   /* écrans bas : la colonne défile seule */
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  padding: 0 47px 1px 0;   /* filtres de 300 px (Figma 10:211) dans la colonne de 347 px */
+}
+.rsaside::-webkit-scrollbar { display: none; }
+.rsaside__toggle { display: none; }
+/* Groupes de filtres (Figma 10:211, bloc de 300 px) : bandeau de la catégorie sur fond secondaire,
+   puis une ligne par choix avec son nombre de fichiers ; 23 px entre deux groupes */
+.rsfilters { display: flex; flex-direction: column; gap: 23px; align-items: stretch; }
+
+.rsgroup__legend {
+  float: left;   /* sort du cadre spécial des <legend> et se place comme un bloc ordinaire */
+  width: 100%;
+  padding: 6px;
+  border-top: 1px solid var(--stroke);
+  background: var(--bg-secondary);
+}
+.rsgroup__list { clear: both; display: flex; flex-direction: column; }
+
+/* choix : case masquée (choix multiple, clavier et lecteurs d'écran) ; état coché absent de la maquette :
+   pastille verte et libellé décalé, comme les entrées de la nav et l'onglet de catégorie actif */
+.rsfilt {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 6px;
+  border-bottom: 1px solid var(--stroke);
+  font-size: var(--fs-s);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  cursor: pointer;
+  transition: opacity .3s var(--ease-figma);
+}
+.rsfilt__label { position: relative; flex: 1 0 0; min-width: 1px; transition: transform .45s var(--ease-expo); }
+.rsfilt__label::before {
+  content: "";
+  position: absolute; left: -12px; top: calc(50% - 3px);
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--green);
+  transform: scale(0);
+  transition: transform .45s var(--ease-expo);
+}
+.rsfilt:hover .rsfilt__label { transform: translateX(4px); }
+.rsfilt input:checked + .rsfilt__label { transform: translateX(12px); }
+.rsfilt input:checked + .rsfilt__label::before { transform: scale(1); }
+.rsfilt:has(input:focus-visible) { outline: 1px solid var(--ink); outline-offset: -1px; }
+.rsfilt__n { flex-shrink: 0; font-variant-numeric: tabular-nums; }
+.rsfilt.is-empty:not(:has(input:checked)) { opacity: .4; }
+
+.rsreset {
+  position: relative;
+  align-self: flex-start;
+  font-size: var(--fs-s);
+  font-weight: 500;
+  line-height: 1.2;
+  transition: color .3s var(--ease-figma);
+}
+.rsreset::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: -1px; height: 1px; background: currentColor;
+  transform: scaleX(0); transform-origin: right center; transition: transform .45s var(--ease-expo);
+}
+.rsreset:hover::after { transform: scaleX(1); transform-origin: left center; }
+/* couleur plutôt qu'opacité : celle de l'apparition (data-reveal) l'emporterait */
+.rsreset:disabled { color: var(--ink-3); cursor: default; }
+.rsreset:disabled::after { transform: scaleX(0); }
+
+/* demande de document : carte claire, comme les infos de la page Contact */
+.rshelp { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; padding: 32px 24px; background: var(--bg-secondary); }
+.rshelp .btn { margin-top: 12px; padding: 11px 16px 10px; }
+
+/* =========================================================
+   RESPONSIVE (déduit — pas de maquette)
+   ========================================================= */
+@media (max-width: 1280px) {
+  .rstabs { font-size: 16px; column-gap: 24px; }
+}
+
+@media (max-width: 1100px) {
+  .rshead__info { flex-basis: 240px; }
+  .rsbody { grid-template-columns: 240px minmax(0, 1fr); }
+  .rsaside { padding-right: 32px; }
+  .rshelp { padding: 24px 20px; }
+}
+
+/* Tablette : une colonne ; filtres repliés sous un bouton FILTERS, la demande de document après les résultats */
+@media (max-width: 991px) {
+  .rshead { padding-top: 160px; }
+  .rshead__row { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .rshead__title { order: -1; flex: none; font-size: var(--fs-4xl); }
+  .rshead__info, .rshead__lead { flex: none; min-width: 0; max-width: 560px; }
+
+  .rsbody {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    grid-template-areas: "search" "tabs" "toggle" "filters" "bar" "results" "help";
+    padding-top: 48px;
+  }
+  .rsaside { display: contents; }
+  .rsaside__toggle {
+    grid-area: toggle;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 32px;
+    padding: 14px 0;
+    border-top: 1px solid var(--stroke);
+    border-bottom: 1px solid var(--stroke);
+    font-size: var(--fs-s);
+    font-weight: 500;
+    line-height: 1.2;
+  }
+  .rsaside__active:not(:empty) { display: grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; border-radius: 9px; background: var(--ink); color: var(--light); font-size: var(--fs-xs); }
+  .rsaside__chev { width: 20px; height: 20px; margin-left: auto; background: url("../assets/frame-dark.svg") center / 20px 20px no-repeat; transition: transform .45s var(--ease-expo); }
+  .rsaside__toggle[aria-expanded="true"] .rsaside__chev { transform: rotate(180deg); }
+  .rsfilters {
+    grid-area: filters;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 23px 24px;
+    padding: 24px 0 8px;
+  }
+  .js .rsfilters:not(.is-open) { display: none; }
+  .rsreset { grid-column: 1 / -1; justify-self: start; }
+  .rshelp { grid-area: help; margin-top: 64px; padding: 32px 24px; }
+
+  /* catégories : une ligne qui défile, jusqu'aux bords de l'écran */
+  .rstabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    margin: 0 calc(-1 * var(--gutter));
+    padding: 24px var(--gutter) 6px calc(var(--gutter) + 10px);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+  .rstabs::-webkit-scrollbar { display: none; }
+  .rsbar { padding-top: 32px; }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .rshead { padding-top: 128px; }
+
+  .rssearch__input { height: 60px; font-size: var(--fs-m); }
+  .rssearch__key { display: none; }
+  .rsfilters { grid-template-columns: minmax(0, 1fr); gap: 23px; }
+  .rsbar { flex-wrap: wrap; }
+  .rsbar__tools { width: 100%; justify-content: space-between; }
+
+  .rsgrid.is-list .rscard { flex-direction: column; align-items: stretch; gap: 12px; padding: 16px 0; }
+  .rsgrid.is-list .rscard__foot { justify-content: space-between; }
+  .rsgrid.is-list .rscard__file { flex-wrap: wrap; white-space: normal; }
+  .rshelp { margin-top: 48px; padding: 24px 20px; }
+}

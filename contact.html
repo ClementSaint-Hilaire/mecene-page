@@ -17,39 +17,59 @@
      data-nav-compact : pastilles dès le haut de page, comme sur la maquette.
      ========================================================= -->
 <header class="nav is-collapsed" data-nav data-nav-compact>
-  <a href="index.html" class="nav__logo" aria-label="Verdon — accueil">
+  <a href="index.html" class="nav__logo" aria-label="Verdon — home">
     <img decoding="async" class="nav__ink nav__ink--light" src="assets/logo.svg" alt="" width="347" height="24">
     <img decoding="async" class="nav__ink nav__ink--dark" src="assets/logo-dark.svg" alt="" width="347" height="24">
   </a>
 
   <div class="nav__slot" data-nav-slot>
-    <nav class="nav__menu" aria-label="Navigation principale">
+    <nav class="nav__menu" aria-label="Main navigation">
       <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
-      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
-      <a href="data-center.html" class="nav__item" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
-      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
-      <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
-      <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
-      <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
-      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTEMS</span></a>
+      <div class="nav__group" style="--i:2" data-nav-group>
+        <button class="nav__item" type="button" aria-expanded="false" aria-controls="nav-sectors" data-nav-group-toggle><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTORS</span></button>
+        <div class="nav__sub" id="nav-sectors">
+          <div class="nav__sublist">
+            <a href="data-center.html" class="nav__item" style="--j:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">DATA CENTER</span></a>
+            <a href="#" class="nav__item" style="--j:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SCIENCE &amp; PHARMA</span></a>
+            <a href="#" class="nav__item" style="--j:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ENERGY</span></a>
+            <a href="#" class="nav__item" style="--j:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SEMICONDUCTORS</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
+      <a href="about.html" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
+      <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+      <a href="resources.html" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
+      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
     </nav>
 
-    <button class="nav__toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+    <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
       <span class="nav__dots" aria-hidden="true"></span>
     </button>
 
     <div class="nav__panel" id="nav-panel" data-nav-panel>
       <button class="nav__close" type="button" data-nav-close>CLOSE</button>
       <img decoding="async" class="nav__rule" src="assets/line-13-panel.svg" alt="" width="145" height="1">
-      <nav class="nav__plist" aria-label="Navigation principale">
+      <nav class="nav__plist" aria-label="Main navigation">
         <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
-        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
-        <a href="data-center.html" class="nav__item" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
-        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
-        <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
-        <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
-        <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
-        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTEMS</span></a>
+        <div class="nav__group" style="--i:2" data-nav-group>
+          <button class="nav__item" type="button" aria-expanded="false" aria-controls="nav-sectors-panel" data-nav-group-toggle><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTORS</span></button>
+          <div class="nav__sub" id="nav-sectors-panel">
+            <div class="nav__sublist">
+              <a href="data-center.html" class="nav__item" style="--j:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">DATA CENTER</span></a>
+              <a href="#" class="nav__item" style="--j:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SCIENCE &amp; PHARMA</span></a>
+              <a href="#" class="nav__item" style="--j:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ENERGY</span></a>
+              <a href="#" class="nav__item" style="--j:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SEMICONDUCTORS</span></a>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
+        <a href="about.html" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
+        <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+        <a href="resources.html" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
+        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
       </nav>
       <img decoding="async" class="nav__rule nav__rule--end" src="assets/line-13-panel.svg" alt="" width="145" height="1">
       <div class="nav__contact">
@@ -62,7 +82,7 @@
   <div class="nav__spacer"></div>
 
   <div class="nav__right">
-    <button class="nav__lang" type="button" aria-label="Changer de langue">
+    <button class="nav__lang" type="button" aria-label="Change language">
       <span>EN</span>
       <span class="nav__chev" aria-hidden="true">
         <img decoding="async" class="nav__ink nav__ink--light" src="assets/frame.svg" alt="" width="20" height="20">
@@ -70,7 +90,7 @@
       </span>
     </button>
     <a href="#contact-form" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
-    <button class="nav__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" data-burger>
       <span></span><span></span>
     </button>
   </div>
@@ -358,8 +378,8 @@
         <div class="fcell fcell--line fcell--links">
           <p class="caption">SOCIALS</p>
           <div class="flinks">
-            <div class="flinks__col"><a href="index.html">Home</a><a href="#">About us</a><a href="#">Newsroom</a></div>
-            <div class="flinks__col"><a href="#">Ressources</a><a href="factory-built.html">Factory built</a><a href="data-center.html">Sectors</a></div>
+            <div class="flinks__col"><a href="index.html">Home</a><a href="about.html">About us</a><a href="#">Newsroom</a></div>
+            <div class="flinks__col"><a href="resources.html">Ressources</a><a href="factory-built.html">Factory built</a><a href="data-center.html">Sectors</a></div>
             <div class="flinks__col"><a href="#">Systems</a><a href="#">Careers</a></div>
           </div>
         </div>
@@ -415,8 +435,8 @@
 <!-- Menu mobile -->
 <div class="mnav" data-mnav aria-hidden="true">
   <nav class="mnav__links">
-    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTÈMES</a><a href="data-center.html">SECTEURS</a><a href="#">RÉALISATIONS</a>
-    <a href="#">À PROPOS</a><a href="#">ACTUALITÉS</a><a href="#">RESSOURCES</a><a href="#">CARRIÈRES</a>
+    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTEMS</a><a href="data-center.html">SECTORS</a><a href="#">PROJECTS</a>
+    <a href="about.html">ABOUT</a><a href="#">NEWS</a><a href="resources.html">RESOURCES</a><a href="#">CAREERS</a>
   </nav>
   <a href="#contact-form" class="btn btn--solid" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
 </div>

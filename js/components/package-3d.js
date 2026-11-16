@@ -1,8 +1,10 @@
 /* =========================================================
    Composant « Package 3D » — maquette 3D interactive en matrice de points
    Deux maquettes (MODELS, choisie par la valeur de data-pack3d) :
-   - package : package factory-built (accueil, section Factory built), d'après « Verdon Factory-Built.html »
-   - campus : campus (page Data center), d'après « Campus Verdon 3D.html » (_ref/campus-3d-source.html)
+   - package : package factory-built (accueil, section Factory built, et page Data center, section One partner),
+     d'après « Verdon Factory-Built.html »
+   - campus : campus, d'après « Campus Verdon 3D.html » (_ref/campus-3d-source.html) ; plus utilisé
+     (data-pack3d="campus" pour le remettre)
    Commun :
    - three.js + OrbitControls vendorisés (js/vendor/three), pas de CDN
    - géométrie chargée à la demande : assets/<maquette>-3d.json (index des systèmes)

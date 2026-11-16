@@ -18,39 +18,59 @@
      data-nav-compact : pastilles dès le haut de page, comme sur la maquette.
      ========================================================= -->
 <header class="nav is-collapsed" data-nav data-nav-compact>
-  <a href="index.html" class="nav__logo" aria-label="Verdon — accueil">
+  <a href="index.html" class="nav__logo" aria-label="Verdon — home">
     <img decoding="async" class="nav__ink nav__ink--light" src="assets/logo.svg" alt="" width="347" height="24">
     <img decoding="async" class="nav__ink nav__ink--dark" src="assets/logo-dark.svg" alt="" width="347" height="24">
   </a>
 
   <div class="nav__slot" data-nav-slot>
-    <nav class="nav__menu" aria-label="Navigation principale">
+    <nav class="nav__menu" aria-label="Main navigation">
       <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
-      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
-      <a href="data-center.html" class="nav__item is-active" aria-current="page" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
-      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
-      <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
-      <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
-      <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
-      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTEMS</span></a>
+      <div class="nav__group" style="--i:2" data-nav-group>
+        <button class="nav__item is-active" type="button" aria-expanded="false" aria-controls="nav-sectors" data-nav-group-toggle><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTORS</span></button>
+        <div class="nav__sub" id="nav-sectors">
+          <div class="nav__sublist">
+            <a href="data-center.html" class="nav__item is-active" aria-current="page" style="--j:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">DATA CENTER</span></a>
+            <a href="#" class="nav__item" style="--j:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SCIENCE &amp; PHARMA</span></a>
+            <a href="#" class="nav__item" style="--j:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ENERGY</span></a>
+            <a href="#" class="nav__item" style="--j:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SEMICONDUCTORS</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
+      <a href="about.html" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
+      <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+      <a href="resources.html" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
+      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
     </nav>
 
-    <button class="nav__toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+    <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
       <span class="nav__dots" aria-hidden="true"></span>
     </button>
 
     <div class="nav__panel" id="nav-panel" data-nav-panel>
       <button class="nav__close" type="button" data-nav-close>CLOSE</button>
       <img decoding="async" class="nav__rule" src="assets/line-13-panel.svg" alt="" width="145" height="1">
-      <nav class="nav__plist" aria-label="Navigation principale">
+      <nav class="nav__plist" aria-label="Main navigation">
         <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
-        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTÈMES</span></a>
-        <a href="data-center.html" class="nav__item is-active" aria-current="page" style="--i:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTEURS</span></a>
-        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RÉALISATIONS</span></a>
-        <a href="#" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">À PROPOS</span></a>
-        <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ACTUALITÉS</span></a>
-        <a href="#" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESSOURCES</span></a>
-        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CARRIÈRES</span></a>
+        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTEMS</span></a>
+        <div class="nav__group" style="--i:2" data-nav-group>
+          <button class="nav__item is-active" type="button" aria-expanded="false" aria-controls="nav-sectors-panel" data-nav-group-toggle><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTORS</span></button>
+          <div class="nav__sub" id="nav-sectors-panel">
+            <div class="nav__sublist">
+              <a href="data-center.html" class="nav__item is-active" aria-current="page" style="--j:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">DATA CENTER</span></a>
+              <a href="#" class="nav__item" style="--j:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SCIENCE &amp; PHARMA</span></a>
+              <a href="#" class="nav__item" style="--j:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ENERGY</span></a>
+              <a href="#" class="nav__item" style="--j:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SEMICONDUCTORS</span></a>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
+        <a href="about.html" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
+        <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+        <a href="resources.html" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
+        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
       </nav>
       <img decoding="async" class="nav__rule nav__rule--end" src="assets/line-13-panel.svg" alt="" width="145" height="1">
       <div class="nav__contact">
@@ -63,7 +83,7 @@
   <div class="nav__spacer"></div>
 
   <div class="nav__right">
-    <button class="nav__lang" type="button" aria-label="Changer de langue">
+    <button class="nav__lang" type="button" aria-label="Change language">
       <span>EN</span>
       <span class="nav__chev" aria-hidden="true">
         <img decoding="async" class="nav__ink nav__ink--light" src="assets/frame.svg" alt="" width="20" height="20">
@@ -71,7 +91,7 @@
       </span>
     </button>
     <a href="contact.html" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
-    <button class="nav__burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" data-burger>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" data-burger>
       <span></span><span></span>
     </button>
   </div>
@@ -85,7 +105,7 @@
   <section class="hero dchero" data-section="hero" data-nav-bg="dark">
     <div class="dchero__bg" aria-hidden="true">
       <img src="assets/dc-hero.webp" srcset="assets/dc-hero-1200.webp 1200w, assets/dc-hero.webp 2400w" sizes="100vw"
-           alt="" width="2400" height="1798" fetchpriority="high" data-hero-media>
+           alt="" width="2400" height="1600" fetchpriority="high" data-hero-media>
     </div>
 
     <div class="dchero__body">
@@ -114,31 +134,31 @@
       <p class="p t-muted t-center dcgrowth__lead" data-reveal="up">The expansion of AI, cloud computing and high-density workloads is accelerating demand for critical infrastructure. As projects become increasingly complex and schedules tighten, traditional construction methods face growing limitations.</p>
     </div>
 
-    <!-- Visuels à venir (blocs pleins sur la maquette) : une image par .dcard__img -->
+    <!-- Visuels : illustrations isométriques en points (js/components/iso-dots.js), une scène par carte -->
     <div class="dcgrid">
       <article class="dcard" data-reveal="up">
-        <div class="dcard__img" data-nav-bg="dark"></div>
+        <div class="dcard__img" data-nav-bg="dark" data-iso-dots="schedule" aria-hidden="true"><canvas></canvas></div>
         <div class="dcard__text">
           <h3 class="lead-l">Increasing Schedule Pressure</h3>
           <p class="p t-muted">Project timelines are shrinking while critical equipment can require months of procurement. Anticipating requirements from the earliest design stages is essential to securing delivery milestones.</p>
         </div>
       </article>
       <article class="dcard" data-reveal="up">
-        <div class="dcard__img" data-nav-bg="dark"></div>
+        <div class="dcard__img" data-nav-bg="dark" data-iso-dots="integration" aria-hidden="true"><canvas></canvas></div>
         <div class="dcard__text">
           <h3 class="lead-l">Complex Technical Integration</h3>
           <p class="p t-muted">Cooling, power distribution, structural systems and safety infrastructure must work together. Multiple contractors and interfaces increase the risk of incompatibilities, delays and on-site rework.</p>
         </div>
       </article>
       <article class="dcard" data-reveal="up">
-        <div class="dcard__img" data-nav-bg="dark"></div>
+        <div class="dcard__img" data-nav-bg="dark" data-iso-dots="quality" aria-hidden="true"><canvas></canvas></div>
         <div class="dcard__text">
           <h3 class="lead-l">Uncompromising Quality Requirements</h3>
           <p class="p t-muted">In critical infrastructure, every detail matters. Manufacturing precision, component traceability and assembly validation directly influence installation quality and operational reliability.</p>
         </div>
       </article>
       <article class="dcard" data-reveal="up">
-        <div class="dcard__img" data-nav-bg="dark"></div>
+        <div class="dcard__img" data-nav-bg="dark" data-iso-dots="scale" aria-hidden="true"><canvas></canvas></div>
         <div class="dcard__text">
           <h3 class="lead-l">Deployment at Scale</h3>
           <p class="p t-muted">Operators are developing multi-building and multi-site programmes. Their challenge is to replicate proven solutions, maintain consistent quality and secure predictable delivery across successive projects.</p>
@@ -149,7 +169,7 @@
 </div>
 
 <!-- =========================================================
-     ONE PARTNER — campus 3D et ses 4 points (composant Package 3D, maquette « campus »)
+     ONE PARTNER — package 3D de l'accueil et ses 8 systèmes (composant Package 3D)
      ========================================================= -->
 <section class="factory dcsys" data-section="systems" data-nav-bg="dark">
   <div class="factory__head">
@@ -168,11 +188,11 @@
     </div>
   </div>
 
-  <!-- Composant Package 3D (js/components/package-3d.js), maquette du campus -->
-  <div class="factory__package pack3d" data-pack3d="campus" data-reveal="scale">
+  <!-- Composant Package 3D (js/components/package-3d.js), même maquette que l'accueil -->
+  <div class="factory__package pack3d" data-pack3d data-src="assets/package-3d.json" data-bin="assets/package-3d.bin" data-reveal="scale">
     <div class="pack3d__view" data-p3d-view>
-      <img class="pack3d__poster" decoding="async" src="assets/campus-3d-poster.webp" alt="Data Centre campus: containment and structural systems, cooling and process pipework, power distribution, safety and technical interfaces" width="1080" height="1080" loading="lazy">
-      <canvas class="pack3d__canvas" aria-label="Interactive 3D view of a Data Centre campus and the systems Verdon integrates: hover or tap a system, drag to rotate"></canvas>
+      <img class="pack3d__poster" decoding="async" src="assets/package-3d-poster.webp" alt="VERDON factory-built data hall package and its integrated systems" width="1080" height="1080" loading="lazy">
+      <canvas class="pack3d__canvas" aria-label="Interactive 3D view of a VERDON factory-built data hall package: hover or tap a system, drag to rotate"></canvas>
       <svg class="pack3d__leader" aria-hidden="true"><path data-p3d-path d="" opacity="0"></path><circle data-p3d-dot r="3" opacity="0"></circle></svg>
       <div class="pack3d__markers" data-p3d-markers></div>
       <div class="p3d-cap" data-p3d-cap aria-live="polite"></div>
@@ -305,53 +325,50 @@
   </div>
 </section>
 
-<!-- Cas d'étude collés en haut de l'écran pendant que les partenaires les recouvrent -->
-<div class="dcstack">
-  <!-- =========================================================
-       CAS D'ÉTUDE — carrousel (js/data-center.js) : la carte active au centre, les voisines réduites à 80 %
-       ========================================================= -->
-  <section class="dccases" data-section="cases" data-nav-bg="light" aria-roledescription="carousel" aria-label="Case studies">
-    <div class="dccases__viewport" data-cases>
-      <div class="dccases__track" data-cases-track>
-        <article class="dccase" data-case aria-roledescription="slide" aria-label="1 / 3">
-          <div class="dccase__body">
-            <p class="dccase__text">Our Trade Program allows us to support and collaborate with design professionals. Once you’re enrolled, we’re here to help you with selecting and specifying products, consulting on finishes and customization, and more.</p>
-            <a href="#" class="dccase__link">Voir le cas d’étude →</a>
-          </div>
-          <div class="dccase__img"></div>
-        </article>
-        <article class="dccase" data-case aria-roledescription="slide" aria-label="2 / 3">
-          <div class="dccase__body">
-            <p class="dccase__text">Our Trade Program allows us to support and collaborate with design professionals. Once you’re enrolled, we’re here to help you with selecting and specifying products, consulting on finishes and customization, and more.</p>
-            <a href="#" class="dccase__link">Voir le cas d’étude →</a>
-          </div>
-          <div class="dccase__img"></div>
-        </article>
-        <article class="dccase" data-case aria-roledescription="slide" aria-label="3 / 3">
-          <div class="dccase__body">
-            <p class="dccase__text">Our Trade Program allows us to support and collaborate with design professionals. Once you’re enrolled, we’re here to help you with selecting and specifying products, consulting on finishes and customization, and more.</p>
-            <a href="#" class="dccase__link">Voir le cas d’étude →</a>
-          </div>
-          <div class="dccase__img"></div>
-        </article>
-      </div>
+<!-- =========================================================
+     CAS D'ÉTUDE — carrousel infini (js/data-center.js) : la carte active au centre, les voisines réduites à 80 %
+     ========================================================= -->
+<section class="dccases" data-section="cases" data-nav-bg="light" aria-roledescription="carousel" aria-label="Case studies">
+  <div class="dccases__viewport" data-cases>
+    <div class="dccases__track" data-cases-track>
+      <article class="dccase" data-case aria-roledescription="slide" aria-label="1 / 3">
+        <div class="dccase__body">
+          <p class="dccase__text">Our Trade Program allows us to support and collaborate with design professionals. Once you’re enrolled, we’re here to help you with selecting and specifying products, consulting on finishes and customization, and more.</p>
+          <a href="#" class="dccase__link">Voir le cas d’étude →</a>
+        </div>
+        <div class="dccase__img"></div>
+      </article>
+      <article class="dccase" data-case aria-roledescription="slide" aria-label="2 / 3">
+        <div class="dccase__body">
+          <p class="dccase__text">Our Trade Program allows us to support and collaborate with design professionals. Once you’re enrolled, we’re here to help you with selecting and specifying products, consulting on finishes and customization, and more.</p>
+          <a href="#" class="dccase__link">Voir le cas d’étude →</a>
+        </div>
+        <div class="dccase__img"></div>
+      </article>
+      <article class="dccase" data-case aria-roledescription="slide" aria-label="3 / 3">
+        <div class="dccase__body">
+          <p class="dccase__text">Our Trade Program allows us to support and collaborate with design professionals. Once you’re enrolled, we’re here to help you with selecting and specifying products, consulting on finishes and customization, and more.</p>
+          <a href="#" class="dccase__link">Voir le cas d’étude →</a>
+        </div>
+        <div class="dccase__img"></div>
+      </article>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- =========================================================
-       PARTENAIRES (mêmes logos que l'accueil)
-       ========================================================= -->
-  <section class="partners dcpartners" data-section="partners" data-nav-bg="light">
-    <div class="partners__grid" data-partners>
-      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-atlasedge.webp" alt="AtlasEdge" width="534" height="289" style="--w:170px" loading="lazy"></div>
-      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-data4.webp" alt="Data4" width="298" height="169" style="--w:140px" loading="lazy"></div>
-      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-equinix.svg" alt="Equinix" width="500" height="242" style="--w:168px" loading="lazy"></div>
-      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-ibm.webp" alt="IBM" width="800" height="324" style="--w:166px" loading="lazy"></div>
-      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-lcl.webp" alt="LCL" width="640" height="360" style="--w:150px" loading="lazy"></div>
-      <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-google.webp" alt="Google" width="640" height="216" style="--w:184px" loading="lazy"></div>
-    </div>
-  </section>
-</div>
+<!-- =========================================================
+     PARTENAIRES (mêmes logos que l'accueil)
+     ========================================================= -->
+<section class="partners dcpartners" data-section="partners" data-nav-bg="light">
+  <div class="partners__grid" data-partners>
+    <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-atlasedge.webp" alt="AtlasEdge" width="534" height="289" style="--w:170px" loading="lazy"></div>
+    <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-data4.webp" alt="Data4" width="298" height="169" style="--w:140px" loading="lazy"></div>
+    <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-equinix.svg" alt="Equinix" width="500" height="242" style="--w:168px" loading="lazy"></div>
+    <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-ibm.webp" alt="IBM" width="800" height="324" style="--w:166px" loading="lazy"></div>
+    <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-lcl.webp" alt="LCL" width="640" height="360" style="--w:150px" loading="lazy"></div>
+    <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-google.webp" alt="Google" width="640" height="216" style="--w:184px" loading="lazy"></div>
+  </div>
+</section>
 
 <div class="lower">
   <!-- =========================================================
@@ -488,8 +505,8 @@
         <div class="fcell fcell--line fcell--links">
           <p class="caption">SOCIALS</p>
           <div class="flinks">
-            <div class="flinks__col"><a href="index.html">Home</a><a href="#">About us</a><a href="#">Newsroom</a></div>
-            <div class="flinks__col"><a href="#">Ressources</a><a href="factory-built.html">Factory built</a><a href="data-center.html" aria-current="page">Sectors</a></div>
+            <div class="flinks__col"><a href="index.html">Home</a><a href="about.html">About us</a><a href="#">Newsroom</a></div>
+            <div class="flinks__col"><a href="resources.html">Ressources</a><a href="factory-built.html">Factory built</a><a href="data-center.html" aria-current="page">Sectors</a></div>
             <div class="flinks__col"><a href="#">Systems</a><a href="#">Careers</a></div>
           </div>
         </div>
@@ -545,8 +562,8 @@
 <!-- Menu mobile -->
 <div class="mnav" data-mnav aria-hidden="true">
   <nav class="mnav__links">
-    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTÈMES</a><a href="data-center.html" aria-current="page">SECTEURS</a><a href="#">RÉALISATIONS</a>
-    <a href="#">À PROPOS</a><a href="#">ACTUALITÉS</a><a href="#">RESSOURCES</a><a href="#">CARRIÈRES</a>
+    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTEMS</a><a href="data-center.html" aria-current="page">SECTORS</a><a href="#">PROJECTS</a>
+    <a href="about.html">ABOUT</a><a href="#">NEWS</a><a href="resources.html">RESOURCES</a><a href="#">CAREERS</a>
   </nav>
   <a href="contact.html" class="btn btn--solid" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
 </div>
@@ -563,5 +580,6 @@
 <script src="js/components/europe-map.js" defer></script>
 <script src="js/components/wordmark-dots.js" defer></script>
 <script src="js/components/service-dots.js" defer></script>
+<script src="js/components/iso-dots.js" defer></script>
 </body>
 </html>

@@ -4,7 +4,8 @@
    de la page Factory built (à la place des étoiles), dessiné en canvas : grille de 24 × 16 points sur les cartes.
    Même composant, en pleine vignette et en clair sur fond sombre, sur les vignettes « One integrated chain »
    et les calques du visuel des Steps (grilles de 20 × 25 : la taille est lue dans la grille).
-   Grilles de 24 × 16 sur les pages isométriques du panneau « Industrial scale » (survol : la page entière).
+   Grilles de 24 × 16 sur les pages isométriques du panneau « Industrial scale » (survol : la page entière)
+   et sur les cartes de certification de la page About ; vignettes des fichiers de la page Resources (survol : la carte entière).
    Légende des grilles (ARTS) :
      '#' trait (couleur du texte, --ink)        '+' remplissage (gris, --ink-2)
      'o' trait parcouru par le flux (--ink)      '~' fluide parcouru par le flux (gris, --ink-2)
@@ -173,6 +174,65 @@
       '..............#.#.#.#...',
       '........................',
     ] },
+    // instrumentation et contrôle : le fluide passe sous deux transmetteurs et une vanne de régulation,
+    // leurs signaux remontent jusqu'à l'armoire, dont l'écran et les voyants s'allument
+    instrumentation: { src: [[0, 13]], grid: [
+      '................########',
+      '................#......#',
+      '...ooooooooooooooo~~~~.#',
+      '...o...o....o...#.~~~~.#',
+      '...o...o...ooo..#.o.o..#',
+      '..ooo.ooo.ooooo.#......#',
+      '..ooo.ooo...o...#.#.#..#',
+      '...o...o....o...#.#.#..#',
+      '...o...o....o...#......#',
+      '...o...o....o...########',
+      '...o...o....o...........',
+      '...o..#o#..#o#..........',
+      '###o###o####o###########',
+      '~~~~~~~~~~~~~~~~~~~~~~~~',
+      '########################',
+      '......###..###.....##...',
+    ] },
+    // allée chaude confinée : l'air de la salle traverse les serveurs vers l'allée fermée,
+    // monte et repart par la cheminée vers le plénum
+    hotaisle: { src: [[1, 5], [1, 7], [1, 9], [1, 11], [22, 5], [22, 7], [22, 9], [22, 11]], grid: [
+      '##########~..~##########',
+      '.........#~..~#.........',
+      '.........#~..~#.........',
+      '..########~..~########..',
+      '..#....#..~..~..#....#..',
+      '.~~oooo~~~~..~~~~oooo~~.',
+      '..#....#..~..~..#....#..',
+      '.~~oooo~~~~..~~~~oooo~~.',
+      '..#....#..~..~..#....#..',
+      '.~~oooo~~~~..~~~~oooo~~.',
+      '..#....#..~..~..#....#..',
+      '.~~oooo~~~~..~~~~oooo~~.',
+      '..#....#........#....#..',
+      '..#....#........#....#..',
+      '..######........######..',
+      '########################',
+    ] },
+    // protection incendie : l'eau suit le collecteur sous la dalle, descend aux sprinklers et pleut sous les déflecteurs
+    fire: { src: [[0, 3]], grid: [
+      '........#.......#.......',
+      '........#.......#.......',
+      '.......###.....###......',
+      'ooooooooooooooooooooo...',
+      '....o.......o.......o...',
+      '...#o#.....#o#.....#o#..',
+      '..#ooo#...#ooo#...#ooo#.',
+      '...~.~.....~.~.....~.~..',
+      '..~.~.~...~.~.~...~.~.~.',
+      '...~.~.....~.~.....~.~..',
+      '..~.~.~...~.~.~...~.~.~.',
+      '...~.~.....~.~.....~.~..',
+      '..~.~.~...~.~.~...~.~.~.',
+      '....~.......~.......~...',
+      '........................',
+      '########################',
+    ] },
 
     /* --- cartes « Expertises » --- */
     // sciences de la vie : double hélice d'ADN, le flux court le long des brins
@@ -290,6 +350,25 @@
       '........o......o........',
       '.........oo..oo.........',
       '...........oo...........',
+    ] },
+    // sécurité (MASE, page About) : casque de chantier, le flux part du sommet et descend la coque jusqu'à la visière
+    safety: { src: [[11, 2], [12, 2]], grid: [
+      '........................',
+      '........................',
+      '..........oooo..........',
+      '.......ooo.++.ooo.......',
+      '......o....++....o......',
+      '.....o.....++.....o.....',
+      '....o......++......o....',
+      '....o......++......o....',
+      '...o.......++.......o...',
+      '...o.......++.......o...',
+      '...o.......++.......o...',
+      '..oooooooooooooooooooo..',
+      '.o....................o.',
+      'oooooooooooooooooooooooo',
+      '........................',
+      '........................',
     ] },
     // moins de travaux sur site : grue à tour, le levage passe par la flèche et le câble jusqu'au module
     onsite: { src: [[5, 2]], grid: [
@@ -712,7 +791,7 @@
     const BG = `rgba(${ink.join(',')},0.08)`;
     const canvas = root.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-    const card = root.closest('.gcard, .xcard, .fbpage') || root;
+    const card = root.closest('.gcard, .xcard, .fbpage, .abcert, .rscard') || root;
     const revealEl = root.closest('[data-reveal]');
 
     let W = 0, H = 0, dpr = 1;
