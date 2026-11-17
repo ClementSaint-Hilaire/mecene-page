@@ -103,7 +103,6 @@
   /* ---------- Replié / déplié ----------
      Écran peu haut : si, en haut de page, le menu déplié recouvrirait [data-nav-avoid] (texte du hero),
      la nav reste repliée même en haut de page. */
-  const menu = nav.querySelector('.nav__menu');
   const avoid = document.querySelector('[data-nav-avoid]');
   let cramped = false;
   function measure() {
@@ -118,7 +117,7 @@
 
   let collapsed = null;
   function onScroll() {
-    const c = cramped || window.scrollY > (collapsed ? EXPAND_AT : COLLAPSE_AT);
+    const c = COMPACT || cramped || window.scrollY > (collapsed ? EXPAND_AT : COLLAPSE_AT);
     if (c === collapsed) return;
     collapsed = c;
     nav.classList.toggle('is-collapsed', c);
