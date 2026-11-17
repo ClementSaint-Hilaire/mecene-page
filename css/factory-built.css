@@ -1,0 +1,383 @@
+/* =========================================================
+   Verdon — page Factory built
+   Intégration Figma (node 318:3931) — complète css/style.css
+   (nav, boutons, cartes, « Our process », FAQ, CTA et footer viennent de style.css)
+   ========================================================= */
+
+/* Heading 1 de la maquette : 64 px sur cette page (--fs-4xl de l'accueil : 54 px) */
+.fb-h1 { font-size: 64px; }
+.h1--ink { color: var(--ink); }
+
+/* =========================================================
+   HERO — photo plein cadre, assombrie en bas à gauche (dégradé Figma)
+   ========================================================= */
+.fbhero { background-image: none; }
+.fbhero__bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+/* 8 % de marge en haut : la photo descend en parallaxe pendant que l'intro recouvre le hero */
+.fbhero__bg img { position: absolute; left: 0; top: -8%; width: 100%; height: 108%; object-fit: cover; }
+.fbhero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1500 1080' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.7'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(105.75 19.695 -11.427 61.358 484.64 883.05)'><stop stop-color='rgba(0,0,0,1)' offset='0'/><stop stop-color='rgba(0,0,0,0)' offset='1'/></radialGradient></defs></svg>");
+  background-size: 100% 100%;
+}
+.fbhero__body {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 0;
+  min-height: 1px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 var(--gutter) 64px;
+}
+.fbhero__titles { display: flex; flex-direction: column; gap: 8px; width: 529px; flex-shrink: 0; }
+.fbhero__aside { display: flex; flex-direction: column; gap: 32px; align-items: flex-end; width: 363px; flex-shrink: 0; }
+.fbhero__lead { color: var(--light); }
+
+/* =========================================================
+   INTRO — définition du factory-built
+   ========================================================= */
+.fbintro {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 128px var(--gutter);
+  background: var(--bg-primary);
+}
+.fbintro__inner { position: relative; min-width: 0; padding: 0 32px; }
+.fbintro__inner::before { content: ""; position: absolute; left: 0; top: 0; bottom: 0; width: 1px; background: var(--stroke); transform-origin: top center; }
+.fbintro__text { width: 600px; max-width: 100%; text-transform: uppercase; }
+/* lettres découpées par js/factory-built.js : tertiaire par défaut, primaire une fois atteintes par le scroll */
+.fbintro__char { color: var(--ink-3); transition: color .2s var(--ease-figma); }
+.fbintro__char.is-on { color: var(--ink); }
+.fbintro__sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* =========================================================
+   THE FACTORY-BUILT ADVANTAGE — colonne gauche collante, cartes à droite (cartes .xcard de l'accueil)
+   ========================================================= */
+.fbadv {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 0 var(--gutter) 128px;
+  background: var(--bg-primary);
+}
+.fbadv__left {
+  position: sticky;
+  top: 120px;                   /* sous la nav */
+  flex: 1 0 0;
+  min-width: 1px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding-right: 64px;
+}
+.fbadv__intro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
+.fbadv__lead { max-width: 500px; }
+.fbadv__right { display: flex; flex-direction: column; gap: 64px; width: 527.967px; flex-shrink: 0; }
+.fbadv .xcard__body { flex: 0 1 350px; }
+
+/* =========================================================
+   OUR PROCESS — composant « Our services » de l'accueil (style.css), cartes à pictogramme en points
+   ========================================================= */
+.fbprocess .services__text p + p { margin-top: 1.2em; }
+.fbprocess .gcard { min-height: 440px; }
+.fbprocess .gcard__line img { height: 365px; }       /* frame-104-short.svg */
+
+/* =========================================================
+   ONE INTEGRATED CHAIN — vignettes débordant à droite, qui s'empilent au scroll sous le visuel des Steps
+   (desktop, js/factory-built.js). Colonnes alignées sur celles des Steps : le visuel collant recouvre la 1re vignette.
+   ========================================================= */
+.fbchain {
+  position: relative;
+  display: flex;
+  gap: 128px;
+  align-items: flex-start;
+  padding: 128px var(--gutter) 32px;
+  background: var(--bg-primary);
+  overflow: clip;
+}
+@supports not (overflow: clip) { .fbchain { overflow: hidden; } }
+.fbchain__aside { width: 300px; flex-shrink: 0; }
+.fbchain__main { flex: 1 0 0; min-width: 1px; display: flex; flex-direction: column; gap: 64px; }
+/* à droite, les vignettes débordent jusqu'au bord de l'écran */
+.fbchain__tiles { clip-path: inset(-100px -100vw -100px 0); }   /* marges verticales : apparition par le bas (data-reveal="up") */
+.fbchain__track { display: flex; gap: 16px; width: max-content; }
+.fbtile { width: 200px; height: 250px; flex-shrink: 0; background: var(--ink); translate: var(--stack-x, 0px) 0; }   /* --stack-x : empilement (js) */
+/* illustration en points (dessin 20 × 25, js/components/service-dots.js), en clair sur le fond sombre :
+   la matrice remplit la vignette, le dessin en occupe 70 % au centre (--dots-scale) ;
+   même chose sur les calques du visuel des Steps (couleurs en hexadécimal : lues par le canvas) */
+.fbtile, .fbsteps__slide { --dots-ink: #ffffff; --dots-muted: #969593; --dots-scale: .7; }
+.fbtile .gdots, .fbsteps__slide .gdots { width: 100%; height: 100%; }
+/* pile terminée : la section repart, seul le visuel collant des Steps reste à l'écran */
+.fbchain.is-stacked .fbtile { visibility: hidden; }
+
+/* =========================================================
+   STEPS — sommaire collant · règle graduée · visuel collant de l'étape en cours (js/factory-built.js)
+   ========================================================= */
+.fbsteps {
+  position: relative;
+  display: flex;
+  gap: 128px;
+  align-items: stretch;
+  padding: 0 var(--gutter) 64px;
+  background: var(--bg-primary);
+}
+.fbsteps__nav { width: 300px; flex-shrink: 0; padding-top: 128px; }
+.fbsteps__sticky { position: sticky; top: 120px; display: flex; flex-direction: column; gap: 24px; }
+.fbsteps__list { display: flex; flex-direction: column; }
+.fbsteps__head {
+  padding: 6px;
+  border-top: 1px solid var(--stroke);
+  background: var(--bg-secondary);
+  font-size: var(--fs-xs);
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--ink-2);
+}
+.fbsteps__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  border-bottom: 1px solid var(--stroke);
+  font-size: var(--fs-s);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+.fbsteps__label { transition: transform .45s var(--ease-expo); }
+/* pastille de l'étape active : couleur de la règle graduée à cet endroit (lilas → pêche → ambre → vert) */
+.fbsteps__dot {
+  position: absolute;
+  left: 6px;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin-top: -3px;
+  border-radius: 50%;
+  background: var(--dot, var(--green));
+  opacity: 0;
+  transform: scale(0);
+  transition: opacity .3s var(--ease-figma), transform .45s var(--ease-expo);
+}
+.fbsteps__link:nth-of-type(1) { --dot: color-mix(in srgb, var(--lilac) 75%, var(--peach)); }
+.fbsteps__link:nth-of-type(2) { --dot: color-mix(in srgb, var(--lilac) 25%, var(--peach)); }
+.fbsteps__link:nth-of-type(3) { --dot: color-mix(in srgb, var(--peach) 75%, var(--amber)); }
+.fbsteps__link:nth-of-type(4) { --dot: color-mix(in srgb, var(--peach) 25%, var(--amber)); }
+.fbsteps__link:nth-of-type(5) { --dot: color-mix(in srgb, var(--amber) 75%, var(--green)); }
+.fbsteps__link:nth-of-type(6) { --dot: color-mix(in srgb, var(--amber) 25%, var(--green)); }
+.fbsteps__link:hover .fbsteps__dot, .fbsteps__link:focus-visible .fbsteps__dot, .fbsteps__link.is-active .fbsteps__dot { opacity: 1; transform: none; }
+.fbsteps__link:hover .fbsteps__label, .fbsteps__link:focus-visible .fbsteps__label, .fbsteps__link.is-active .fbsteps__label { transform: translateX(12px); }
+
+.fbsteps__body { position: relative; flex: 1 0 0; min-width: 1px; display: flex; align-items: flex-start; padding: 0 84px; }
+.fbsteps__ruler { position: relative; flex-shrink: 0; align-self: stretch; width: 24px; }
+.fbsteps__ruler img { width: 24px; height: 2401px; }
+/* graduations remplies au dégradé jusqu'à l'étape en cours (clip-path piloté par le scroll) */
+.fbsteps__fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 2401px;
+  background: linear-gradient(180deg, var(--lilac), var(--peach) 33%, var(--amber) 66%, var(--green));
+  -webkit-mask: url("../assets/frame-427321029.svg") 0 0 / 100% 100% no-repeat;
+          mask: url("../assets/frame-427321029.svg") 0 0 / 100% 100% no-repeat;
+  clip-path: inset(0 0 100% 0);
+}
+/* visuel (200 × 250, maquette : 112 px sous le haut de la section) : collé au milieu de l'écran pendant les étapes */
+.fbsteps__visual { position: absolute; left: 0; top: 0; bottom: 0; width: 200px; z-index: 1; pointer-events: none; }
+.fbsteps__frame { position: sticky; top: calc(50vh - 125px); width: 200px; height: 250px; margin-top: 112px; overflow: hidden; background: var(--ink); }
+/* desktop animé (.is-linked, js/factory-built.js) : la colonne remonte jusqu'à la rangée de « One integrated chain »,
+   le visuel part de la 1re vignette (--chain-lead : écart entre la rangée et le haut des Steps) */
+.fbsteps.is-linked .fbsteps__visual { top: calc(-1 * var(--chain-lead, 0px)); }
+.fbsteps.is-linked .fbsteps__frame { margin-top: 0; top: calc(50vh - 125px - var(--pin-shift, 0px)); }
+/* --pin-shift : décalage laissé par l'épinglage de .fbflow, que position: sticky ignore (js/factory-built.js) */
+.fbsteps.is-linked .fbsteps__sticky { top: calc(120px - var(--pin-shift, 0px)); }
+/* calques empilés comme les vignettes, le 1er dessus (z-index posé par js/factory-built.js) ;
+   à l'étape suivante, le calque du dessus se relève et découvre le suivant (et redescend en remontant) */
+.fbsteps__slide { position: absolute; inset: 0; background: var(--ink); clip-path: inset(0); transition: clip-path .9s var(--ease-expo); }
+.fbsteps__slide.is-past { clip-path: inset(0 0 100% 0); }
+
+.fbsteps__items { flex: 1 0 0; min-width: 1px; margin: 0; padding: 0; list-style: none; }
+.fbstep {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  height: 400px;
+  padding-left: 256px;
+  border-bottom: 1px solid var(--stroke);
+  scroll-margin-top: calc(50vh - 200px);   /* lien du sommaire : étape centrée à l'écran */
+}
+.fbstep__text { display: flex; flex-direction: column; gap: 8px; }
+.fbstep__value { font-weight: 500; letter-spacing: 0; }
+
+/* =========================================================
+   INDUSTRIAL SCALE (sombre)
+   ========================================================= */
+.fbscale {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  column-gap: 128px;
+  row-gap: 48px;
+  padding: 128px var(--gutter) 160px;
+  background: var(--bg-dark);
+  color: var(--light);
+}
+.fbscale__intro { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; align-self: start; }
+.fbscale__intro .h2 { white-space: nowrap; }
+.fbscale__text { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
+.fbscale__text .p p + p { margin-top: 1.2em; }
+.fbscale__panel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 660px;
+  align-self: start;
+  container-type: inline-size;   /* pages réduites quand la colonne rétrécit (@container plus bas) */
+}
+
+/* Trois pages sombres en vue isométrique, posées sur le fond de la section : projection orthogonale
+   (rotations 3D sans perspective), légèrement en plongée, bord gauche des pages vers le fond.
+   Empilées de la plus éloignée (--i: 0, en haut à droite) à la plus proche (en bas à gauche),
+   chacune décalée de --sx / --sy à l'écran (projection centrée sur la page).
+   Illustration à gauche, texte à droite : au repos, le texte de chaque page dépasse de celle de devant
+   (--sx plus large que la colonne de texte).
+   Au survol, la feuille glisse dans le plan de sa page (verticale à l'écran) : elle monte de --lift,
+   les pages de devant descendent de --drop et découvrent son illustration, parcourue par le flux ;
+   la page de devant ne monte que de --lift-front. Survol sur les feuilles, là où elles sont vues. */
+.fbpages {
+  --pw: 440px; --ph: 400px;        /* page, avant projection */
+  --sx: 205px; --sy: 54px;
+  --rx: -22deg; --ry: -30deg;
+  --lift: 72px; --drop: 22px; --lift-front: 16px;
+  position: relative;
+  flex: none;
+  width: calc(var(--pw) + 2 * var(--sx));
+  height: calc(var(--ph) + 2 * var(--sy));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  translate: 0 28px;               /* place au-dessus pour la page du fond qui monte */
+}
+.fbpage {
+  position: absolute;
+  right: calc(var(--i) * var(--sx));
+  top: calc(var(--i) * var(--sy));
+  width: var(--pw);
+  height: var(--ph);
+  transform: rotateX(var(--rx)) rotateY(var(--ry));
+  pointer-events: none;
+  /* illustration en clair sur la page sombre (couleurs en hexadécimal : lues par le canvas) */
+  --dots-ink: #ffffff;
+  --dots-muted: #969593;
+}
+.fbpage__sheet {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 16px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px;
+  background: #262523;
+  border: 1px solid rgba(255, 255, 255, .12);
+  box-shadow: 0 40px 64px -32px rgba(0, 0, 0, .7);
+  color: var(--light);
+  pointer-events: auto;
+  transition: translate .8s var(--ease-expo), border-color .8s var(--ease-expo);
+}
+.fbpage__text { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.fbpage__num { margin-bottom: 8px; color: var(--light-2); }
+.fbpage__title { margin: 0; font-size: var(--fs-l); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; text-transform: uppercase; }
+.fbpage__desc { font-size: var(--fs-m); line-height: 1.25; letter-spacing: -0.01em; color: var(--light-2); }
+.fbpage__dots { width: 168px; height: 112px; }   /* grille 24 × 16 au pas de 7 px */
+
+.fbpage:hover .fbpage__sheet { translate: 0 calc(-1 * var(--lift)); border-color: rgba(255, 255, 255, .3); }
+.fbpage:hover ~ .fbpage .fbpage__sheet { translate: 0 var(--drop); }
+.fbpage:last-child:hover .fbpage__sheet { translate: 0 calc(-1 * var(--lift-front)); }
+
+/* colonne étroite (desktop ≤ 1280 px, tablette) : pages réduites */
+@container (max-width: 800px) { .fbpages { scale: .88; } }
+@container (max-width: 700px) { .fbpages { scale: .75; } }
+@container (max-width: 600px) { .fbpages { scale: .64; } }
+
+/* ---------- Reveal (js/components/reveal.js) ---------- */
+.js [data-reveal="fbintro"]::before { transform: scaleY(0); transition: transform 1.3s cubic-bezier(.87,0,.13,1); }
+.js [data-reveal="fbintro"].is-in::before { transform: none; }
+/* pages d'« Industrial scale » : elles se posent l'une après l'autre */
+.js [data-reveal="page"] { opacity: 0; translate: 0 -40px; transition: opacity .8s var(--ease-expo), translate 1.2s var(--ease-expo); transition-delay: calc(var(--d, 0s) + .5s); }
+.js [data-reveal="page"].is-in { opacity: 1; translate: none; }
+
+/* =========================================================
+   RESPONSIVE (déduit — pas de maquette tablette/mobile fournie)
+   ========================================================= */
+@media (max-width: 1280px) {
+  .fbchain, .fbsteps { gap: 64px; }
+  .fbsteps__body { padding: 0 40px; }
+  .fbstep { padding-left: 240px; }
+  .fbscale__intro .h2 { white-space: normal; }
+}
+
+@media (max-width: 1100px) {
+  .fbadv__right { width: 440px; }
+  .fbchain__aside, .fbsteps__nav { width: 220px; }
+}
+
+/* Tablette */
+@media (max-width: 991px) {
+  .fb-h1 { font-size: var(--fs-4xl); }
+
+  .fbhero__body { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 40px; padding-bottom: 96px; }
+  .fbhero__titles, .fbhero__aside { width: 100%; max-width: 560px; }
+  .fbhero__aside { align-items: flex-start; }
+
+  .fbintro { padding: 96px var(--gutter); }
+
+  .fbadv { flex-direction: column; gap: 64px; padding-bottom: 96px; }
+  .fbadv__left { position: relative; top: auto; flex: none; width: 100%; padding-right: 0; }
+  .fbadv__right { width: 100%; }
+
+  .fbchain { flex-direction: column; gap: 32px; padding-top: 96px; }
+  .fbchain__aside { width: auto; max-width: 480px; }
+  .fbchain__main { flex: none; width: 100%; gap: 40px; }
+  /* scroll horizontal natif */
+  .fbchain__tiles { margin: 0 calc(-1 * var(--gutter)); padding: 0 var(--gutter); overflow-x: auto; scrollbar-width: none; clip-path: none; }
+  .fbchain__tiles::-webkit-scrollbar { display: none; }
+
+  .fbsteps { flex-direction: column; gap: 48px; }
+  .fbsteps__nav { width: 100%; max-width: 420px; padding-top: 96px; }
+  .fbsteps__sticky { position: relative; top: auto; }
+  .fbsteps__body { padding: 0; }
+  .fbsteps__visual { display: none; }
+  .fbsteps__ruler img, .fbsteps__fill { height: 100%; }
+  .fbstep { height: auto; padding: 64px 0 64px 48px; }
+
+  .fbscale { grid-template-columns: minmax(0, 1fr); padding: 96px var(--gutter); }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .fbhero__body { padding-bottom: 72px; }
+  .fbintro__inner { padding: 0 0 0 20px; }
+  .fbtile { width: 160px; height: 200px; }
+  .fbsteps__ruler { display: none; }
+  .fbstep { gap: 20px; padding: 48px 0; }
+  .fbscale__panel { height: auto; }
+  /* pages à plat, l'une sous l'autre, sans survol */
+  .fbpages { --lift: 0px; --drop: 0px; --lift-front: 0px; display: flex; flex-direction: column; gap: 16px; width: 100%; height: auto; translate: none; scale: none; }
+  .fbpage { position: relative; right: auto; top: auto; width: auto; height: auto; transform: none; }
+  .fbpage__sheet { position: relative; flex-direction: column; box-shadow: none; }
+}

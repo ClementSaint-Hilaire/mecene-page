@@ -1,0 +1,835 @@
+<!doctype html>
+<html lang="fr" data-smooth-scroll>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Resources — Verdon</title>
+  <meta name="description" content="Verdon resource library: brochures, technical datasheets, CAD and BIM files, guides, case studies, certificates and media kit to download.">
+  <script>document.documentElement.classList.add("js","gt-ready");</script>
+  <link rel="stylesheet" href="css/components/gradient-text.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/resources.css">
+</head>
+<body>
+
+<!-- =========================================================
+     NAV — composant js/components/nav.js (même barre que l'accueil).
+     data-nav-compact : pastilles dès le haut de page, comme sur la maquette.
+     ========================================================= -->
+<header class="nav is-collapsed" data-nav data-nav-compact>
+  <a href="index.html" class="nav__logo" aria-label="Verdon — home">
+    <img decoding="async" class="nav__ink nav__ink--light" src="assets/logo.svg" alt="" width="347" height="24">
+    <img decoding="async" class="nav__ink nav__ink--dark" src="assets/logo-dark.svg" alt="" width="347" height="24">
+  </a>
+
+  <div class="nav__slot" data-nav-slot>
+    <nav class="nav__menu" aria-label="Main navigation">
+      <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTEMS</span></a>
+      <div class="nav__group" style="--i:2" data-nav-group>
+        <button class="nav__item" type="button" aria-expanded="false" aria-controls="nav-sectors" data-nav-group-toggle><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTORS</span></button>
+        <div class="nav__sub" id="nav-sectors">
+          <div class="nav__sublist">
+            <a href="data-center.html" class="nav__item" style="--j:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">DATA CENTER</span></a>
+            <a href="#" class="nav__item" style="--j:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SCIENCE &amp; PHARMA</span></a>
+            <a href="#" class="nav__item" style="--j:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ENERGY</span></a>
+            <a href="#" class="nav__item" style="--j:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SEMICONDUCTORS</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
+      <a href="about.html" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
+      <a href="newsroom.html" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+      <a href="resources.html" class="nav__item is-active" aria-current="page" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
+      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
+    </nav>
+
+    <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+      <span class="nav__dots" aria-hidden="true"></span>
+    </button>
+
+    <div class="nav__panel" id="nav-panel" data-nav-panel>
+      <button class="nav__close" type="button" data-nav-close>CLOSE</button>
+      <img decoding="async" class="nav__rule" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <nav class="nav__plist" aria-label="Main navigation">
+        <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTEMS</span></a>
+        <div class="nav__group" style="--i:2" data-nav-group>
+          <button class="nav__item" type="button" aria-expanded="false" aria-controls="nav-sectors-panel" data-nav-group-toggle><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTORS</span></button>
+          <div class="nav__sub" id="nav-sectors-panel">
+            <div class="nav__sublist">
+              <a href="data-center.html" class="nav__item" style="--j:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">DATA CENTER</span></a>
+              <a href="#" class="nav__item" style="--j:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SCIENCE &amp; PHARMA</span></a>
+              <a href="#" class="nav__item" style="--j:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ENERGY</span></a>
+              <a href="#" class="nav__item" style="--j:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SEMICONDUCTORS</span></a>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
+        <a href="about.html" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
+        <a href="newsroom.html" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+        <a href="resources.html" class="nav__item is-active" aria-current="page" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
+        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
+      </nav>
+      <img decoding="async" class="nav__rule nav__rule--end" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <div class="nav__contact">
+        <p>connect with us:</p>
+        <a href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav__spacer"></div>
+
+  <div class="nav__right">
+    <button class="nav__lang" type="button" aria-label="Change language">
+      <span>EN</span>
+      <span class="nav__chev" aria-hidden="true">
+        <img decoding="async" class="nav__ink nav__ink--light" src="assets/frame.svg" alt="" width="20" height="20">
+        <img decoding="async" class="nav__ink nav__ink--dark" src="assets/frame-dark.svg" alt="" width="20" height="20">
+      </span>
+    </button>
+    <a href="contact.html" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" data-burger>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main>
+  <!-- =========================================================
+       EN-TÊTE — nombre de fichiers, titre, présentation (même composition que la page Contact)
+       ========================================================= -->
+  <section class="rshead" data-section="resources-head" data-nav-bg="light">
+    <div class="rshead__row" data-reveal="rshead">
+      <div class="rshead__info" data-hero-fade>
+        <p class="caption">DOWNLOAD CENTRE</p>
+        <p class="rshead__val"><span data-rs-total>34</span> documents and assets</p>
+      </div>
+      <h1 class="h1 rshead__title" data-gt-lines style="--gt-delay:0.45s">Resource<br>library</h1>
+      <p class="p t-muted rshead__lead" data-hero-fade>Brochures, technical datasheets, drawings, guides, certificates and media assets: everything you need to assess our systems and integrate them into your projects.</p>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       BIBLIOTHÈQUE — recherche, catégories, filtres (colonne collante), tri, résultats (js/resources.js)
+       Une carte [data-rs-item] par fichier : data-category, data-sectors, data-format, data-date, data-keywords (voir README)
+       ========================================================= -->
+  <section class="rsbody" data-section="resources" data-nav-bg="light" data-resources>
+    <form class="rssearch" role="search" data-reveal="up">
+      <label class="rs-sr" for="rs-q">Search the resources</label>
+      <span class="rssearch__icon" aria-hidden="true"></span>
+      <input class="rssearch__input" id="rs-q" type="search" name="q" placeholder="Search a document, a system, a sector…" autocomplete="off" spellcheck="false" data-rs-search>
+      <kbd class="rssearch__key" title="Press / to search">/</kbd>
+      <button class="rssearch__clear" type="button" data-rs-clear>CLEAR</button>
+    </form>
+
+    <fieldset class="rstabs" data-reveal="up">
+      <legend class="rs-sr">Category</legend>
+      <label class="rstab"><input type="radio" name="category" value="all" checked><span class="rstab__label">ALL<sup class="rstab__n" data-rs-n>34</sup></span></label>
+      <label class="rstab"><input type="radio" name="category" value="brochures"><span class="rstab__label">BROCHURES<sup class="rstab__n" data-rs-n>6</sup></span></label>
+      <label class="rstab"><input type="radio" name="category" value="datasheets"><span class="rstab__label">DATASHEETS<sup class="rstab__n" data-rs-n>9</sup></span></label>
+      <label class="rstab"><input type="radio" name="category" value="cad"><span class="rstab__label">CAD &amp; BIM<sup class="rstab__n" data-rs-n>3</sup></span></label>
+      <label class="rstab"><input type="radio" name="category" value="guides"><span class="rstab__label">GUIDES<sup class="rstab__n" data-rs-n>4</sup></span></label>
+      <label class="rstab"><input type="radio" name="category" value="case-studies"><span class="rstab__label">CASE STUDIES<sup class="rstab__n" data-rs-n>2</sup></span></label>
+      <label class="rstab"><input type="radio" name="category" value="certificates"><span class="rstab__label">CERTIFICATES<sup class="rstab__n" data-rs-n>3</sup></span></label>
+      <label class="rstab"><input type="radio" name="category" value="media"><span class="rstab__label">MEDIA KIT<sup class="rstab__n" data-rs-n>7</sup></span></label>
+    </fieldset>
+
+    <aside class="rsaside" aria-label="Filters">
+      <button class="rsaside__toggle" type="button" aria-expanded="false" aria-controls="rs-filters" data-rs-filters-toggle>
+        <span>FILTERS</span><span class="rsaside__active" data-rs-active></span><span class="rsaside__chev" aria-hidden="true"></span>
+      </button>
+      <div class="rsfilters" id="rs-filters" data-rs-filters>
+        <fieldset class="rsgroup" data-reveal="up">
+          <legend class="rsgroup__legend caption">SECTOR</legend>
+          <div class="rsgroup__list">
+            <label class="rsfilt"><input type="checkbox" name="sector" value="datacenter"><span class="rsfilt__label">Data center</span><span class="rsfilt__n" data-rs-n>29</span></label>
+            <label class="rsfilt"><input type="checkbox" name="sector" value="pharma"><span class="rsfilt__label">Science &amp; Pharma</span><span class="rsfilt__n" data-rs-n>21</span></label>
+            <label class="rsfilt"><input type="checkbox" name="sector" value="energy"><span class="rsfilt__label">Energy</span><span class="rsfilt__n" data-rs-n>25</span></label>
+            <label class="rsfilt"><input type="checkbox" name="sector" value="semiconductors"><span class="rsfilt__label">Semiconductors</span><span class="rsfilt__n" data-rs-n>23</span></label>
+          </div>
+        </fieldset>
+        <fieldset class="rsgroup" data-reveal="up">
+          <legend class="rsgroup__legend caption">FORMAT</legend>
+          <div class="rsgroup__list">
+            <label class="rsfilt"><input type="checkbox" name="format" value="pdf"><span class="rsfilt__label">PDF</span><span class="rsfilt__n" data-rs-n>24</span></label>
+            <label class="rsfilt"><input type="checkbox" name="format" value="cad"><span class="rsfilt__label">CAD / BIM</span><span class="rsfilt__n" data-rs-n>3</span></label>
+            <label class="rsfilt"><input type="checkbox" name="format" value="image"><span class="rsfilt__label">Images</span><span class="rsfilt__n" data-rs-n>6</span></label>
+            <label class="rsfilt"><input type="checkbox" name="format" value="zip"><span class="rsfilt__label">ZIP archive</span><span class="rsfilt__n" data-rs-n>1</span></label>
+          </div>
+        </fieldset>
+        <button class="rsreset" type="button" data-rs-reset data-reveal="up" disabled>Reset all filters</button>
+      </div>
+      <div class="rshelp" data-reveal="up">
+        <h2 class="lead-m">Can’t find a document?</h2>
+        <p class="p t-muted">Drawings, specifications, test reports and project references are available on request.</p>
+        <a href="contact.html#contact-form" class="btn btn--ink" data-btn><span class="btn__label" data-gt>REQUEST A DOCUMENT</span></a>
+      </div>
+    </aside>
+
+    <div class="rsbar" data-reveal="up">
+      <p class="rsbar__count" data-rs-count>34 resources</p>
+      <div class="rsbar__tools">
+        <div class="rssort">
+          <label class="caption" for="rs-sort">SORT BY</label>
+          <select class="rssort__select" id="rs-sort" data-rs-sort>
+            <option value="new">Newest first</option>
+            <option value="old">Oldest first</option>
+            <option value="az">Title A–Z</option>
+          </select>
+        </div>
+        <div class="rsview" role="group" aria-label="Display">
+          <button class="rsview__btn" type="button" aria-pressed="true" data-rs-view="grid" title="Grid view"><span class="rs-sr">Grid view</span><span class="rsview__icon rsview__icon--grid" aria-hidden="true"></span></button>
+          <button class="rsview__btn" type="button" aria-pressed="false" data-rs-view="list" title="List view"><span class="rs-sr">List view</span><span class="rsview__icon rsview__icon--list" aria-hidden="true"></span></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="rsresults" data-rs-results>
+      <h2 class="rs-sr">Resources</h2>
+      <div class="rsgrid" data-rs-grid>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="brochures" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-10-06" data-keywords="company profile presentation overview group sites capabilities">
+          <div class="rscard__thumb"><span class="rscard__new">NEW</span><div class="gdots" data-service-dots="fb-repeat" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">BROCHURE</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Verdon company brochure</h3>
+            <p class="p t-muted rscard__desc">Engineering and off-site manufacturing of technical systems for complex infrastructure: our sites, our capabilities and how we work.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>8.4 MB</span><time datetime="2026-10-06">Oct 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/verdon-company-brochure.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="brochures" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-09-15" data-keywords="prefabrication prefabricated modular modules off-site offsite factory built">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="scale" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">BROCHURE</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Factory-built systems</h3>
+            <p class="p t-muted rscard__desc">How we design, manufacture, test and deliver prefabricated modules, ready to be integrated on site.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>6.1 MB</span><time datetime="2026-09-15">Sep 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/verdon-factory-built.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="brochures" data-sectors="datacenter" data-format="pdf" data-date="2026-06-10" data-keywords="datacenter data centre hyperscale colocation data hall campus">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="datacenter" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">BROCHURE</span><span>DATA CENTER</span></p>
+            <h3 class="rscard__title" data-rs-title>Data center sector brochure</h3>
+            <p class="p t-muted rscard__desc">Cooling pipework, aisle containment, liquid cooling and electrical systems for data halls and campuses.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>5.2 MB</span><time datetime="2026-06-10">Jun 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/verdon-data-center.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="brochures" data-sectors="pharma" data-format="pdf" data-date="2026-04-22" data-keywords="pharmaceutical life sciences biotech gmp clean utilities">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="pharma" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">BROCHURE</span><span>SCIENCE &amp; PHARMA</span></p>
+            <h3 class="rscard__title" data-rs-title>Science &amp; Pharma sector brochure</h3>
+            <p class="p t-muted rscard__desc">Process skids, clean utilities and instrumentation for regulated production environments.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>4.8 MB</span><time datetime="2026-04-22">Apr 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/verdon-science-pharma.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="brochures" data-sectors="energy" data-format="pdf" data-date="2026-03-18" data-keywords="power grid substation generation electricity">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="energy" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">BROCHURE</span><span>ENERGY</span></p>
+            <h3 class="rscard__title" data-rs-title>Energy sector brochure</h3>
+            <p class="p t-muted rscard__desc">Electrical infrastructure, pipework and support structures for power generation and grid projects.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>4.5 MB</span><time datetime="2026-03-18">Mar 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/verdon-energy.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="brochures" data-sectors="semiconductors" data-format="pdf" data-date="2026-02-11" data-keywords="semiconductor fab cleanroom chips wafer">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="semiconductor" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">BROCHURE</span><span>SEMICONDUCTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Semiconductors sector brochure</h3>
+            <p class="p t-muted rscard__desc">Utilities, process pipework and modular systems for fabs and cleanroom environments.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>4.3 MB</span><time datetime="2026-02-11">Feb 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/verdon-semiconductors.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="datasheets" data-sectors="pharma energy semiconductors" data-format="pdf" data-date="2026-09-02" data-keywords="skid pump tank heat exchanger frame process">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="skid" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">DATASHEET</span><span>SCIENCE &amp; PHARMA · ENERGY · SEMICONDUCTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Process skids</h3>
+            <p class="p t-muted rscard__desc">Tanks, pumps and heat exchangers assembled on a common frame and tested in our workshop before delivery.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>1.8 MB</span><time datetime="2026-09-02">Sep 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/datasheet-process-skids.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="datasheets" data-sectors="datacenter" data-format="pdf" data-date="2026-10-20" data-keywords="liquid cooling cdu manifold cold plate direct-to-chip high density">
+          <div class="rscard__thumb"><span class="rscard__new">NEW</span><div class="gdots" data-service-dots="liquid" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">DATASHEET</span><span>DATA CENTER</span></p>
+            <h3 class="rscard__title" data-rs-title>Liquid cooling assemblies</h3>
+            <p class="p t-muted rscard__desc">Manifolds, secondary loops and cold-plate connections for high-density racks.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>2.1 MB</span><time datetime="2026-10-20">Oct 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/datasheet-liquid-cooling.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="datasheets" data-sectors="datacenter" data-format="pdf" data-date="2026-05-14" data-keywords="containment airflow aisle doors roof panels">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="aisle" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">DATASHEET</span><span>DATA CENTER</span></p>
+            <h3 class="rscard__title" data-rs-title>Cold aisle containment</h3>
+            <p class="p t-muted rscard__desc">Modular panels, doors and roofs sized to your rack layout to separate cold and hot air.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>1.4 MB</span><time datetime="2026-05-14">May 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/datasheet-cold-aisle-containment.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="datasheets" data-sectors="datacenter" data-format="pdf" data-date="2026-07-08" data-keywords="containment chimney exhaust airflow">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="hotaisle" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">DATASHEET</span><span>DATA CENTER</span></p>
+            <h3 class="rscard__title" data-rs-title>Hot aisle containment</h3>
+            <p class="p t-muted rscard__desc">Enclosed hot aisles and exhaust chimneys that return warm air straight to the cooling units.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>1.3 MB</span><time datetime="2026-07-08">Jul 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/datasheet-hot-aisle-containment.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="datasheets" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-03-04" data-keywords="pipe rack steel structure supports en 1090 loads">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="support" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">DATASHEET</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Pipe supports &amp; racks</h3>
+            <p class="p t-muted rscard__desc">Steel pipe racks and supports manufactured to EN 1090, with load tables and typical arrangements.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>3.2 MB</span><time datetime="2026-03-04">Mar 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/datasheet-pipe-supports.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="datasheets" data-sectors="datacenter energy semiconductors" data-format="pdf" data-date="2026-01-27" data-keywords="lv switchboard electrical distribution panel breakers">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="lowvoltage" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">DATASHEET</span><span>DATA CENTER · ENERGY · SEMICONDUCTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Low-voltage switchboards</h3>
+            <p class="p t-muted rscard__desc">Distribution switchboards assembled, wired and tested in the factory.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>1.6 MB</span><time datetime="2026-01-27">Jan 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/datasheet-lv-switchboards.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="datasheets" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-08-19" data-keywords="piping spools welding cooling water">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="pipework" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">DATASHEET</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Prefabricated pipework</h3>
+            <p class="p t-muted rscard__desc">Spools and pipework modules for cooling, process and utility networks.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>2.3 MB</span><time datetime="2026-08-19">Aug 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/datasheet-prefabricated-pipework.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="datasheets" data-sectors="pharma energy semiconductors" data-format="pdf" data-date="2026-06-24" data-keywords="instrumentation control valves transmitters cabinet automation">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="instrumentation" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">DATASHEET</span><span>SCIENCE &amp; PHARMA · ENERGY · SEMICONDUCTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Instrumentation &amp; control</h3>
+            <p class="p t-muted rscard__desc">Transmitters, control valves and cabinets, wired and loop-checked before shipping.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>1.2 MB</span><time datetime="2026-06-24">Jun 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/datasheet-instrumentation.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="datasheets" data-sectors="datacenter" data-format="pdf" data-date="2026-02-03" data-keywords="sprinkler fire protection safety">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="fire" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">DATASHEET</span><span>DATA CENTER</span></p>
+            <h3 class="rscard__title" data-rs-title>Fire protection systems</h3>
+            <p class="p t-muted rscard__desc">Sprinkler mains and prefabricated distribution for technical buildings.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>1.1 MB</span><time datetime="2026-02-03">Feb 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/datasheet-fire-protection.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="cad" data-sectors="datacenter pharma energy semiconductors" data-format="cad" data-date="2026-07-21" data-keywords="dwg autocad drawings details cad">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="fb-standard" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">CAD &amp; BIM</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Pipe supports — standard details</h3>
+            <p class="p t-muted rscard__desc">AutoCAD details of our standard supports, ready to insert in your drawings.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">DWG</span><span>12.6 MB</span><time datetime="2026-07-21">Jul 2026</time></p>
+            <a class="rscard__dl rscard__dl--request" href="contact.html#contact-form"><span class="rscard__dl-label">REQUEST</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="cad" data-sectors="datacenter" data-format="cad" data-date="2026-09-28" data-keywords="bim revit rvt ifc families model coordination 3d">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="engineer" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">CAD &amp; BIM</span><span>DATA CENTER</span></p>
+            <h3 class="rscard__title" data-rs-title>Aisle containment — BIM objects</h3>
+            <p class="p t-muted rscard__desc">IFC and Revit families of our containment systems for your coordination model.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">IFC</span><span>18.4 MB</span><time datetime="2026-09-28">Sep 2026</time></p>
+            <a class="rscard__dl rscard__dl--request" href="contact.html#contact-form"><span class="rscard__dl-label">REQUEST</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="cad" data-sectors="datacenter energy semiconductors" data-format="cad" data-date="2026-05-06" data-keywords="dwg autocad electrical schematic one-line diagram layout">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="power" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">CAD &amp; BIM</span><span>DATA CENTER · ENERGY · SEMICONDUCTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Electrical rooms — single-line diagrams</h3>
+            <p class="p t-muted rscard__desc">Typical single-line diagrams and switchboard layouts for prefabricated electrical rooms.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">DWG</span><span>4.8 MB</span><time datetime="2026-05-06">May 2026</time></p>
+            <a class="rscard__dl rscard__dl--request" href="contact.html#contact-form"><span class="rscard__dl-label">REQUEST</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="guides" data-sectors="datacenter energy" data-format="pdf" data-date="2026-11-03" data-keywords="white paper schedule programme risk lead time off-site offsite comparison">
+          <div class="rscard__thumb"><span class="rscard__new">NEW</span><div class="gdots" data-service-dots="leadtime" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">GUIDE</span><span>DATA CENTER · ENERGY</span></p>
+            <h3 class="rscard__title" data-rs-title>Factory-built vs. site-built: managing schedule risk</h3>
+            <p class="p t-muted rscard__desc">When moving work off site shortens a programme, and how to plan for it from the design stage.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>3.4 MB</span><time datetime="2026-11-03">Nov 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/factory-built-vs-site-built-managing-schedule-risk.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="guides" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-05-27" data-keywords="white paper design for manufacturing dfma tolerances interfaces">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="manufacture" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">GUIDE</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Designing systems for off-site manufacturing</h3>
+            <p class="p t-muted rscard__desc">Interfaces, tolerances and transport constraints to settle before freezing a design.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>2.8 MB</span><time datetime="2026-05-27">May 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/designing-systems-for-off-site-manufacturing.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="guides" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-04-08" data-keywords="white paper procurement purchasing long lead equipment transformer chiller planning">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="procure" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">GUIDE</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Planning long-lead equipment</h3>
+            <p class="p t-muted rscard__desc">Procurement steps and decision points for transformers, chillers and other critical equipment.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>1.9 MB</span><time datetime="2026-04-08">Apr 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/planning-long-lead-equipment.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="guides" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-01-14" data-keywords="white paper logistics transport delivery shipping site trucks">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="deliver" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">GUIDE</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Delivering modules across Europe</h3>
+            <p class="p t-muted rscard__desc">Transport, sequencing and site logistics for prefabricated modules.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>2.2 MB</span><time datetime="2026-01-14">Jan 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/delivering-modules-across-europe.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="case-studies" data-sectors="datacenter" data-format="pdf" data-date="2026-08-05" data-keywords="case study reference project belgium cooling crane">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="onsite" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">CASE STUDY</span><span>DATA CENTER</span></p>
+            <h3 class="rscard__title" data-rs-title>Data hall cooling pipework — Belgium</h3>
+            <p class="p t-muted rscard__desc">Prefabricated cooling modules lifted into place and installed in phases on a live campus.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>3.1 MB</span><time datetime="2026-08-05">Aug 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/data-hall-cooling-pipework-belgium.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="case-studies" data-sectors="datacenter energy" data-format="pdf" data-date="2026-03-26" data-keywords="case study reference project france electrical rooms rollout series">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="fb-europe" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">CASE STUDY</span><span>DATA CENTER · ENERGY</span></p>
+            <h3 class="rscard__title" data-rs-title>Electrical rooms for three sites — France</h3>
+            <p class="p t-muted rscard__desc">Identical electrical rooms manufactured in series and delivered to three sites on one schedule.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>2.7 MB</span><time datetime="2026-03-26">Mar 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/electrical-rooms-for-three-sites-france.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="certificates" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-01-08" data-keywords="iso quality management qms certification">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="quality" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">CERTIFICATE</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>ISO 9001 certificate</h3>
+            <p class="p t-muted rscard__desc">Quality management system certificate covering engineering and manufacturing.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>0.4 MB</span><time datetime="2026-01-08">Jan 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/iso-9001-certificate.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="certificates" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-01-08" data-keywords="en1090 steel structures ce marking fpc certification">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="support" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">CERTIFICATE</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>EN 1090 certificate</h3>
+            <p class="p t-muted rscard__desc">Execution of steel structures: factory production control certificate.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>0.5 MB</span><time datetime="2026-01-08">Jan 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/en-1090-certificate.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="certificates" data-sectors="datacenter pharma energy semiconductors" data-format="pdf" data-date="2026-01-08" data-keywords="mase safety hse health environment certification">
+          <div class="rscard__thumb"><div class="gdots" data-service-dots="safety" aria-hidden="true"><canvas></canvas></div></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">CERTIFICATE</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>MASE certificate</h3>
+            <p class="p t-muted rscard__desc">Health, safety and environment management system certificate.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">PDF</span><span>0.3 MB</span><time datetime="2026-01-08">Jan 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/mase-certificate.pdf" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="media" data-sectors="datacenter pharma energy semiconductors" data-format="zip" data-date="2026-10-12" data-keywords="press media journalists archive boilerplate">
+          <div class="rscard__thumb"><img decoding="async" src="assets/about-story-3.webp" alt="" width="1000" height="666" loading="lazy"></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">MEDIA KIT</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Press kit</h3>
+            <p class="p t-muted rscard__desc">Logos, photographs and company boilerplate in a single archive.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">ZIP</span><span>24.5 MB</span><time datetime="2026-10-12">Oct 2026</time></p>
+            <a class="rscard__dl" href="assets/resources/verdon-press-kit.zip" download><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="media" data-sectors="datacenter pharma energy semiconductors" data-format="image" data-date="2026-09-01" data-keywords="logo brand identity vector black">
+          <div class="rscard__thumb rscard__thumb--light"><img decoding="async" class="rscard__logo" src="assets/logo-dark.svg" alt="" width="347" height="24" loading="lazy"></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">MEDIA KIT</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Verdon logo — dark</h3>
+            <p class="p t-muted rscard__desc">Vector logo for light backgrounds.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">SVG</span><span>5.8 KB</span><time datetime="2026-09-01">Sep 2026</time></p>
+            <a class="rscard__dl" href="assets/logo-dark.svg" download="verdon-logo-dark.svg"><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="media" data-sectors="datacenter pharma energy semiconductors" data-format="image" data-date="2026-09-01" data-keywords="logo brand identity vector white">
+          <div class="rscard__thumb rscard__thumb--dark"><img decoding="async" class="rscard__logo" src="assets/logo.svg" alt="" width="347" height="24" loading="lazy"></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">MEDIA KIT</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Verdon logo — light</h3>
+            <p class="p t-muted rscard__desc">Vector logo for dark backgrounds and photographs.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">SVG</span><span>5.8 KB</span><time datetime="2026-09-01">Sep 2026</time></p>
+            <a class="rscard__dl" href="assets/logo.svg" download="verdon-logo-light.svg"><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="media" data-sectors="datacenter pharma energy semiconductors" data-format="image" data-date="2026-07-15" data-keywords="photo photography aerial site building factory">
+          <div class="rscard__thumb"><img decoding="async" src="assets/about-hero-1200.webp" alt="" width="1200" height="899" loading="lazy"></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">MEDIA KIT</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Production site — aerial view</h3>
+            <p class="p t-muted rscard__desc">Aerial photograph of our production site, 2400 px wide.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">WEBP</span><span>386 KB</span><time datetime="2026-07-15">Jul 2026</time></p>
+            <a class="rscard__dl" href="assets/about-hero.webp" download="verdon-production-site.webp"><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="media" data-sectors="datacenter pharma energy semiconductors" data-format="image" data-date="2026-07-15" data-keywords="photo photography factory workshop interior">
+          <div class="rscard__thumb"><img decoding="async" src="assets/factory-hero-1200.webp" alt="" width="1200" height="801" loading="lazy"></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">MEDIA KIT</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Production hall</h3>
+            <p class="p t-muted rscard__desc">Interior of our production hall, 2400 px wide.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">WEBP</span><span>199 KB</span><time datetime="2026-07-15">Jul 2026</time></p>
+            <a class="rscard__dl" href="assets/factory-hero.webp" download="verdon-production-hall.webp"><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="media" data-sectors="datacenter pharma energy semiconductors" data-format="image" data-date="2026-07-15" data-keywords="photo photography workshop interior steel">
+          <div class="rscard__thumb"><img decoding="async" src="assets/dc-hero-1200.webp" alt="" width="1200" height="800" loading="lazy"></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">MEDIA KIT</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Fabrication workshop</h3>
+            <p class="p t-muted rscard__desc">Steel and pipework fabrication workshop, 2400 px wide.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">WEBP</span><span>361 KB</span><time datetime="2026-07-15">Jul 2026</time></p>
+            <a class="rscard__dl" href="assets/dc-hero.webp" download="verdon-fabrication-workshop.webp"><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+        <article class="rscard" data-rs-item data-reveal="up" data-category="media" data-sectors="datacenter pharma energy semiconductors" data-format="image" data-date="2026-07-15" data-keywords="photo photography welder welding pipe spool people">
+          <div class="rscard__thumb"><img decoding="async" src="assets/about-story-1.webp" alt="" width="1000" height="666" loading="lazy"></div>
+          <div class="rscard__body">
+            <p class="rscard__meta"><span class="rscard__cat">MEDIA KIT</span><span>ALL SECTORS</span></p>
+            <h3 class="rscard__title" data-rs-title>Pipe welding</h3>
+            <p class="p t-muted rscard__desc">Welder at work on a pipe spool, 1000 px wide.</p>
+          </div>
+          <div class="rscard__foot">
+            <p class="rscard__file"><span class="rscard__fmt">WEBP</span><span>39 KB</span><time datetime="2026-07-15">Jul 2026</time></p>
+            <a class="rscard__dl" href="assets/about-story-1.webp" download="verdon-pipe-welding.webp"><span class="rscard__dl-label">DOWNLOAD</span></a>
+          </div>
+        </article>
+      </div>
+
+      <div class="rsempty" data-rs-empty hidden>
+        <p class="lead-m">No resources match your search.</p>
+        <p class="p t-muted">Check the spelling, try a more general term or remove a filter. Our team can also send you the document you need.</p>
+        <div class="rsempty__ctas">
+          <button class="btn btn--outline" type="button" data-btn data-rs-reset><span class="btn__label" data-gt>RESET FILTERS</span></button>
+          <a href="contact.html#contact-form" class="btn btn--ink" data-btn><span class="btn__label" data-gt>ASK OUR TEAM</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<p class="rs-sr" role="status" data-rs-live></p>
+
+<div class="lower">
+  <!-- =========================================================
+       FAQ
+       ========================================================= -->
+  <section class="faq" data-section="faq" data-nav-bg="light">
+    <div class="faq__grid">
+      <div class="faq__intro">
+        <h2 class="h2" data-gt-lines><span>F.A.Q</span></h2>
+        <p class="p t-muted" data-reveal="up">Discover Verdon’s expertise in engineering, manufacturing and Data Center infrastructure.</p>
+      </div>
+
+      <div class="faq__list" data-faq>
+        <div class="faq__item is-open" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="true">
+            <span class="faq__num">01</span>
+            <span class="faq__question">What does Verdon specialise in&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon combines engineering expertise and industrial manufacturing to develop and produce technical systems for complex industrial environments. With a strong focus on Data Centers, the company brings together technical design, manufacturing processes and system integration to address the requirements of demanding infrastructure projects.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">02</span>
+            <span class="faq__question">What is Verdon’s expertise in Data Centers&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon supports Data Center projects through the engineering and off-site manufacturing of technical systems designed for complex MEP infrastructure. Its approach takes into account equipment interfaces, installation constraints and the coordination required to integrate systems into large-scale facilities.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">03</span>
+            <span class="faq__question">Which industries does Verdon serve&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon operates across four key sectors: Data Centers, Energy, Life Sciences &amp; Pharmaceuticals, and Semiconductors. Each sector presents specific technical requirements, operating conditions and infrastructure constraints. Verdon applies its engineering and manufacturing capabilities to address the needs of these different industrial environments.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">04</span>
+            <span class="faq__question">What types of systems does Verdon manufacture&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon’s capabilities cover a range of technical systems, including electrical infrastructure, cooling pipework, aisle containment, liquid cooling assemblies and associated support structures. Each system addresses specific functional requirements and equipment interfaces, with its configuration defined according to project specifications.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">05</span>
+            <span class="faq__question">How does Verdon approach complex industrial projects&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon brings engineering and manufacturing capabilities together to prepare technical systems for integration into complex facilities. By considering technical specifications, equipment interfaces and manufacturing constraints, the company works to align system design with practical installation requirements from the outset.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">06</span>
+            <span class="faq__question">Can Verdon adapt its solutions to specific project requirements&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon develops technical systems around the specifications and constraints of each project. Equipment configurations, spatial limitations, connection interfaces and installation requirements inform the approach taken. This allows the scope and configuration of each solution to be defined in line with the project’s technical needs.</p></div></div>
+        </div>
+      </div>
+
+      <div class="faq__aside" data-reveal="up">
+        <p class="p t-muted">Still have questions? <br>Our team is here to help.</p>
+        <a href="contact.html" class="btn btn--outline" data-btn><span class="btn__label" data-gt>CONTACT</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA + FOOTER
+       ========================================================= -->
+  <section class="cta" data-section="cta" data-nav-bg="dark">
+    <div class="cta__bg" aria-hidden="true">
+      <img decoding="async" src="assets/seciton-temoignages.webp" alt="" width="1500" height="1123" loading="lazy" data-cta-bg>
+      <div class="cta__overlay"></div>
+    </div>
+
+    <div class="cta__head">
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+      <div class="cta__content">
+        <h2 class="h2 h2--light t-center" data-gt-lines>
+          <span class="t-muted-light">Let’s define your </span><br><span>project requirements.</span>
+        </h2>
+        <div class="cta__sub">
+          <p class="lead-m t-center cta__lead" data-reveal="up">Verdon works alongside project stakeholders to address the technical, engineering and manufacturing requirements of complex infrastructure projects. Contact our team to discuss your needs and explore the scope of our capabilities.</p>
+          <div class="btn-row" data-reveal="up">
+            <a href="contact.html" class="btn btn--solid btn--w240" data-btn><span class="btn__label" data-gt>CONTACT</span></a>
+            <a href="#" class="btn btn--outline-light btn--w240" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+    </div>
+
+    <footer class="footer" data-footer data-nav-bg="light">
+      <div class="frow">
+        <div class="fcell fcell--line fcell--top">
+          <p class="p t-muted">We don’t just build systems.<br>We set the standard.</p>
+        </div>
+        <div class="fcell fcell--line fcell--stretch"></div>
+      </div>
+
+      <div class="frow">
+        <div class="fcell fcell--top fcell--socials">
+          <p class="caption">SOCIALS</p>
+          <div class="socials">
+            <a href="#" class="socials__link" aria-label="LinkedIn"><img decoding="async" src="assets/icon.svg" alt="" width="16" height="16"></a>
+            <a href="#" class="socials__link" aria-label="Instagram">
+              <span class="socials__ig"><img decoding="async" src="assets/group-1.svg" alt=""></span>
+            </a>
+            <a href="#" class="socials__link" aria-label="Facebook"><img decoding="async" src="assets/icon-1.svg" alt="" width="16" height="16"></a>
+          </div>
+        </div>
+        <div class="fcell fcell--line fcell--links">
+          <p class="caption">SOCIALS</p>
+          <div class="flinks">
+            <div class="flinks__col"><a href="index.html">Home</a><a href="about.html">About us</a><a href="newsroom.html">Newsroom</a></div>
+            <div class="flinks__col"><a href="resources.html" aria-current="page">Ressources</a><a href="factory-built.html">Factory built</a><a href="data-center.html">Sectors</a></div>
+            <div class="flinks__col"><a href="#">Systems</a><a href="#">Careers</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="frow frow--grow">
+        <div class="fcell"></div>
+        <div class="fcell fcell--line fcell--info">
+          <div class="finfo">
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">HEAD OFFICE</p>
+                <p class="finfo__val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">PHONE NUMBER</p>
+                <a class="finfo__val" href="tel:+3271468380">+32 71 46 83 80</a>
+              </div>
+            </div>
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">EMAIL</p>
+                <a class="finfo__val" href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">OPERATING ACROSS</p>
+                <p class="finfo__val">France • Belgium • England </p>
+              </div>
+            </div>
+            <!-- Carte Europe en matrice de points, vue isométrique en rotation lente (js/components/europe-map.js) -->
+            <div class="finfo__map emap" data-europe-map data-src="assets/europe-dots.json" role="img" aria-label="Carte de l'Europe avec 5 sites Verdon : Courcelles (siège), Liège, Lille, Paris, Lyon">
+              <canvas class="emap__canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fbottom">
+        <!-- Signature en matrice de points, colorée au survol (js/components/wordmark-dots.js) -->
+        <div class="fbottom__mark wmark" data-wordmark data-src="assets/wordmark-dots.json" data-reveal="wipe" style="--dur:2s" role="img" aria-label="Verdon groupe">
+          <canvas class="wmark__canvas"></canvas>
+        </div>
+        <div class="fbottom__legal">
+          <a href="#">Legal</a>
+          <p>Copyright © Verdon SA • All rights reserved</p>
+          <a href="https://agence-orem.fr" target="_blank" rel="noopener">Réalisé par Orem</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<!-- Menu mobile -->
+<div class="mnav" data-mnav aria-hidden="true">
+  <nav class="mnav__links">
+    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTEMS</a>
+    <div class="mnav__group" data-mnav-group>
+      <button class="mnav__toggle" type="button" aria-expanded="false" aria-controls="mnav-sectors" data-mnav-group-toggle>SECTORS<img class="mnav__chev" src="assets/frame.svg" alt="" width="20" height="20"></button>
+      <div class="mnav__sub" id="mnav-sectors">
+        <div class="mnav__sublist">
+          <a href="data-center.html" style="--j:0">DATA CENTER</a><a href="#" style="--j:1">SCIENCE &amp; PHARMA</a><a href="#" style="--j:2">ENERGY</a><a href="#" style="--j:3">SEMICONDUCTORS</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">PROJECTS</a>
+    <a href="about.html">ABOUT</a><a href="newsroom.html">NEWS</a><a href="resources.html" aria-current="page">RESOURCES</a><a href="#">CAREERS</a>
+  </nav>
+  <a href="contact.html" class="btn btn--solid" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+</div>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/components/sequence.js"></script>
+<script src="js/components/gradient-text.js"></script>
+<script src="js/components/reveal.js"></script>
+<script src="js/components/nav.js"></script>
+<script src="js/main.js"></script>
+<script src="js/resources.js"></script>
+<script src="js/components/europe-map.js" defer></script>
+<script src="js/components/wordmark-dots.js" defer></script>
+<script src="js/components/service-dots.js" defer></script>
+</body>
+</html>

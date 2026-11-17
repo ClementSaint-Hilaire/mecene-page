@@ -1,0 +1,232 @@
+/* =========================================================
+   Verdon — page About
+   Intégration Figma (node 2:197, fichier « MCP ») — complète css/style.css
+   (nav, boutons, cartes secteurs [.xcard], pictogrammes en points [.gdots],
+    partenaires, FAQ, CTA et footer viennent de style.css)
+   ========================================================= */
+
+/* Heading 1 de la maquette : 64 px sur cette page (--fs-4xl de l'accueil : 54 px) */
+.ab-h1 { font-size: 64px; }
+
+/* =========================================================
+   HERO — photo du site (même photo que la page Data center), assombrie en bas à gauche (dégradé Figma)
+   ========================================================= */
+.abhero { background-image: none; }
+.abhero__bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+/* 8 % de marge en haut : la photo descend en parallaxe pendant que Our story recouvre le hero */
+.abhero__bg img { position: absolute; left: 0; top: -8%; width: 100%; height: 108%; object-fit: cover; }
+.abhero__bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1500 1000' xmlns='http://www.w3.org/2000/svg' preserveAspectRatio='none'><rect x='0' y='0' height='100%' width='100%' fill='url(%23grad)' opacity='0.9'/><defs><radialGradient id='grad' gradientUnits='userSpaceOnUse' cx='0' cy='0' r='10' gradientTransform='matrix(174.68 22.973 -10.065 65.616 616.29 819.87)'><stop stop-color='rgba(0,0,0,1)' offset='0'/><stop stop-color='rgba(0,0,0,0)' offset='1'/></radialGradient></defs></svg>");
+  background-size: 100% 100%;
+}
+.abhero__body {
+  position: relative;
+  z-index: 1;
+  flex: 1 0 0;
+  min-height: 1px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 0 var(--gutter) var(--gutter);   /* même marge en bas que sur les côtés */
+}
+.abhero__titles { display: flex; flex-direction: column; gap: 8px; width: 658px; min-width: 0; }
+.abhero__aside { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; width: 347px; flex-shrink: 0; }
+.abhero__lead { color: var(--light); }
+
+/* =========================================================
+   OUR STORY — colonne gauche collante (texte en bas de l'écran), photos en quinconce à droite
+   ========================================================= */
+.abstory {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 64px;
+  padding: 64px var(--gutter) 0;
+  background: var(--bg-primary);
+}
+.abstory__left { position: sticky; top: 0; flex: 0 1 528px; min-width: 0; display: flex; flex-direction: column; gap: 8px; }
+/* 587 px sur la maquette (écran de 1000 px) : le texte reste vers le bas de l'écran */
+.abstory__spacer { height: max(160px, calc(100vh - 413px)); }
+.abstory__intro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
+.abstory__text { display: flex; flex-direction: column; gap: 8px; }
+.abstory__right { flex: 0 1 726px; min-width: 0; display: flex; flex-direction: column; gap: 128px; }
+.abstory__photo { width: 400px; max-width: 72%; aspect-ratio: 5 / 4; overflow: hidden; }
+.abstory__photo:nth-child(even) { align-self: flex-end; }
+.abstory__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* =========================================================
+   A MANUFACTURING PARTNER — bloc centré de 1366 px, certifications en 3 cartes
+   ========================================================= */
+.abpartner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+  padding: 128px max(var(--gutter), calc((100% - 1366px) / 2));
+  background: var(--bg-primary);
+}
+.abpartner__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 64px; }
+.abpartner__title { flex: 0 1 613px; }
+.abpartner__intro { flex: 0 1 583px; display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
+
+.abcerts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.abcert {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 32px;
+  min-height: 329px;
+  padding: 10px 64px;
+  background: var(--bg-secondary);
+  border-left: 1px solid var(--stroke);
+}
+.abcert .gdots { width: 144px; height: 96px; }
+.abcert__text { display: flex; flex-direction: column; gap: 8px; }
+
+/* =========================================================
+   OUR TEAM — section sombre, en retrait à gauche (--indent) ; la rangée de portraits déborde à droite
+   ========================================================= */
+.abteam {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 64px var(--gutter) 64px var(--indent);
+  background: var(--bg-dark);
+  color: var(--light);
+  overflow: hidden;
+}
+.abteam__head { display: grid; grid-template-columns: minmax(0, 3fr) minmax(0, 1fr); column-gap: 32px; padding: 32px 0; }
+/* largeur du titre : le texte passe à la ligne sous lui */
+.abteam__intro { display: flex; flex-direction: column; gap: 8px; width: min-content; max-width: 100%; padding: 10px 0; }
+.abteam__title { white-space: nowrap; }
+.abteam__ctas { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; justify-content: flex-end; }
+/* jusqu'au bord de l'écran ; la piste glisse avec le scroll (js/about.js) */
+.abteam__viewport { margin-right: calc(-1 * var(--gutter)); }
+.abteam__track { display: flex; gap: 16px; width: max-content; padding-right: var(--gutter); }
+.abmember { display: flex; flex-direction: column; gap: 32px; width: 320px; flex-shrink: 0; }
+/* portrait à venir : bloc plein de la maquette */
+.abteam__img { height: 450px; background: var(--light); }
+.abmember__text { display: flex; flex-direction: column; gap: 8px; }
+
+/* =========================================================
+   INDUSTRIAL CAPACITY — colonne gauche collante (titre + chiffres clés), secteurs à droite
+   ========================================================= */
+.abcap {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 64px;
+  padding: 128px var(--gutter) 0;
+  background: var(--bg-primary);
+}
+/* largeur de la colonne = celle du titre (les chiffres ne l'élargissent pas) */
+.abcap__left { position: sticky; top: 120px; display: flex; flex-direction: column; gap: 8px; width: min-content; flex-shrink: 0; }
+.abcap__title { white-space: nowrap; }
+.abcap__figures { display: flex; flex-direction: column; gap: 32px; width: 0; min-width: 100%; }
+.abstats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 64px; }
+.abstat { display: flex; flex-direction: column; gap: 16px; }
+.abstat__num {
+  font-size: var(--fs-3xl);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+
+.abcap__right { flex: 0 1 726px; min-width: 0; display: flex; flex-direction: column; gap: 128px; }
+.abcap__intro { width: 528px; max-width: 100%; display: flex; flex-direction: column; gap: 32px; align-items: flex-start; }
+.abcap__lead { min-height: 182px; }   /* bloc de texte de hauteur fixe sur la maquette */
+.abcap__cards { display: flex; flex-direction: column; gap: 128px; width: 374px; max-width: 100%; }
+
+.abpartners { padding-bottom: 128px; }
+
+/* =========================================================
+   RESPONSIVE (déduit — pas de maquette tablette/mobile fournie)
+   ========================================================= */
+@media (max-width: 1280px) {
+  .abcert { padding: 10px 40px; }
+}
+
+@media (max-width: 1100px) {
+  .abcert { padding: 10px 32px; }
+  .abcap__right { flex-basis: 440px; }
+}
+
+/* Tablette */
+@media (max-width: 991px) {
+  .ab-h1 { font-size: var(--fs-4xl); }
+  .abhero__body { flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 40px; padding-bottom: 48px; }
+  .abhero__titles, .abhero__aside { width: 100%; max-width: 560px; }
+
+  .abstory { flex-direction: column; gap: 64px; padding: 96px var(--gutter) 0; }
+  .abstory__left { position: relative; top: auto; flex: none; width: 100%; max-width: 560px; }
+  .abstory__spacer { display: none; }
+  .abstory__right { flex: none; width: 100%; gap: 64px; }
+
+  .abpartner { padding: 96px var(--gutter); gap: 48px; }
+  .abpartner__head { flex-direction: column; gap: 32px; }
+  .abpartner__title, .abpartner__intro { flex: none; width: 100%; max-width: 600px; }
+  .abcerts { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .abcert { min-height: 0; padding: 32px; }
+
+  .abteam { padding: 96px var(--gutter); }
+  .abteam__head { grid-template-columns: minmax(0, 1fr); row-gap: 32px; padding: 0; }
+  .abteam__intro { width: auto; max-width: 480px; padding: 0; }
+  .abteam__title { white-space: normal; }
+  .abteam__ctas { flex-direction: row; flex-wrap: wrap; justify-content: flex-start; }
+  /* scroll horizontal natif */
+  .abteam__viewport {
+    margin-left: calc(-1 * var(--gutter));
+    padding-left: var(--gutter);
+    scroll-padding-left: var(--gutter);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .abteam__viewport::-webkit-scrollbar { display: none; }
+  .abmember { scroll-snap-align: start; width: 280px; }
+  .abteam__img { height: auto; aspect-ratio: 320 / 450; }
+
+  .abcap { flex-direction: column; gap: 64px; padding-top: 96px; }
+  .abcap__left { position: relative; top: auto; width: 100%; }
+  .abcap__title { white-space: normal; }
+  .abcap__figures { width: auto; max-width: 560px; }
+  .abcap__right { flex: none; width: 100%; gap: 64px; }
+  .abcap__lead { min-height: 0; }
+  .abcap__cards { width: 100%; max-width: 520px; gap: 64px; }
+
+  .abpartners { padding-bottom: 96px; }
+}
+
+/* Mobile */
+@media (max-width: 767px) {
+  .abhero__body { padding-bottom: 40px; }
+
+  .abstory { padding-top: 72px; }
+  .abstory__right { gap: 40px; }
+  .abstory__photo { max-width: 85%; }
+
+  .abpartner { padding: 72px var(--gutter); }
+  .abcert { padding: 24px 20px; gap: 24px; }
+
+  .abteam { padding: 72px var(--gutter); }
+  .abmember { width: 260px; gap: 24px; }
+
+  .abcap { padding-top: 72px; }
+  .abstats { column-gap: 32px; }
+  .abcap__cards { gap: 48px; }
+
+  .abpartners { padding-bottom: 72px; }
+}

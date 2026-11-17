@@ -1,9 +1,12 @@
 /* =========================================================
    Composant « Nav » — navigation fixe, 3 états (Figma « Navbar ») :
    - défaut        : menu déplié (haut de page, sur le hero)
-   - .is-collapsed : menu replié en pastilles dès qu'on a scrollé
+   - .is-collapsed : menu replié en pastilles dès qu'on a scrollé (dès le chargement avec [data-nav-compact],
+                     classe à poser aussi dans le HTML pour éviter le menu déplié avant le JS)
    - .is-open      : panneau ouvert au survol des pastilles, refermé quand la souris quitte le menu
                      (ou CLOSE, Échap). Clavier / tactile : le bouton pastilles ouvre, focus ou toucher ailleurs ferme.
+   Sous-menu [data-nav-group] (SECTORS, dans la liste dépliée et dans le panneau) : .is-expanded au clic
+   sur le bouton (bascule) ; Échap, focus ou clic ailleurs ferme.
    Couleur : .nav--on-light sur chaque bloc (logo, pastilles, langue, burger) qui passe sur un fond clair
    (encre foncée). Le fond est lu sur les zones [data-nav-bg="dark|light"] sous le centre de chaque bloc ;
    si plusieurs se superposent, la dernière dans le DOM l'emporte. Aucune zone = fond clair.
@@ -17,6 +20,7 @@
 
   const COLLAPSE_AT = 80;   // px scrollés avant de replier le menu
   const EXPAND_AT = 40;     // px sous lesquels il se redéplie (l'écart évite le va-et-vient autour du seuil)
+  const COMPACT = nav.hasAttribute('data-nav-compact');  // toujours replié (pastilles dès le haut de page)
   const PROBE_Y = 43;       // ligne de lecture du fond : milieu de la barre (24 + 38 / 2)
   const CLOSE_DELAY = 250;  // ms de tolérance quand la souris sort du menu
   const AVOID_GAP = 24;     // px d'écart minimal entre le menu déplié et [data-nav-avoid], sinon nav repliée
@@ -24,21 +28,41 @@
   const DOT_COLORS = ['green', 'amber', 'peach', 'lilac'];  // tokens de style.css
 
   const slot = nav.querySelector('[data-nav-slot]');
+  const menu = nav.querySelector('.nav__menu');
   const toggle = nav.querySelector('[data-nav-toggle]');
   const panel = nav.querySelector('[data-nav-panel]');
+  const isMouse = (e) => e.pointerType === 'mouse';
 
   /* ---------- Pastilles : une couleur aléatoire par item ----------
-     Tirée par index --i (même couleur dans le menu déplié et le panneau),
+     Tirée par rang dans la liste, sous-menu compris (même couleur dans le menu déplié et le panneau),
      jamais identique à celle de l'item précédent. */
   const dotColor = [];
-  nav.querySelectorAll('.nav__item').forEach((item) => {
-    const i = Number(item.style.getPropertyValue('--i')) || 0;
-    if (!dotColor[i]) {
-      const choices = DOT_COLORS.filter((c) => c !== dotColor[i - 1]);
-      dotColor[i] = choices[Math.floor(Math.random() * choices.length)];
-    }
-    item.style.setProperty('--dot', `var(--${dotColor[i]})`);
+  nav.querySelectorAll('.nav__menu, .nav__plist').forEach((list) => {
+    list.querySelectorAll('.nav__item').forEach((item, i) => {
+      if (!dotColor[i]) {
+        const choices = DOT_COLORS.filter((c) => c !== dotColor[i - 1]);
+        dotColor[i] = choices[Math.floor(Math.random() * choices.length)];
+      }
+      item.style.setProperty('--dot', `var(--${dotColor[i]})`);
+    });
   });
+
+  /* ---------- Sous-menu (clic sur SECTORS) ---------- */
+  const groups = Array.from(nav.querySelectorAll('[data-nav-group]')).map((el) => {
+    const btn = el.querySelector('[data-nav-group-toggle]');
+    const set = (open) => {
+      el.classList.toggle('is-expanded', open);
+      btn.setAttribute('aria-expanded', String(open));
+    };
+    btn.addEventListener('click', () => set(!el.classList.contains('is-expanded')));
+    el.addEventListener('focusout', (e) => { if (e.relatedTarget && !el.contains(e.relatedTarget)) set(false); });
+    return { el, set };
+  });
+  const collapseGroups = (scope) => groups.forEach((g) => { if (scope.contains(g.el)) g.set(false); });
+  if (groups.length) {
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') collapseGroups(nav); });
+    document.addEventListener('click', (e) => groups.forEach((g) => { if (!g.el.contains(e.target)) g.set(false); }));
+  }
 
   /* ---------- Panneau (survol des pastilles) ---------- */
   let closeTimer = null;
@@ -48,13 +72,13 @@
     clearTimeout(closeTimer);
     if (nav.classList.contains('is-open') === open) return;
     if (!open && panel.contains(document.activeElement)) toggle.focus({ preventScroll: true });
+    if (!open) collapseGroups(panel);
     nav.classList.toggle('is-open', open);
     toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Fermer le menu' : 'Ouvrir le menu');
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   }
 
   if (slot && toggle && panel) {
-    const isMouse = (e) => e.pointerType === 'mouse';
     toggle.addEventListener('pointerenter', (e) => {
       if (isMouse(e) && !hoverLocked && nav.classList.contains('is-collapsed')) setOpen(true);
     });
@@ -98,6 +122,7 @@
     if (c === collapsed) return;
     collapsed = c;
     nav.classList.toggle('is-collapsed', c);
+    if (c && menu) collapseGroups(menu);
     if (!c && panel) setOpen(false);
   }
   const update = () => { measure(); onScroll(); };

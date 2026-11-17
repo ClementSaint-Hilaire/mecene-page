@@ -7,7 +7,8 @@
                       tombent à l'écran, et chaque ligne a son balayage, décalé de --gt-stagger
                       (h1, h2, h3, légendes des chiffres clés). Redécoupé quand la largeur
                       de l'élément change ou quand la police arrive.
-   Le balayage démarre à l'entrée dans l'écran (IntersectionObserver).
+   Le balayage démarre à l'entrée dans l'écran (IntersectionObserver) ; sur tablette et mobile,
+   dans l'ordre de lecture (js/components/sequence.js).
    API : window.GradientText.init(root?)  → initialise les nouveaux éléments
          window.GradientText.play(el)     → rejoue le balayage
    ========================================================= */
@@ -42,11 +43,29 @@
     st.lines.forEach((l) => l.classList.add('is-in'));
   }
 
+  const time = (v) => (parseFloat(v) || 0) * (/ms\s*$/.test(v) ? 1 : 1000);  // « 0.45s » / « 120ms » → ms
+
+  // Départ confié à Sequence (tablette, mobile) : titres et libellés des éléments qui apparaissent
+  // (un libellé de bouton balayé avant que son bouton soit affiché ne se verrait pas)
+  function queue(el) {
+    const S = window.Sequence;
+    if (!S || !S.active || (!el.__gtl && !el.closest('[data-reveal], [data-hero-fade]'))) { enter(el); return; }
+    const cs = getComputedStyle(el);
+    let span = 0;
+    if (el.__gtl) {
+      // lignes pas encore découpées (police en chargement) : estimées d'après la hauteur
+      const lh = parseFloat(cs.lineHeight) || parseFloat(cs.fontSize) * 1.2;
+      const lines = el.__gtl.lines.length || Math.max(1, Math.round(el.offsetHeight / lh));
+      span = (lines - 1) * time(cs.getPropertyValue('--gt-stagger'));
+    }
+    S.add(el, () => enter(el), { delay: time(cs.getPropertyValue('--gt-delay')), span });
+  }
+
   const io = 'IntersectionObserver' in window
     ? new IntersectionObserver((entries) => {
         entries.forEach((e) => {
           if (!e.isIntersecting) return;
-          enter(e.target);
+          queue(e.target);
           io.unobserve(e.target);
         });
       }, { rootMargin: '0px 0px -10% 0px', threshold: 0 })
