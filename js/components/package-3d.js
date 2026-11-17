@@ -21,7 +21,8 @@
 
 /* Par maquette :
    - cell / cellS : pas de la grille de points en px CSS (plus petit = plus de points), cellS quand la vue fait moins de 560 px
-   - view : angles de départ (az, el, en degrés), point visé, cadrage (fit × rayon de la maquette = demi-largeur de la vue),
+   - view : angles de départ (az, el, en degrés), point visé, cadrage (fit × rayon de la maquette = demi-largeur de la vue,
+     réduit si la maquette sortirait du canvas en tournant),
      limites de l'inclinaison (polar), vitesse de la rotation automatique (spin)
    - systems : un par catégorie du .json, dans l'ordre ; tone = teinte de repos ;
      context = décor (sans pastille ni légende, non survolable) */
@@ -244,30 +245,46 @@ async function init(root) {
 
   /* ---------- tailles (lues seulement au resize, jamais dans la boucle) ---------- */
   // clientWidth et non getBoundingClientRect : la vue peut être en cours de reveal (scale)
-  let W = 1, H = 1, wide = true, capBox = { w: 0, y: 0 };
+  // W × H : canvas, sur toute la largeur du composant ; VW : vue carrée centrée (cadrage, légende), décalée de ox dans le canvas
+  let W = 1, H = 1, VW = 1, ox = 0, wide = true, capBox = { w: 0, h: 0, top: 0, y: 0 };
   let active = null, pinned = null, lastUser = -1e9, pointer = null, pickDirty = false, dots = true;
   function resize() {
-    W = Math.max(1, view.clientWidth); H = Math.max(1, view.clientHeight);
+    W = Math.max(1, cv.clientWidth); H = Math.max(1, cv.clientHeight);
+    VW = Math.max(1, view.clientWidth); ox = (W - VW) / 2;
     const dpr = Math.min(devicePixelRatio || 1, 2);
     renderer.setPixelRatio(dpr); renderer.setSize(W, H, false);
-    const cell = Math.max(3, Math.round((W < 560 ? model.cellS : model.cell) * dpr));
+    const cell = Math.max(3, Math.round((VW < 560 ? model.cellS : model.cell) * dpr));
     postMat.uniforms.res.value.set(W * dpr, H * dpr);
     postMat.uniforms.cell.value = cell;
     // points : un texel par cellule ; lisse : au moins 2 texels par px CSS (4 échantillons par pixel en DPR 1)
     if (dots) rt.setSize(Math.ceil((W * dpr) / cell), Math.ceil((H * dpr) / cell));
     else rt.setSize(Math.ceil(W * Math.max(dpr, 2)), Math.ceil(H * Math.max(dpr, 2)));
-    const half = radius * V.fit;
-    cam.left = -half; cam.right = half; cam.top = (half * H) / W; cam.bottom = (-half * H) / W;
+    // px CSS par unité : cadrage de la vue (fit × rayon = sa demi-largeur), réduit si la maquette sortirait du canvas
+    // en tournant (à l'écran, sa demi-largeur ne dépasse jamais son rayon horizontal ; marge de 2 %)
+    const k = Math.min(VW / (2 * radius * V.fit), W / (2 * radius * 1.02));
+    cam.left = -W / (2 * k); cam.right = W / (2 * k); cam.top = H / (2 * k); cam.bottom = -H / (2 * k);
     cam.updateProjectionMatrix();
     wide = matchMedia('(min-width: 701px)').matches;
     measureCap();
     wake();
   }
-  // largeur de la légende et milieu de son titre, pour la ligne de rappel
+  // largeur, haut et hauteur de la légende, milieu de son titre (ligne de rappel) : hors décalage
   function measureCap() {
     if (!active) return;
     const t = items[active].querySelector('.p3d-cap__title');
-    capBox = { w: cap.offsetWidth, y: cap.offsetTop + t.offsetTop + t.offsetHeight / 2 };
+    capBox = { w: cap.offsetWidth, h: cap.offsetHeight, top: cap.offsetTop, y: cap.offsetTop + t.offsetTop + t.offsetHeight / 2 };
+    placeCap();
+  }
+  // la légende reste à l'écran : décalée vers le bas quand le haut de la vue passe sous la nav,
+  // vers le haut quand elle dépasserait en bas ; quand la vue sort de l'écran, elle s'en va avec (rappelé au scroll)
+  const CAP_TOP = 80, CAP_BOTTOM = 16; // px : place de la nav repliée en haut de l'écran, marge en bas
+  let capShift = 0;
+  function placeCap() {
+    if (!active) return;
+    const v = view.getBoundingClientRect(), y = v.top + capBox.top;
+    const onScreen = Math.max(CAP_TOP, Math.min(y, innerHeight - CAP_BOTTOM - capBox.h));
+    const shift = Math.round(Math.min(Math.max(onScreen, v.top - capBox.h), v.bottom - capBox.h) - y);
+    if (shift !== capShift) { capShift = shift; cap.style.translate = shift ? `0 ${shift}px` : ''; }
   }
 
   /* ---------- interaction ---------- */
@@ -371,10 +388,11 @@ async function init(root) {
     const [ax, ay] = project(active);
     // la légende se place du côté du système survolé
     if ((ax > W * 0.5) !== right) { right = !right; cap.classList.toggle('is-r', right); }
-    const m = W * 0.02;
-    const sx = right ? W - m - capBox.w - 12 : m + capBox.w + 12;
+    // départ au bord de la légende, positionnée dans la vue (repères du canvas : + ox)
+    const m = VW * 0.02;
+    const sx = ox + (right ? VW - m - capBox.w - 12 : m + capBox.w + 12), sy = capBox.y + capShift;
     const kx = sx + (right ? -1 : 1) * Math.min(70, Math.abs(ax - sx) * 0.3);
-    lp.setAttribute('d', `M${sx},${capBox.y} H${kx} L${ax},${ay}`); lp.setAttribute('opacity', 1);
+    lp.setAttribute('d', `M${sx},${sy} H${kx} L${ax},${ay}`); lp.setAttribute('opacity', 1);
     lc.setAttribute('cx', ax); lc.setAttribute('cy', ay); lc.setAttribute('opacity', 1);
   }
 
@@ -430,8 +448,10 @@ async function init(root) {
 
   new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) wake(); }, { rootMargin: '100px 0px' }).observe(view);
   document.addEventListener('visibilitychange', wake);
-  new ResizeObserver(resize).observe(view);
-  window.addEventListener('scroll', () => { cvRect = null; lastScroll = performance.now(); }, { passive: true });
+  // le canvas peut s'élargir sans que la vue (plafonnée à 1080 px) change
+  const ro = new ResizeObserver(resize); ro.observe(view); ro.observe(cv);
+  // la légende et sa ligne de rappel suivent le scroll sans attendre la frame (une sur trois pendant le défilement)
+  window.addEventListener('scroll', () => { cvRect = null; lastScroll = performance.now(); if (active) { placeCap(); updateOverlay(); } }, { passive: true });
   resize();
 
   renderer.compile(scene, cam);

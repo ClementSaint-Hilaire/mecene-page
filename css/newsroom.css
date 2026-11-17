@@ -1,0 +1,213 @@
+/* =========================================================
+   Verdon — page Newsroom
+   Intégration Figma (node 13:259, fichier « MCP ») — complète css/style.css
+   (nav, boutons, traits, partenaires, FAQ, CTA et footer viennent de style.css)
+   ========================================================= */
+
+.nw-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+/* les classes ci-dessous posent un display : [hidden] doit l'emporter (articles filtrés, état vide) */
+.nwhero [hidden], .nwlist [hidden] { display: none !important; }
+
+/* Heading 1 de la maquette : 64 px sur cette page (--fs-4xl de l'accueil : 54 px) ;
+   566 px de large comme sur la maquette, un peu plus que la colonne : « THE LATEST NEWS » tient sur une ligne */
+.nw-h1 { width: 566px; max-width: calc(100vw - 2 * var(--gutter)); color: var(--ink); font-size: 64px; }
+
+/* =========================================================
+   HERO — grand titre qui défile, collant en haut de l'écran pendant tout le hero ;
+   colonne gauche collante (613 px, contenu en bas) ; articles à la une et recherche à droite
+   ========================================================= */
+.nwhero { position: relative; padding-top: 62px; } /* barre de nav fixe : 24 + 38 */
+
+/* « text auto défilant » (annotation de la maquette) : deux copies du texte, la piste glisse de la moitié de sa largeur */
+.nwhero__word {
+  position: sticky;
+  top: 0;
+  margin-bottom: -32px;
+  overflow: hidden;
+  font-size: 380px;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--bg-secondary);
+  white-space: nowrap;
+  pointer-events: none;
+  user-select: none;
+}
+.nwhero__track { display: flex; width: max-content; animation: nw-marquee 50s linear infinite; }
+.nwhero__track > span { padding-right: .3em; }
+.nwhero__word.is-paused .nwhero__track { animation-play-state: paused; }
+@keyframes nw-marquee { to { transform: translate3d(-50%, 0, 0); } }
+
+/* align-items: flex-start : sans lui la colonne gauche prend la hauteur de la rangée et ne colle plus */
+.nwhero__row { position: relative; display: flex; align-items: flex-start; gap: 48px; padding: 0 var(--gutter); }
+/* min-width: 0 : le titre (566 px) déborde de la colonne au lieu de l'élargir ;
+   marge du bas : écart avec la grille quand les articles à la une sont filtrés (colonne plus haute que la une) */
+.nwhero__aside {
+  position: sticky;
+  top: 0;
+  flex: 0 0 539px;
+  min-width: 0;
+  height: 613px;
+  margin-bottom: 64px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 32px;
+}
+.nwhero__titles { display: flex; flex-direction: column; gap: 8px; }
+.nwhero__feed { flex: 1 0 0; min-width: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 32px; padding-bottom: 64px; }
+
+/* ---------- Thèmes : pastilles de la maquette, filtres à bascule (plusieurs à la fois) ---------- */
+.nwtags { display: flex; flex-wrap: wrap; gap: 8px; }
+.nwchip {
+  padding: 4px 8px 2.5px;
+  border-radius: 2px;
+  background: var(--bg-secondary);
+  font-size: var(--fs-s);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  white-space: nowrap;
+  transition: background-color .35s var(--ease-figma), color .35s var(--ease-figma), opacity .35s var(--ease-figma);
+}
+.nwchip:hover { background: color-mix(in srgb, var(--ink) 9%, var(--bg-secondary)); }
+.nwchip[aria-pressed="true"] { background: var(--ink); color: var(--light); }
+.nwchip:focus-visible { outline: 1px solid var(--ink); outline-offset: 2px; }
+/* aucun article de ce thème pour la recherche en cours */
+.nwchip.is-empty:not([aria-pressed="true"]) { opacity: .4; }
+
+/* ---------- Recherche : champ sur fond secondaire, trait foncé dessiné au focus (comme les champs du formulaire de contact) ---------- */
+.nwsearch {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  max-width: 600px;
+  padding: 0 10px;
+  background: var(--bg-secondary);
+}
+.nwsearch::after {
+  content: "";
+  position: absolute; left: 0; right: 0; bottom: 0;
+  height: 1px;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform .6s var(--ease-expo);
+}
+.nwsearch:focus-within::after { transform: none; }
+.nwsearch__input {
+  flex: 1 0 0;
+  min-width: 0;
+  margin: 0;
+  padding: 12px 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  color: var(--ink);
+  font: 400 var(--fs-s) / 1.2 var(--font);
+  letter-spacing: -0.01em;
+  outline: none;
+  appearance: none;
+}
+.nwsearch__input::placeholder { color: var(--ink-2); opacity: 1; }
+.nwsearch__input::-webkit-search-cancel-button { -webkit-appearance: none; }
+.nwsearch__icon { flex: none; width: 16px; height: 16px; }
+
+/* =========================================================
+   ARTICLES — carte entièrement cliquable (lien du titre étendu à la carte)
+   à la une : image 600 × 390, titre 22 px, flèche 9 px ; grille : image 452 × 324, titre 18 px, flèche 24 px
+   ========================================================= */
+.nwpost { position: relative; display: flex; flex-direction: column; gap: 16px; }
+.nwpost--feat { width: 100%; max-width: 600px; gap: 8px; }
+.nwpost__img { position: relative; overflow: hidden; aspect-ratio: 452 / 324; background: var(--ink); }
+.nwpost--feat .nwpost__img { aspect-ratio: 600 / 390; }
+/* zoom au survol sur un calque à part : le reveal « clip » anime déjà l'échelle de l'image */
+.nwpost__zoom { position: absolute; inset: 0; transition: transform 1s var(--ease-expo); }
+.nwpost__zoom img { width: 100%; height: 100%; object-fit: cover; }
+.nwpost:hover .nwpost__zoom { transform: scale(1.05); }
+
+.nwpost__body { display: flex; flex-direction: column; gap: 16px; }
+.nwpost--feat .nwpost__body { gap: 8px; }
+.nwpost__meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.nwtag {
+  padding: 4px 4px 2.5px;
+  border-radius: 2px;
+  background: var(--bg-secondary);
+  font-size: var(--fs-xs);
+  line-height: 1.2;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.nwpost__dot { width: 4px; height: 4px; }
+
+.nwpost__row { display: flex; align-items: flex-start; gap: 13px; }
+.nwpost--feat .nwpost__row { align-items: center; }
+.nwpost__title { flex: 1 0 0; min-width: 1px; font-size: var(--fs-m); font-weight: 500; line-height: 1.2; letter-spacing: -0.02em; }
+.nwpost--feat .nwpost__title { font-size: var(--fs-l); }
+.nwpost__title mark { background: color-mix(in srgb, var(--lilac) 60%, transparent); color: inherit; }
+.nwpost__link { outline: none; }
+.nwpost__link::after { content: ""; position: absolute; inset: 0; z-index: 1; }
+.nwpost__link:focus-visible::after { outline: 1px solid var(--ink); outline-offset: 6px; }
+.nwpost__arrow { flex: none; transition: transform .5s var(--ease-expo); }
+.nwpost--feat .nwpost__arrow { width: 8.79062px; height: 8.79062px; }
+.nwpost:hover .nwpost__arrow { transform: translate3d(3px, -3px, 0); }
+
+/* article déjà apparu qui revient après un filtre : courte ré-apparition en cascade (js/newsroom.js) */
+.nwpost.is-pop { animation: nw-pop .8s var(--ease-expo) var(--pop, 0s) both; }
+@keyframes nw-pop { from { opacity: 0; transform: translate3d(0, 16px, 0); } }
+
+/* ---------- Grille ---------- */
+.nwlist { padding: 0 var(--gutter); }
+.nwgrid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; }
+.nwgrid .nwpost { padding-bottom: 32px; }
+
+/* aucun résultat */
+.nwempty { display: flex; flex-direction: column; align-items: flex-start; gap: 12px; padding: 64px 0; border-top: 1px solid var(--stroke); }
+.nwempty .p { max-width: 460px; }
+.nwempty__ctas { display: flex; flex-wrap: wrap; gap: 16px; padding-top: 20px; }
+
+/* =========================================================
+   PARTENAIRES — même grille que l'accueil, sans la place de l'arc dégradé des actus
+   ========================================================= */
+.nwpartners { padding-bottom: 128px; }
+
+/* =========================================================
+   RESPONSIVE (déduit — pas de maquette tablette/mobile)
+   ========================================================= */
+@media (max-width: 1100px) {
+  .nwgrid { column-gap: 24px; }
+}
+
+/* Tablette : plus rien de collant dans le hero ; colonne gauche au-dessus de la une,
+   une sur 2 colonnes (le 1er article affiché sur toute la largeur, les suivants côte à côte) */
+@media (max-width: 991px) {
+  .nw-h1 { width: auto; font-size: var(--fs-4xl); }
+  .nwhero__word { position: relative; font-size: 200px; margin-bottom: -16px; }
+  .nwhero__row { flex-direction: column; align-items: stretch; gap: 64px; }
+  .nwhero__aside { position: relative; top: auto; flex: none; height: auto; margin-bottom: 0; padding-top: 32px; }
+  .nwhero__feed { flex: none; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 24px; }
+  .nwpost--feat, .nwsearch { max-width: none; }
+  .nwpost--feat:nth-child(1 of .nwpost--feat:not([hidden])), .nwsearch { grid-column: 1 / -1; }
+  .nwpost--feat:not(:nth-child(1 of .nwpost--feat:not([hidden]))) .nwpost__title { font-size: var(--fs-m); }
+  .nwgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 32px; }
+  .nwpartners { padding-bottom: 96px; }
+}
+
+/* Mobile : une colonne */
+@media (max-width: 767px) {
+  .nwhero__word { font-size: 120px; margin-bottom: -8px; }
+  .nwhero .btn-row { justify-content: flex-start; }
+  .nwhero__feed { display: flex; flex-direction: column; align-items: stretch; padding-bottom: 48px; }
+  .nwpost--feat:not(:nth-child(1 of .nwpost--feat:not([hidden]))) .nwpost__title { font-size: var(--fs-l); }
+  .nwpost--feat .nwpost__row { align-items: flex-start; }
+  .nwpost--feat .nwpost__arrow { margin-top: 6px; }
+  .nwgrid { grid-template-columns: minmax(0, 1fr); row-gap: 16px; }
+  .nwpartners { padding-bottom: 72px; }
+}
+
+/* le texte défile en boucle : arrêté (et non accéléré par la règle générale de style.css) */
+@media (prefers-reduced-motion: reduce) {
+  .nwhero__track { animation: none; }
+}

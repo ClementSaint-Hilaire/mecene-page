@@ -44,10 +44,15 @@
   --fs-s: 14px;
   --fs-xs: 10px;
 
-  --gutter: 32px;
+  /* Très grands écrans : au-delà de --max-w (gouttières comprises), le contenu reste dans un cadre centré,
+     les fonds restent pleine largeur. --frame = marge entre le bord de l'écran et ce cadre (0 jusqu'à 1680 px),
+     à ajouter à tout décalage horizontal mesuré depuis le bord de l'écran. */
+  --max-w: 1680px;
+  --frame: max(0px, (100vw - var(--max-w)) / 2);
+  --gutter: calc(var(--frame) + 32px);
   --nav-h: 188px;           /* hauteur de la Navbar Figma, réservée en haut du hero (la nav est fixe) */
   --section-y: 128px;
-  --indent: 400px;          /* décalage gauche des sections témoignages / actus */
+  --indent: calc(var(--frame) + 400px);   /* décalage gauche des sections témoignages / actus */
 
   --ease-figma: cubic-bezier(0.42, 0, 0.58, 1);
   --ease-out-figma: cubic-bezier(0, 0, 0.58, 1);
@@ -60,6 +65,7 @@ html { -webkit-text-size-adjust: 100%; }
 html.lenis, html.lenis body { height: auto; }
 .lenis.lenis-smooth { scroll-behavior: auto !important; }
 .lenis.lenis-stopped { overflow: hidden; }
+html.is-locked { overflow: hidden; }   /* menu mobile ouvert (js/main.js) */
 body {
   margin: 0;
   background: var(--bg-primary);
@@ -199,7 +205,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav__logo img { width: 346.992px; height: 24px; }
 
 /* Emplacement du menu : liste, pastilles et panneau superposés au même endroit */
-.nav__slot { position: relative; flex-shrink: 0; }
+.nav__slot { position: relative; flex-shrink: 0; margin-left: -12px; }
 
 .nav__menu, .nav__plist { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
 .nav__item {
@@ -353,10 +359,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   align-items: flex-end;
   gap: 16px;
   padding: 0 var(--gutter) 128px;
+  margin-bottom: -88px;
 }
 .hero__visual {
   position: absolute;
-  left: 412px;
+  left: calc(var(--frame) + 412px);
   top: -493.27px;
   width: 1429.234px;
   height: 1429.234px;
@@ -404,13 +411,20 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   height: calc(max(100vh, 680px) + var(--arc-drop));
   pointer-events: none;
 }
+/* --arc-w : au-delà de ~1960 px d'écran, l'arc de la maquette ne couvre plus la jonction sur les bords ;
+   il s'élargit alors avec l'écran (étiré en largeur seulement : même profil au centre) */
+.positioning__arc,
+.positioning__gradient::before,
+.news__arc,
+.news__gradient::before { --arc-w: max(3131.58px, 160%); }
 .positioning__arc,
 .positioning__gradient::before {
   position: absolute;
-  /* box Figma : 2931.578 × 1649.343 @ (-739.78, -246.65) dans un bloc de 1078 px, SVG débordant de 3.41 % / 6.06 % */
-  left: calc(50% - 750px - 739.78px - 99.97px);
+  /* box Figma : 2931.578 × 1649.343 @ (-739.78, -246.65) dans un bloc de 1078 px, SVG débordant de 3.41 % / 6.06 %
+     (left d'origine : 50% - 750 - 739.78 - 99.97 = 50% - 3131.58 / 2 - 23.96) */
+  left: calc(50% - var(--arc-w) / 2 - 23.96px);
   top: calc(100% - 1078px - 246.65px);
-  width: 3131.58px;
+  width: var(--arc-w);
   height: 1749.34px;
 }
 /* Arc discret : la silhouette de l'arc couleur fond clair masque la jonction sombre / clair,
@@ -492,7 +506,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex;
   flex-shrink: 0;
   justify-content: flex-start;
-  padding: 0 512px;
+  padding: 0 512px 0 calc(var(--frame) + 512px);
   margin-bottom: calc(-0.171 * var(--big));
   background: var(--bg-primary);
   white-space: nowrap;
@@ -511,7 +525,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   align-items: flex-start;
   height: 100%;
   width: max-content;
-  padding: var(--band-pt) var(--gutter) 0 700px;
+  padding: var(--band-pt) var(--gutter) 0 calc(var(--frame) + 700px);
 }
 .services__intro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; flex-shrink: 0; }
 .services__intro .h2 { white-space: nowrap; }
@@ -618,7 +632,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .factory__headcontent { display: flex; flex-direction: column; gap: 32px; align-items: center; width: 100%; }
 .factory__lead { max-width: 600px; }
 /* --- Composant Package 3D --- */
-.pack3d { position: relative; width: 100%; display: flex; justify-content: center; }
+.pack3d { position: relative; width: 100%; display: flex; justify-content: center; container-type: inline-size; }
 .pack3d__view { position: relative; width: min(100%, 1080px); aspect-ratio: 1 / 1; }
 .pack3d__poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .8s var(--ease-figma); }
 .pack3d__canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: pan-y; cursor: grab; opacity: 0; transition: opacity .8s var(--ease-figma); }
@@ -652,8 +666,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .p3d-pin.is-on { background: var(--light); }
 .p3d-pin:focus-visible { outline: 1px solid var(--light); outline-offset: 3px; }
+/* canvas, ligne de rappel et pastilles débordent de la vue carrée sur toute la largeur du composant :
+   la maquette n'est pas coupée sur les côtés en tournant (le JS réduit le cadrage si cette largeur ne suffit pas) */
+.pack3d__canvas, .pack3d__leader, .pack3d__markers { left: calc(50% - 50cqw); width: 100cqw; }
 
-/* légende : dans un coin de la vue, du côté du système actif */
+/* légende : dans un coin de la vue, du côté du système actif ; le JS la décale (translate) pour qu'elle reste à l'écran */
 .p3d-cap {
   position: absolute; top: 2%; left: 2%; z-index: 2; width: min(320px, 44%); padding: 16px 18px 18px;
   background: rgba(28, 27, 25, .9); pointer-events: none;
@@ -663,7 +680,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .pack3d.has-active .p3d-cap { opacity: 1; transform: none; }
 .p3d-cap__item { display: none; gap: 12px; }
 .p3d-cap__item.is-on { display: grid; }
-.p3d-cap__title { font-size: 20px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; text-transform: uppercase; color: var(--light); }
+.p3d-cap__title {
+  font-size: 20px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; text-transform: uppercase; color: var(--light);
+  --gt-duration: .73s; --gt-stagger: .04s;   /* balayage dégradé 3× plus court que les autres titres (2.2s / .12s) */
+}
 .p3d-cap__text { font-size: var(--fs-s); line-height: 1.35; letter-spacing: -0.01em; color: var(--light-2); }
 
 @media (max-width: 700px) {
@@ -673,7 +693,8 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .pack3d__hint { bottom: calc(4% + 26px); }
   .pack3d__mode { left: 0; right: 0; width: max-content; margin: 0 auto; }
 }
-.factory__row { width: 100%; display: flex; gap: 128px; align-items: flex-start; padding-top: 128px; overflow: hidden; }
+/* marges --frame : sur les très grands écrans, la frise qui défile est coupée près des bords de l'écran, pas au bord du cadre */
+.factory__row { width: calc(100% + 2 * var(--frame)); margin: 0 calc(-1 * var(--frame)); display: flex; gap: 128px; align-items: flex-start; padding: 128px var(--frame) 0; overflow: hidden; }
 .factory__rowintro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; flex-shrink: 0; }
 .factory__rowintro .h2 { white-space: nowrap; }
 .factory__cols-viewport { flex: 1 0 0; min-width: 0; overflow: visible; }
@@ -785,9 +806,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .news__arc,
 .news__gradient::before {
   position: absolute;
-  left: calc(50% - 750px - 739.78px - 99.97px);
+  left: calc(50% - var(--arc-w) / 2 - 23.96px);
   top: 0;
-  width: 3131.58px;
+  width: var(--arc-w);
   height: 100%;
   transform: scaleY(-1);
 }
@@ -977,8 +998,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
           mask-image: linear-gradient(270deg, #000 calc(var(--gt-p) - var(--gt-feather)), transparent var(--gt-p));
   opacity: 0;
   visibility: hidden;
+  overflow-y: auto; overscroll-behavior: contain;   /* SECTORS déplié sur un écran bas : le menu défile */
   transition: opacity .4s var(--ease-figma), visibility 0s linear .4s, --gt-p 0s linear .4s;
 }
+.mnav > * { flex-shrink: 0; }
 .mnav::before {
   content: ""; position: absolute; inset: 0; z-index: -1; pointer-events: none;
   background-image: linear-gradient(270deg, var(--gt-c1) 0%, var(--gt-c2) 80%, var(--gt-c3) 90%, var(--gt-c4) 100%);
@@ -990,7 +1013,36 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .mnav.is-open, .mnav.is-open::before { --gt-p: 200%; transition: --gt-p var(--mnav-sweep) var(--gt-ease); }
 .mnav.is-open { opacity: 1; visibility: visible; }
 .mnav__links { display: flex; flex-direction: column; gap: 14px; font-size: 32px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+.mnav__links > a { transition: color .3s var(--ease-figma); }
 .mnav .btn { align-self: flex-start; }
+
+/* SECTORS (menu mobile) : bouton qui déplie la liste des secteurs, comme le sous-menu de la nav
+   (hauteur animée par grid-template-rows 0fr → 1fr, retrait de 32 px, cascade --j) ; chevron retourné quand il est ouvert,
+   les autres entrées passent à 60 %. Replié = masqué, donc hors du parcours clavier. */
+.mnav__group { display: flex; flex-direction: column; align-items: flex-start; }
+.mnav__toggle { display: inline-flex; align-items: center; gap: 8px; letter-spacing: inherit; text-align: left; }
+.mnav__chev { width: 24px; height: 24px; transition: transform .5s var(--ease-expo); }
+.mnav__group.is-expanded .mnav__chev { transform: rotate(180deg); }
+.mnav__sub {
+  display: grid; grid-template-rows: 0fr;
+  visibility: hidden;
+  transition: grid-template-rows .5s var(--ease-expo), visibility 0s linear .5s;
+}
+.mnav__group.is-expanded .mnav__sub { grid-template-rows: 1fr; visibility: inherit; transition: grid-template-rows .7s var(--ease-expo); }
+/* écart sous SECTORS en marge du 1er lien, pas en padding : un padding resterait affiché replié (0fr) */
+.mnav__sublist {
+  min-height: 0; overflow: hidden;
+  display: flex; flex-direction: column; gap: 12px; align-items: flex-start;
+  padding-left: 32px;
+  font-size: 20px;
+}
+.mnav__sublist > :first-child { margin-top: 16px; }
+.mnav__sublist > a { opacity: 0; translate: -6px 0; transition: opacity .2s var(--ease-figma), translate .2s var(--ease-figma); }
+.mnav__group.is-expanded .mnav__sublist > a {
+  opacity: 1; translate: none;
+  transition: opacity .5s var(--ease-figma) calc(.08s + var(--j) * 40ms), translate .7s var(--ease-expo) calc(.08s + var(--j) * 40ms);
+}
+.mnav__links:has(> .is-expanded) > a { color: color-mix(in srgb, currentColor 60%, transparent); }
 
 /* ---------- Composant Reveal (js/components/reveal.js) ----------
    États initiaux posés seulement si le JS tourne (.js). Transitions 100 % CSS :
@@ -1158,6 +1210,9 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .services__text { width: 280px; }
   .vline--136 { display: none; }
   .gcard { width: 280px; }
+
+  /* frise « A controlled path from concept to commissioning » : masquée sur mobile */
+  .factory__row { display: none; }
 
   .expertise { padding-bottom: 72px; }
   .xcard { height: auto; align-items: stretch; }

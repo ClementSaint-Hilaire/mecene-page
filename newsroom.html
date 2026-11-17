@@ -1,0 +1,521 @@
+<!doctype html>
+<html lang="fr" data-smooth-scroll>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Newsroom — Verdon</title>
+  <meta name="description" content="Verdon newsroom: news, project milestones, industrial innovations and insights from our engineering and off-site manufacturing teams.">
+  <script>document.documentElement.classList.add("js","gt-ready");</script>
+  <link rel="stylesheet" href="css/components/gradient-text.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/newsroom.css">
+</head>
+<body>
+
+<!-- =========================================================
+     NAV — composant js/components/nav.js (même barre que l'accueil).
+     data-nav-compact : pastilles dès le haut de page, comme sur la maquette.
+     ========================================================= -->
+<header class="nav is-collapsed" data-nav data-nav-compact>
+  <a href="index.html" class="nav__logo" aria-label="Verdon — home">
+    <img decoding="async" class="nav__ink nav__ink--light" src="assets/logo.svg" alt="" width="347" height="24">
+    <img decoding="async" class="nav__ink nav__ink--dark" src="assets/logo-dark.svg" alt="" width="347" height="24">
+  </a>
+
+  <div class="nav__slot" data-nav-slot>
+    <nav class="nav__menu" aria-label="Main navigation">
+      <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+      <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTEMS</span></a>
+      <div class="nav__group" style="--i:2" data-nav-group>
+        <button class="nav__item" type="button" aria-expanded="false" aria-controls="nav-sectors" data-nav-group-toggle><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTORS</span></button>
+        <div class="nav__sub" id="nav-sectors">
+          <div class="nav__sublist">
+            <a href="data-center.html" class="nav__item" style="--j:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">DATA CENTER</span></a>
+            <a href="#" class="nav__item" style="--j:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SCIENCE &amp; PHARMA</span></a>
+            <a href="#" class="nav__item" style="--j:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ENERGY</span></a>
+            <a href="#" class="nav__item" style="--j:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SEMICONDUCTORS</span></a>
+          </div>
+        </div>
+      </div>
+      <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
+      <a href="about.html" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
+      <a href="newsroom.html" class="nav__item is-active" aria-current="page" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+      <a href="resources.html" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
+      <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
+    </nav>
+
+    <button class="nav__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="nav-panel" data-nav-toggle>
+      <span class="nav__dots" aria-hidden="true"></span>
+    </button>
+
+    <div class="nav__panel" id="nav-panel" data-nav-panel>
+      <button class="nav__close" type="button" data-nav-close>CLOSE</button>
+      <img decoding="async" class="nav__rule" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <nav class="nav__plist" aria-label="Main navigation">
+        <a href="factory-built.html" class="nav__item" style="--i:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">FACTORY BUILT</span></a>
+        <a href="#" class="nav__item" style="--i:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SYSTEMS</span></a>
+        <div class="nav__group" style="--i:2" data-nav-group>
+          <button class="nav__item" type="button" aria-expanded="false" aria-controls="nav-sectors-panel" data-nav-group-toggle><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SECTORS</span></button>
+          <div class="nav__sub" id="nav-sectors-panel">
+            <div class="nav__sublist">
+              <a href="data-center.html" class="nav__item" style="--j:0"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">DATA CENTER</span></a>
+              <a href="#" class="nav__item" style="--j:1"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SCIENCE &amp; PHARMA</span></a>
+              <a href="#" class="nav__item" style="--j:2"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ENERGY</span></a>
+              <a href="#" class="nav__item" style="--j:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">SEMICONDUCTORS</span></a>
+            </div>
+          </div>
+        </div>
+        <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
+        <a href="about.html" class="nav__item" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
+        <a href="newsroom.html" class="nav__item is-active" aria-current="page" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+        <a href="resources.html" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
+        <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
+      </nav>
+      <img decoding="async" class="nav__rule nav__rule--end" src="assets/line-13-panel.svg" alt="" width="145" height="1">
+      <div class="nav__contact">
+        <p>connect with us:</p>
+        <a href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav__spacer"></div>
+
+  <div class="nav__right">
+    <button class="nav__lang" type="button" aria-label="Change language">
+      <span>EN</span>
+      <span class="nav__chev" aria-hidden="true">
+        <img decoding="async" class="nav__ink nav__ink--light" src="assets/frame.svg" alt="" width="20" height="20">
+        <img decoding="async" class="nav__ink nav__ink--dark" src="assets/frame-dark.svg" alt="" width="20" height="20">
+      </span>
+    </button>
+    <a href="contact.html" class="btn btn--solid nav__cta" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+    <button class="nav__burger" type="button" aria-label="Open menu" aria-expanded="false" data-burger>
+      <span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main data-newsroom>
+  <!-- =========================================================
+       HERO — grand titre « OUR NEWSROOM » qui défile (collant), colonne gauche collante (titre, boutons, thèmes),
+       articles à la une et recherche à droite (js/newsroom.js)
+       ========================================================= -->
+  <section class="nwhero" data-section="newsroom-hero" data-nav-bg="light">
+    <div class="nwhero__word" aria-hidden="true" data-hero-fade>
+      <div class="nwhero__track" data-nw-marquee><span>OUR NEWSROOM</span><span>OUR NEWSROOM</span></div>
+    </div>
+
+    <div class="nwhero__row">
+      <div class="nwhero__aside">
+        <div class="nwhero__titles">
+          <h1 class="h1 nw-h1" data-gt-lines style="--gt-delay:0.45s"><span class="t-muted">The </span><span>latest news</span><br><span class="t-muted">from Verdon</span></h1>
+          <p class="p t-muted" data-hero-fade>Stay informed about our latest developments, industrial innovations, project milestones and insights into the future of critical infrastructure.</p>
+        </div>
+        <div class="btn-row" data-hero-fade>
+          <a href="contact.html#contact-form" class="btn btn--ink" data-btn><span class="btn__label" data-gt>PRESS CONTACT</span></a>
+          <a href="resources.html?category=case-studies" class="btn btn--outline" data-btn><span class="btn__label" data-gt>OUR CASE STUDIES</span></a>
+        </div>
+        <div class="hline" data-reveal="line"><img decoding="async" src="assets/line-14.svg" alt=""></div>
+        <div class="nwtags" role="group" aria-label="Filter the articles by topic" data-hero-fade>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="data-center">Data center</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="energy">Energy</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="pharma">Science &amp; Pharma</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="semiconductors">Semiconductors</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="factory-built">Factory built</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="engineering">Engineering</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="manufacturing">Manufacturing</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="quality">Quality</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="projects">Projects</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="partnerships">Partnerships</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="sustainability">Sustainability</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="company">Company</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="careers">Careers</button>
+          <button class="nwchip" type="button" aria-pressed="false" data-nw-tag="events">Events</button>
+        </div>
+      </div>
+
+      <div class="nwhero__feed">
+        <article class="nwpost nwpost--feat" data-nw-item data-tags="data-center factory-built manufacturing" data-keywords="cooling skid workshop belgium test delivery">
+          <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/dc-hero-1200.webp" alt="" width="1200" height="800"></div></div>
+          <div class="nwpost__body" data-reveal="up">
+            <p class="nwpost__meta"><time class="nwtag" datetime="2026-11-04">november 4, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-6.svg" alt="" width="4" height="4"><span class="nwtag">Data center</span><span class="nwtag">Factory built</span><span class="nwtag">Manufacturing</span></p>
+            <div class="nwpost__row">
+              <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Inside our Courcelles workshop: how a factory-built cooling skid is designed, assembled, pressure-tested and shipped to a data center site</a></h2>
+              <img decoding="async" class="nwpost__arrow" src="assets/arrow-ne.svg" alt="">
+            </div>
+          </div>
+        </article>
+        <article class="nwpost nwpost--feat" data-nw-item data-tags="data-center factory-built engineering" data-keywords="prefabrication prefabricated modular modules offsite mep">
+          <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/factory-hero-1200.webp" alt="" width="1200" height="801"></div></div>
+          <div class="nwpost__body" data-reveal="up">
+            <p class="nwpost__meta"><time class="nwtag" datetime="2026-10-20">october 20, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-6.svg" alt="" width="4" height="4"><span class="nwtag">Data center</span><span class="nwtag">Factory built</span><span class="nwtag">Engineering</span></p>
+            <div class="nwpost__row">
+              <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Off-site manufacturing: why data center builders are moving MEP work from the site to the factory</a></h2>
+              <img decoding="async" class="nwpost__arrow" src="assets/arrow-ne.svg" alt="">
+            </div>
+          </div>
+        </article>
+        <article class="nwpost nwpost--feat" data-nw-item data-tags="engineering projects partnerships" data-keywords="design coordination interfaces drawings bim">
+          <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/about-story-4.webp" alt="" width="1000" height="666"></div></div>
+          <div class="nwpost__body" data-reveal="up">
+            <p class="nwpost__meta"><time class="nwtag" datetime="2026-10-06">october 6, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-6.svg" alt="" width="4" height="4"><span class="nwtag">Engineering</span><span class="nwtag">Projects</span><span class="nwtag">Partnerships</span></p>
+            <div class="nwpost__row">
+              <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>From drawings to delivery: integrating technical systems from the earliest design stage</a></h2>
+              <img decoding="async" class="nwpost__arrow" src="assets/arrow-ne.svg" alt="">
+            </div>
+          </div>
+        </article>
+
+        <form class="nwsearch" role="search" data-reveal="up">
+          <label class="nw-sr" for="nw-q">Search the newsroom</label>
+          <input class="nwsearch__input" id="nw-q" type="search" name="q" placeholder="Search an article" autocomplete="off" spellcheck="false" data-nw-search>
+          <img decoding="async" class="nwsearch__icon" src="assets/frame-search.svg" alt="" width="16" height="16">
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       ARTICLES — grille de 3 colonnes (un [data-nw-item] par article : data-tags, data-keywords, voir README)
+       ========================================================= -->
+  <section class="nwlist" data-section="newsroom-list" data-nav-bg="light">
+    <div class="nwgrid" data-nw-grid>
+      <article class="nwpost" data-nw-item data-tags="manufacturing quality" data-keywords="welding welder steel certification certificate en1090">
+        <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/about-story-1.webp" alt="" width="1000" height="666" loading="lazy"></div></div>
+        <div class="nwpost__body" data-reveal="up">
+          <p class="nwpost__meta"><time class="nwtag" datetime="2026-09-22">september 22, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-7.svg" alt="" width="4" height="4"><span class="nwtag">Manufacturing</span><span class="nwtag">Quality</span></p>
+          <div class="nwpost__row">
+            <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Welding to EN 1090: what certification means for our steel support structures</a></h2>
+            <img decoding="async" class="nwpost__arrow" src="assets/frame-arrow.svg" alt="" width="24" height="24">
+          </div>
+        </div>
+      </article>
+      <article class="nwpost" data-nw-item data-tags="data-center engineering" data-keywords="liquid cooling pipework pipes racks cdu">
+        <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/about-story-3.webp" alt="" width="1000" height="666" loading="lazy"></div></div>
+        <div class="nwpost__body" data-reveal="up">
+          <p class="nwpost__meta"><time class="nwtag" datetime="2026-09-08">september 8, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-7.svg" alt="" width="4" height="4"><span class="nwtag">Data center</span><span class="nwtag">Engineering</span></p>
+          <div class="nwpost__row">
+            <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Liquid cooling assemblies for high-density racks: designing pipework for the next generation of data halls</a></h2>
+            <img decoding="async" class="nwpost__arrow" src="assets/frame-arrow.svg" alt="" width="24" height="24">
+          </div>
+        </div>
+      </article>
+      <article class="nwpost" data-nw-item data-tags="pharma manufacturing quality" data-keywords="instrumentation control panels wiring electrical test">
+        <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/about-story-2.webp" alt="" width="1000" height="666" loading="lazy"></div></div>
+        <div class="nwpost__body" data-reveal="up">
+          <p class="nwpost__meta"><time class="nwtag" datetime="2026-08-25">august 25, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-7.svg" alt="" width="4" height="4"><span class="nwtag">Science &amp; Pharma</span><span class="nwtag">Manufacturing</span><span class="nwtag">Quality</span></p>
+          <div class="nwpost__row">
+            <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Instrumentation and control panels, wired and tested before they leave the factory</a></h2>
+            <img decoding="async" class="nwpost__arrow" src="assets/frame-arrow.svg" alt="" width="24" height="24">
+          </div>
+        </div>
+      </article>
+      <article class="nwpost" data-nw-item data-tags="pharma quality" data-keywords="clean utilities gmp pharmaceutical life sciences cleanroom">
+        <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/about-story-5.webp" alt="" width="1000" height="666" loading="lazy"></div></div>
+        <div class="nwpost__body" data-reveal="up">
+          <p class="nwpost__meta"><time class="nwtag" datetime="2026-07-14">july 14, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-7.svg" alt="" width="4" height="4"><span class="nwtag">Science &amp; Pharma</span><span class="nwtag">Quality</span></p>
+          <div class="nwpost__row">
+            <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Clean utilities for pharmaceutical production: meeting GMP requirements from the workshop</a></h2>
+            <img decoding="async" class="nwpost__arrow" src="assets/frame-arrow.svg" alt="" width="24" height="24">
+          </div>
+        </div>
+      </article>
+      <article class="nwpost" data-nw-item data-tags="careers company" data-keywords="jobs recruitment hiring careers welders pipefitters electricians">
+        <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/frame-64.webp" alt="" width="900" height="600" loading="lazy"></div></div>
+        <div class="nwpost__body" data-reveal="up">
+          <p class="nwpost__meta"><time class="nwtag" datetime="2026-06-30">june 30, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-7.svg" alt="" width="4" height="4"><span class="nwtag">Careers</span><span class="nwtag">Company</span></p>
+          <div class="nwpost__row">
+            <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Welders, pipefitters, electricians: we are hiring across our sites in Belgium and France</a></h2>
+            <img decoding="async" class="nwpost__arrow" src="assets/frame-arrow.svg" alt="" width="24" height="24">
+          </div>
+        </div>
+      </article>
+      <article class="nwpost" data-nw-item data-tags="sustainability company" data-keywords="environment carbon solar waste logistics">
+        <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/about-hero-1200.webp" alt="" width="1200" height="899" loading="lazy"></div></div>
+        <div class="nwpost__body" data-reveal="up">
+          <p class="nwpost__meta"><time class="nwtag" datetime="2026-06-02">june 2, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-7.svg" alt="" width="4" height="4"><span class="nwtag">Sustainability</span><span class="nwtag">Company</span></p>
+          <div class="nwpost__row">
+            <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Fewer trucks, less waste, solar roofs: the environmental case for building systems off site</a></h2>
+            <img decoding="async" class="nwpost__arrow" src="assets/frame-arrow.svg" alt="" width="24" height="24">
+          </div>
+        </div>
+      </article>
+      <article class="nwpost" data-nw-item data-tags="energy factory-built" data-keywords="electrical switchboards low voltage power grid">
+        <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/dc-hero-1200.webp" alt="" width="1200" height="800" loading="lazy"></div></div>
+        <div class="nwpost__body" data-reveal="up">
+          <p class="nwpost__meta"><time class="nwtag" datetime="2026-05-12">may 12, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-7.svg" alt="" width="4" height="4"><span class="nwtag">Energy</span><span class="nwtag">Factory built</span></p>
+          <div class="nwpost__row">
+            <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Low-voltage switchboards for energy projects, assembled and tested off site</a></h2>
+            <img decoding="async" class="nwpost__arrow" src="assets/frame-arrow.svg" alt="" width="24" height="24">
+          </div>
+        </div>
+      </article>
+      <article class="nwpost" data-nw-item data-tags="semiconductors engineering" data-keywords="semiconductor fab cleanroom process pipework traceability">
+        <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/factory-hero-1200.webp" alt="" width="1200" height="801" loading="lazy"></div></div>
+        <div class="nwpost__body" data-reveal="up">
+          <p class="nwpost__meta"><time class="nwtag" datetime="2026-04-21">april 21, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-7.svg" alt="" width="4" height="4"><span class="nwtag">Semiconductors</span><span class="nwtag">Engineering</span></p>
+          <div class="nwpost__row">
+            <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Process pipework for semiconductor fabs: precision, cleanliness and full traceability</a></h2>
+            <img decoding="async" class="nwpost__arrow" src="assets/frame-arrow.svg" alt="" width="24" height="24">
+          </div>
+        </div>
+      </article>
+      <article class="nwpost" data-nw-item data-tags="events company" data-keywords="trade fair exhibition meet event booth">
+        <div class="nwpost__img" data-reveal="clip"><div class="nwpost__zoom"><img decoding="async" src="assets/about-story-4.webp" alt="" width="1000" height="666" loading="lazy"></div></div>
+        <div class="nwpost__body" data-reveal="up">
+          <p class="nwpost__meta"><time class="nwtag" datetime="2026-03-17">march 17, 2026</time><img decoding="async" class="nwpost__dot" src="assets/ellipse-7.svg" alt="" width="4" height="4"><span class="nwtag">Events</span><span class="nwtag">Company</span></p>
+          <div class="nwpost__row">
+            <h2 class="nwpost__title"><a href="#" class="nwpost__link" data-nw-title>Meet our engineers at this season’s industry trade fairs</a></h2>
+            <img decoding="async" class="nwpost__arrow" src="assets/frame-arrow.svg" alt="" width="24" height="24">
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="nwempty" data-nw-empty hidden>
+      <p class="lead-m">No articles match your search.</p>
+      <p class="p t-muted">Check the spelling, try a more general term or remove a topic.</p>
+      <div class="nwempty__ctas">
+        <button class="btn btn--outline" type="button" data-btn data-nw-reset><span class="btn__label" data-gt>RESET FILTERS</span></button>
+        <a href="contact.html#contact-form" class="btn btn--ink" data-btn><span class="btn__label" data-gt>PRESS CONTACT</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       PARTENAIRES (mêmes logos que l'accueil)
+       ========================================================= -->
+  <section class="partners nwpartners" data-section="partners" data-nav-bg="light">
+      <div class="partners__grid" data-partners>
+        <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-atlasedge.webp" alt="AtlasEdge" width="534" height="289" style="--w:170px" loading="lazy"></div>
+        <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-data4.webp" alt="Data4" width="298" height="169" style="--w:140px" loading="lazy"></div>
+        <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-equinix.svg" alt="Equinix" width="500" height="242" style="--w:168px" loading="lazy"></div>
+        <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-ibm.webp" alt="IBM" width="800" height="324" style="--w:166px" loading="lazy"></div>
+        <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-lcl.webp" alt="LCL" width="640" height="360" style="--w:150px" loading="lazy"></div>
+        <div class="partners__cell" data-reveal="scale"><img decoding="async" src="assets/partner-google.webp" alt="Google" width="640" height="216" style="--w:184px" loading="lazy"></div>
+      </div>
+  </section>
+</main>
+<p class="nw-sr" role="status" data-nw-live></p>
+
+<div class="lower">
+  <!-- =========================================================
+       FAQ
+       ========================================================= -->
+  <section class="faq" data-section="faq" data-nav-bg="light">
+    <div class="faq__grid">
+      <div class="faq__intro">
+        <h2 class="h2" data-gt-lines><span>F.A.Q</span></h2>
+        <p class="p t-muted" data-reveal="up">Discover Verdon’s expertise in engineering, manufacturing and Data Center infrastructure.</p>
+      </div>
+
+      <div class="faq__list" data-faq>
+        <div class="faq__item is-open" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="true">
+            <span class="faq__num">01</span>
+            <span class="faq__question">What does Verdon specialise in&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon combines engineering expertise and industrial manufacturing to develop and produce technical systems for complex industrial environments. With a strong focus on Data Centers, the company brings together technical design, manufacturing processes and system integration to address the requirements of demanding infrastructure projects.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">02</span>
+            <span class="faq__question">What is Verdon’s expertise in Data Centers&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon supports Data Center projects through the engineering and off-site manufacturing of technical systems designed for complex MEP infrastructure. Its approach takes into account equipment interfaces, installation constraints and the coordination required to integrate systems into large-scale facilities.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">03</span>
+            <span class="faq__question">Which industries does Verdon serve&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon operates across four key sectors: Data Centers, Energy, Life Sciences &amp; Pharmaceuticals, and Semiconductors. Each sector presents specific technical requirements, operating conditions and infrastructure constraints. Verdon applies its engineering and manufacturing capabilities to address the needs of these different industrial environments.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">04</span>
+            <span class="faq__question">What types of systems does Verdon manufacture&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon’s capabilities cover a range of technical systems, including electrical infrastructure, cooling pipework, aisle containment, liquid cooling assemblies and associated support structures. Each system addresses specific functional requirements and equipment interfaces, with its configuration defined according to project specifications.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">05</span>
+            <span class="faq__question">How does Verdon approach complex industrial projects&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon brings engineering and manufacturing capabilities together to prepare technical systems for integration into complex facilities. By considering technical specifications, equipment interfaces and manufacturing constraints, the company works to align system design with practical installation requirements from the outset.</p></div></div>
+        </div>
+        <div class="faq__item" data-faq-item data-reveal="up">
+          <button class="faq__q" type="button" aria-expanded="false">
+            <span class="faq__num">06</span>
+            <span class="faq__question">Can Verdon adapt its solutions to specific project requirements&nbsp;?</span>
+            <span class="faq__icon" aria-hidden="true">
+              <img decoding="async" class="faq__dot faq__dot--closed" src="assets/ellipse-15.svg" alt="" width="8" height="8">
+              <img decoding="async" class="faq__dot faq__dot--open" src="assets/frame-142.svg" alt="">
+            </span>
+          </button>
+          <div class="faq__a" role="region"><div class="faq__a-inner"><p>Verdon develops technical systems around the specifications and constraints of each project. Equipment configurations, spatial limitations, connection interfaces and installation requirements inform the approach taken. This allows the scope and configuration of each solution to be defined in line with the project’s technical needs.</p></div></div>
+        </div>
+      </div>
+
+      <div class="faq__aside" data-reveal="up">
+        <p class="p t-muted">Still have questions? <br>Our team is here to help.</p>
+        <a href="contact.html" class="btn btn--outline" data-btn><span class="btn__label" data-gt>CONTACT</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================================================
+       CTA + FOOTER
+       ========================================================= -->
+  <section class="cta" data-section="cta" data-nav-bg="dark">
+    <div class="cta__bg" aria-hidden="true">
+      <img decoding="async" src="assets/seciton-temoignages.webp" alt="" width="1500" height="1123" loading="lazy" data-cta-bg>
+      <div class="cta__overlay"></div>
+    </div>
+
+    <div class="cta__head">
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+      <div class="cta__content">
+        <h2 class="h2 h2--light t-center" data-gt-lines>
+          <span class="t-muted-light">Let’s define your </span><br><span>project requirements.</span>
+        </h2>
+        <div class="cta__sub">
+          <p class="lead-m t-center cta__lead" data-reveal="up">Verdon works alongside project stakeholders to address the technical, engineering and manufacturing requirements of complex infrastructure projects. Contact our team to discuss your needs and explore the scope of our capabilities.</p>
+          <div class="btn-row" data-reveal="up">
+            <a href="contact.html" class="btn btn--solid btn--w240" data-btn><span class="btn__label" data-gt>CONTACT</span></a>
+            <a href="#" class="btn btn--outline-light btn--w240" data-btn><span class="btn__label" data-gt>LEARN MORE</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="vline vline--188" aria-hidden="true" data-cta-line data-reveal="vline"><div class="vline__rot"><img decoding="async" src="assets/line-11.svg" alt=""></div></div>
+    </div>
+
+    <footer class="footer" data-footer data-nav-bg="light">
+      <div class="frow">
+        <div class="fcell fcell--line fcell--top">
+          <p class="p t-muted">We don’t just build systems.<br>We set the standard.</p>
+        </div>
+        <div class="fcell fcell--line fcell--stretch"></div>
+      </div>
+
+      <div class="frow">
+        <div class="fcell fcell--top fcell--socials">
+          <p class="caption">SOCIALS</p>
+          <div class="socials">
+            <a href="#" class="socials__link" aria-label="LinkedIn"><img decoding="async" src="assets/icon.svg" alt="" width="16" height="16"></a>
+            <a href="#" class="socials__link" aria-label="Instagram">
+              <span class="socials__ig"><img decoding="async" src="assets/group-1.svg" alt=""></span>
+            </a>
+            <a href="#" class="socials__link" aria-label="Facebook"><img decoding="async" src="assets/icon-1.svg" alt="" width="16" height="16"></a>
+          </div>
+        </div>
+        <div class="fcell fcell--line fcell--links">
+          <p class="caption">SOCIALS</p>
+          <div class="flinks">
+            <div class="flinks__col"><a href="index.html">Home</a><a href="about.html">About us</a><a href="newsroom.html" aria-current="page">Newsroom</a></div>
+            <div class="flinks__col"><a href="resources.html">Ressources</a><a href="factory-built.html">Factory built</a><a href="data-center.html">Sectors</a></div>
+            <div class="flinks__col"><a href="#">Systems</a><a href="#">Careers</a></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="frow frow--grow">
+        <div class="fcell"></div>
+        <div class="fcell fcell--line fcell--info">
+          <div class="finfo">
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">HEAD OFFICE</p>
+                <p class="finfo__val">124, Rue de Trazegnies<br>6180 Courcelles<br>BELGIUM</p>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">PHONE NUMBER</p>
+                <a class="finfo__val" href="tel:+3271468380">+32 71 46 83 80</a>
+              </div>
+            </div>
+            <div class="finfo__col">
+              <div class="finfo__block">
+                <p class="caption">EMAIL</p>
+                <a class="finfo__val" href="mailto:info@groupe-verdon.com">info@groupe-verdon.com</a>
+              </div>
+              <div class="finfo__block">
+                <p class="caption">OPERATING ACROSS</p>
+                <p class="finfo__val">France • Belgium • England </p>
+              </div>
+            </div>
+            <!-- Carte Europe en matrice de points, vue isométrique en rotation lente (js/components/europe-map.js) -->
+            <div class="finfo__map emap" data-europe-map data-src="assets/europe-dots.json" role="img" aria-label="Carte de l'Europe avec 5 sites Verdon : Courcelles (siège), Liège, Lille, Paris, Lyon">
+              <canvas class="emap__canvas"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fbottom">
+        <!-- Signature en matrice de points, colorée au survol (js/components/wordmark-dots.js) -->
+        <div class="fbottom__mark wmark" data-wordmark data-src="assets/wordmark-dots.json" data-reveal="wipe" style="--dur:2s" role="img" aria-label="Verdon groupe">
+          <canvas class="wmark__canvas"></canvas>
+        </div>
+        <div class="fbottom__legal">
+          <a href="#">Legal</a>
+          <p>Copyright © Verdon SA • All rights reserved</p>
+          <a href="https://agence-orem.fr" target="_blank" rel="noopener">Réalisé par Orem</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<!-- Menu mobile -->
+<div class="mnav" data-mnav aria-hidden="true">
+  <nav class="mnav__links">
+    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTEMS</a>
+    <div class="mnav__group" data-mnav-group>
+      <button class="mnav__toggle" type="button" aria-expanded="false" aria-controls="mnav-sectors" data-mnav-group-toggle>SECTORS<img class="mnav__chev" src="assets/frame.svg" alt="" width="20" height="20"></button>
+      <div class="mnav__sub" id="mnav-sectors">
+        <div class="mnav__sublist">
+          <a href="data-center.html" style="--j:0">DATA CENTER</a><a href="#" style="--j:1">SCIENCE &amp; PHARMA</a><a href="#" style="--j:2">ENERGY</a><a href="#" style="--j:3">SEMICONDUCTORS</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">PROJECTS</a>
+    <a href="about.html">ABOUT</a><a href="newsroom.html" aria-current="page">NEWS</a><a href="resources.html">RESOURCES</a><a href="#">CAREERS</a>
+  </nav>
+  <a href="contact.html" class="btn btn--solid" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
+</div>
+
+<script src="js/vendor/gsap.min.js"></script>
+<script src="js/vendor/ScrollTrigger.min.js"></script>
+<script src="js/vendor/lenis.min.js"></script>
+<script src="js/components/sequence.js"></script>
+<script src="js/components/gradient-text.js"></script>
+<script src="js/components/reveal.js"></script>
+<script src="js/components/nav.js"></script>
+<script src="js/main.js"></script>
+<script src="js/newsroom.js"></script>
+<script src="js/components/europe-map.js" defer></script>
+<script src="js/components/wordmark-dots.js" defer></script>
+</body>
+</html>

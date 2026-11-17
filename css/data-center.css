@@ -54,7 +54,7 @@
 .dcgrid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  padding: 0 128px;
+  padding: 0 calc(var(--frame) + 128px);   /* traits haut et bas pleine largeur, cartes dans le cadre */
   border-top: 1px solid var(--stroke);
   border-bottom: 1px solid var(--stroke);
 }

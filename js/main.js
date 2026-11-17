@@ -15,18 +15,34 @@
   const $ = (s, c = document) => c.querySelector(s);
   const $$ = (s, c = document) => Array.from(c.querySelectorAll(s));
 
-  /* ---------- Menu mobile ---------- */
+  /* ---------- Menu mobile ----------
+     SECTORS ([data-mnav-group]) : sous-menu replié, déplié au clic ; il se replie une fois le menu fermé.
+     Page bloquée sous le menu ouvert (html.is-locked ; Lenis, quand il tourne, est aussi arrêté). */
   const burger = $('[data-burger]');
   const mnav = $('[data-mnav]');
   let lenis = null;
   if (burger && mnav) {
+    const groups = $$('[data-mnav-group]', mnav).map((el) => {
+      const btn = $('[data-mnav-group-toggle]', el);
+      const set = (open) => {
+        el.classList.toggle('is-expanded', open);
+        btn.setAttribute('aria-expanded', String(open));
+      };
+      btn.addEventListener('click', () => set(!el.classList.contains('is-expanded')));
+      return set;
+    });
     let inkTimer = 0;
+    let groupTimer = 0;
     burger.addEventListener('click', () => {
       const open = burger.getAttribute('aria-expanded') !== 'true';
       burger.setAttribute('aria-expanded', String(open));
       burger.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
       mnav.classList.toggle('is-open', open);
       mnav.setAttribute('aria-hidden', String(!open));
+      document.documentElement.classList.toggle('is-locked', open);
+      // replié après le fondu de fermeture (.4s, css/style.css) : pas d'animation visible
+      clearTimeout(groupTimer);
+      if (!open) groupTimer = setTimeout(() => groups.forEach((set) => set(false)), reduceMotion ? 0 : 400);
       // menu sombre par-dessus : encre claire pendant que le balayage du fond passe sous la nav
       // (vers 30 % de --mnav-sweep : le burger est déjà couvert, le logo le sera pendant le fondu de couleur)
       clearTimeout(inkTimer);
@@ -84,14 +100,35 @@
     item.addEventListener('focus', activate);
   });
 
+  /* ---------- Our services : toutes les cartes à la hauteur de la plus haute ----------
+     (les cartes sont réparties en deux groupes .services__cards : le CSS seul ne les égalise pas entre groupes) */
+  const svcCards = $$('[data-section="services"] .gcard');
+  if (svcCards.length) {
+    const equalizeCards = () => {
+      svcCards.forEach((c) => { c.style.minHeight = ''; });
+      const h = Math.max(...svcCards.map((c) => c.offsetHeight));
+      svcCards.forEach((c) => { c.style.minHeight = h + 'px'; });
+    };
+    // le contenu change de hauteur au redimensionnement, au chargement des polices et quand gradient-text
+    // redécoupe les titres : on observe .gcard__body, que le min-height de la carte n'affecte pas
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(equalizeCards);
+      svcCards.forEach((c) => ro.observe($('.gcard__body', c)));
+    } else equalizeCards();
+  }
+
   /* ---------- Compteurs (IntersectionObserver, pas de ScrollTrigger) ---------- */
   const fmt = (n) => Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ' ');
   const counters = $$('[data-count]');
   if (!reduceMotion && 'IntersectionObserver' in window) {
+    // départ avec le chiffre (tablette, mobile : dans l'ordre de lecture, js/components/sequence.js)
     const cio = new IntersectionObserver((entries) => entries.forEach((e) => {
       if (!e.isIntersecting) return;
       cio.unobserve(e.target);
-      const el = e.target;
+      if (window.Sequence) Sequence.add(e.target, () => count(e.target));
+      else count(e.target);
+    }), { rootMargin: '0px 0px -12% 0px' });
+    const count = (el) => {
       const target = Number(el.dataset.count);
       const suffix = el.dataset.suffix || '';
       const t0 = performance.now();
@@ -103,7 +140,7 @@
         if (k < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
-    }), { rootMargin: '0px 0px -12% 0px' });
+    };
     counters.forEach((el) => {
       // suffixe : data-suffix dans le HTML (« 650 MW »), sinon le « + » final
       if (!('suffix' in el.dataset)) el.dataset.suffix = el.textContent.trim().endsWith('+') ? '+' : '';
@@ -129,25 +166,34 @@
   gsap.registerPlugin(ScrollTrigger);
   ScrollTrigger.config({ ignoreMobileResize: true });
 
-  /* ---------- Smooth scroll (Lenis) — désactivé par défaut ----------
-     Le scroll natif est géré hors du thread JS : il reste fluide même quand la page calcule.
-     Pour réactiver le lissage Lenis : <html data-smooth-scroll>. */
-  if (typeof window.Lenis !== 'undefined' && document.documentElement.hasAttribute('data-smooth-scroll')) {
-    lenis = new Lenis({ duration: 1.1, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add((time) => lenis.raf(time * 1000));
-    gsap.ticker.lagSmoothing(0);
-    $$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
-      const id = a.getAttribute('href');
-      const target = id.length > 1 && $(id);
-      // Lenis ignore scroll-margin-top : on le passe en décalage
-      if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -(parseFloat(getComputedStyle(target).scrollMarginTop) || 0) }); }
-      else if (id === '#') e.preventDefault();
-    }));
-  }
-
   const mm = gsap.matchMedia();
   const DESKTOP = '(min-width: 992px)';
+
+  /* ---------- Smooth scroll (Lenis) — seulement avec <html data-smooth-scroll>, jamais sur mobile ----------
+     Le scroll natif est géré hors du thread JS : il reste fluide même quand la page calcule.
+     Mobile (≤ 767 px) : scroll natif ; Lenis est créé ou détruit quand la largeur passe le seuil. */
+  if (typeof window.Lenis !== 'undefined' && document.documentElement.hasAttribute('data-smooth-scroll')) {
+    mm.add('(min-width: 768px)', () => {
+      lenis = new Lenis({ duration: 1.1, easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), smoothWheel: true });
+      lenis.on('scroll', ScrollTrigger.update);
+      const raf = (time) => lenis.raf(time * 1000);
+      gsap.ticker.add(raf);
+      gsap.ticker.lagSmoothing(0);
+      return () => {
+        gsap.ticker.remove(raf);
+        gsap.ticker.lagSmoothing(500, 33);   // valeurs par défaut de GSAP
+        lenis.destroy();
+        lenis = null;
+      };
+    });
+    $$('a[href^="#"]').forEach((a) => a.addEventListener('click', (e) => {
+      const id = a.getAttribute('href');
+      if (id === '#') { e.preventDefault(); return; }
+      const target = lenis && $(id);
+      // Lenis ignore scroll-margin-top : on le passe en décalage
+      if (target) { e.preventDefault(); lenis.scrollTo(target, { offset: -(parseFloat(getComputedStyle(target).scrollMarginTop) || 0) }); }
+    }));
+  }
 
   /* =========================================================
      HERO — intro + sortie au scroll
@@ -156,13 +202,31 @@
   const heroDots = $('.hero__dots, [data-hero-media]');
   const intro = gsap.timeline({ defaults: { ease: 'expo.out' }, delay: 0.1 });
   if (heroDots) intro.fromTo(heroDots, { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 2.4, ease: 'power3.out' }, 0);
-  intro
-    .fromTo('.nav__logo', { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 1.2 }, 0.2)
-    .fromTo('.nav__menu > *', { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 1, stagger: 0.05 }, 0.3)
-    .fromTo(['.nav__toggle', '.nav__lang', '.nav__cta', '.nav__burger'], { opacity: 0 }, { opacity: 1, duration: 1, ease: 'sine.inOut' }, 0.5);
-  if ($('.hero__eyebrow')) intro.fromTo('.hero__eyebrow', { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'sine.inOut' }, 0.45);
+  // Desktop : une timeline. Tablette et mobile : chaque élément part à son heure, mais jamais avant ce qui est
+  // au-dessus de lui (js/components/sequence.js, qui ordonne aussi le titre et les apparitions du dessous).
+  const seq = window.Sequence && Sequence.active;
+  const t0 = performance.now() + intro.delay() * 1000;
+  const enter = (targets, from, to, at) => {
+    if (!seq) { intro.fromTo(targets, from, to, at); return; }
+    const { stagger = 0, ...rest } = to;
+    (typeof targets === 'string' ? $$(targets) : targets).forEach((el, i) => {
+      const tween = gsap.fromTo(el, from, { ease: 'expo.out', ...rest, paused: true });
+      Sequence.add(el, () => tween.play(), { at: t0 + (at + i * stagger) * 1000 });
+    });
+  };
+  enter('.nav__logo', { opacity: 0, y: -12 }, { opacity: 1, y: 0, duration: 1.2 }, 0.2);
+  enter('.nav__menu > *', { opacity: 0, x: -8 }, { opacity: 1, x: 0, duration: 1, stagger: 0.05 }, 0.3);
+  enter('.nav__toggle, .nav__lang, .nav__cta', { opacity: 0 }, { opacity: 1, duration: 1, ease: 'sine.inOut' }, 0.5);
+  // burger (tablette, mobile) : juste après le logo, avant le titre
+  enter('.nav__burger', { opacity: 0 }, { opacity: 1, duration: 1, ease: 'sine.inOut' }, 0.3);
+  if ($('.hero__eyebrow')) enter('.hero__eyebrow', { opacity: 0 }, { opacity: 1, duration: 0.8, ease: 'sine.inOut' }, 0.45);
   // titre h1 : composant Gradient text ligne par ligne ([data-gt-lines], délai dans le HTML)
-  intro.fromTo('[data-hero-fade]', { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.12 }, 0.95);
+  // Tablette et mobile : ce qui est au-dessus du titre (grand titre de la Newsroom) part avec le surtitre, pas après le titre
+  const fades = $$('[data-hero-fade]');
+  const title = seq && $('h1');
+  const above = title ? fades.filter((el) => el.getBoundingClientRect().bottom <= title.getBoundingClientRect().top) : [];
+  if (above.length) enter(above, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.2 }, 0.45);
+  enter(fades.filter((el) => !above.includes(el)), { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: 1.2, stagger: 0.12 }, 0.95);
 
   // Vidéo mise en pause quand le hero est entièrement recouvert (économie GPU / batterie)
   let heroVisible = true;

@@ -40,7 +40,7 @@
       </div>
       <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
       <a href="about.html" class="nav__item is-active" aria-current="page" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
-      <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+      <a href="newsroom.html" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
       <a href="resources.html" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
       <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
     </nav>
@@ -68,7 +68,7 @@
         </div>
         <a href="#" class="nav__item" style="--i:3"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">PROJECTS</span></a>
         <a href="about.html" class="nav__item is-active" aria-current="page" style="--i:4"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">ABOUT</span></a>
-        <a href="#" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
+        <a href="newsroom.html" class="nav__item" style="--i:5"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">NEWS</span></a>
         <a href="resources.html" class="nav__item" style="--i:6"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">RESOURCES</span></a>
         <a href="#" class="nav__item" style="--i:7"><span class="nav__dot" aria-hidden="true"></span><span class="nav__label">CAREERS</span></a>
       </nav>
@@ -491,7 +491,7 @@
         <div class="fcell fcell--line fcell--links">
           <p class="caption">SOCIALS</p>
           <div class="flinks">
-            <div class="flinks__col"><a href="index.html">Home</a><a href="about.html" aria-current="page">About us</a><a href="#">Newsroom</a></div>
+            <div class="flinks__col"><a href="index.html">Home</a><a href="about.html" aria-current="page">About us</a><a href="newsroom.html">Newsroom</a></div>
             <div class="flinks__col"><a href="resources.html">Ressources</a><a href="factory-built.html">Factory built</a><a href="data-center.html">Sectors</a></div>
             <div class="flinks__col"><a href="#">Systems</a><a href="#">Careers</a></div>
           </div>
@@ -548,8 +548,17 @@
 <!-- Menu mobile -->
 <div class="mnav" data-mnav aria-hidden="true">
   <nav class="mnav__links">
-    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTEMS</a><a href="data-center.html">SECTORS</a><a href="#">PROJECTS</a>
-    <a href="about.html" aria-current="page">ABOUT</a><a href="#">NEWS</a><a href="resources.html">RESOURCES</a><a href="#">CAREERS</a>
+    <a href="factory-built.html">FACTORY BUILT</a><a href="#">SYSTEMS</a>
+    <div class="mnav__group" data-mnav-group>
+      <button class="mnav__toggle" type="button" aria-expanded="false" aria-controls="mnav-sectors" data-mnav-group-toggle>SECTORS<img class="mnav__chev" src="assets/frame.svg" alt="" width="20" height="20"></button>
+      <div class="mnav__sub" id="mnav-sectors">
+        <div class="mnav__sublist">
+          <a href="data-center.html" style="--j:0">DATA CENTER</a><a href="#" style="--j:1">SCIENCE &amp; PHARMA</a><a href="#" style="--j:2">ENERGY</a><a href="#" style="--j:3">SEMICONDUCTORS</a>
+        </div>
+      </div>
+    </div>
+    <a href="#">PROJECTS</a>
+    <a href="about.html" aria-current="page">ABOUT</a><a href="newsroom.html">NEWS</a><a href="resources.html">RESOURCES</a><a href="#">CAREERS</a>
   </nav>
   <a href="contact.html" class="btn btn--solid" data-btn><span class="btn__label" data-gt>WORK WITH US</span></a>
 </div>
@@ -557,6 +566,7 @@
 <script src="js/vendor/gsap.min.js"></script>
 <script src="js/vendor/ScrollTrigger.min.js"></script>
 <script src="js/vendor/lenis.min.js"></script>
+<script src="js/components/sequence.js"></script>
 <script src="js/components/gradient-text.js"></script>
 <script src="js/components/reveal.js"></script>
 <script src="js/components/nav.js"></script>
