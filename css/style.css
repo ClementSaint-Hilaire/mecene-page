@@ -208,6 +208,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .nav__slot { position: relative; flex-shrink: 0; margin-left: -12px; }
 
 .nav__menu, .nav__plist { display: flex; flex-direction: column; gap: 12px; align-items: flex-start; }
+.nav__menu { gap: 6px; }  /* menu déplié : interligne serré (le panneau garde 12 px) */
 .nav__item {
   position: relative;
   display: inline-flex;
@@ -358,8 +359,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   display: flex;
   align-items: flex-end;
   gap: 16px;
-  padding: 0 var(--gutter) 128px;
-  margin-bottom: -88px;
+  padding: 0 var(--gutter) 96px;
 }
 .hero__visual {
   position: absolute;
@@ -379,10 +379,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   object-fit: cover;
   background: #000;
   /* assombrit la vidéo (le noir reste noir, donc le fondu en screen est conservé) */
-  filter: brightness(.6);
+  filter: brightness(.4);
 }
 .hero__spacer { width: 347px; height: 100px; flex-shrink: 0; }
-.hero__content { position: relative; z-index: 1; width: 529px; flex-shrink: 0; display: flex; flex-direction: column; gap: 64px; }
+.hero__content { position: relative; z-index: 1; width: 529px; flex-shrink: 0; display: flex; flex-direction: column; gap: 32px; }
 .hero__text { display: flex; flex-direction: column; gap: 24px; }
 .hero__titles { display: flex; flex-direction: column; gap: 8px; width: 700px; }
 .hero__eyebrow { font-size: var(--fs-s); letter-spacing: -0.01em; line-height: 1.2; color: var(--light); }
@@ -686,6 +686,10 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 }
 .p3d-cap__text { font-size: var(--fs-s); line-height: 1.35; letter-spacing: -0.01em; color: var(--light-2); }
 
+/* tablette : légende centrée en haut de la vue, la ligne de rappel part de son bas */
+@media (min-width: 701px) and (max-width: 991px) {
+  .p3d-cap, .p3d-cap.is-r { left: 50%; right: auto; translate: -50% 0; text-align: center; }
+}
 @media (max-width: 700px) {
   .p3d-cap, .p3d-cap.is-r { top: 0; left: 0; right: 0; width: auto; padding: 12px 14px 14px; text-align: left; transform: none; }
   .pack3d__leader { display: none; }
@@ -697,7 +701,11 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 .factory__row { width: calc(100% + 2 * var(--frame)); margin: 0 calc(-1 * var(--frame)); display: flex; gap: 128px; align-items: flex-start; padding: 128px var(--frame) 0; overflow: hidden; }
 .factory__rowintro { display: flex; flex-direction: column; gap: 32px; align-items: flex-start; flex-shrink: 0; }
 .factory__rowintro .h2 { white-space: nowrap; }
-.factory__cols-viewport { flex: 1 0 0; min-width: 0; overflow: visible; }
+/* frise : scroll horizontal libre (trackpad, glisser à la souris, clavier), voir main.js */
+.factory__cols-viewport { flex: 1 0 0; min-width: 0; overflow-x: auto; overflow-y: hidden; overscroll-behavior-x: contain; scrollbar-width: none; cursor: grab; }
+.factory__cols-viewport::-webkit-scrollbar { display: none; }
+.factory__cols-viewport.is-dragging { cursor: grabbing; }
+.factory__cols-viewport:focus-visible { outline: 1px solid var(--light); outline-offset: 8px; }
 .factory__cols { display: flex; gap: 32px; align-items: stretch; width: max-content; border-bottom: 1px solid var(--stroke); }
 .fcol { display: flex; flex-direction: column; gap: 24px; align-items: flex-start; }
 .fcol .vline { margin-top: auto; } /* textes de longueurs différentes : le trait reste posé sur la ligne */
@@ -1158,8 +1166,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .factory { padding: 96px var(--gutter); }
   .factory__head .h2, .factory__rowintro .h2, .cta__content .h2 { white-space: normal; }
   .factory__row { flex-direction: column; gap: 48px; padding-top: 64px; overflow: visible; }
-  .factory__cols-viewport { width: 100%; overflow-x: auto; scrollbar-width: none; }
-  .factory__cols-viewport::-webkit-scrollbar { display: none; }
+  .factory__cols-viewport { width: 100%; }
 
   .testimonials, .news { padding: 96px var(--gutter); }
   .testimonials__head { flex-direction: column; align-items: flex-start; }
@@ -1194,7 +1201,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
   .hero { min-height: 600px; }
   .hero__body { padding-bottom: 240px; }
   .nav__cta { display: none; }
-  .hero__content { gap: 40px; }
+  .hero__content { gap: 24px; }
   .hero__visual { width: 640px; height: 640px; top: -160px; right: -260px; opacity: .65; }
   .hero__ctas { flex-wrap: wrap; gap: 12px; }
 

@@ -245,9 +245,8 @@ async function init(root) {
 
   /* ---------- tailles (lues seulement au resize, jamais dans la boucle) ---------- */
   // clientWidth et non getBoundingClientRect : la vue peut être en cours de reveal (scale)
-  // W × H : canvas, sur toute la largeur du composant ; VW : vue carrée centrée (cadrage, légende), décalée de ox dans le canvas
-  let W = 1, H = 1, VW = 1, ox = 0, wide = true, capBox = { w: 0, h: 0, top: 0, y: 0 };
-  let active = null, pinned = null, lastUser = -1e9, pointer = null, pickDirty = false, dots = true;
+  let W = 1, H = 1, wide = true, centered = false, capBox = { w: 0, y: 0, bottom: 0 };
+  let active = null, pinned = null, lastUser = -1e9, pointer = null, pickDirty = false;
   function resize() {
     W = Math.max(1, cv.clientWidth); H = Math.max(1, cv.clientHeight);
     VW = Math.max(1, view.clientWidth); ox = (W - VW) / 2;
@@ -265,26 +264,15 @@ async function init(root) {
     cam.left = -W / (2 * k); cam.right = W / (2 * k); cam.top = H / (2 * k); cam.bottom = -H / (2 * k);
     cam.updateProjectionMatrix();
     wide = matchMedia('(min-width: 701px)').matches;
+    centered = matchMedia('(max-width: 991px)').matches; // tablette : légende centrée (voir .p3d-cap)
     measureCap();
     wake();
   }
-  // largeur, haut et hauteur de la légende, milieu de son titre (ligne de rappel) : hors décalage
+  // largeur de la légende, milieu de son titre et bas, pour la ligne de rappel
   function measureCap() {
     if (!active) return;
     const t = items[active].querySelector('.p3d-cap__title');
-    capBox = { w: cap.offsetWidth, h: cap.offsetHeight, top: cap.offsetTop, y: cap.offsetTop + t.offsetTop + t.offsetHeight / 2 };
-    placeCap();
-  }
-  // la légende reste à l'écran : décalée vers le bas quand le haut de la vue passe sous la nav,
-  // vers le haut quand elle dépasserait en bas ; quand la vue sort de l'écran, elle s'en va avec (rappelé au scroll)
-  const CAP_TOP = 80, CAP_BOTTOM = 16; // px : place de la nav repliée en haut de l'écran, marge en bas
-  let capShift = 0;
-  function placeCap() {
-    if (!active) return;
-    const v = view.getBoundingClientRect(), y = v.top + capBox.top;
-    const onScreen = Math.max(CAP_TOP, Math.min(y, innerHeight - CAP_BOTTOM - capBox.h));
-    const shift = Math.round(Math.min(Math.max(onScreen, v.top - capBox.h), v.bottom - capBox.h) - y);
-    if (shift !== capShift) { capShift = shift; cap.style.translate = shift ? `0 ${shift}px` : ''; }
+    capBox = { w: cap.offsetWidth, y: cap.offsetTop + t.offsetTop + t.offsetHeight / 2, bottom: cap.offsetTop + cap.offsetHeight };
   }
 
   /* ---------- interaction ---------- */
@@ -386,13 +374,20 @@ async function init(root) {
     }
     if (!active || !wide) { lp.setAttribute('opacity', 0); lc.setAttribute('opacity', 0); return; }
     const [ax, ay] = project(active);
-    // la légende se place du côté du système survolé
-    if ((ax > W * 0.5) !== right) { right = !right; cap.classList.toggle('is-r', right); }
-    // départ au bord de la légende, positionnée dans la vue (repères du canvas : + ox)
-    const m = VW * 0.02;
-    const sx = ox + (right ? VW - m - capBox.w - 12 : m + capBox.w + 12), sy = capBox.y + capShift;
-    const kx = sx + (right ? -1 : 1) * Math.min(70, Math.abs(ax - sx) * 0.3);
-    lp.setAttribute('d', `M${sx},${sy} H${kx} L${ax},${ay}`); lp.setAttribute('opacity', 1);
+    if (centered) {
+      // tablette : légende centrée, la ligne descend de son bas
+      const sx = W / 2, sy = capBox.bottom + 12;
+      const ky = sy + Math.min(70, Math.abs(ay - sy) * 0.3);
+      lp.setAttribute('d', `M${sx},${sy} V${ky} L${ax},${ay}`);
+    } else {
+      // la légende se place du côté du système survolé
+      if ((ax > W * 0.5) !== right) { right = !right; cap.classList.toggle('is-r', right); }
+      const m = W * 0.02;
+      const sx = right ? W - m - capBox.w - 12 : m + capBox.w + 12;
+      const kx = sx + (right ? -1 : 1) * Math.min(70, Math.abs(ax - sx) * 0.3);
+      lp.setAttribute('d', `M${sx},${capBox.y} H${kx} L${ax},${ay}`);
+    }
+    lp.setAttribute('opacity', 1);
     lc.setAttribute('cx', ax); lc.setAttribute('cy', ay); lc.setAttribute('opacity', 1);
   }
 

@@ -100,21 +100,25 @@
     item.addEventListener('focus', activate);
   });
 
-  /* ---------- Our services : toutes les cartes à la hauteur de la plus haute ----------
-     (les cartes sont réparties en deux groupes .services__cards : le CSS seul ne les égalise pas entre groupes) */
-  const svcCards = $$('[data-section="services"] .gcard');
-  if (svcCards.length) {
-    const equalizeCards = () => {
-      svcCards.forEach((c) => { c.style.minHeight = ''; });
-      const h = Math.max(...svcCards.map((c) => c.offsetHeight));
-      svcCards.forEach((c) => { c.style.minHeight = h + 'px'; });
-    };
-    // le contenu change de hauteur au redimensionnement, au chargement des polices et quand gradient-text
-    // redécoupe les titres : on observe .gcard__body, que le min-height de la carte n'affecte pas
-    if ('ResizeObserver' in window) {
-      const ro = new ResizeObserver(equalizeCards);
-      svcCards.forEach((c) => ro.observe($('.gcard__body', c)));
-    } else equalizeCards();
+  /* ---------- Factory built : frise des étapes ----------
+     Scroll horizontal libre (trackpad, molette horizontale, glisser à la souris, flèches du clavier),
+     jamais imposé par le scroll vertical. (La maquette 3D est dans js/components/package-3d.js.) */
+  const rail = $('[data-drag]');
+  if (rail) {
+    // geste horizontal : laissé au navigateur (sinon Lenis le transforme en scroll vertical de la page)
+    rail.addEventListener('wheel', (e) => { if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) e.stopPropagation(); }, { passive: true });
+    let x0 = null, s0 = 0;
+    rail.addEventListener('pointerdown', (e) => {
+      if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      e.preventDefault();  // pas de sélection de texte ni de glisser-déposer d'image
+      x0 = e.clientX; s0 = rail.scrollLeft;
+    });
+    window.addEventListener('pointermove', (e) => {
+      if (x0 === null) return;
+      if (Math.abs(e.clientX - x0) > 3) rail.classList.add('is-dragging');
+      rail.scrollLeft = s0 - (e.clientX - x0);
+    });
+    window.addEventListener('pointerup', () => { x0 = null; rail.classList.remove('is-dragging'); });
   }
 
   /* ---------- Compteurs (IntersectionObserver, pas de ScrollTrigger) ---------- */
@@ -285,21 +289,6 @@
      EXPERTISES — blobs en parallaxe
      ========================================================= */
   if ($('.expertise__blobs')) gsap.fromTo('.expertise__blobs', { y: 200 }, { y: -200, ease: 'none', scrollTrigger: { trigger: '.expertise', start: 'top bottom', end: 'bottom top', scrub: true } });
-
-  /* =========================================================
-     FACTORY BUILT — colonnes (la maquette 3D est dans js/components/package-3d.js)
-     ========================================================= */
-  mm.add(DESKTOP, () => {
-    const vp = $('[data-drag]');
-    const tr = $('[data-drag-track]');
-    if (!vp || !tr) return;
-    const over = () => Math.max(0, tr.scrollWidth - vp.clientWidth);
-    // le h2 de la frise défile avec elle
-    gsap.to([tr, $('.factory__rowintro .h2')].filter(Boolean), {
-      x: () => -over(), ease: 'none',
-      scrollTrigger: { trigger: '.factory__row', start: 'top 85%', end: 'bottom 20%', scrub: 0.8, invalidateOnRefresh: true },
-    });
-  });
 
   /* =========================================================
      CTA + FOOTER
