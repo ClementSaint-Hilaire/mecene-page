@@ -4,6 +4,8 @@ Page statique HTML / CSS / JS. Ouvrir `index.html` via un petit serveur local
 (ex. `npx serve .` ou l'extension Live Server) : certaines animations et le chargement
 des SVG ne fonctionnent pas en `file://`.
 
+Design & dev par Saint-Hilaire
+
 ## Structure
 - `index.html` : toute la page (hero, positionnement + chiffres, services, expertises,
   factory built, témoignages, partenaires, actus, FAQ, CTA + footer)
